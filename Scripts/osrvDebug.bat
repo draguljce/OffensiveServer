@@ -1,0 +1,1 @@
+java -agentlib:jdwp=transport=dt_socket,address=127.0.0.1:8000,server=y,suspend=n -classpath bin;lib/Log4J/log4j-1.2.17.jar;configuration\Log4J offensive.Server.Osrv -debug 5000 -ConfigFilePath C:\Users\john\SkyDrive\Offensive\workspace\osrv\configuration\osrv\osrv.config %*
