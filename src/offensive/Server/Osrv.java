@@ -1,10 +1,11 @@
 package offensive.Server;
 
+import offensive.Server.Utilities.Environment;
 import offensive.Server.WorkerThreads.CleanupThread;
 
 public class Osrv {
 
-	private static Server server;
+	private static GameServer server;
 	
 	private static Thread serverThread;
 	
@@ -18,7 +19,9 @@ public class Osrv {
 			}
 		}
 		
-		Osrv.server = new Server(args);
+		Environment environment = new Environment(args);
+		
+		Osrv.server = new GameServer(environment);
 		Osrv.server.initialize();
 		
 		Osrv.serverThread = new Thread(Osrv.server, "Server");
@@ -30,8 +33,8 @@ public class Osrv {
 		try {
 			Osrv.serverThread.join();
 		} catch (InterruptedException e) {
-			Server.logger.error(e.getMessage(), e);
-			Server.logger.error("Server exited with code 1");
+			Osrv.server.logger.error(e.getMessage(), e);
+			Osrv.server.logger.error("Server exited with code 1");
 			System.exit(1);
 		}
 	}
@@ -39,10 +42,10 @@ public class Osrv {
 	public static void shutdown() {
 		Osrv.server.shutdown();
 		try {
-			// If server thread doesn't shutdown in 30 minutes just kill it...
+			// If server thread don't shutdown in 30 minutes just exit...
 			Osrv.serverThread.join(30 * 60 * 1000);
 		} catch (InterruptedException e) {
-			Server.logger.error(e.getMessage(), e);
+			Osrv.server.logger.error(e.getMessage(), e);
 		}
 	}
 }

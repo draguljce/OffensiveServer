@@ -1,4 +1,1 @@
-@echo off
-setlocal ENABLEDELAYEDEXPANSION
-FOR /R .\lib %%G IN (*.jar) DO set CLASSPATH=!CLASSPATH!;%%G
-Echo The Classpath definition is %CLASSPATH%
+set CLASSPATH=lib\Hibernate\*;lib\Hibernate\envers\*;lib\Hibernate\jpa\*;lib\Hibernate\jpa-metamodel-generator\*;lib\Hibernate\optional\c3p0\*;lib\Hibernate\optional\ehcache\*;lib\Hibernate\optional\infinispan\*;lib\Hibernate\optional\proxool\*;lib\Hibernate\osgi\*;lib\Hibernate\required\*;lib\log4j\*;lib\protobuf\*;bin;bin\offensive\Server\Hybernate\POJO\*;configuration\Hibernate

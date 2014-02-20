@@ -74,7 +74,7 @@ public class Environment {
 				this.environmentVariables.put(node.getNodeName(), node.getFirstChild().getNodeValue());
 			}
 		} catch (IOException | SAXException | ParserConfigurationException e) {
-			Server.logger.error(e.getMessage(), e);
+			Server.getServer().logger.error(e.getMessage(), e);
 			System.exit(2);
 		}
 	}
@@ -88,12 +88,24 @@ public class Environment {
 			this.environmentVariables.put(Constants.BattleThreadNumVarName, Constants.BattleThreadNumDefaultVal);
 		}
 		
+		if(!this.containsVariable(Constants.RegistrationThreadNumVarName)) {
+			this.environmentVariables.put(Constants.RegistrationThreadNumVarName, Constants.RegistrationThreadNumDefaultVal);
+		}
+		
 		if(!this.containsVariable(Constants.PortNumberVarName)) {
 			this.environmentVariables.put(Constants.PortNumberVarName, Constants.PortNumberDefaultVal);
 		}
 		
+		if(!this.containsVariable(Constants.RegistrationPortNumberVarName)) {
+			this.environmentVariables.put(Constants.RegistrationPortNumberVarName, Constants.RegistrationPortNumberDefaultVal);
+		}
+		
 		if(!this.containsVariable(Constants.ServerSocketTimeoutVarName)) {
 			this.environmentVariables.put(Constants.ServerSocketTimeoutVarName, Constants.ServerSocketTimeoutDefaultVal);
+		}
+		
+		if(!this.containsVariable(Constants.SocketTimeoutVarName)) {
+			this.environmentVariables.put(Constants.SocketTimeoutVarName, Constants.SocketTimeoutDefaultVal);
 		}
 	}
 	

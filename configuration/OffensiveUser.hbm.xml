@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?> 
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd"> 
+
+<hibernate-mapping> 
+	<class name="offensive.Server.Hybernate.POJO.OffensiveUser" table="OffensiveUsers">  
+		<id name="id" type="int" column="id"/>
+		 
+		<property name="userName" column="UserName" type="string"/>
+		<property name="password" column="Password" type="string"/>  
+	</class> 
+</hibernate-mapping>

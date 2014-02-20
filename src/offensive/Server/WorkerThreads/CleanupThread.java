@@ -1,12 +1,12 @@
 package offensive.Server.WorkerThreads;
 
-import offensive.Server.Osrv;
+import offensive.Server.Server;
 
 public class CleanupThread implements Runnable {
 
 	@Override
 	public void run() {
-		Osrv.shutdown();
+		Server.getServer().shutdown();
 	}
 
 }

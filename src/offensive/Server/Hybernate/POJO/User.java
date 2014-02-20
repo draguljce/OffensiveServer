@@ -7,6 +7,10 @@ public class User {
 	
 	public User() {};
 	
+	public User(UserType type) {
+		this.type = type;
+	}
+	
 	public int getId() {
 		return this.id;
 	}

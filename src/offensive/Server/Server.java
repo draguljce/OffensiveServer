@@ -2,130 +2,70 @@ package offensive.Server;
 
 import java.io.IOException;
 import java.net.ServerSocket;
-import java.net.Socket;
-import java.net.SocketException;
-import java.net.SocketTimeoutException;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
-import java.util.concurrent.TimeUnit;
+import java.util.Iterator;
 
-import offensive.Server.Utilities.Constants;
 import offensive.Server.Utilities.Environment;
-import offensive.Server.WorkerThreads.HandlerThread;
 
 import org.apache.log4j.Logger;
 import org.hibernate.SessionFactory;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cfg.Configuration;
+import org.hibernate.mapping.Table;
 import org.hibernate.service.ServiceRegistry;
-import org.hibernate.service.ServiceRegistryBuilder;
 
-public class Server implements Runnable {
-	public static Logger logger;
+public class Server {
+	public Logger logger;
 	
-	private Environment environment;
+	public Environment environment;
 	
-	private ExecutorService handlerExecutorService;
+	public static SessionFactory sessionFactory;
 	
-	private ExecutorService battleExecutorService;
+	protected ServerSocket serverSocket;
 	
-	private ServerSocket serverSocket;
+	protected boolean shouldShutdown;
 	
-	private boolean shouldShutdown = false;
+	private static Server server;
 	
-	private SessionFactory sessionFactory;
+	private Thread mainThread;
 	
-	private ServiceRegistry serviceRegistry;
-	
-	public Server(String[] args) {
-		this.environment = new Environment(args);
+	protected Server(Environment environment) {
+		this.logger = Logger.getLogger(this.getClass());
 		
-		Server.logger = Logger.getLogger(this.getClass());
+		this.environment = environment;
+		
+		Server.server = this;
+		
+		this.mainThread = Thread.currentThread();
 	}
 	
-	void initialize() {
-		Server.logger.info("Server initialization started.");
-		
-		Server.logger.info("Building session factory...");
-		
-		//Configuration configuration = new Configuration();
-		//configuration.configure();
-		//this.serviceRegistry = new StandardServiceRegistryBuilder().applySettings(configuration.getProperties()).build();
-		//this.sessionFactory = new Configuration().buildSessionFactory(this.serviceRegistry);
-		
-		Server.logger.info("Building session factory completed.");
-		
-		Server.logger.debug("Initializing handler threads.");
-		this.handlerExecutorService = Executors.newFixedThreadPool(Integer.parseInt(this.environment.getVariable(Constants.HandlerThreadNumVarName)));
-		Server.logger.debug("Initialization of handler threads completed. Number of handler threads is " + this.environment.getVariable(Constants.HandlerThreadNumVarName));
-		
-		Server.logger.debug("Initializing battle threads.");
-		this.battleExecutorService = Executors.newFixedThreadPool(Integer.parseInt(this.environment.getVariable(Constants.BattleThreadNumVarName)));
-		Server.logger.debug("Initialization of handler threads completed. Number of battle threads is " + this.environment.getVariable(Constants.BattleThreadNumVarName));
-		
-		Server.logger.info("Opening server socket on port " + this.environment.getVariable(Constants.PortNumberVarName));
-		try {
-			serverSocket = new ServerSocket(Integer.parseInt(this.environment.getVariable(Constants.PortNumberVarName)));
-		} catch (NumberFormatException | IOException e) {
-			Server.logger.fatal(e.getMessage(), e);
-			System.exit(4);
-		}
-		Server.logger.info("Server socket opened.");
-		
-		try {
-			this.serverSocket.setSoTimeout(Integer.parseInt(this.environment.getVariable(Constants.ServerSocketTimeoutVarName)));
-		} catch (NumberFormatException | SocketException e) {
-			Server.logger.fatal(e.getMessage(), e);
-			System.exit(5);
-		}
-		
-		Server.logger.info("Server socket timeout is " + this.environment.getVariable(Constants.ServerSocketTimeoutVarName));
-		
-		Server.logger.info("Server initialization completed.");
+	protected static void setServer(Server server) {
+		Server.server = server;
 	}
-
-	@Override
-	public void run() {
-		Server.logger.info("Server is now listening on port " + this.environment.getVariable(Constants.PortNumberVarName));
+	
+	public static Server getServer() {
+		return Server.server; 
+	}
+	
+	protected void initialize() {
+		this.logger.info("Building session factory...");
 		
-		Socket socket = null;
-		while(true) {
-			try {	
-				try {
-					socket = serverSocket.accept();
-				} catch (SocketException socketException) {
-					if(this.shouldShutdown) {
-						Server.logger.info("Received shutdown request.");
-						try {
-							Server.logger.info("Waiting for handler threads to finish...");
-							this.handlerExecutorService.shutdown();
-							this.handlerExecutorService.awaitTermination(Long.MAX_VALUE, TimeUnit.NANOSECONDS);
-							
-							Server.logger.info("Waiting for battle threads to finish...");
-							this.battleExecutorService.shutdown();
-							this.battleExecutorService.awaitTermination(Long.MAX_VALUE, TimeUnit.NANOSECONDS);
-						} catch (InterruptedException e) {
-							Server.logger.error(e.getMessage(), e);
-						}
-						
-						Server.logger.info("Shuting down...");
-						return;
-					}
-					
-					continue;
-				}
-				catch (SocketTimeoutException timeoutException) {
-					// TODO: nothing to do here. For now...
-					continue;
-				}
-				
-				Server.logger.info("Accepted connection from address " + socket.getRemoteSocketAddress());
-				this.handlerExecutorService.submit(new HandlerThread(socket));
-			} catch (NumberFormatException | IOException e) {
-				Server.logger.error(e.getMessage(), e);
-				System.exit(3);
-			}
+		Configuration configuration = new Configuration();
+		configuration.configure();
+		ServiceRegistry serviceRegistry = new StandardServiceRegistryBuilder().applySettings(configuration.getProperties()).build();
+		GameServer.sessionFactory = configuration.buildSessionFactory(serviceRegistry);
+		
+		this.logger.debug("Classes mappings:");
+		for(String key : GameServer.sessionFactory.getAllClassMetadata().keySet()) {
+			this.logger.debug(key);
 		}
+		
+		this.logger.debug("Table mappings:");
+		for(Iterator<Table> iterator = configuration.getTableMappings(); iterator.hasNext();) {
+			Table map = iterator.next();
+			this.logger.debug(map);
+		}
+		
+		this.logger.info("Building session factory completed.");
 	}
 	
 	public void shutdown() {
@@ -134,7 +74,14 @@ public class Server implements Runnable {
 		try {
 			this.serverSocket.close();
 		} catch (IOException e) {
-			Server.logger.error(e.getMessage(), e);
+			this.logger.error(e.getMessage(), e);
+		}
+		
+		// Wait for up to 30 minutes for shutdown to complete.
+		try {
+			this.mainThread.join(30 * 60 * 1000);
+		} catch (InterruptedException e) {
+			this.logger.error(e.getMessage(), e);
 		}
 	}
 }

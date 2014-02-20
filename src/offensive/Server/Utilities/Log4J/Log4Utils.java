@@ -11,7 +11,7 @@ import org.apache.log4j.Logger;
 public class Log4Utils {
 	
 	public static Logger getLogger(String logPath) {
-		Logger logger = Logger.getLogger(offensive.Server.Server.class);
+		Logger logger = Logger.getLogger(offensive.Server.GameServer.class);
 		
 		if(logPath == null || logPath.isEmpty()) {
 			logPath = Constants.DefaultLogPath;

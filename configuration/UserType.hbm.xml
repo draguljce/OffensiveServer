@@ -2,11 +2,7 @@
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd"> 
 
 <hibernate-mapping> 
-	<class name="User" table="Users">  
-		<id name="id" type="int" column="id">
-			<generator class="identity"/> 
-		</id>
-		 
-		<one-to-one name="type"/>  
+	<class name="offensive.Server.Hybernate.POJO.UserType" table="UserTypes">  
+		<id name="name" type="string" column="name"/>  
 	</class> 
 </hibernate-mapping>

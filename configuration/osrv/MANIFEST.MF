@@ -1,0 +1,3198 @@
+Manifest-Version: 1.0
+Class-Path: .
+Main-Class: offensive.Server.GameServer
+
+Name: OSGI-OPT/src/org/osgi/service/upnp/UPnPLocalStateVariable.java
+SHA-Digest: Ej4kn2lMXuAFWgqgdzyw/Q//Gno=
+MD5-Digest: tOEEfnxrcJ+PPZU5zBbEqQ==
+
+Name: org/osgi/service/blueprint/reflect/Metadata.class
+SHA-Digest: 5Aq22rAecI4Ho/Tm9Z0rYytl4xw=
+MD5-Digest: 3ic9Ygc9pjOGHgrGps2pOw==
+
+Name: OSGI-OPT/src/org/osgi/service/jpa/packageinfo
+SHA-Digest: PjGh674JTItklvGASGkWhaF4Ozw=
+MD5-Digest: cUcaoi9RK+TuyZ85gXBzPg==
+
+Name: OSGI-OPT/src/org/osgi/framework/startlevel/package-info.java
+SHA-Digest: jziNRKjZxv7gw2qglXTqIxDgCpo=
+MD5-Digest: Ul02WT1lkR57Bs9XTKAOCg==
+
+Name: org/osgi/service/component/ComponentConstants.class
+SHA-Digest: XgOtwFTU+ZGmTy/XcgDCyGSZ0Pc=
+MD5-Digest: I6NIyUGlojXDJ42oS7WUFQ==
+
+Name: OSGI-OPT/src/org/osgi/service/component/ComponentConstants.java
+SHA-Digest: qXSlwnME0eo2H5T5jLxhJtx8pOE=
+MD5-Digest: misaRoFIgHz4K5+DyLwqsA==
+
+Name: org/osgi/service/blueprint/reflect/CollectionMetadata.class
+SHA-Digest: 87GxiECqaWtj7AbNjutZ8YNk+gU=
+MD5-Digest: cqPr9lt0Nnp3hQehiI/LJw==
+
+Name: org/osgi/framework/wiring/BundleRequirement.class
+SHA-Digest: gBLmTwm6DTpUf2AQWRRyILy2+dA=
+MD5-Digest: n+G1DMgPh3vwWpYGp5+EKw==
+
+Name: OSGI-OPT/src/org/osgi/service/dmt/notification/AlertItem.java
+SHA-Digest: xSN2VgCx3PA24o/8fyxXsf9Kp08=
+MD5-Digest: CRJi6ECP3NYC6tG5qGB1QQ==
+
+Name: org/osgi/service/condpermadmin/ConditionalPermissionInfo.class
+SHA-Digest: poKaSw+KOJ0+anwmfU+Si1S9r3E=
+MD5-Digest: gvmzCTFsLiWrnzT3ERuKHw==
+
+Name: OSGI-OPT/src/org/osgi/service/component/annotations/ReferencePol
+ icy.java
+SHA-Digest: QqaK1MVXgfDAwXDaB3dx9KthhD8=
+MD5-Digest: HToi9I7jnajuDjPsFkwsjQ==
+
+Name: org/osgi/service/dmt/spi/packageinfo
+SHA-Digest: nbgmAaUdW/zBD5biN/VIZTJsYes=
+MD5-Digest: kvpRabXUueUzjDvOyc0UrA==
+
+Name: org/osgi/service/remoteserviceadmin/RemoteConstants.class
+SHA-Digest: WtKUTTLet0uD0PcmIb0uqpyDj6Q=
+MD5-Digest: 6AjBwUH765YGf+N7vaUwtw==
+
+Name: org/osgi/service/blueprint/reflect/ServiceMetadata.class
+SHA-Digest: U+1tkr1pMCBISA+AXezTF8PCXsI=
+MD5-Digest: zVc+CoEecGeDD+GxX3cyFQ==
+
+Name: org/osgi/service/permissionadmin/package-info.class
+SHA-Digest: a+DrYodxA/hzADLvCh/gvzu5uG8=
+MD5-Digest: z76y/HAP1boyXA7baOQcmg==
+
+Name: OSGI-OPT/src/org/osgi/service/application/ScheduledApplication.j
+ ava
+SHA-Digest: 68wiBUR1MhL8YHEAH9kC7BzHHPo=
+MD5-Digest: ucjmgprtLf26dJvus5gTjg==
+
+Name: org/osgi/framework/launch/Framework.class
+SHA-Digest: fB58N6kjq2MZJt7ZsBuwM16lbqg=
+MD5-Digest: TRS3ADZ05MM1J1SY1JkUVA==
+
+Name: OSGI-OPT/src/org/osgi/framework/FrameworkUtil.java
+SHA-Digest: dV6HuB82aNgtAz1A5sf6FeO6Nf0=
+MD5-Digest: N1OLDqNhy7Y56AjwyF560A==
+
+Name: org/osgi/service/blueprint/reflect/ReferenceListener.class
+SHA-Digest: 8KQnlRCTmwn39GBFOKo2SviFXjA=
+MD5-Digest: N23cCrkb4Ia2/maJB0e4uQ==
+
+Name: org/osgi/framework/hooks/service/ListenerHook.class
+SHA-Digest: L0OJKJ4dpB8pjfUmNIzLVNgl8Gg=
+MD5-Digest: 6W1/7O+fdqOjMBWuiPZfJg==
+
+Name: org/osgi/service/log/LogReaderService.class
+SHA-Digest: YIkFrxipKKw06T5t+o9UWQUgdnA=
+MD5-Digest: 1sIJiyaPkFIrI1IJyXQknA==
+
+Name: OSGI-OPT/src/org/osgi/framework/ServiceEvent.java
+SHA-Digest: 0CljRDNKCUSVJUqmAbp2Wtsg0tE=
+MD5-Digest: GaFdJUCuZDN17GamwPdlaQ==
+
+Name: OSGI-OPT/src/org/osgi/service/dmt/notification/package-info.java
+SHA-Digest: lWKkG2OWZNLmI7jotC4YnX2yGP4=
+MD5-Digest: iHV8MxW3QBInI0zwUts+jQ==
+
+Name: OSGI-OPT/src/org/osgi/framework/InvalidSyntaxException.java
+SHA-Digest: tSPTG3XT2fGtzfSXdr7Hg5X7hzs=
+MD5-Digest: n8Ak29WES/o1wEv48BiKhQ==
+
+Name: org/osgi/framework/wiring/BundleWire.class
+SHA-Digest: x+PQywX29tp3oSSnUj2zvzIgL+A=
+MD5-Digest: vcu/x+vRCtdA9gzn6jqLkA==
+
+Name: OSGI-OPT/src/org/osgi/util/tracker/AbstractTracked.java
+SHA-Digest: dp0+23PXWhbMBRslnUkyPHYSdYs=
+MD5-Digest: gFgT7ndIEOKi0RUG1MjzRg==
+
+Name: org/osgi/framework/AdminPermission$1.class
+SHA-Digest: Yva5hufMD58YaRI4ui3+h81oFHI=
+MD5-Digest: NlT247TWi5oSTX+zZKqvbA==
+
+Name: org/osgi/service/dmt/security/DmtPermission.class
+SHA-Digest: 87sg/nb7iyACegIiaCyUJkSGf20=
+MD5-Digest: UT5ZO6vctVcvTgRpK9inKg==
+
+Name: org/osgi/service/prefs/packageinfo
+SHA-Digest: Iu7DqTvUrN0Xc0LSCfxA53TM0Qc=
+MD5-Digest: gc5nyDSM/DALn/gXEA35qA==
+
+Name: org/osgi/service/deploymentadmin/spi/DeploymentCustomizerPermiss
+ ion$1.class
+SHA-Digest: Ty9mV+iO93p04qBn/9mS6Mr0Zeo=
+MD5-Digest: u0xF7JS3Xa1DoFvdLMYT4Q==
+
+Name: OSGI-OPT/src/org/osgi/framework/hooks/bundle/packageinfo
+SHA-Digest: PjGh674JTItklvGASGkWhaF4Ozw=
+MD5-Digest: cUcaoi9RK+TuyZ85gXBzPg==
+
+Name: org/osgi/util/tracker/package-info.class
+SHA-Digest: WpKHhWzPvrDFxhUCHCAerK9m/nI=
+MD5-Digest: FkYbxzo6dwNGkQV92rsEgA==
+
+Name: OSGI-OPT/src/org/osgi/service/component/packageinfo
+SHA-Digest: r5uYn4Hkb0NJxA6LFYd3cMZf+Qs=
+MD5-Digest: ijfbF0l6UvxtLGGSc2LmTA==
+
+Name: OSGI-OPT/src/org/osgi/service/http/HttpService.java
+SHA-Digest: JpPWMWOwTu9uYJYVFIG20OuSmAU=
+MD5-Digest: FNk2laTxpQNJ/lDHMzXKkg==
+
+Name: org/osgi/framework/hooks/bundle/FindHook.class
+SHA-Digest: LQtZKWVgsMnhLkFJ0+/XnMJ7Tb0=
+MD5-Digest: r63U+813uH0P2BSAI5igWw==
+
+Name: OSGI-OPT/src/org/osgi/service/metatype/package-info.java
+SHA-Digest: wALrqJg3feQeHvMfk8FcSwv+HpU=
+MD5-Digest: w51CSzvERX9+Ws8DnZE4tg==
+
+Name: org/osgi/service/remoteserviceadmin/package-info.class
+SHA-Digest: ARAZb60jx3htPty+jevvFrNYd14=
+MD5-Digest: s1IufZluMsGW/Z/WQEgyTg==
+
+Name: OSGI-OPT/src/org/osgi/service/component/ComponentInstance.java
+SHA-Digest: OCcLQcb88F/rkoZ8VvZgVBQdA7o=
+MD5-Digest: gIqHmRbG9I+4dTC+2/ID2A==
+
+Name: OSGI-OPT/src/org/osgi/service/prefs/Preferences.java
+SHA-Digest: Z/aCM7A93B3FD+qPzS7WBwiszM4=
+MD5-Digest: 68HD8odFo00t1qTDe6AxbQ==
+
+Name: org/osgi/framework/ServiceReference.class
+SHA-Digest: wk33YKxSAOxfPQbopUd4wVTRmPc=
+MD5-Digest: pw/xgZIqdIbZuTJB7gcn2Q==
+
+Name: org/osgi/framework/FrameworkUtil$CaseInsensitiveMap.class
+SHA-Digest: jwQ40dzHutBqOQDZTBEGJFWUyhk=
+MD5-Digest: Vl3RhiqDxCdpp6eYUBo7pQ==
+
+Name: org/osgi/service/log/package-info.class
+SHA-Digest: f6VBTY1/jZOHBW/n7Yv9LAyIEAk=
+MD5-Digest: HnnZre3S/Hmxto8kuo3dHg==
+
+Name: org/osgi/service/io/packageinfo
+SHA-Digest: PjGh674JTItklvGASGkWhaF4Ozw=
+MD5-Digest: cUcaoi9RK+TuyZ85gXBzPg==
+
+Name: org/osgi/service/component/ComponentException.class
+SHA-Digest: 6KG6zjFdA7SNeyfe9KqNs0NRCVg=
+MD5-Digest: HIQu5lvE1I2hqN2JKnzHQA==
+
+Name: OSGI-OPT/src/org/osgi/service/useradmin/UserAdminListener.java
+SHA-Digest: MBWag1uQPuqrbGZjL9b5ZWFmWK4=
+MD5-Digest: 7A5aGppjHob5I5Rc0BjJ2w==
+
+Name: org/osgi/service/monitor/MonitorPermission.class
+SHA-Digest: NO8jjqyyYs7Lzfaho72zzgHCFQU=
+MD5-Digest: fJSA/a2gmCCNm2lfzJWwKA==
+
+Name: org/osgi/service/remoteserviceadmin/packageinfo
+SHA-Digest: YevA+7phDMQI14SpmNZxNw6CMx0=
+MD5-Digest: YwjBAV07gY2hP8TQTgAeKg==
+
+Name: org/osgi/service/provisioning/package-info.class
+SHA-Digest: iOjKmY42HuUcMTipkeo6OW0/MOU=
+MD5-Digest: jdrU2nqsW94OnnPUJ1Ncew==
+
+Name: OSGI-OPT/src/org/osgi/service/dmt/notification/spi/RemoteAlertSe
+ nder.java
+SHA-Digest: 6fPzfJnyGg6//EhN1G7blcon3gU=
+MD5-Digest: 04Dk7JOEX0nM1prmYjaVbQ==
+
+Name: OSGI-OPT/src/org/osgi/service/monitor/MonitorAdmin.java
+SHA-Digest: CJnoLzfybY7HqoqmxT1HDhXvN4E=
+MD5-Digest: C17TTVNupxjtiteHAhbEPA==
+
+Name: OSGI-OPT/src/org/osgi/service/dmt/Acl.java
+SHA-Digest: AaAdTR/bjUcZZ59QqLB06UXsLd8=
+MD5-Digest: Rvky280ReqtIQT+EE7pK5A==
+
+Name: org/osgi/service/application/ScheduledApplication.class
+SHA-Digest: /zlsboBPmZxJ9GifOxk4Pqr88W4=
+MD5-Digest: vpHayWSSEfzotgN/dE5EzQ==
+
+Name: OSGI-OPT/src/org/osgi/service/io/package-info.java
+SHA-Digest: +Bms8BFbWVjZmqL+26we6gyXLRo=
+MD5-Digest: SsMI6+iA5Es3KpJMTxOSHw==
+
+Name: OSGI-OPT/src/org/osgi/service/packageadmin/PackageAdmin.java
+SHA-Digest: 0IoEbxMU9+flhXX7yw13Ekw0Lec=
+MD5-Digest: Nw0N07uVm+0DWZV9fYNafA==
+
+Name: OSGI-OPT/src/org/osgi/service/event/TopicPermission.java
+SHA-Digest: jN+aPTJKuNGIgsbOSrLSUnDV3Hg=
+MD5-Digest: JN/93eHaHlHmevBGCw0aBA==
+
+Name: org/osgi/framework/FrameworkUtil$1.class
+SHA-Digest: Y0f4rmKagqf7308pls7KEXCYhMU=
+MD5-Digest: Rr2JP/NOaDgojVAPn/gbtA==
+
+Name: org/osgi/service/deploymentadmin/spi/ResourceProcessorException.
+ class
+SHA-Digest: g6lrz7S4vQ+2mkEmrVO/e4EWgrM=
+MD5-Digest: BR/WWWbGW4+dV+aQduH5og==
+
+Name: OSGI-OPT/src/org/osgi/service/url/URLStreamHandlerSetter.java
+SHA-Digest: hp+IkXrlftKlH6lui9zFj6PDRew=
+MD5-Digest: OiQvKU44zbPhOtNv7fU37Q==
+
+Name: OSGI-OPT/src/org/osgi/service/permissionadmin/PermissionInfo.jav
+ a
+SHA-Digest: BdNsIUNfqnoFRhymllHRl1wW8VM=
+MD5-Digest: SARTZUjQNKR6Giesdxk22g==
+
+Name: OSGI-OPT/src/org/osgi/service/blueprint/reflect/BeanProperty.jav
+ a
+SHA-Digest: Bcw4XhaVG+qr0UJ1w0XnWaSdQUo=
+MD5-Digest: m0QWTd93jGrKfJXhESaoow==
+
+Name: org/osgi/service/jdbc/package-info.class
+SHA-Digest: hrPKzXpf/weGWEOqiqICzsmHDpA=
+MD5-Digest: 0VgrmyagfpvBDSlKgVYLSw==
+
+Name: org/osgi/util/measurement/package-info.class
+SHA-Digest: uHxWZbU5GWLNQIC36ploQqVzX5s=
+MD5-Digest: 1Saszr0Nr/fwStFUptAtVw==
+
+Name: org/osgi/service/prefs/Preferences.class
+SHA-Digest: 9qv311/UF+xvktzYCnXkv+TGiK8=
+MD5-Digest: SaOfC3sOK2mQl8kEtSX4BA==
+
+Name: org/osgi/service/log/LogListener.class
+SHA-Digest: V/JGO3lrybKeSHljqybhpfp8YhA=
+MD5-Digest: osPZ464uYI/PBGqBluiEWw==
+
+Name: OSGI-OPT/src/org/osgi/service/coordinator/CoordinationException.
+ java
+SHA-Digest: a3cMnJ47VjsHIaYuMtllgMcZY1I=
+MD5-Digest: 3MspZ/xTtXHKNQ9gasyh2A==
+
+Name: OSGI-OPT/src/org/osgi/service/metatype/packageinfo
+SHA-Digest: r5uYn4Hkb0NJxA6LFYd3cMZf+Qs=
+MD5-Digest: ijfbF0l6UvxtLGGSc2LmTA==
+
+Name: org/osgi/framework/BundlePermissionCollection.class
+SHA-Digest: wkNbfFOSBqgWjmHfo7UT3e6hUec=
+MD5-Digest: qbNQy8wpDKyq5fSLfJHGzw==
+
+Name: OSGI-OPT/src/org/osgi/service/component/annotations/Component.ja
+ va
+SHA-Digest: q3N/LneDt/W465tfJw8Fgnf9IkU=
+MD5-Digest: xLTPtC8UESogrZJz9iIZ5w==
+
+Name: OSGI-OPT/src/org/osgi/service/useradmin/Role.java
+SHA-Digest: dJkBnneKP729D0+IKhnUF2KElN0=
+MD5-Digest: CxATkjhqt8D0C2AidibQuw==
+
+Name: org/osgi/service/upnp/UPnPIcon.class
+SHA-Digest: PEqlXB3FFrRQex+o1qoMSVJQvPI=
+MD5-Digest: YUnM2B54I+UR2UoGjW6uJA==
+
+Name: org/osgi/util/tracker/ServiceTracker.class
+SHA-Digest: g2QcY/P13LQLnvUs6vQMOETvwC0=
+MD5-Digest: wRfN9w926WoAZ+iBjkAZLQ==
+
+Name: OSGI-OPT/src/org/osgi/framework/wiring/BundleCapability.java
+SHA-Digest: oyks928WjKsAxDBKrdJ68128vQE=
+MD5-Digest: ZBJekgrEaU8fF0IvxkBYRg==
+
+Name: OSGI-OPT/src/org/osgi/service/log/LogReaderService.java
+SHA-Digest: t3s03d5Qrt9wVoNQB1hEVmW+iIo=
+MD5-Digest: gX3fTuDEX6t+OGkJpR41Bw==
+
+Name: OSGI-OPT/src/org/osgi/service/component/annotations/Modified.jav
+ a
+SHA-Digest: +Og23P9oIOrScImD6K/XQgD/j8c=
+MD5-Digest: mEMPnRaLkxCMKW4xZBkb9w==
+
+Name: OSGI-OPT/src/org/osgi/framework/Version.java
+SHA-Digest: MnvSvI/t7eGU/kcwm5WbelOhONo=
+MD5-Digest: 9GIJIyyfuBrAXVuvyFtVFA==
+
+Name: org/osgi/service/component/annotations/packageinfo
+SHA-Digest: r5uYn4Hkb0NJxA6LFYd3cMZf+Qs=
+MD5-Digest: ijfbF0l6UvxtLGGSc2LmTA==
+
+Name: org/osgi/service/dmt/security/DmtPermissionCollection.class
+SHA-Digest: vF6puTzvVHwfta5mLsClJZzehR8=
+MD5-Digest: 8P3sUTVqD6Ka3afxYxkezQ==
+
+Name: org/osgi/service/blueprint/container/ServiceUnavailableException
+ .class
+SHA-Digest: l6rEdtvWS+y76kZIGFbJJhrtsy4=
+MD5-Digest: sIpmhW9WaIZYnCiPAcZkCA==
+
+Name: org/osgi/service/blueprint/reflect/NullMetadata$1.class
+SHA-Digest: GA9eSEjyThsjLUoQ87/ZA4jV3jw=
+MD5-Digest: 2pCeG5AgEWImcYnmxl0ALw==
+
+Name: org/osgi/service/jdbc/packageinfo
+SHA-Digest: PjGh674JTItklvGASGkWhaF4Ozw=
+MD5-Digest: cUcaoi9RK+TuyZ85gXBzPg==
+
+Name: OSGI-OPT/src/org/osgi/service/remoteserviceadmin/RemoteServiceAd
+ minListener.java
+SHA-Digest: vlHVNL9bRmKONP8nLaPhHrGcdak=
+MD5-Digest: g2PpuHvitrM1lbpRjy8Zyw==
+
+Name: org/osgi/service/application/ApplicationDescriptor$Delegate$2.cl
+ ass
+SHA-Digest: a5btkZZ8RdX9KC6Py81LIkzfjw8=
+MD5-Digest: /MU9zrzJF+7PCAYFm2zB2w==
+
+Name: OSGI-OPT/src/org/osgi/service/blueprint/container/ReifiedType.ja
+ va
+SHA-Digest: TxOnHGnHyetFeTu8vQOSfNuglwM=
+MD5-Digest: tstTeWXWP0X7JYEGMmrMOA==
+
+Name: org/osgi/framework/hooks/weaving/WeavingHook.class
+SHA-Digest: +a8QMov3RnGDSid9G32+9Kb+/YQ=
+MD5-Digest: WjvDLOGgaGANCsGM67bNUg==
+
+Name: OSGI-OPT/src/org/osgi/service/wireadmin/WireConstants.java
+SHA-Digest: UuAEwJfllCTLJCW34MXmCj/9Yxw=
+MD5-Digest: h0qtoVYCU9igJnGX6/Ohtw==
+
+Name: org/osgi/framework/startlevel/FrameworkStartLevel.class
+SHA-Digest: Ifmq+5DsCfYvu+WTVzVytO0A+VM=
+MD5-Digest: kiUuGJP03v2I1RAexOKZqQ==
+
+Name: OSGI-OPT/src/org/osgi/service/component/annotations/ReferenceCar
+ dinality.java
+SHA-Digest: t6buJKtnTmqi/QBo3Y9TPWCO2aA=
+MD5-Digest: x/LbVl8XOHjX1YJt+PjanQ==
+
+Name: OSGI-OPT/src/org/osgi/service/remoteserviceadmin/RemoteServiceAd
+ minEvent.java
+SHA-Digest: e0bj47IH7aDCOqCGxN63p0MJJYc=
+MD5-Digest: Iy/rGLV2M39jxaBs/GvNTQ==
+
+Name: org/osgi/service/useradmin/packageinfo
+SHA-Digest: PhMzFYEiVe2dicD0Uo46QHBW068=
+MD5-Digest: YjqPCNiOolZ/nRAQLKGgKg==
+
+Name: OSGI-OPT/src/org/osgi/util/tracker/packageinfo
+SHA-Digest: 6bQhsW1wDpwT/HLKVlhp7kDvaOQ=
+MD5-Digest: JhG2NfP2SlUi76Gf6h5x+Q==
+
+Name: org/osgi/service/dmt/security/DmtPrincipalPermission.class
+SHA-Digest: EFXcO2gwQL3OPNqTv/pM7CTKC7Y=
+MD5-Digest: lJLE0EoOrQdePGZ35lNTKQ==
+
+Name: org/osgi/service/wireadmin/Producer.class
+SHA-Digest: jaPmp4cmkSNbwc4Us1E0TpiLi1Y=
+MD5-Digest: uv0r2lLskU7LWYdhrizuzA==
+
+Name: org/osgi/application/ApplicationServiceEvent.class
+SHA-Digest: wWiyGpuaCd9XbRsqH5QrwwpHXs0=
+MD5-Digest: W0nuKjqcqXdOaa/bez2shA==
+
+Name: OSGI-OPT/src/org/osgi/service/blueprint/reflect/packageinfo
+SHA-Digest: YevA+7phDMQI14SpmNZxNw6CMx0=
+MD5-Digest: YwjBAV07gY2hP8TQTgAeKg==
+
+Name: OSGI-OPT/src/org/osgi/service/application/ApplicationDescriptor.
+ java
+SHA-Digest: d02n8ErEHK/LCV8kw9BC4ofe7MI=
+MD5-Digest: /FqcMCpAfkPpzNvvYtxHig==
+
+Name: OSGI-OPT/src/org/osgi/framework/hooks/service/ListenerHook.java
+SHA-Digest: mYsrLfcuW5CgvoTE9i4S2mZqICg=
+MD5-Digest: 3GQ3nCQsoDhr5wAkNWWFyA==
+
+Name: org/osgi/service/startlevel/StartLevel.class
+SHA-Digest: 1W9qH2JyUmYe49jYD1m+HzWCs4g=
+MD5-Digest: GI9pJ+6zhD8bseiEfHRA5w==
+
+Name: org/osgi/service/remoteserviceadmin/RemoteServiceAdmin.class
+SHA-Digest: NqfnvNaUGyEb56LxkHHzoKU+dIk=
+MD5-Digest: zexfSrJA0idQ+bnGuERCxg==
+
+Name: org/osgi/service/cm/ConfigurationException.class
+SHA-Digest: kW4Zav74zzKQnmoHuWv6WV66mLQ=
+MD5-Digest: a+6zodPfJnXom9IEJKS5PA==
+
+Name: OSGI-OPT/src/org/osgi/service/coordinator/CoordinationPermission
+ .java
+SHA-Digest: NshZVmcUJsbd/y9Tgyt51FehnzQ=
+MD5-Digest: XTyztd5Ic06y2kZadswbcA==
+
+Name: OSGI-OPT/src/org/osgi/service/dmt/spi/ReadWriteDataSession.java
+SHA-Digest: npu3JkeA+CWP2DrUTU6HRL6kC28=
+MD5-Digest: JX4zjWt0jA6UmDcKVvfJ5Q==
+
+Name: org/osgi/service/monitor/MonitorAdmin.class
+SHA-Digest: 4QbVk2Qp1YaEga/YfWTEuA9ND4k=
+MD5-Digest: r2g80293duqSNRnHoQ8LXA==
+
+Name: org/osgi/framework/PackagePermission.class
+SHA-Digest: 7+cqgYviR1R/YUbW2wa4cl+3it0=
+MD5-Digest: 4RI2ld1YSHs0vBWFG0TTRQ==
+
+Name: org/osgi/service/deploymentadmin/spi/package-info.class
+SHA-Digest: FYiG1BUBw2n9W2aA5vODLIrgJi4=
+MD5-Digest: GohVcSxwU3q5+M/7oeJ0Eg==
+
+Name: org/osgi/framework/SignerProperty.class
+SHA-Digest: nJmx2unhUZMzGvsM3dh7N05useY=
+MD5-Digest: nV9VVzAR0gUyLrDAbS6s1g==
+
+Name: org/osgi/framework/AdaptPermissionCollection.class
+SHA-Digest: U4jhaIHD+fwpkI4bgaWYugt/Z9A=
+MD5-Digest: r/xoUi4rAvFI9C6Ai2rpXQ==
+
+Name: OSGI-OPT/src/org/osgi/service/device/Constants.java
+SHA-Digest: NC0eIqQNibr+JRyEtnKDOUa0LrQ=
+MD5-Digest: yuoFe+5jL+WJoBRe/fTqvg==
+
+Name: org/osgi/service/component/annotations/Activate.class
+SHA-Digest: d9QfmSxjemkpEyHAzeE64zEjL+k=
+MD5-Digest: jiKLWOC2bUzrDgGWs0/8pA==
+
+Name: org/osgi/service/dmt/DmtEventListener.class
+SHA-Digest: N7TvKFry6ApVT2YKtURgC2iQW5Y=
+MD5-Digest: GuUReY6iYmJq/Jj2RWC4Lg==
+
+Name: org/osgi/framework/ServiceException.class
+SHA-Digest: 0LNUtNDvu5pHtykzhMD5a2NFLoc=
+MD5-Digest: /rz5iRfPDEu35BbpQaE1pA==
+
+Name: OSGI-OPT/src/org/osgi/service/condpermadmin/packageinfo
+SHA-Digest: Iu7DqTvUrN0Xc0LSCfxA53TM0Qc=
+MD5-Digest: gc5nyDSM/DALn/gXEA35qA==
+
+Name: OSGI-OPT/src/org/osgi/framework/startlevel/BundleStartLevel.java
+SHA-Digest: rWKVSiD4yRtJx9735mHuMrZO9rg=
+MD5-Digest: n16gwOrane3ns0SB+rc2aw==
+
+Name: org/osgi/service/condpermadmin/ConditionInfo.class
+SHA-Digest: sel/tvoaUm+xDowfodlGgzXGo68=
+MD5-Digest: bLhtPYIYHyvNAFsjAV9Vdg==
+
+Name: org/osgi/service/provisioning/packageinfo
+SHA-Digest: r5uYn4Hkb0NJxA6LFYd3cMZf+Qs=
+MD5-Digest: ijfbF0l6UvxtLGGSc2LmTA==
+
+Name: OSGI-OPT/src/org/osgi/framework/hooks/service/packageinfo
+SHA-Digest: PhMzFYEiVe2dicD0Uo46QHBW068=
+MD5-Digest: YjqPCNiOolZ/nRAQLKGgKg==
+
+Name: OSGI-OPT/src/org/osgi/service/useradmin/packageinfo
+SHA-Digest: PhMzFYEiVe2dicD0Uo46QHBW068=
+MD5-Digest: YjqPCNiOolZ/nRAQLKGgKg==
+
+Name: OSGI-OPT/src/org/osgi/service/device/DriverSelector.java
+SHA-Digest: tax9nuqVumVuTQCpR7AVU8+oFQs=
+MD5-Digest: vWnU3C7la4Dz6e0OAu3iIw==
+
+Name: org/osgi/util/position/Position.class
+SHA-Digest: trg4izvWmKmtijzuetobFGzdiEQ=
+MD5-Digest: uSnpysiF48gc0475NuCIuA==
+
+Name: OSGI-OPT/src/org/osgi/service/upnp/package-info.java
+SHA-Digest: h+6465xnVrjHT7pJTIVlptfboPY=
+MD5-Digest: MbZbF0aUwLooLSSS1UOgaQ==
+
+Name: OSGI-OPT/src/org/osgi/service/upnp/packageinfo
+SHA-Digest: r5uYn4Hkb0NJxA6LFYd3cMZf+Qs=
+MD5-Digest: ijfbF0l6UvxtLGGSc2LmTA==
+
+Name: OSGI-OPT/src/org/osgi/util/xml/packageinfo
+SHA-Digest: +evdBkKRmsgKjkFemflB3D+DoVU=
+MD5-Digest: ftPKYz9hsF0jxbXDdTfCpA==
+
+Name: OSGI-OPT/src/org/osgi/service/blueprint/container/ComponentDefin
+ itionException.java
+SHA-Digest: fp1WiQcilAyGD8Gtgr2Cknce8fs=
+MD5-Digest: 2QRFXw5ZRFqw06KhXPVhKA==
+
+Name: org/osgi/service/packageadmin/RequiredBundle.class
+SHA-Digest: vAtgnquC499dLVrQlE7DgfAxwRc=
+MD5-Digest: puB1DKzdJW2CX+84vWVVQw==
+
+Name: org/osgi/service/url/package-info.class
+SHA-Digest: 69mgEXbyEVoyueKIdjzZ3JUa1jE=
+MD5-Digest: O0reSkBeqtkNIzXL6kApOg==
+
+Name: org/osgi/service/packageadmin/package-info.class
+SHA-Digest: nWUrALnlFXyyvr40ZosPv/BYyf0=
+MD5-Digest: vTdugkJTLSKLS1uFdJws2w==
+
+Name: org/osgi/service/remoteserviceadmin/EndpointDescription$1.class
+SHA-Digest: TYwEv94qAqQvxrsR4UgeBJlaimw=
+MD5-Digest: dcM+N8INGbiZq1ucpGdqIA==
+
+Name: org/osgi/service/component/packageinfo
+SHA-Digest: r5uYn4Hkb0NJxA6LFYd3cMZf+Qs=
+MD5-Digest: ijfbF0l6UvxtLGGSc2LmTA==
+
+Name: OSGI-OPT/src/org/osgi/framework/BundleListener.java
+SHA-Digest: H7OA9qf76JVRn8vBGjBxFrPMGVc=
+MD5-Digest: kM76HFKKuOk7oyTMTI+GOw==
+
+Name: org/osgi/service/deploymentadmin/DeploymentPackage.class
+SHA-Digest: yXPvjZ0jCZvYOTW7vpugcFT5dM8=
+MD5-Digest: IOTOHi6Vqy6Vyk6rA7GyWw==
+
+Name: OSGI-OPT/src/org/osgi/framework/SynchronousBundleListener.java
+SHA-Digest: p/q//7mLSLCZScIAs00yrQQVR+w=
+MD5-Digest: Hw1hrjcbHA1G0M4W7nGxJQ==
+
+Name: org/osgi/framework/launch/package-info.class
+SHA-Digest: rPOu1Z1FyYmhjnqOTiuy61cCcJk=
+MD5-Digest: lZh2ULdxqS3Ufzc2QqKV4A==
+
+Name: OSGI-OPT/src/org/osgi/service/dmt/spi/packageinfo
+SHA-Digest: nbgmAaUdW/zBD5biN/VIZTJsYes=
+MD5-Digest: kvpRabXUueUzjDvOyc0UrA==
+
+Name: OSGI-OPT/src/org/osgi/application/package-info.java
+SHA-Digest: fvJ2djmub4M8nah6p+721W9IUHQ=
+MD5-Digest: UheFs0rTB0VW/ixp/mT4cw==
+
+Name: org/osgi/framework/Filter.class
+SHA-Digest: 1fwtO8kzmn0gzH51EDHJfQO9teA=
+MD5-Digest: 119Yv6ZT6bPUx1WO9LHr9g==
+
+Name: OSGI-OPT/src/org/osgi/framework/CapabilityPermission.java
+SHA-Digest: mScdRcuRetldsE/qJ0Q2I6R+msA=
+MD5-Digest: cMNde4b7y1arz7deMfboEw==
+
+Name: org/osgi/service/permissionadmin/PermissionInfo.class
+SHA-Digest: 7fPaoRisqzjPJJ/k1E79Xkvw2WI=
+MD5-Digest: GhdcVbG2C/5A4c3wcB2Mfw==
+
+Name: org/osgi/service/upnp/UPnPException.class
+SHA-Digest: E2t2h8IQR5/hd9MxSLiZwneQss0=
+MD5-Digest: 3WGwfJpn85oHszV7Sl2T/A==
+
+Name: OSGI-OPT/src/org/osgi/service/upnp/UPnPService.java
+SHA-Digest: KvuRC/XHHlrjigz5fx3fpU9012U=
+MD5-Digest: 2fZM8/lIHkEbuOB+H95WEg==
+
+Name: org/osgi/util/tracker/ServiceTracker$AllTracked.class
+SHA-Digest: 63ilgTWXb0848ZEMBpdkipAhA2w=
+MD5-Digest: zNMo7/mCBDi09WsZIdsH5A==
+
+Name: OSGI-OPT/src/org/osgi/service/cm/ConfigurationEvent.java
+SHA-Digest: h4mXAS756gUicpkSXXGDr3CUXdc=
+MD5-Digest: gUApixVipBaMg8WSqsh+iw==
+
+Name: OSGI-OPT/src/org/osgi/util/xml/package-info.java
+SHA-Digest: CCSoZw0BmML5hTGhBiIFrU60l4E=
+MD5-Digest: 3EZ3iMLkTUDIwYrtPCfABQ==
+
+Name: org/osgi/service/dmt/DmtIllegalStateException.class
+SHA-Digest: yW8zXeDYLFhUIHdanR6JXdRF7s4=
+MD5-Digest: FUnjh7VF+nc6CIskNGkrPw==
+
+Name: org/osgi/service/url/packageinfo
+SHA-Digest: PjGh674JTItklvGASGkWhaF4Ozw=
+MD5-Digest: cUcaoi9RK+TuyZ85gXBzPg==
+
+Name: OSGI-OPT/src/org/osgi/framework/hooks/bundle/FindHook.java
+SHA-Digest: NzRso+Mx8n6nGiPir+rocrTH7bU=
+MD5-Digest: QX1ieiS7MlZHAIvUaSbXjA==
+
+Name: OSGI-OPT/src/org/osgi/service/upnp/UPnPStateVariable.java
+SHA-Digest: jQ3BayacGBwLBdx0jpiSumIHuNw=
+MD5-Digest: 4Nr6GK+6scwZEszUcq8fYA==
+
+Name: org/osgi/service/event/packageinfo
+SHA-Digest: jyKXN/3sf9hPr8wZXRJMYtX1ZrY=
+MD5-Digest: BaRSxDuyRxflEnbPMmZxqQ==
+
+Name: OSGI-OPT/src/org/osgi/service/condpermadmin/BundleSignerConditio
+ n.java
+SHA-Digest: 9rGROAKCxmdGC6yC1pOia1T+xDo=
+MD5-Digest: LfCjxZv1CL2aeUKK1MeSMg==
+
+Name: OSGI-OPT/src/org/osgi/framework/hooks/bundle/EventHook.java
+SHA-Digest: 1p5KEp9oF8gdC/Va90YSrviuSYA=
+MD5-Digest: HVDs7hdPl4EeC5fxIPfNeg==
+
+Name: org/osgi/service/blueprint/reflect/ReferenceMetadata.class
+SHA-Digest: UOat0HLwRyTPsW+6AQXC98V20Po=
+MD5-Digest: myouQSbWxRZaG12g4s+5/A==
+
+Name: org/osgi/service/dmt/packageinfo
+SHA-Digest: SkeYoWJtYjHpLe9xFMcQIpIjQqY=
+MD5-Digest: BLUOW/dbogEDdflrRradHg==
+
+Name: org/osgi/service/deploymentadmin/DeploymentAdmin.class
+SHA-Digest: Zy53+5YD07BAo304ZU7+kxZnjDw=
+MD5-Digest: XTzxYt9Fn4CbKlHhYt5zPA==
+
+Name: OSGI-OPT/src/org/osgi/framework/AdminPermission.java
+SHA-Digest: iSXeucJAhnLA/d8//nI+FtHmPJM=
+MD5-Digest: dUr1hKc2Ri2z9L/O2p1phA==
+
+Name: org/osgi/service/dmt/Uri.class
+SHA-Digest: TnE//9Og/nClVlP+k8OktwfCLWs=
+MD5-Digest: Zzg8Kp2B3q3oFtdfXxOZfg==
+
+Name: OSGI-OPT/src/org/osgi/framework/Constants.java
+SHA-Digest: WjszBnVq+HzttlxI/IVYXZ68KRs=
+MD5-Digest: ak+9KBfhOAb1ZWitWly1nA==
+
+Name: org/osgi/service/upnp/UPnPLocalStateVariable.class
+SHA-Digest: 2oNMhz052Y57bVcqYCFal2kFXME=
+MD5-Digest: rFibJ1AJyoETrZN9rkQRcg==
+
+Name: org/osgi/service/device/Device.class
+SHA-Digest: qSD3SDZBjYqyYvlrnMmSpNQWGFM=
+MD5-Digest: QwNkGimQgUeBAEwz127KUA==
+
+Name: OSGI-OPT/src/org/osgi/service/remoteserviceadmin/packageinfo
+SHA-Digest: YevA+7phDMQI14SpmNZxNw6CMx0=
+MD5-Digest: YwjBAV07gY2hP8TQTgAeKg==
+
+Name: OSGI-OPT/src/org/osgi/service/condpermadmin/ConditionInfo.java
+SHA-Digest: R2ucVrzXrp3V9efbjb+quF4zVLI=
+MD5-Digest: 2ebxzhmpxiyCar8JMUq1Qw==
+
+Name: org/osgi/service/blueprint/container/NoSuchComponentException.cl
+ ass
+SHA-Digest: r5fH5zVwhTEl/Kpae9Qy5PcG62U=
+MD5-Digest: vhnLoq3WMCMSJEpgi3wucA==
+
+Name: OSGI-OPT/src/org/osgi/framework/hooks/weaving/WeavingException.j
+ ava
+SHA-Digest: NnQF7Z8yqRgsJ+yD2GeYiJ+rY/s=
+MD5-Digest: 7uH4iohtOnWbbCHT4q5aGQ==
+
+Name: OSGI-OPT/src/org/osgi/service/application/ApplicationAdminPermis
+ sion.java
+SHA-Digest: aogaWi6+7jgp1N6YiIhPui6OVVQ=
+MD5-Digest: JwvZsVQ73KjUWwMEB+bX5w==
+
+Name: org/osgi/framework/hooks/service/FindHook.class
+SHA-Digest: bwVUb919nalC6QC+GnkmkER/6NA=
+MD5-Digest: a3Dk0a87IB+1sht0SBhbNw==
+
+Name: org/osgi/service/wireadmin/BasicEnvelope.class
+SHA-Digest: lNo7KlQKA0IqdPHs92rETct0EIk=
+MD5-Digest: kI+Gip5Mx4PJoRj7/oELmQ==
+
+Name: org/osgi/service/metatype/packageinfo
+SHA-Digest: r5uYn4Hkb0NJxA6LFYd3cMZf+Qs=
+MD5-Digest: ijfbF0l6UvxtLGGSc2LmTA==
+
+Name: OSGI-OPT/src/org/osgi/service/deploymentadmin/package-info.java
+SHA-Digest: b3JJMUJlht2ZUGfEZgKmI5K1loI=
+MD5-Digest: GzKewzU4GarzLEPFybWWNA==
+
+Name: org/osgi/util/tracker/BundleTrackerCustomizer.class
+SHA-Digest: hNKqGhk3UhS8M9SQhrhldbQyfXY=
+MD5-Digest: HBy2DvgqGC4o81hE5LHE5g==
+
+Name: org/osgi/service/metatype/AttributeDefinition.class
+SHA-Digest: V3TJRpcB1Y7XiD01EFQ8HT42Dns=
+MD5-Digest: u4Tc/eqKOs1HBK0jHZaU7w==
+
+Name: OSGI-OPT/src/org/osgi/service/url/URLConstants.java
+SHA-Digest: +Rdf5RuNxpfhGo6zorp2A/zWA7M=
+MD5-Digest: enc4sfOVoAghAQSKKHhcUA==
+
+Name: OSGI-OPT/src/org/osgi/service/dmt/DmtEvent.java
+SHA-Digest: TNR4zVXODMRuV0qmfNdDHKzs+wI=
+MD5-Digest: N+M3C7i/0sQznA8aCq34UA==
+
+Name: org/osgi/service/jndi/JNDIContextManager.class
+SHA-Digest: JNLO4FaeX5Hc6lfsTyAMWqxRahs=
+MD5-Digest: 6zZV8q7nbLC4xqjRpzJmfw==
+
+Name: OSGI-OPT/src/org/osgi/service/useradmin/User.java
+SHA-Digest: u4xKy/LGLtvnvXVeZo3h+c3S0VM=
+MD5-Digest: vmMAw69NOrBVCTtKUVifOQ==
+
+Name: org/osgi/service/deploymentadmin/DeploymentException.class
+SHA-Digest: e3qv0EKMDX4KBm0PhQOuCcaQZRw=
+MD5-Digest: PJAEhSdIgpehS/PjoYmhlg==
+
+Name: org/osgi/service/component/ComponentFactory.class
+SHA-Digest: J59xNjp92ZzIUGibCXjwiTG37do=
+MD5-Digest: hYyjgs30S8mSHCMAHRb5Vg==
+
+Name: OSGI-OPT/src/org/osgi/application/packageinfo
+SHA-Digest: PjGh674JTItklvGASGkWhaF4Ozw=
+MD5-Digest: cUcaoi9RK+TuyZ85gXBzPg==
+
+Name: OSGI-OPT/src/org/osgi/service/coordinator/Participant.java
+SHA-Digest: ECgLa4hVg7/NADbr+3BGcW2UE1g=
+MD5-Digest: JzhT2Dfxlutq4c0pxD9rUw==
+
+Name: OSGI-OPT/src/org/osgi/service/wireadmin/Wire.java
+SHA-Digest: Wv+9q/biGx6+jNaUUUzWOYaHnyM=
+MD5-Digest: tR8HOl93tWTTza/E2v51iw==
+
+Name: OSGI-OPT/src/org/osgi/service/blueprint/container/ServiceUnavail
+ ableException.java
+SHA-Digest: vj20HlrBl5bope+18Z9m3qr2zqI=
+MD5-Digest: P8Jv+5SgeYRbDHS9OV4HOA==
+
+Name: OSGI-OPT/src/org/osgi/service/coordinator/Coordination.java
+SHA-Digest: Jx/w2jDPsEmiOovvWMWhfUdn0jE=
+MD5-Digest: 7Os0MgAgFkRR/3dpIohm+A==
+
+Name: OSGI-OPT/src/org/osgi/service/component/annotations/Reference.ja
+ va
+SHA-Digest: yA90rtQzLU86l4sKSgz3pevTtAw=
+MD5-Digest: 6cYmPBpvv8N6DxBgczaujQ==
+
+Name: OSGI-OPT/src/org/osgi/framework/hooks/resolver/ResolverHookFacto
+ ry.java
+SHA-Digest: uX2+QZfAZr+pvrRU4kyHe77L/TQ=
+MD5-Digest: NcMRtkDJJ9/FbDxQoRB+Fg==
+
+Name: org/osgi/service/remoteserviceadmin/EndpointListener.class
+SHA-Digest: gy4VuBTPg9903dZJeHKHlUyJjEA=
+MD5-Digest: /ENnv49CLM9GmSD79hOY5w==
+
+Name: OSGI-OPT/src/org/osgi/service/deploymentadmin/spi/DeploymentSess
+ ion.java
+SHA-Digest: WFA3VEWriWRlVsVmAHjj9IbxUxQ=
+MD5-Digest: qc1OI6/lEReuFL8+TxR6fg==
+
+Name: OSGI-OPT/src/org/osgi/service/packageadmin/RequiredBundle.java
+SHA-Digest: a/wea5wykR6wlpBHviQTHVSTE7Y=
+MD5-Digest: U7h5yaQcNs1cHt3J3nucGw==
+
+Name: OSGI-OPT/src/org/osgi/service/blueprint/container/NoSuchComponen
+ tException.java
+SHA-Digest: XjtjMyFVL/qt94kkSJXShHHOx1A=
+MD5-Digest: YNXSY3/fo7ya/b+jdIXhKg==
+
+Name: OSGI-OPT/src/org/osgi/service/event/Event.java
+SHA-Digest: xuZVA4Ag10ooqkxIKi20ZbV1SbQ=
+MD5-Digest: +18Afc1XHGcA7NZ5IpAlSg==
+
+Name: OSGI-OPT/src/org/osgi/service/wireadmin/BasicEnvelope.java
+SHA-Digest: P7lyssHzr0ygw3ZmHZlKzNYu9zI=
+MD5-Digest: Ad/coADVKPLauc0/euZuOA==
+
+Name: OSGI-OPT/src/org/osgi/service/deploymentadmin/BundleInfo.java
+SHA-Digest: GhIPCAR5YBgdizj+hfbnCdWAIsg=
+MD5-Digest: +Sn+nlwHyK3xU+4Dy06g9w==
+
+Name: org/osgi/service/event/EventAdmin.class
+SHA-Digest: 13h+1z//8XBwnxnS3nkPt0ciBlQ=
+MD5-Digest: nRUKOmKY23H5PdEs7dBAyg==
+
+Name: OSGI-OPT/src/org/osgi/service/cm/ConfigurationListener.java
+SHA-Digest: xKKnU//5/B+YU0dz3tIgkWsqCjE=
+MD5-Digest: W4Ian/IyoTrnZ2VEWZ/dMw==
+
+Name: org/osgi/service/jndi/packageinfo
+SHA-Digest: PjGh674JTItklvGASGkWhaF4Ozw=
+MD5-Digest: cUcaoi9RK+TuyZ85gXBzPg==
+
+Name: OSGI-OPT/src/org/osgi/service/cm/Configuration.java
+SHA-Digest: FjwJboNlo9RiUOuBFMny4g78qQE=
+MD5-Digest: crtGUq3aafARtBxVGQrOjg==
+
+Name: org/osgi/service/wireadmin/WireAdminListener.class
+SHA-Digest: DIiCG4FcCISWTfTcONZlP/hX9qE=
+MD5-Digest: FVk59FtbtWySBlpeaws8Hg==
+
+Name: org/osgi/service/dmt/DmtAdmin.class
+SHA-Digest: RPt3cjUFEeS06sdOx5al0UmrE+g=
+MD5-Digest: ZkH+FdG7ZHg0QmEla9en/g==
+
+Name: org/osgi/framework/ServicePermission$Properties$Entry.class
+SHA-Digest: N0bMmW+5wLkkUcwWHR2MO7dC/sg=
+MD5-Digest: erlBwDoiQAs471DLFBIIJw==
+
+Name: org/osgi/service/cm/ConfigurationPermission.class
+SHA-Digest: /q6i2She6Ds4rFxy6ZxC4mXCD9o=
+MD5-Digest: d7tzNUuDw4F09Mn70UjMEQ==
+
+Name: org/osgi/service/blueprint/reflect/BeanMetadata.class
+SHA-Digest: KerEE8sKK1xV4xgxILocgvtpfoI=
+MD5-Digest: XHwC6zpjT9bH9sBxMS2a3A==
+
+Name: OSGI-OPT/src/org/osgi/framework/hooks/weaving/package-info.java
+SHA-Digest: mXpliqwGFwfCwaGLGVuKjJnl3ko=
+MD5-Digest: NqyTAlgzFOwA63xsFjxCLQ==
+
+Name: org/osgi/service/useradmin/UserAdminPermissionCollection.class
+SHA-Digest: FgmhsUl69Fc4K9L/8h5g1DwNDhM=
+MD5-Digest: rUpK9prjqeminUdk/Hourw==
+
+Name: org/osgi/service/blueprint/reflect/package-info.class
+SHA-Digest: /MV6K6CFQ++nmP4iEkcTNVNivN0=
+MD5-Digest: Ek8HSgrMVrsCUenHzzO3VQ==
+
+Name: OSGI-OPT/src/org/osgi/service/blueprint/reflect/ValueMetadata.ja
+ va
+SHA-Digest: wDOPjNJng0e3slcRpbYvqbpCfac=
+MD5-Digest: ACYtt8wURkEW3o0xvLt2JA==
+
+Name: org/osgi/service/event/EventProperties.class
+SHA-Digest: K1lxMljeOiUInDyk7VqLUdBfiSY=
+MD5-Digest: 9qmMB5McxYK+6Qmsvh4YDw==
+
+Name: OSGI-OPT/src/org/osgi/service/provisioning/packageinfo
+SHA-Digest: r5uYn4Hkb0NJxA6LFYd3cMZf+Qs=
+MD5-Digest: ijfbF0l6UvxtLGGSc2LmTA==
+
+Name: OSGI-OPT/src/org/osgi/service/cm/ConfigurationPlugin.java
+SHA-Digest: fTXnrbftBM7Nx9AuFgeym6FFa7I=
+MD5-Digest: ZF0FSK1VULggjPuuSG4Mrw==
+
+Name: OSGI-OPT/src/org/osgi/service/prefs/PreferencesService.java
+SHA-Digest: t66KzXzNQMxMgPXVOLW33su0USk=
+MD5-Digest: qwFViCulfjjYfvB/BT8U/A==
+
+Name: OSGI-OPT/src/org/osgi/framework/Bundle.java
+SHA-Digest: m+hWp0fRrJk41jRmGzsf+HUmmcA=
+MD5-Digest: 0Grjf0+G8wAtx333kiDIug==
+
+Name: org/osgi/service/dmt/spi/ReadWriteDataSession.class
+SHA-Digest: hs7CZNcDxA4KLmmeXkvYNgsRt2M=
+MD5-Digest: SLP5ESfyo+SrtJ43FDYOgA==
+
+Name: org/osgi/service/blueprint/reflect/PropsMetadata.class
+SHA-Digest: lFmI2S5YHF069ozhv96r5wAaU84=
+MD5-Digest: 18eQ8E8gfX2ZYX0UN2cVBw==
+
+Name: OSGI-OPT/src/org/osgi/framework/launch/FrameworkFactory.java
+SHA-Digest: cHaAnbTrQAIBRr1T9+ahSm1fRp8=
+MD5-Digest: oThJ6KPGry87d0YCyoH0sg==
+
+Name: OSGI-OPT/src/org/osgi/service/monitor/MonitoringJob.java
+SHA-Digest: BFjJYtUsNRWyp9s3CWir+1ctvOg=
+MD5-Digest: qmCHC38wJf/aGA+pvwFMDA==
+
+Name: xmlns/metatype/v1.2.0/metatype.xsd
+SHA-Digest: +PPC6XHLxOiyZULlhqbJAen+FUA=
+MD5-Digest: BopYgWJi8LQa/t1eQrCr0A==
+
+Name: org/osgi/service/jpa/package-info.class
+SHA-Digest: 5XLc8VX3Q53QvP5wZDEQ0xHFFhA=
+MD5-Digest: eH0N1qHevXAiJIG2GDCXNQ==
+
+Name: OSGI-OPT/src/org/osgi/service/component/annotations/Configuratio
+ nPolicy.java
+SHA-Digest: 3LwkNyaNMLvqisoWjd0OtmZn9GU=
+MD5-Digest: VqVr183xD7KPm7MuzYOvcw==
+
+Name: OSGI-OPT/src/org/osgi/service/device/Device.java
+SHA-Digest: 0X2E8lwrc0N0SRLPIAxjwHhiaj8=
+MD5-Digest: bLQ+EWPC2hVUXxbSgJDa+Q==
+
+Name: org/osgi/service/dmt/security/AlertPermission.class
+SHA-Digest: n6mvlCOiAqKdc2uEKoQ7Egf5qAw=
+MD5-Digest: u+YrIjxqx5O1YGek5cAQNA==
+
+Name: org/osgi/service/url/AbstractURLStreamHandlerService.class
+SHA-Digest: H3vKMom7GxVbsFjXBi4B9EhxN6w=
+MD5-Digest: UTxpGKNc9a/ouhLNPXwb4Q==
+
+Name: org/osgi/framework/startlevel/packageinfo
+SHA-Digest: PjGh674JTItklvGASGkWhaF4Ozw=
+MD5-Digest: cUcaoi9RK+TuyZ85gXBzPg==
+
+Name: org/osgi/framework/CapabilityPermission$1.class
+SHA-Digest: cXtlfb/qUQDGszUOqvcdvfbq7Gw=
+MD5-Digest: oiH1JH6ZrO++LwPLgfZmfA==
+
+Name: org/osgi/service/cm/ManagedServiceFactory.class
+SHA-Digest: 3B0nNy0szwOd4b1FvlWmvPaMKBs=
+MD5-Digest: J+uqFP78xpoTi9ckVDSdFw==
+
+Name: OSGI-OPT/src/org/osgi/service/upnp/UPnPDevice.java
+SHA-Digest: Yo+utkOuVOl2bckIlp5rjMaGS3s=
+MD5-Digest: 31+7btf/L8cAM1kdbX0tQg==
+
+Name: OSGI-OPT/src/org/osgi/service/blueprint/reflect/package-info.jav
+ a
+SHA-Digest: vZytH+ji8xrV9ou9UMQKtYAH6ic=
+MD5-Digest: u0HGHxsc+GLLUl/gsScanw==
+
+Name: org/osgi/service/upnp/UPnPStateVariable.class
+SHA-Digest: 9zMjPYGTQm4cdvfmLSnokW9lJmY=
+MD5-Digest: hRn20BQmqpcSFZukvx5DQQ==
+
+Name: org/osgi/service/deploymentadmin/spi/DeploymentSession.class
+SHA-Digest: ERTCX48MoNRzQfUwDtdWXYO/fqw=
+MD5-Digest: TOEssnNfwkxzkb0WllZV7g==
+
+Name: OSGI-OPT/src/org/osgi/service/condpermadmin/Condition.java
+SHA-Digest: JNVeBa4SWNhEalu3S/f6NAOZgmM=
+MD5-Digest: qZuSBWmXMFiBiV5b3U+2bA==
+
+Name: org/osgi/framework/launch/packageinfo
+SHA-Digest: PjGh674JTItklvGASGkWhaF4Ozw=
+MD5-Digest: cUcaoi9RK+TuyZ85gXBzPg==
+
+Name: org/osgi/service/remoteserviceadmin/ExportRegistration.class
+SHA-Digest: BXUaFY2CH9SGCDA/TjXN98lXvD4=
+MD5-Digest: s2BR2vHIUPjvTkuruFQu1g==
+
+Name: org/osgi/framework/wiring/packageinfo
+SHA-Digest: PjGh674JTItklvGASGkWhaF4Ozw=
+MD5-Digest: cUcaoi9RK+TuyZ85gXBzPg==
+
+Name: OSGI-OPT/src/org/osgi/service/condpermadmin/ConditionalPermissio
+ nInfo.java
+SHA-Digest: qv4oA8KCdZ8SG1MisX1BjoMR1H4=
+MD5-Digest: yuW2hdFLWLEEX74Skt7rVQ==
+
+Name: org/osgi/framework/BundleReference.class
+SHA-Digest: qAxn+BzZsNNKTIhtDU9tsIpeR+8=
+MD5-Digest: K4ttL5q/GamecfEOk8Hcnw==
+
+Name: OSGI-OPT/src/org/osgi/service/event/EventConstants.java
+SHA-Digest: aJFSFwfE2ZvXaPr9xJbobUYBuqM=
+MD5-Digest: +zcssaVKPTOVC2ZaKJV7Fw==
+
+Name: org/osgi/service/prefs/BackingStoreException.class
+SHA-Digest: TFdfrsPn3FjHCWCwbAGcRQ3r9rQ=
+MD5-Digest: Xv7Tuq0Y7W8boHorolr8hg==
+
+Name: OSGI-OPT/src/org/osgi/framework/ServiceException.java
+SHA-Digest: W8+FKensjdUhW0VKXjwUYhNH0FQ=
+MD5-Digest: bde1/+n8wDWLgaOcpB0fgg==
+
+Name: OSGI-OPT/src/org/osgi/service/blueprint/reflect/Metadata.java
+SHA-Digest: Yq9cKl/hM4IGSnTAStqDI7Xp33c=
+MD5-Digest: jXcpF0uYCbnUoQyMswQbxw==
+
+Name: org/osgi/service/useradmin/Authorization.class
+SHA-Digest: ntQYXDYNZyXDokXebqiiKE8e4+U=
+MD5-Digest: MHTVHK7QwnTYmycXLk67fg==
+
+Name: OSGI-OPT/src/org/osgi/framework/wiring/BundleWire.java
+SHA-Digest: PqmAqMx6MkrVcwPjL9etpqkjIPs=
+MD5-Digest: uQaa0k31hOhXeihYcSFW+g==
+
+Name: org/osgi/service/blueprint/container/ReifiedType.class
+SHA-Digest: /XBobYAnWFvTBG8xmxTKOSCCUX8=
+MD5-Digest: MuJznlXhApQqPewSjFDnjA==
+
+Name: org/osgi/service/blueprint/reflect/MapEntry.class
+SHA-Digest: FNm52CdmKemWiOgzwkDrOsAqwig=
+MD5-Digest: 9nOtSlKM5mN0ToF63aoPJw==
+
+Name: org/osgi/framework/hooks/bundle/package-info.class
+SHA-Digest: N3PhiNraM31yZ8++AsbwCV7b59Q=
+MD5-Digest: kaREvRuLiYDbhKHhcGyxpw==
+
+Name: OSGI-OPT/src/org/osgi/service/deploymentadmin/DeploymentAdminPer
+ mission.java
+SHA-Digest: Z+n4fX9u/lyWfkfU3Vqmv4y1mgs=
+MD5-Digest: YAhSQzR1EztOb+JvN2gK4A==
+
+Name: OSGI-OPT/src/org/osgi/framework/startlevel/FrameworkStartLevel.j
+ ava
+SHA-Digest: f0aYqw3hdD5amAuELICvcivePvU=
+MD5-Digest: Nn8MDcCrZR5ozC2NXwM9SQ==
+
+Name: org/osgi/framework/BundleException.class
+SHA-Digest: M4kO+avoVgtmU2c0xlIvaEyaxc8=
+MD5-Digest: LNJ0UDacgBypxxUgoWHagw==
+
+Name: OSGI-OPT/src/org/osgi/service/component/annotations/package-info
+ .java
+SHA-Digest: axKqX71MKgdvBQWMQKwysYq32Gg=
+MD5-Digest: hpX6n+01h8mu+sJr490RTg==
+
+Name: org/osgi/service/coordinator/CoordinationPermission$1.class
+SHA-Digest: 0HRiC5Y3mXqibOKojNwmQjIcyws=
+MD5-Digest: Kp4AyKPNZkLMJcty1EASHg==
+
+Name: OSGI-OPT/src/org/osgi/service/dmt/DmtAdmin.java
+SHA-Digest: GQn8jTQeLaIyNBI9fHgG38H2u44=
+MD5-Digest: p+eYNYsAudMujRaPLJukvA==
+
+Name: org/osgi/service/blueprint/reflect/RegistrationListener.class
+SHA-Digest: yOMNIHjp/JuSEpnOdfiFSJ6zgoI=
+MD5-Digest: oLd0SdS3BilTxeT2IXNhIg==
+
+Name: org/osgi/service/event/EventConstants.class
+SHA-Digest: huw3FsoKGk7BIkDQ3HvEic710E0=
+MD5-Digest: QQ+AleFg7/NGlUMAhF4KQQ==
+
+Name: org/osgi/service/application/ApplicationHandle$Delegate$2.class
+SHA-Digest: BgrsCGRZ9svYHoVXSn36SpwaTAc=
+MD5-Digest: PkgwlwFV6Ii8bH+ikVG2VA==
+
+Name: xmlns/scr/v1.2.0/scr.xsd
+SHA-Digest: BDRZuImSIvVm/ngsYZkImIdfH1E=
+MD5-Digest: N/yGpZBcIvLvCMr4EAundQ==
+
+Name: OSGI-OPT/src/org/osgi/util/tracker/BundleTracker.java
+SHA-Digest: yJcFnMmRu9Q7e/rhPuLvEttpIyI=
+MD5-Digest: Dw8P4ZKj2uQrQhJXepve/Q==
+
+Name: org/osgi/service/jndi/JNDIProviderAdmin.class
+SHA-Digest: k1IkI4r+yrqjE3J1kqmdBeu7EXE=
+MD5-Digest: FK9HcPh58TZt01KLTnzByw==
+
+Name: org/osgi/service/startlevel/packageinfo
+SHA-Digest: PhMzFYEiVe2dicD0Uo46QHBW068=
+MD5-Digest: YjqPCNiOolZ/nRAQLKGgKg==
+
+Name: org/osgi/framework/hooks/bundle/EventHook.class
+SHA-Digest: UJSKxMwczdpxyBiKo3haoQ34SS0=
+MD5-Digest: nrPerx0y3tw3s1y4lo/xNA==
+
+Name: org/osgi/service/dmt/notification/packageinfo
+SHA-Digest: nbgmAaUdW/zBD5biN/VIZTJsYes=
+MD5-Digest: kvpRabXUueUzjDvOyc0UrA==
+
+Name: OSGI-OPT/src/org/osgi/service/log/package-info.java
+SHA-Digest: Mf9jua3SJRIIt4HBdwfPeBY6YXQ=
+MD5-Digest: Eq7rkKUrqHx0MQC7i03TCQ==
+
+Name: org/osgi/service/wireadmin/Envelope.class
+SHA-Digest: uZInY8nvAuDJLrdWFdo2y65mhz8=
+MD5-Digest: C4Qe/Y6VVPxuKbKaGSaclA==
+
+Name: OSGI-OPT/src/org/osgi/service/metatype/MetaTypeProvider.java
+SHA-Digest: G6Sh9b7LIXK8dEFGe3RcPwml3nM=
+MD5-Digest: AjnnNsH4595XUkNxni2euA==
+
+Name: OSGI-OPT/src/org/osgi/service/condpermadmin/BundleLocationCondit
+ ion.java
+SHA-Digest: iINkGUqNLJYzJ0zOY+hQy74vEOk=
+MD5-Digest: y2qZhK8bSApx6Hgdc1Yvow==
+
+Name: OSGI-OPT/src/org/osgi/service/packageadmin/package-info.java
+SHA-Digest: R619kiSABOr4mLnS/BGx2cJkiqc=
+MD5-Digest: z4gZo+TVPlkgEA3RCBqHFw==
+
+Name: org/osgi/framework/FrameworkUtil$DNChainMatching.class
+SHA-Digest: L51bcJEMqIv3MwcJhLOFR4la33Q=
+MD5-Digest: jDHLi9cqXn9awrFUIqaSbw==
+
+Name: OSGI-OPT/src/org/osgi/framework/BundleActivator.java
+SHA-Digest: 4rtLwuO6qgPtWlzhd9APSK17avI=
+MD5-Digest: cCWVAlW/NKtDJysmZMTwNQ==
+
+Name: org/osgi/framework/hooks/weaving/WeavingException.class
+SHA-Digest: sgMaV7yQ2k6BGY+wHWj/y5KeRWM=
+MD5-Digest: cElJ24Kr5NaE7I5Bjzjwdg==
+
+Name: OSGI-OPT/src/org/osgi/framework/launch/packageinfo
+SHA-Digest: PjGh674JTItklvGASGkWhaF4Ozw=
+MD5-Digest: cUcaoi9RK+TuyZ85gXBzPg==
+
+Name: OSGI-OPT/src/org/osgi/service/dmt/spi/TransactionalDataSession.j
+ ava
+SHA-Digest: Gf656c29b+tMASFORFAiXnWv5+s=
+MD5-Digest: qu9DCvjGmNIqt+ggkOXp9w==
+
+Name: org/osgi/service/application/ApplicationHandle$Delegate$1.class
+SHA-Digest: 9JxkvRNJ3C0mYAc1eDRFbomjmTI=
+MD5-Digest: gugZWCdD384lcrXyVc1B8w==
+
+Name: org/osgi/framework/hooks/weaving/WovenClass.class
+SHA-Digest: s0eUmmiziwdolfcgn4RuFL1Syao=
+MD5-Digest: +r8RWrG1T8DcYTEyUScEVQ==
+
+Name: org/osgi/service/io/package-info.class
+SHA-Digest: Iqy4w/KdfiKimHlnGq+6kR5p9FU=
+MD5-Digest: B8DBYNQ4EdBClyKtCga14Q==
+
+Name: org/osgi/service/wireadmin/WireAdmin.class
+SHA-Digest: 47kOedyy7PhN8ZsMgcQ+8+GJm6o=
+MD5-Digest: m9EZayzdmQp6g0c9G74aFw==
+
+Name: org/osgi/service/coordinator/SignerProperty.class
+SHA-Digest: 4JjEA0hK269r5cBhK5MrouMBjPc=
+MD5-Digest: 75V35ggwN+qpA/TRZ1RStQ==
+
+Name: OSGI-OPT/src/org/osgi/service/application/packageinfo
+SHA-Digest: PhMzFYEiVe2dicD0Uo46QHBW068=
+MD5-Digest: YjqPCNiOolZ/nRAQLKGgKg==
+
+Name: org/osgi/service/component/ComponentInstance.class
+SHA-Digest: Wls0getUuKmDv0Qwbp4sFraKHiY=
+MD5-Digest: u4dQjtD8mH7xyd8hfc7LZw==
+
+Name: OSGI-OPT/src/org/osgi/service/upnp/UPnPIcon.java
+SHA-Digest: 4tO6QkjKVqlXOZnChaBHFK/N3SU=
+MD5-Digest: pfo1j0LxvUHuOSVm0pEB9g==
+
+Name: org/osgi/service/remoteserviceadmin/RemoteServiceAdminEvent.clas
+ s
+SHA-Digest: Pg0F4tsM4ca2idQDRhWKjhRaM4s=
+MD5-Digest: jvXpfwF5jftonP9DLzXy3A==
+
+Name: OSGI-OPT/src/org/osgi/service/io/ConnectionFactory.java
+SHA-Digest: jQivuCltX0WpYVUOtWfhQdSqCRE=
+MD5-Digest: mOhrmZxqSowUa9xTDGuVEQ==
+
+Name: org/osgi/service/http/package-info.class
+SHA-Digest: u5QNp9CUmn2o8YGlgh1//5AhLzM=
+MD5-Digest: BcX1vQMWrrPHqXPKQVZKtA==
+
+Name: org/osgi/framework/hooks/resolver/ResolverHookFactory.class
+SHA-Digest: kWVYV2nclbZEp0Kg3DTi10FRO4o=
+MD5-Digest: OkqnJ227Vow/+UGSMOkekg==
+
+Name: OSGI-OPT/src/org/osgi/service/blueprint/reflect/IdRefMetadata.ja
+ va
+SHA-Digest: 5fegGU1w6GEJbCj3RZp7o1aIZek=
+MD5-Digest: j0mHvyiS7JUkbNC2BEtWSg==
+
+Name: OSGI-OPT/src/org/osgi/service/coordinator/Coordinator.java
+SHA-Digest: hYeVbGf0ISK0sD3XF7gcl0hJtqg=
+MD5-Digest: v7U6JYiaGxEyFQKir6RWBw==
+
+Name: OSGI-OPT/src/org/osgi/service/useradmin/UserAdminEvent.java
+SHA-Digest: p2t462Y3cuD3SMUWzNCKf/+Y3Co=
+MD5-Digest: Owz2envchWOFV9afizfPpw==
+
+Name: OSGI-OPT/src/org/osgi/service/deploymentadmin/DeploymentExceptio
+ n.java
+SHA-Digest: xCbYejptOdwu/iPoQmtBe7W8N18=
+MD5-Digest: pGuxE8TqB7lJ+/7+Lqbw2g==
+
+Name: org/osgi/service/http/NamespaceException.class
+SHA-Digest: L1uWtRJ0kIiIA4Et5VT3QdiPDK4=
+MD5-Digest: zAnOKAHsR+YwLa3GLfuB3w==
+
+Name: OSGI-OPT/src/org/osgi/framework/wiring/BundleRequirement.java
+SHA-Digest: MuMjY5mPvpveiZ5+wTHgnLQ5c+o=
+MD5-Digest: MQvJ5PLVCW+sMt8/KOqtlw==
+
+Name: org/osgi/framework/Version.class
+SHA-Digest: XYnkXwEgYGK+hQny3w1fNkIc0BE=
+MD5-Digest: lD9zbdOd+DQ+MU8UeFyvEQ==
+
+Name: org/osgi/service/dmt/security/package-info.class
+SHA-Digest: RkZpYffuhpOeAe6BLEil9EkceCY=
+MD5-Digest: dsixUqnyplhJ8gfmCYLr7Q==
+
+Name: org/osgi/service/packageadmin/packageinfo
+SHA-Digest: r5uYn4Hkb0NJxA6LFYd3cMZf+Qs=
+MD5-Digest: ijfbF0l6UvxtLGGSc2LmTA==
+
+Name: org/osgi/service/useradmin/UserAdminPermission.class
+SHA-Digest: Nm2FO14KlSfLyAUrV4XmtjnPp1I=
+MD5-Digest: B8rAo7yYHF/flwFSZrLL9A==
+
+Name: org/osgi/service/coordinator/Participant.class
+SHA-Digest: xY713F7shVSm3e67+dpR37YcR98=
+MD5-Digest: ePsOb50dtlaMNBsGvmg8fw==
+
+Name: org/osgi/service/blueprint/reflect/RefMetadata.class
+SHA-Digest: tI1K2IsBeATQYnr20hFHqedNdGQ=
+MD5-Digest: pW7vnyw45rrFOsPUd2k+gg==
+
+Name: org/osgi/framework/InvalidSyntaxException.class
+SHA-Digest: fNsx4NfpeB6H4LyQRKD+wlpDRmQ=
+MD5-Digest: bciXFtAjaip9p53KRhJ8TA==
+
+Name: OSGI-OPT/src/org/osgi/framework/hooks/resolver/packageinfo
+SHA-Digest: PjGh674JTItklvGASGkWhaF4Ozw=
+MD5-Digest: cUcaoi9RK+TuyZ85gXBzPg==
+
+Name: OSGI-OPT/src/org/osgi/service/remoteserviceadmin/EndpointPermiss
+ ion.java
+SHA-Digest: sXXtGaMccdZOYMEckYBz3ka1ALk=
+MD5-Digest: WxMq6uedOv43XsSOWmdJcA==
+
+Name: OSGI-OPT/src/org/osgi/util/tracker/package-info.java
+SHA-Digest: qQZWjFt7LgjJpMdmUzhwy1XZxJc=
+MD5-Digest: OIyPCHknW2LcGh4WTiUSPg==
+
+Name: org/osgi/service/url/URLStreamHandlerSetter.class
+SHA-Digest: gVJUz5M4zXDD/47pgpcA54BudhU=
+MD5-Digest: 1CZrLVfw78xObXOXbi5JyA==
+
+Name: org/osgi/service/event/Event$FilterProperties.class
+SHA-Digest: AHXGgrJA9qOmZCZY6rE5x5k7R9c=
+MD5-Digest: wJioUadWM70tlsDnr8maPw==
+
+Name: org/osgi/service/packageadmin/PackageAdmin.class
+SHA-Digest: X1iB99Xatsa8serHlKG+ZLmWYdc=
+MD5-Digest: iReblWsP/H6zmchrUR1SQQ==
+
+Name: org/osgi/util/xml/package-info.class
+SHA-Digest: Xjykx6S/FX+5dG5gRX18hz3nE1k=
+MD5-Digest: +zOmJOcBPf/FjRgyMC367g==
+
+Name: OSGI-OPT/src/org/osgi/service/blueprint/reflect/ReferenceListene
+ r.java
+SHA-Digest: kaOKBxIwS8IUC1+l1m711tuww9g=
+MD5-Digest: /e/wP7D+WbV/oU4LomOmiA==
+
+Name: OSGI-OPT/src/org/osgi/service/wireadmin/package-info.java
+SHA-Digest: 70h/0g9z69snCwG85/cJrTyVURI=
+MD5-Digest: DW9t3pzCKHALmjRjpjOAag==
+
+Name: org/osgi/framework/wiring/BundleWiring.class
+SHA-Digest: wHEvZzzpC2V5/D48yXIpcXeP/vc=
+MD5-Digest: EfZ/R3tYWK2jZ22iZiJ47A==
+
+Name: org/osgi/util/measurement/packageinfo
+SHA-Digest: +evdBkKRmsgKjkFemflB3D+DoVU=
+MD5-Digest: ftPKYz9hsF0jxbXDdTfCpA==
+
+Name: org/osgi/framework/ServicePermission$1.class
+SHA-Digest: Xn6tM325TOlYllv6Ca7PexSAjcM=
+MD5-Digest: WJJzJBVKFiuY6BC5bYIP6w==
+
+Name: OSGI-OPT/src/org/osgi/service/blueprint/reflect/BeanArgument.jav
+ a
+SHA-Digest: Yj+mrkvgkCWvQHRC+k/kdT+l9Ts=
+MD5-Digest: jblEtrAsuf2R5TZX/94ZCA==
+
+Name: OSGI-OPT/src/org/osgi/service/startlevel/packageinfo
+SHA-Digest: PhMzFYEiVe2dicD0Uo46QHBW068=
+MD5-Digest: YjqPCNiOolZ/nRAQLKGgKg==
+
+Name: OSGI-OPT/src/org/osgi/service/wireadmin/Consumer.java
+SHA-Digest: zKxt3DH5fxmMSaK6X/gtftLdfNY=
+MD5-Digest: cKYJz4SVzlVoVegZKbaYrg==
+
+Name: org/osgi/framework/hooks/weaving/packageinfo
+SHA-Digest: PjGh674JTItklvGASGkWhaF4Ozw=
+MD5-Digest: cUcaoi9RK+TuyZ85gXBzPg==
+
+Name: OSGI-OPT/src/org/osgi/service/upnp/UPnPEventListener.java
+SHA-Digest: STAC/KwprAnP+n7uZ4nAIxydMG8=
+MD5-Digest: R+piLwDs1LbMwSh9PBVRfw==
+
+Name: OSGI-OPT/src/org/osgi/service/application/ApplicationException.j
+ ava
+SHA-Digest: ua7DuSc5n18JTyW5aibRzEQoVkc=
+MD5-Digest: yBc5gIW2+H/LfXY+91hMUA==
+
+Name: OSGI-OPT/src/org/osgi/framework/wiring/FrameworkWiring.java
+SHA-Digest: wZRVwI0UqlwnBTJO7FNqdMm5pYo=
+MD5-Digest: sgHQe0JSO5YS8XejY0alNg==
+
+Name: OSGI-OPT/src/org/osgi/service/remoteserviceadmin/ExportRegistrat
+ ion.java
+SHA-Digest: pdI/NsaPtNwF2OxT/Xoag2L9TD8=
+MD5-Digest: BPLByyy46QZZFa/AC9U+Yw==
+
+Name: org/osgi/service/dmt/notification/spi/RemoteAlertSender.class
+SHA-Digest: bw3Qe5VdmH5iCODBnx38EXUUDl0=
+MD5-Digest: WMCr/DXb5YYFAU8aAVviOQ==
+
+Name: OSGI-OPT/src/org/osgi/service/component/ComponentContext.java
+SHA-Digest: GmIMyefeltxngm79vFsQl72uHnA=
+MD5-Digest: NcBzrUpoq7b/ikxsPmZ8jQ==
+
+Name: OSGI-OPT/src/org/osgi/service/remoteserviceadmin/EndpointListene
+ r.java
+SHA-Digest: gD1YDjETC0ZMaWCryyak/9vGPDg=
+MD5-Digest: /PokBPdLD1hKIqDgErDMYQ==
+
+Name: org/osgi/service/blueprint/reflect/ServiceReferenceMetadata.clas
+ s
+SHA-Digest: qoLqLhISQvnLk18NveAAi5SWhHo=
+MD5-Digest: mTgzcwp2fagi/0R6s8r/Hg==
+
+Name: org/osgi/service/metatype/ObjectClassDefinition.class
+SHA-Digest: 7rmso1sQg50Q+IxBIuCKwIkiNvU=
+MD5-Digest: lJfP/G3fCIi1oO+5o/nF5w==
+
+Name: OSGI-OPT/src/org/osgi/service/jndi/JNDIConstants.java
+SHA-Digest: Pp7Xoj4Da2La82oAZudfJCJXTso=
+MD5-Digest: ToPPJ8H0z7kX+X/J3ekULQ==
+
+Name: org/osgi/service/blueprint/container/BlueprintContainer.class
+SHA-Digest: kcQfihfbK8lVjmV9o7yA3upcFrE=
+MD5-Digest: pLxoeAD2kiSKIu7+FR2mog==
+
+Name: org/osgi/service/device/Constants.class
+SHA-Digest: 9SQC2t+mi5tEeWa97QsQcA9/0SE=
+MD5-Digest: UxGe75DEZhn4qSj+P/Mpww==
+
+Name: org/osgi/service/monitor/MonitorListener.class
+SHA-Digest: jiBt3CYmL1IP68QG7eRFc83BMt4=
+MD5-Digest: hyOUCJ0sf0v5yr1+k3xZAw==
+
+Name: org/osgi/service/condpermadmin/BooleanCondition.class
+SHA-Digest: GZDL+iiyMPHk2AuQwt7C5116SgA=
+MD5-Digest: pMHQryXbo45Mi/X6JF3ZEg==
+
+Name: org/osgi/service/dmt/spi/package-info.class
+SHA-Digest: vsBJlWr9HFq2P27adGXKQ2VPK0I=
+MD5-Digest: +AVhAC+NGwqcD+Gl0AXD6A==
+
+Name: OSGI-OPT/src/org/osgi/service/event/EventProperties.java
+SHA-Digest: 8nBIqApYXhParlCaSxrLEEUfcyw=
+MD5-Digest: in/oq7HlChbKu+4dHGgYKQ==
+
+Name: org/osgi/service/dmt/MetaNode.class
+SHA-Digest: YoT/VfTipCvBg8lfa9cD41smoxE=
+MD5-Digest: GEDWavWv+93MzPQmcgj+RA==
+
+Name: OSGI-OPT/src/org/osgi/service/dmt/notification/packageinfo
+SHA-Digest: nbgmAaUdW/zBD5biN/VIZTJsYes=
+MD5-Digest: kvpRabXUueUzjDvOyc0UrA==
+
+Name: OSGI-OPT/src/org/osgi/framework/hooks/service/EventListenerHook.
+ java
+SHA-Digest: vdiswK0w//WW4OIMxslosTTlG74=
+MD5-Digest: TwwFVNwfGZcV3l19JtK8dg==
+
+Name: org/osgi/framework/hooks/service/ListenerHook$ListenerInfo.class
+SHA-Digest: qLSAHxu4cJU8bx3opIMcLR57/Wo=
+MD5-Digest: CIFO3uPcyFh1lYqHQH1tug==
+
+Name: OSGI-OPT/src/org/osgi/service/metatype/MetaTypeService.java
+SHA-Digest: 4CBPxPgNKU103Dwyyo+lD6GIuQQ=
+MD5-Digest: 3gYACIoiz+/4u47+7/vKZA==
+
+Name: OSGI-OPT/src/org/osgi/service/jndi/JNDIProviderAdmin.java
+SHA-Digest: Dsg4ts/bP0xDIROs0dPM75U3TWg=
+MD5-Digest: xpTNRo8w1sN0osmRSErmfw==
+
+Name: OSGI-OPT/src/org/osgi/service/blueprint/reflect/CollectionMetada
+ ta.java
+SHA-Digest: vrhIsFnedibIUD+KMDwLZdgk21E=
+MD5-Digest: Hma8ZHZ13eQwnzaYXp3cZg==
+
+Name: org/osgi/service/event/EventHandler.class
+SHA-Digest: 3h6f9XXgiHNQ+1/qEwW5SGIvXyU=
+MD5-Digest: 0PnvrFI42bq9B/AaQHhkow==
+
+Name: org/osgi/service/url/URLConstants.class
+SHA-Digest: BDixbch5lb9D2nrQQMwOeeAkJC8=
+MD5-Digest: IJbwKgorijcxTBdL3/LieA==
+
+Name: xmlns/scact/v1.0.0/scact.xsd
+SHA-Digest: JemeLTSmOTtE4KZGdAzLpFU8L/Q=
+MD5-Digest: HBGcyYG6lIsB3t66EYrKiQ==
+
+Name: org/osgi/service/condpermadmin/BundleLocationCondition.class
+SHA-Digest: bKKRDXqJxghfWZSmudoA2FmFwmM=
+MD5-Digest: umFq/nJqMm8ZSl96nqQw3Q==
+
+Name: org/osgi/service/device/DriverLocator.class
+SHA-Digest: 5w8FVaExpeThJATZST9gqM0Ih30=
+MD5-Digest: eiNFM1q6J4NGjwuvHFUIqA==
+
+Name: OSGI-OPT/src/org/osgi/service/remoteserviceadmin/RemoteConstants
+ .java
+SHA-Digest: 5ZgzYpXZHvL+slU0tut/l/h0N54=
+MD5-Digest: e5cZhpmKh54Q/0JbQGSB/Q==
+
+Name: OSGI-OPT/src/org/osgi/service/url/package-info.java
+SHA-Digest: P8vgbXo74RuNXxtHimyQfB9oSA0=
+MD5-Digest: 36iOfuMnR/++d3bz1K4F+w==
+
+Name: org/osgi/service/packageadmin/ExportedPackage.class
+SHA-Digest: JdK/FQBbrnNRxBPU8akEMzdA270=
+MD5-Digest: eblbYj5u3FNov6YmF67ikA==
+
+Name: OSGI-OPT/src/org/osgi/service/jdbc/package-info.java
+SHA-Digest: bEmkU+jm1HJ4zI76sF+uy9VvTeU=
+MD5-Digest: OgulXsVg/OnJXNJMBpb4TQ==
+
+Name: org/osgi/service/condpermadmin/package-info.class
+SHA-Digest: KFK0lMniZ+9D+LQRf6HTqioDRTY=
+MD5-Digest: AbcR4HZYfcfyUP6eTH6e8w==
+
+Name: OSGI-OPT/src/org/osgi/util/position/Position.java
+SHA-Digest: T6ZwNsGKAUsxAQg5UXW3OLWNGyM=
+MD5-Digest: Thx0+T4rpgdCuor3qvUiag==
+
+Name: OSGI-OPT/src/org/osgi/service/blueprint/reflect/RefMetadata.java
+SHA-Digest: 7Ow5YZjjjKH7qCARglfcH2NYALE=
+MD5-Digest: rVdFQt0HkakMVqQUKF71KQ==
+
+Name: OSGI-OPT/src/org/osgi/service/blueprint/reflect/ServiceMetadata.
+ java
+SHA-Digest: CQXxzhyWuW+vaKrhKFAiX4ouCg8=
+MD5-Digest: HCXpgjB9V2SVdfBDsP1VcA==
+
+Name: org/osgi/service/http/HttpContext.class
+SHA-Digest: VVGt5ysG/Fa3Hb5eyEjuUQ+rfSY=
+MD5-Digest: 2PuvNtK6uGSRmGMxEsnMpw==
+
+Name: OSGI-OPT/src/org/osgi/util/position/packageinfo
+SHA-Digest: +evdBkKRmsgKjkFemflB3D+DoVU=
+MD5-Digest: ftPKYz9hsF0jxbXDdTfCpA==
+
+Name: OSGI-OPT/src/org/osgi/service/dmt/spi/MountPoint.java
+SHA-Digest: 0Hqj+J2AZ6JDaWYlIFBoyHzwunM=
+MD5-Digest: BzMVVx8AwpNPfnDMYUPULQ==
+
+Name: org/osgi/service/component/annotations/Deactivate.class
+SHA-Digest: 3R7JCvEv3WhbvXjz/PCUiETS2UU=
+MD5-Digest: oHE324F9Hw8N0WtmG9gYHw==
+
+Name: OSGI-OPT/src/org/osgi/service/metatype/AttributeDefinition.java
+SHA-Digest: ykUuXryA5Gl4L82flp380MWQ3xQ=
+MD5-Digest: 4Cml4AmU8XbIA0JSXgceag==
+
+Name: org/osgi/service/jpa/packageinfo
+SHA-Digest: PjGh674JTItklvGASGkWhaF4Ozw=
+MD5-Digest: cUcaoi9RK+TuyZ85gXBzPg==
+
+Name: OSGI-OPT/src/org/osgi/service/metatype/ObjectClassDefinition.jav
+ a
+SHA-Digest: /pInnCrbes+NaHE1/jSSaqtCN4s=
+MD5-Digest: 61Z4kQm6M5qfYIToI/Z+wg==
+
+Name: OSGI-OPT/src/org/osgi/service/dmt/packageinfo
+SHA-Digest: SkeYoWJtYjHpLe9xFMcQIpIjQqY=
+MD5-Digest: BLUOW/dbogEDdflrRradHg==
+
+Name: OSGI-OPT/src/org/osgi/util/xml/XMLParserActivator.java
+SHA-Digest: /SzVLE4lN+7Ti24yKa6IdzdSFNo=
+MD5-Digest: UG5XetCL22N3xTKV7vMVBA==
+
+Name: OSGI-OPT/src/org/osgi/service/startlevel/StartLevel.java
+SHA-Digest: BDUOe8olU+qpeDdwWnEScAiPR6s=
+MD5-Digest: luVOVl81psQsJ40WazXlzg==
+
+Name: org/osgi/service/dmt/spi/ReadableDataSession.class
+SHA-Digest: suJ4YhevK2UH5clVHvXrLwe/adc=
+MD5-Digest: dvZFirgx2A9PMihiHeKCYw==
+
+Name: LICENSE
+SHA-Digest: K4uBUimqimHkg/tLoFiLi2xJGJA=
+MD5-Digest: O4Pvljh/FGVfyFTdw8a9Vw==
+
+Name: OSGI-OPT/src/org/osgi/service/useradmin/UserAdmin.java
+SHA-Digest: wicJgtlAVCITatTn5ti65iUYIW8=
+MD5-Digest: Pv5LwlKo/MlkyxvrajSslQ==
+
+Name: org/osgi/framework/AdminPermissionCollection.class
+SHA-Digest: P66gey4zxavzcfmGtbJLmtG0alk=
+MD5-Digest: 4eavCbWyfhIixkvPSxO8dg==
+
+Name: OSGI-OPT/src/org/osgi/framework/wiring/package-info.java
+SHA-Digest: xDjm3h51THj2uXGuQJk6CIIzO7c=
+MD5-Digest: RFIlgqwntJm/+pFDWLadzQ==
+
+Name: org/osgi/service/wireadmin/WirePermissionCollection.class
+SHA-Digest: +sc+bg47ISnQZfDvzarLqTp34LM=
+MD5-Digest: 0RqmIDi6GHa7r2GWSe78xg==
+
+Name: org/osgi/framework/FrameworkUtil$FilterImpl.class
+SHA-Digest: +NGW1lALpy4UoCb/Q42m5hGeM1I=
+MD5-Digest: CzYfIIPfNKJ3iy0zSew9Rw==
+
+Name: xmlns/rsa/v1.0.0/rsa.xsd
+SHA-Digest: oJ6gs245Oqn7XYiASFB/oxcNet4=
+MD5-Digest: X7sMI4be8OdgBxI8BDDqxw==
+
+Name: OSGI-OPT/src/org/osgi/service/http/NamespaceException.java
+SHA-Digest: s+CUM8FfzVuyn9Bi4kFgXGMh0cE=
+MD5-Digest: PUPzjzekBycisGSE4Vt9qQ==
+
+Name: org/osgi/service/component/annotations/ReferenceCardinality.clas
+ s
+SHA-Digest: UK8N6c8oDlcH+NtjenKj15sP0nQ=
+MD5-Digest: 8CLoPJBzuZHtf52w1wHaxg==
+
+Name: OSGI-OPT/src/org/osgi/framework/SignerProperty.java
+SHA-Digest: MIC1OF+OGGwmrCpKCC0qXuHwj8c=
+MD5-Digest: mx//mN3ssWfFekk3YBOqog==
+
+Name: org/osgi/service/monitor/MonitoringJob.class
+SHA-Digest: VowcoAPqGXRBOCWwhL52wqOsswo=
+MD5-Digest: GttSuA8B9V+JrrxECth4aQ==
+
+Name: org/osgi/util/tracker/packageinfo
+SHA-Digest: 6bQhsW1wDpwT/HLKVlhp7kDvaOQ=
+MD5-Digest: JhG2NfP2SlUi76Gf6h5x+Q==
+
+Name: OSGI-OPT/src/org/osgi/service/useradmin/Group.java
+SHA-Digest: pXldTImUTf56qF7bm2haDboQHq8=
+MD5-Digest: QvcqX8PyiLg34m4qcYLvWw==
+
+Name: OSGI-OPT/src/org/osgi/service/blueprint/reflect/ReferenceMetadat
+ a.java
+SHA-Digest: p9fyzEX8EA7csxehmmCJVBHiyJE=
+MD5-Digest: umghmK1vLlbnHovTk4d60w==
+
+Name: org/osgi/service/dmt/Acl.class
+SHA-Digest: 4A4Sg84+FM/rfRk3UU8PIP4vcPY=
+MD5-Digest: 3ZNqR+GoXq99kTHpo6lI5Q==
+
+Name: org/osgi/service/cm/ConfigurationAdmin.class
+SHA-Digest: bcvaaLktePLL5LwzNvTVpCuoPXM=
+MD5-Digest: pTInyWutERp6bRyWxX2mXQ==
+
+Name: OSGI-OPT/src/org/osgi/service/condpermadmin/package-info.java
+SHA-Digest: KIRzT9hhhyeWchxJv7RrTyELnng=
+MD5-Digest: MyTRpp2CuEPoRL5cJultCw==
+
+Name: OSGI-OPT/src/org/osgi/service/component/annotations/ReferencePol
+ icyOption.java
+SHA-Digest: DYheKXQ2Mxqz6KMfWEuX4u7i9tE=
+MD5-Digest: 8Df0FiLamzi8rE/L6xk+Xg==
+
+Name: OSGI-OPT/src/org/osgi/util/measurement/State.java
+SHA-Digest: nm3JM88VOpZ2bH/MPvoqIFaLdvM=
+MD5-Digest: 0hbsbtj8WPDeEOY/dgoXkA==
+
+Name: OSGI-OPT/src/org/osgi/service/wireadmin/Producer.java
+SHA-Digest: wBxZKxlt78VUIcn8o/VhIEeSRBo=
+MD5-Digest: YZzX9REUZgMwf6QE37RNfA==
+
+Name: org/osgi/service/application/ApplicationDescriptor.class
+SHA-Digest: I7V0DIkSgHEySb70hgzh+ZozMAw=
+MD5-Digest: OU0G9yAGPcAUPv9MBBwCzw==
+
+Name: OSGI-OPT/src/org/osgi/service/prefs/packageinfo
+SHA-Digest: Iu7DqTvUrN0Xc0LSCfxA53TM0Qc=
+MD5-Digest: gc5nyDSM/DALn/gXEA35qA==
+
+Name: org/osgi/framework/ServiceFactory.class
+SHA-Digest: xZcFkM4kGiC6OiFQbDD5CrMgQjs=
+MD5-Digest: RvcvBn5IMRmLFsYyiw62dQ==
+
+Name: org/osgi/framework/wiring/BundleRevision.class
+SHA-Digest: erPxZeEZj/ZEaw7HktnEmtSdIPg=
+MD5-Digest: Kc5fwdIXgm5nsNWPgcK5JA==
+
+Name: OSGI-OPT/src/org/osgi/service/dmt/security/package-info.java
+SHA-Digest: CEhh/uqcfG/+5YtO5HaWy83dH90=
+MD5-Digest: HJb9Kz2Tuggy8KftOmBhsg==
+
+Name: OSGI-OPT/src/org/osgi/util/position/package-info.java
+SHA-Digest: /6JZkBEjxmpepHpyKh/bLCiBo/o=
+MD5-Digest: slEaEhE71sx25xQID/yEUQ==
+
+Name: OSGI-OPT/src/org/osgi/framework/hooks/weaving/packageinfo
+SHA-Digest: PjGh674JTItklvGASGkWhaF4Ozw=
+MD5-Digest: cUcaoi9RK+TuyZ85gXBzPg==
+
+Name: OSGI-OPT/src/org/osgi/service/deploymentadmin/spi/ResourceProces
+ sor.java
+SHA-Digest: oPkAPlMbEvScJrrNH9xd7saSIyI=
+MD5-Digest: mG8nDMV5Fnmv6rUwXcO1TQ==
+
+Name: org/osgi/util/tracker/BundleTracker.class
+SHA-Digest: 5HcZvWSNNZ6cHa8m1Ttr1elz55A=
+MD5-Digest: /97IPzsoPjLyhhs6GxyNTw==
+
+Name: org/osgi/application/ApplicationServiceListener.class
+SHA-Digest: VNNUdfZrYDmKoaEA+lHekEeKcrA=
+MD5-Digest: R03t1q6yhVMW8KUaT+k7zA==
+
+Name: org/osgi/service/coordinator/CoordinationException.class
+SHA-Digest: ZhkBwjwfNPWJE7u229A5c9zLfsA=
+MD5-Digest: L/mgDIG2dd6DIUyTPpcTBQ==
+
+Name: org/osgi/service/blueprint/container/BlueprintEvent.class
+SHA-Digest: zMIs9A7nVwUK7i8lcf+lkVVCvSU=
+MD5-Digest: zHMLb21bYu7uFsRbEA3vCg==
+
+Name: org/osgi/service/wireadmin/WireAdminEvent.class
+SHA-Digest: hXzpLLhnbiTOtaMrzuwtxo5YwUo=
+MD5-Digest: lmxXznVHygIZrJfKUyYvFw==
+
+Name: OSGI-OPT/src/org/osgi/service/log/LogListener.java
+SHA-Digest: RpczB13GvblmjwiaGps+OnQIjBY=
+MD5-Digest: dYxjrjk2NT6oLSDrPBCdWg==
+
+Name: org/osgi/service/blueprint/container/EventConstants.class
+SHA-Digest: 5RzxdtPi8OVLOiv0QE1/Gr+zXXI=
+MD5-Digest: Hc+nacDcu/LL/cHBsqX0Yg==
+
+Name: OSGI-OPT/src/org/osgi/framework/BundlePermission.java
+SHA-Digest: XopcE6GBz/mxC9XeFL27BKvEEd4=
+MD5-Digest: yvL7yAvhjjtYpMTgIiQs4A==
+
+Name: OSGI-OPT/src/org/osgi/framework/wiring/BundleRevisions.java
+SHA-Digest: XDd31RC29c7Rek99+OrPUiKyc+0=
+MD5-Digest: I4KuNar71esaxaSuBzo1ig==
+
+Name: org/osgi/service/remoteserviceadmin/EndpointDescription.class
+SHA-Digest: 3Q/5AkR0+XaecG+kF/mifG1dDek=
+MD5-Digest: Abi+bJbmSjqZ+/pc282nEg==
+
+Name: OSGI-OPT/src/org/osgi/service/cm/ManagedService.java
+SHA-Digest: quewuQQVtxBZRlKtOOypQ0eS1Sk=
+MD5-Digest: d2vE6hiyXzZm4tZvF39bKQ==
+
+Name: org/osgi/service/prefs/package-info.class
+SHA-Digest: owYC94NbOXB7cA8FcEwM08q5nBQ=
+MD5-Digest: TK3EWc1A9cOSIVwb0uY30A==
+
+Name: org/osgi/service/cm/ConfigurationListener.class
+SHA-Digest: ss5eJeVZopE1eoanCIEAP1SW2pg=
+MD5-Digest: MGLQAyIDO6usroMXKKz0dQ==
+
+Name: org/osgi/service/monitor/package-info.class
+SHA-Digest: g5dRBNKum6UC1WNNUGtdjqzibdw=
+MD5-Digest: m8oZJC57rAz/OudNFqqhfw==
+
+Name: org/osgi/service/coordinator/package-info.class
+SHA-Digest: Y+yAaRPcWEUUp2xN5aSPL4QT+y0=
+MD5-Digest: LFxhQKvcV0PYhs3/sMC2jg==
+
+Name: org/osgi/service/deploymentadmin/spi/DeploymentCustomizerPermiss
+ ion.class
+SHA-Digest: jn6AbYZH9RiVTjdE1MKwsnBZf68=
+MD5-Digest: mrw6ofcixk9gyvUXIWl+0A==
+
+Name: org/osgi/framework/wiring/BundleRevisions.class
+SHA-Digest: H4cXsmy7jop0lYSiP45vI/QIyaY=
+MD5-Digest: DKQng/F9hUyCS+yhegnyxg==
+
+Name: org/osgi/util/measurement/Measurement.class
+SHA-Digest: UPEMO9pQogGAN2eKu37C0TC2Maw=
+MD5-Digest: hAyeyHlrA1uWsUy1GA4cow==
+
+Name: OSGI-OPT/src/org/osgi/service/dmt/notification/NotificationServi
+ ce.java
+SHA-Digest: xqoiVrmLHmGUcjWD2D0VS8Wdo/A=
+MD5-Digest: l3ighBgpCfuEhmZTZBSzYQ==
+
+Name: org/osgi/application/ApplicationContext.class
+SHA-Digest: /1flt5A8rgO8YKaNmZAKgpuWJC0=
+MD5-Digest: RHFaUUF0wOJLJ2dxt+Zfxg==
+
+Name: OSGI-OPT/src/org/osgi/service/monitor/Monitorable.java
+SHA-Digest: 5bvzdeXJ1TB2dGS1ealoQl3fUy8=
+MD5-Digest: ulQf3HvEhZhaD96teXW81w==
+
+Name: OSGI-OPT/src/org/osgi/service/blueprint/reflect/PropsMetadata.ja
+ va
+SHA-Digest: 11mSx5M9KQsnapxYtwKAQN+9dlY=
+MD5-Digest: n/X/1s2ytJb8Z+RkL+5Qpg==
+
+Name: OSGI-OPT/src/org/osgi/service/component/ComponentFactory.java
+SHA-Digest: S+NYrwrkSIN9qD2v5mVI5Ubl4MQ=
+MD5-Digest: XSWdHeAcXwVmRrBENv33Wg==
+
+Name: OSGI-OPT/src/org/osgi/service/device/DriverLocator.java
+SHA-Digest: Ha5FH4Swg7QHZli36T74AbUkC+Y=
+MD5-Digest: +Y5N14zREWjPr//ydW4A6g==
+
+Name: org/osgi/framework/FrameworkUtil$SetAccessibleAction.class
+SHA-Digest: O8FyvgnM9IHJGwJCQM212hVLWqM=
+MD5-Digest: uvQXcjjjBpIQaZqNFjm1IA==
+
+Name: OSGI-OPT/src/org/osgi/service/blueprint/container/packageinfo
+SHA-Digest: fxd5k32/C30xA0BPa9um9Q8+9O8=
+MD5-Digest: SlEnYU7DgOE3HqMR/GMYHA==
+
+Name: org/osgi/service/dmt/DmtConstants.class
+SHA-Digest: gl5txlxi8VqiCiy+z/ucwD90Tss=
+MD5-Digest: RTRJpPbhCGTr/Mnyfz74Gw==
+
+Name: OSGI-OPT/src/org/osgi/service/permissionadmin/packageinfo
+SHA-Digest: r5uYn4Hkb0NJxA6LFYd3cMZf+Qs=
+MD5-Digest: ijfbF0l6UvxtLGGSc2LmTA==
+
+Name: org/osgi/service/dmt/notification/AlertItem.class
+SHA-Digest: d5qmH1imSD7/FceJiXZq1JPCxic=
+MD5-Digest: F0wFjO5SyeUNWf5EGOed0Q==
+
+Name: org/osgi/service/blueprint/reflect/packageinfo
+SHA-Digest: YevA+7phDMQI14SpmNZxNw6CMx0=
+MD5-Digest: YwjBAV07gY2hP8TQTgAeKg==
+
+Name: OSGI-OPT/src/org/osgi/service/monitor/package-info.java
+SHA-Digest: qd+8wFppY3U/ej6Opnx7fxU4Jdk=
+MD5-Digest: P+NdP505Ke+DuvE5R1n4dg==
+
+Name: org/osgi/util/tracker/ServiceTracker$Tracked.class
+SHA-Digest: ggmXQH+te3PE9hL3DLeezIyMP/Q=
+MD5-Digest: DGrsScLJMeu2ZLQSBbEAhA==
+
+Name: OSGI-OPT/src/org/osgi/service/useradmin/Authorization.java
+SHA-Digest: rZumzskhKzh+vQk+jeqsBTdNAyI=
+MD5-Digest: Pyb4Cum7W5kequ0dmeyYWA==
+
+Name: OSGI-OPT/src/org/osgi/application/ApplicationContext.java
+SHA-Digest: s5eExgxkB6Q2MX0o0vpsOk9YQqo=
+MD5-Digest: 8Xgt7mmzolkrJf4+soMF9g==
+
+Name: org/osgi/service/component/annotations/ReferencePolicyOption.cla
+ ss
+SHA-Digest: nQDx/2CcZ8+eL8s3bO1aNWv1oj8=
+MD5-Digest: kCmwkeyFfMSk5B6NfaMx+w==
+
+Name: org/osgi/service/blueprint/container/package-info.class
+SHA-Digest: mLH0RGuuot/5Nh4WlLl44z6kXVs=
+MD5-Digest: jZ40S+7Ymld8BIw4SO0Ztw==
+
+Name: OSGI-OPT/src/org/osgi/service/cm/ConfigurationException.java
+SHA-Digest: 3Kta9YvbdY9QbcHDzuZTC5GbVok=
+MD5-Digest: Dp5kD3jpb/kp8FHljwZOEw==
+
+Name: OSGI-OPT/src/org/osgi/util/measurement/packageinfo
+SHA-Digest: +evdBkKRmsgKjkFemflB3D+DoVU=
+MD5-Digest: ftPKYz9hsF0jxbXDdTfCpA==
+
+Name: org/osgi/service/dmt/DmtEvent.class
+SHA-Digest: vhJtqxY8Eefh8bEd+rbFJfMkTCc=
+MD5-Digest: +I/gMRPktCu3UqDZCG8gzA==
+
+Name: OSGI-OPT/src/org/osgi/framework/AllServiceListener.java
+SHA-Digest: EibYls/wDCBbzbjc4Cd7PMdt+Yc=
+MD5-Digest: 8JF69FLE6aKjfrGuSQKNPA==
+
+Name: OSGI-OPT/src/org/osgi/framework/hooks/service/FindHook.java
+SHA-Digest: WcqYj3Cli3ytWnfCkm+GIG4lO0E=
+MD5-Digest: byUOKaKqyVq7A9l8WO2GNA==
+
+Name: OSGI-OPT/src/org/osgi/framework/AdaptPermission.java
+SHA-Digest: aYIJDx+c5FpqB39pP7zYb1uQsbo=
+MD5-Digest: erj/wmk5fP4lGkHodKhXTQ==
+
+Name: org/osgi/service/monitor/StatusVariable.class
+SHA-Digest: C2Bk1SiCFrZEoObZ25DB6cPsfcE=
+MD5-Digest: MhX7h0gQAChZwTq4ZId+6Q==
+
+Name: org/osgi/service/cm/package-info.class
+SHA-Digest: dN0d1hhpskzM4RCwBDvDuYv/a9w=
+MD5-Digest: XEb8QDpIMEqeQClL5XZGcg==
+
+Name: OSGI-OPT/src/org/osgi/framework/ServicePermission.java
+SHA-Digest: R+FDAv/fjxf1V9hbTtD3wSBxkco=
+MD5-Digest: 7xPIVVDTc4qEhfxMf85oQQ==
+
+Name: org/osgi/service/remoteserviceadmin/ImportReference.class
+SHA-Digest: eHGP9ptWeVTCP7rbpMysVXjn8cI=
+MD5-Digest: DliHJgWzEvYooFNrw1jgJw==
+
+Name: org/osgi/service/blueprint/reflect/ReferenceListMetadata.class
+SHA-Digest: jVj5NMVlZdB0QmiFErI1r9uH8hM=
+MD5-Digest: MrUAwCnCyyt6R32M2p9cOQ==
+
+Name: OSGI-OPT/src/org/osgi/service/dmt/security/AlertPermission.java
+SHA-Digest: W9hWwkBci91T9l/P+G52n7mhAMs=
+MD5-Digest: +wom8R6tbmF3ctnStoWDFg==
+
+Name: org/osgi/service/dmt/notification/spi/packageinfo
+SHA-Digest: nbgmAaUdW/zBD5biN/VIZTJsYes=
+MD5-Digest: kvpRabXUueUzjDvOyc0UrA==
+
+Name: OSGI-OPT/src/org/osgi/service/dmt/spi/ExecPlugin.java
+SHA-Digest: ARx3L8lq+GQRqr/VneP/DbfDBX8=
+MD5-Digest: uvtw3Z+k3RvUD0F145yCDA==
+
+Name: OSGI-OPT/src/org/osgi/service/wireadmin/WireAdminEvent.java
+SHA-Digest: PK0/CH1ASFnx7efOUwuJD8UJT3o=
+MD5-Digest: EuBB7fdOQBEzXobhk7RgoA==
+
+Name: OSGI-OPT/src/org/osgi/service/blueprint/reflect/BeanMetadata.jav
+ a
+SHA-Digest: XrJ6s955/B4lFeX2eRY8PX2nSt0=
+MD5-Digest: nN6Iix7uvaJbWYw3tpEw1g==
+
+Name: org/osgi/service/condpermadmin/packageinfo
+SHA-Digest: Iu7DqTvUrN0Xc0LSCfxA53TM0Qc=
+MD5-Digest: gc5nyDSM/DALn/gXEA35qA==
+
+Name: OSGI-OPT/src/org/osgi/service/dmt/spi/MountPlugin.java
+SHA-Digest: uidj0mADFQFPKfsujK9NZqDF5o0=
+MD5-Digest: avADnG6EjvPVJSFnlGMROQ==
+
+Name: org/osgi/service/upnp/UPnPEventListener.class
+SHA-Digest: yBlnRjmygSU6CxA+8ffr6Hli1cY=
+MD5-Digest: JKQGhxWvzaHsUtzK2kSV+Q==
+
+Name: org/osgi/service/coordinator/CoordinationPermission.class
+SHA-Digest: mgWr83UXOjV8ihOFvVvKcJ3HKjU=
+MD5-Digest: NzLHYLn/ESESC25a69CnYA==
+
+Name: OSGI-OPT/src/org/osgi/service/jndi/packageinfo
+SHA-Digest: PjGh674JTItklvGASGkWhaF4Ozw=
+MD5-Digest: cUcaoi9RK+TuyZ85gXBzPg==
+
+Name: OSGI-OPT/src/org/osgi/service/cm/ConfigurationPermission.java
+SHA-Digest: CumkY0GFR69Qb34Huh/tCD744yE=
+MD5-Digest: FJT6NmLRTew8K66lsVAF1g==
+
+Name: org/osgi/framework/hooks/resolver/ResolverHook.class
+SHA-Digest: sQ8FECMybJxzkRYalyJew1gkBi8=
+MD5-Digest: cV6MAnCCz1al8o5Wi22GRA==
+
+Name: OSGI-OPT/src/org/osgi/service/cm/package-info.java
+SHA-Digest: sus6Z1YqdZUWxjsiMJSNM/Cd3mU=
+MD5-Digest: E6As8G4WD2fGtWOie4BZ9A==
+
+Name: OSGI-OPT/src/org/osgi/service/dmt/spi/DataPlugin.java
+SHA-Digest: 2ru9/c3q3OBqkTMLPtnKElF7QSo=
+MD5-Digest: Q2FPaHeYDEDVWkw754oTYA==
+
+Name: OSGI-OPT/src/org/osgi/service/http/packageinfo
+SHA-Digest: OzipZGDMGHDypocMYBDc1ooOPPI=
+MD5-Digest: AJLM2eJthNTN3+bot08PaA==
+
+Name: OSGI-OPT/src/org/osgi/service/jndi/JNDIContextManager.java
+SHA-Digest: LRmdgfHOwfb8oOQCOTSBcuv7DC0=
+MD5-Digest: gRVMYaQTwr0oRK/h+cJpPw==
+
+Name: OSGI-OPT/src/org/osgi/service/dmt/DmtConstants.java
+SHA-Digest: 6Kl2vCA//tv4Nx5LNeUD2kqBQec=
+MD5-Digest: v6MZ54QAjIz1HutIVEMH/Q==
+
+Name: OSGI-OPT/src/org/osgi/framework/launch/package-info.java
+SHA-Digest: rSVxCR7ssXzrdyM/qjdsM3P1Nzs=
+MD5-Digest: bxiHvZDNVyqqOCrq7jGcsw==
+
+Name: org/osgi/framework/AdminPermission.class
+SHA-Digest: WWsIGFcR6B6jBsVmv9LMKRtGPh8=
+MD5-Digest: qP+zWmAXb15hW09eVH2ziw==
+
+Name: org/osgi/service/deploymentadmin/spi/ResourceProcessor.class
+SHA-Digest: EsyWyoU81jJvtfxuFbQ5kiTtJdo=
+MD5-Digest: vTrDBbYIYDIP+ds4N03mww==
+
+Name: org/osgi/service/blueprint/reflect/NonNullMetadata.class
+SHA-Digest: zr1VL15myOpNXdxqqlOjbbm8mMg=
+MD5-Digest: yLKWatgiSrmXrD8BmXbgnw==
+
+Name: OSGI-OPT/src/org/osgi/service/device/package-info.java
+SHA-Digest: kQGgc1lErQzHXme+F/cQ5QOn8ck=
+MD5-Digest: To9XkGW1hlyDYQuZfUBYSg==
+
+Name: OSGI-OPT/src/org/osgi/framework/hooks/weaving/WovenClass.java
+SHA-Digest: 30ahGZuuj9ukA2G1dxb+8ge1vlc=
+MD5-Digest: XvyccJz5LArMTT40/YBv6w==
+
+Name: org/osgi/framework/ServicePermission$Properties.class
+SHA-Digest: 1admvyhck08cY8J776aYsexqA5s=
+MD5-Digest: 3nswPE/sB3KwS+zMC5LJXg==
+
+Name: org/osgi/service/cm/ConfigurationPermissionCollection.class
+SHA-Digest: SCVn1WuaI9qmgEKDvoW4UJCcVjE=
+MD5-Digest: Sc+4cfewf0CnQfwV1CYInw==
+
+Name: org/osgi/service/monitor/Monitorable.class
+SHA-Digest: LeTYytrZJ5imRsJudDnsa4iLZQQ=
+MD5-Digest: kjty+j9yfInCN0gs64tuIQ==
+
+Name: OSGI-OPT/src/org/osgi/service/deploymentadmin/packageinfo
+SHA-Digest: PhMzFYEiVe2dicD0Uo46QHBW068=
+MD5-Digest: YjqPCNiOolZ/nRAQLKGgKg==
+
+Name: OSGI-OPT/src/org/osgi/service/permissionadmin/PermissionAdmin.ja
+ va
+SHA-Digest: ZdCTM2dzE4U30ASRwJy/2bIHYYY=
+MD5-Digest: wkfj0tLIYOHMrJUxkps32A==
+
+Name: OSGI-OPT/src/org/osgi/service/remoteserviceadmin/ExportReference
+ .java
+SHA-Digest: 1y9AFl10MXnBAXQa6/z0FZk8n3E=
+MD5-Digest: cwrwDC73okIMH8omFmb1Aw==
+
+Name: OSGI-OPT/src/org/osgi/service/log/LogEntry.java
+SHA-Digest: 6GOPipxqlwd9OZfkSTlSy+VBbWY=
+MD5-Digest: CF7VUEyNLaUmL6IGenx9Qg==
+
+Name: OSGI-OPT/src/org/osgi/service/url/AbstractURLStreamHandlerServic
+ e.java
+SHA-Digest: EWymbD7AZrnTjPPaTAoLg7n/P2c=
+MD5-Digest: MacHlUMIK71h3x2Vs9qUxg==
+
+Name: org/osgi/service/component/annotations/ReferencePolicy.class
+SHA-Digest: r9/6N/FHGjR3iDjIILa8/Jwo1BI=
+MD5-Digest: U5hXosavRPpX37MPbDNI0g==
+
+Name: org/osgi/service/useradmin/User.class
+SHA-Digest: JzSPO5BErLJLBJbXXYikxxiHqOA=
+MD5-Digest: bQQMr1cHHYGfHPEej/9gig==
+
+Name: OSGI-OPT/src/org/osgi/service/remoteserviceadmin/ImportRegistrat
+ ion.java
+SHA-Digest: xfUuhNkvQWi672YYk01NICeosK8=
+MD5-Digest: iD+hbTtyWXe00CWCWA8Qvg==
+
+Name: org/osgi/framework/ServicePermission.class
+SHA-Digest: ceUWF71jLmhkejtC9pwu+LYqiCU=
+MD5-Digest: ratHkZ4JoQTwlfTWmXMuQA==
+
+Name: xmlns/metatype/v1.1.0/metatype.xsd
+SHA-Digest: 09IMvZeU9fTM9QcWMowligbI0CU=
+MD5-Digest: u7KXqxPqfj9CgxyLOG34Gw==
+
+Name: OSGI-OPT/src/org/osgi/framework/hooks/service/EventHook.java
+SHA-Digest: KCfH2rp6prynHOJtbXtgb/+FCaQ=
+MD5-Digest: 4dvMVLUzDbEvSvVojdHFEQ==
+
+Name: OSGI-OPT/src/org/osgi/service/log/packageinfo
+SHA-Digest: jyKXN/3sf9hPr8wZXRJMYtX1ZrY=
+MD5-Digest: BaRSxDuyRxflEnbPMmZxqQ==
+
+Name: org/osgi/service/component/package-info.class
+SHA-Digest: TKvNKnnNyl4TAQSHpJV/k56ubHw=
+MD5-Digest: WE8/+FZeJncL9cPoQtWOkg==
+
+Name: org/osgi/service/cm/ManagedService.class
+SHA-Digest: rYcPik+25D0g1mDFk24wE5G1ZbE=
+MD5-Digest: 2DEC39h6nMdeGs+OUxKi5w==
+
+Name: org/osgi/service/monitor/packageinfo
+SHA-Digest: PjGh674JTItklvGASGkWhaF4Ozw=
+MD5-Digest: cUcaoi9RK+TuyZ85gXBzPg==
+
+Name: org/osgi/util/xml/XMLParserActivator.class
+SHA-Digest: b7UUhY48gzqzMZgemrW+DEzeFf8=
+MD5-Digest: 92n0KmezXp88jLaPFBHi+Q==
+
+Name: OSGI-OPT/src/org/osgi/service/dmt/security/DmtPrincipalPermissio
+ n.java
+SHA-Digest: BtBQx7XS14TUmGSOGUVvkI55oY0=
+MD5-Digest: pkt3vbQ1k7wqw4OVf2pQ0w==
+
+Name: org/osgi/service/coordinator/packageinfo
+SHA-Digest: PjGh674JTItklvGASGkWhaF4Ozw=
+MD5-Digest: cUcaoi9RK+TuyZ85gXBzPg==
+
+Name: OSGI-OPT/src/org/osgi/service/monitor/MonitorListener.java
+SHA-Digest: 89wuuo6DHO1k7kOapWNaULoRGjY=
+MD5-Digest: +kTOFaZOrosxiW6l8ZvGeg==
+
+Name: org/osgi/framework/CapabilityPermission.class
+SHA-Digest: S2fU2auhiBOimgabvh7Fp6sOhcM=
+MD5-Digest: OQGrKzyq4AFbBeYww6xEHQ==
+
+Name: org/osgi/service/device/DriverSelector.class
+SHA-Digest: amxxyruD2Am53rpotjrX3tq7PVI=
+MD5-Digest: oNXkt3Oygjpa4HACs4Yntw==
+
+Name: OSGI-OPT/src/org/osgi/service/blueprint/reflect/NullMetadata.jav
+ a
+SHA-Digest: K/DV8H2jA/mhIZjuFqlCB5I0+iI=
+MD5-Digest: ECJLIJCqUBZ1VkRd0RryRQ==
+
+Name: OSGI-OPT/src/org/osgi/util/measurement/Unit.java
+SHA-Digest: wrEi6yHVoOLaOEEeMPNxMe5LmCE=
+MD5-Digest: iFT5iu0PDUHmiFv0juSLUw==
+
+Name: OSGI-OPT/src/org/osgi/service/useradmin/package-info.java
+SHA-Digest: 0XRw1vTBlj71BIvyqd/LZnlJMIw=
+MD5-Digest: 72kKbi9ToSHHYC7hMI9uVg==
+
+Name: org/osgi/service/permissionadmin/packageinfo
+SHA-Digest: r5uYn4Hkb0NJxA6LFYd3cMZf+Qs=
+MD5-Digest: ijfbF0l6UvxtLGGSc2LmTA==
+
+Name: OSGI-OPT/src/org/osgi/framework/package-info.java
+SHA-Digest: 2PodqI0Rz8OybfTReTtpN6oL4gU=
+MD5-Digest: Sb4TFEgJcUB/kZTxmZ0mnQ==
+
+Name: OSGI-OPT/src/org/osgi/service/dmt/DmtSession.java
+SHA-Digest: vDAlCpZ5NM9IOXNZ44SXZc2iaBk=
+MD5-Digest: YPYgv2kK16BFFvLnCAroWw==
+
+Name: OSGI-OPT/src/org/osgi/service/wireadmin/WireAdmin.java
+SHA-Digest: B/1VwprOKfO7K/qywU2lAnVYSd8=
+MD5-Digest: H5rHyNbZGRgkeVktgw+93w==
+
+Name: OSGI-OPT/src/org/osgi/framework/FrameworkListener.java
+SHA-Digest: 9jjiBh5SHqbxRtHXcqSCQiYkDkU=
+MD5-Digest: 9DZPxLRaE4TB7LJEqBfhag==
+
+Name: org/osgi/service/provisioning/ProvisioningService.class
+SHA-Digest: QB32XsPokdYAL9Uwn8cd9hdQiT8=
+MD5-Digest: BWRysEjETEAYAnZyiwcGlA==
+
+Name: OSGI-OPT/src/org/osgi/service/dmt/Uri.java
+SHA-Digest: cGWji0yU6sTOGtforPEvjB3pu80=
+MD5-Digest: KnBI7Wo+4A3xg/4xYEDemQ==
+
+Name: OSGI-OPT/src/org/osgi/framework/ServiceReference.java
+SHA-Digest: guC4UxXf4U5zj4fZF0ZWaoI/vow=
+MD5-Digest: PlmdBCe2nlDNPTq+ul3opw==
+
+Name: org/osgi/service/upnp/UPnPDevice.class
+SHA-Digest: 6nsEBXhIvW/cfsVLYlIiOlXfN6I=
+MD5-Digest: Nb4kiabnLWN7lmbR4pBsxA==
+
+Name: org/osgi/service/http/HttpService.class
+SHA-Digest: Y6m47TfZWm2Hn5NrplQyN3J09As=
+MD5-Digest: B8D1eO8gk5bIA/1eV+J+aA==
+
+Name: OSGI-OPT/src/org/osgi/framework/hooks/resolver/package-info.java
+SHA-Digest: UFeYiFmPstS6pAu4rTxujrSMam0=
+MD5-Digest: BmqfINHr9IAoklaiX80QOQ==
+
+Name: org/osgi/service/prefs/PreferencesService.class
+SHA-Digest: d+C1kCeU6H0121RpA3iZiJl5ODw=
+MD5-Digest: Ga8eaqvgjUoDwYIcanrcMA==
+
+Name: OSGI-OPT/src/org/osgi/service/wireadmin/Envelope.java
+SHA-Digest: /M4QSchvEfVSa2RshC1cElS+yJ0=
+MD5-Digest: 0V03CbkE7/k0Mg5nOxwolg==
+
+Name: OSGI-OPT/src/org/osgi/framework/wiring/packageinfo
+SHA-Digest: PjGh674JTItklvGASGkWhaF4Ozw=
+MD5-Digest: cUcaoi9RK+TuyZ85gXBzPg==
+
+Name: OSGI-OPT/src/org/osgi/framework/wiring/BundleRevision.java
+SHA-Digest: 5lZ5tm1OIm8TZL4jy7aDSMSrj9o=
+MD5-Digest: mzd0IL91RZ/AjrX77epBTA==
+
+Name: OSGI-OPT/src/org/osgi/service/dmt/DmtEventListener.java
+SHA-Digest: ivXZpYlNCFZK2LS3voHQJyEWOQo=
+MD5-Digest: SizzXZjE0KZfliupZQluQA==
+
+Name: org/osgi/service/remoteserviceadmin/ExportReference.class
+SHA-Digest: L5Tlx8f1z/QAcZOg51j865rKvKc=
+MD5-Digest: nopsltUcJQJ++zBX1IivmQ==
+
+Name: OSGI-OPT/src/org/osgi/service/dmt/notification/spi/package-info.
+ java
+SHA-Digest: EpqvaJPVg9YsfSfhnGxyURA1lmo=
+MD5-Digest: V2tS3HW+MUJmvBFqdGr0IQ==
+
+Name: OSGI-OPT/src/org/osgi/framework/packageinfo
+SHA-Digest: NaiJAc6FSYUlU9RedOiZFBA2vkQ=
+MD5-Digest: xfp2iLp9vcb5Q/BMgP/lGg==
+
+Name: OSGI-OPT/src/org/osgi/service/blueprint/reflect/NonNullMetadata.
+ java
+SHA-Digest: WV0mJqM7b3+fnZTZHif65X436aU=
+MD5-Digest: u1RaIyPA+ceIwIYgQNCRBA==
+
+Name: xmlns/scr/v1.0.0/scr.xsd
+SHA-Digest: zYiUYxsAHYxnEWLPoHIIRrSMRrA=
+MD5-Digest: 3Zchqae96NjFLR8ug96DMA==
+
+Name: xmlns/metatype/v1.0.0/metatype.xsd
+SHA-Digest: 1T1SwM6gsovmZ6kFCKlw1Q4Uhpg=
+MD5-Digest: fx/tBIQAO8fpZybiCmNoqw==
+
+Name: org/osgi/service/application/ApplicationDescriptor$Delegate$1.cl
+ ass
+SHA-Digest: DT8cMfC7sQUadXBMd0lIAMi1y/s=
+MD5-Digest: 9c/68fJm/dc7DTCTmp3xeA==
+
+Name: org/osgi/util/tracker/ServiceTrackerCustomizer.class
+SHA-Digest: xUQ+WacsM1FikDIAdN/eUbpNYsM=
+MD5-Digest: SvEykEYTrObr1i1ZXnePxQ==
+
+Name: OSGI-OPT/src/org/osgi/service/blueprint/container/EventConstants
+ .java
+SHA-Digest: KFZICTWfuadT89aahNBBD/7a14s=
+MD5-Digest: mW+mKwmMeRwKbEokLSbmLQ==
+
+Name: org/osgi/service/dmt/notification/spi/package-info.class
+SHA-Digest: cqTySkMTIiFjIaaZlGJvRVvz/tE=
+MD5-Digest: xHAx61jGBlpBL3gMySWXGQ==
+
+Name: org/osgi/framework/FrameworkUtil$ServiceReferenceMap.class
+SHA-Digest: oFdQfeDFDY1XOAKo3oWnqI95HQg=
+MD5-Digest: FYllOiXbkDte6MC6onFc3g==
+
+Name: OSGI-OPT/src/org/osgi/service/prefs/package-info.java
+SHA-Digest: TSZ1OlgMQw1SY7O/xAfWpqk3QoE=
+MD5-Digest: KQbgnxdNCR8iOr+vdsGBYw==
+
+Name: OSGI-OPT/src/org/osgi/service/deploymentadmin/DeploymentAdmin.ja
+ va
+SHA-Digest: iKH3E3vailhwmoUmVUzQKw+pz20=
+MD5-Digest: P5sDdDpoA4ruHB71VRPwIQ==
+
+Name: org/osgi/service/application/ApplicationAdminPermission$SignerWr
+ apper.class
+SHA-Digest: oK46NKeNDXrlfpQIE7zEeh7D5uU=
+MD5-Digest: ypffwosOYP07yIxLuAZTBA==
+
+Name: org/osgi/service/blueprint/reflect/BeanProperty.class
+SHA-Digest: apkNhsdT9+VnWsOtW5xKVtkIEeg=
+MD5-Digest: i3W9LPlPgsTWmMw9UQjaLw==
+
+Name: org/osgi/service/deploymentadmin/DeploymentAdminPermission$1.cla
+ ss
+SHA-Digest: s6r6eNt9IjcHCsN7vNs4uyCa+RQ=
+MD5-Digest: RKE926AUWmYyqHPSLESX8A==
+
+Name: org/osgi/service/dmt/DmtSession.class
+SHA-Digest: 9Rv79/uZcnJEjRYmlmGrHNE2c+k=
+MD5-Digest: eUTEzr6QQYoJxNwAG+cvTw==
+
+Name: OSGI-OPT/src/org/osgi/framework/hooks/weaving/WeavingHook.java
+SHA-Digest: TJUjBkGruavstfvZoZKthTzyCwY=
+MD5-Digest: gkVgNVaLdd42AUKw7qb6IA==
+
+Name: org/osgi/framework/CapabilityPermission$Properties.class
+SHA-Digest: 5l1a5KQ33W671WJb2VX6X7yTuwY=
+MD5-Digest: bSK2oelYF4KtWcn5ySu5Ig==
+
+Name: org/osgi/service/dmt/spi/TransactionalDataSession.class
+SHA-Digest: w/1K2fp8eNtEFjCLrRUflRjfUUg=
+MD5-Digest: ob8Ozoh2HaA2VC4tdv33og==
+
+Name: OSGI-OPT/src/org/osgi/service/startlevel/package-info.java
+SHA-Digest: XjyM/2tMDjxXWeidj3dKe5qexVk=
+MD5-Digest: jGrqO/EXv6dWO8LumRXJ2Q==
+
+Name: OSGI-OPT/src/org/osgi/service/url/packageinfo
+SHA-Digest: PjGh674JTItklvGASGkWhaF4Ozw=
+MD5-Digest: cUcaoi9RK+TuyZ85gXBzPg==
+
+Name: OSGI-OPT/src/org/osgi/framework/hooks/resolver/ResolverHook.java
+SHA-Digest: qTFGFSfxrIalA58OK1Doqj/TI54=
+MD5-Digest: gvr1+xvmElLUeO+AtsU9Tg==
+
+Name: org/osgi/service/metatype/MetaTypeInformation.class
+SHA-Digest: ijoM/kl2Q+SiW5Z3XJD+sWbCl2o=
+MD5-Digest: sq+ZnP1GfK2fK1NWEKZfOQ==
+
+Name: org/osgi/service/cm/Configuration.class
+SHA-Digest: dMzBgpvYWRFNI1G6cDPysWDacT4=
+MD5-Digest: 2UmPZnY4/N+alD2usPqTyA==
+
+Name: org/osgi/framework/package-info.class
+SHA-Digest: neRsJi+Tlj4HPA99TmbRzlEUswM=
+MD5-Digest: 4ngn1j2VhdrCrE6TvQkSBQ==
+
+Name: org/osgi/service/useradmin/UserAdminEvent.class
+SHA-Digest: Pbuw0qsjv4EtryntPQDUti0Ucqc=
+MD5-Digest: XCbBPZiFKFVZ8iuNcuITjg==
+
+Name: OSGI-OPT/src/org/osgi/service/blueprint/reflect/Target.java
+SHA-Digest: OPY0OnyU+zMG3Fel2o6hPFTTDBs=
+MD5-Digest: UKEvZWrnabebRC8twjcOQA==
+
+Name: org/osgi/service/deploymentadmin/package-info.class
+SHA-Digest: h4SqCNQDHz/QWrjaOYBbuEewSiY=
+MD5-Digest: 2Zvfl8BDiKbPtFG8x10NVQ==
+
+Name: org/osgi/framework/BundleActivator.class
+SHA-Digest: es5Tq5O2QDLZW+rcbt6PqqCmwHI=
+MD5-Digest: myci3PSLkfIJx5QL27RZaw==
+
+Name: OSGI-OPT/src/org/osgi/service/blueprint/container/BlueprintListe
+ ner.java
+SHA-Digest: gQn6kcxdiRPBms5oyB9abo+oBXA=
+MD5-Digest: h6SdodA3txyY5A54oEmrww==
+
+Name: org/osgi/framework/FrameworkUtil.class
+SHA-Digest: ykFxovOqaWuaapNoxDlhXOtu8y8=
+MD5-Digest: rhe0suHM7/5xI62qlryU2g==
+
+Name: org/osgi/framework/ServiceListener.class
+SHA-Digest: soLZvS57OflprY8jqRer0rrr/uM=
+MD5-Digest: D67rUn3nz9/MogMJQ3b4wA==
+
+Name: org/osgi/service/http/packageinfo
+SHA-Digest: OzipZGDMGHDypocMYBDc1ooOPPI=
+MD5-Digest: AJLM2eJthNTN3+bot08PaA==
+
+Name: org/osgi/framework/SynchronousBundleListener.class
+SHA-Digest: wnq4cJGcCL9cAK1slHtiQsPuIWo=
+MD5-Digest: U4xGeVxL8iHEJFASKvL9Zg==
+
+Name: OSGI-OPT/src/org/osgi/service/wireadmin/WirePermission.java
+SHA-Digest: LR97Fc901nBVlGhoNIz98YEQZV8=
+MD5-Digest: jo581/ei1H9gDBOxM1WV3A==
+
+Name: org/osgi/service/cm/ConfigurationPlugin.class
+SHA-Digest: FfjGwpx7RyyloFPbfEIOPFGCH0Q=
+MD5-Digest: dW0GzVI3bN6tKhNSfeUOLQ==
+
+Name: org/osgi/service/dmt/package-info.class
+SHA-Digest: KM2+PGfmPcE1LHk418by2qetBOs=
+MD5-Digest: DsK9dMv2M3jBeAklf6hblQ==
+
+Name: org/osgi/service/condpermadmin/BundleLocationCondition$1.class
+SHA-Digest: lPhVnLA5YWvQUUXc7oroiNzC1/E=
+MD5-Digest: eq94ZEiHsmYikSV6wjy3dQ==
+
+Name: org/osgi/service/coordinator/Coordinator.class
+SHA-Digest: 797KTqorwl0zQltaKPAC4dWNf2Y=
+MD5-Digest: thC8KdMz9MsgRgsSy5SM2w==
+
+Name: org/osgi/framework/BundlePermission.class
+SHA-Digest: xrxnMMpi6mRjw9f1X1xVw+ZVhIo=
+MD5-Digest: teEilvWaGShOYjbLBru4Zg==
+
+Name: OSGI-OPT/src/org/osgi/util/tracker/ServiceTracker.java
+SHA-Digest: LqgWqccDacmGyV6GCgtR7IdrII0=
+MD5-Digest: LB5d0XsYsjtfhHjv20VvoQ==
+
+Name: OSGI-OPT/src/org/osgi/service/jdbc/DataSourceFactory.java
+SHA-Digest: 5v0tQI6sR3qYMIEO7+3Mji6QanM=
+MD5-Digest: u+AT06hyqLlO2Q4NQ5SD9w==
+
+Name: org/osgi/framework/AdaptPermission$1.class
+SHA-Digest: Yegh15KcudSxpHsvG8a6zgh9mHk=
+MD5-Digest: XEiHygzzFJpUOg9jy/Lz0w==
+
+Name: OSGI-OPT/src/org/osgi/framework/BundleContext.java
+SHA-Digest: Zu3VD3TnEZOBqtB0tfICogEvS1U=
+MD5-Digest: WXQZ0S07jcjRwF2ZGhhb0Q==
+
+Name: org/osgi/service/blueprint/container/packageinfo
+SHA-Digest: fxd5k32/C30xA0BPa9um9Q8+9O8=
+MD5-Digest: SlEnYU7DgOE3HqMR/GMYHA==
+
+Name: org/osgi/service/remoteserviceadmin/EndpointPermissionCollection
+ .class
+SHA-Digest: vy+NQ+Kn03B6k1+BKQXfmsTbDxM=
+MD5-Digest: br0TSlFAMnOMNVhFBh7JWg==
+
+Name: org/osgi/service/condpermadmin/ConditionalPermissionUpdate.class
+SHA-Digest: w5J4AytYYev5kdmvzPmWTzERxvE=
+MD5-Digest: iLdzpaDQTdd2lZaz36ZLoQ==
+
+Name: OSGI-OPT/src/org/osgi/service/dmt/DmtException.java
+SHA-Digest: 3QONXTT1ss1JLsvatW06CoFxLs4=
+MD5-Digest: kaCGLGEeCwKMKvRys4QqEA==
+
+Name: org/osgi/service/component/annotations/Reference.class
+SHA-Digest: sy9e7vZbJWSPicssjebe13w+1b0=
+MD5-Digest: IJV6DU1v1Vvq4Vk8Mrp6og==
+
+Name: OSGI-OPT/src/org/osgi/service/provisioning/package-info.java
+SHA-Digest: /QhRCQl3uvbGSOWTFq5DdycKoiA=
+MD5-Digest: qAQxp0Ek2xVOvKcrpALM8A==
+
+Name: xmlns/app/v1.1.0/app.xsd
+SHA-Digest: vt6nBUHRhOfE17D/uoZQlIfx25U=
+MD5-Digest: 9jfyN32BhistClkkUUj4NQ==
+
+Name: org/osgi/framework/FrameworkListener.class
+SHA-Digest: o/osGp2B2Rn4yqD/rE6mkdSN2J8=
+MD5-Digest: V/DANU3X063WVi3A2NDl/Q==
+
+Name: org/osgi/framework/Bundle.class
+SHA-Digest: CAY08KwF3tNih1RZ1WCNSi8DexI=
+MD5-Digest: r7NBNaDXimh1bsHIlEvVtQ==
+
+Name: org/osgi/service/remoteserviceadmin/EndpointDescription$Unmodifi
+ ableDictionary.class
+SHA-Digest: 5jTpFKUF43e8iJ59blkvSqA+gik=
+MD5-Digest: hp4s5sheIZ7tFTCFpohjpw==
+
+Name: org/osgi/service/upnp/package-info.class
+SHA-Digest: Lb83rBz20wuPq1hSwE+dwEgO0mE=
+MD5-Digest: 9RjjAujxFPgaOm2wJwKYzw==
+
+Name: OSGI-OPT/src/org/osgi/service/upnp/UPnPAction.java
+SHA-Digest: EMYTBammFWa7blZTMMjbdjsx/Ew=
+MD5-Digest: RWDHXjbp8vomDTZmILnJmA==
+
+Name: org/osgi/service/wireadmin/WirePermission.class
+SHA-Digest: 7VQ1qjklGIq7C3GtzaDj7qBjPXQ=
+MD5-Digest: UFFIp+XOgtkmKrZF8SEYfw==
+
+Name: org/osgi/framework/packageinfo
+SHA-Digest: NaiJAc6FSYUlU9RedOiZFBA2vkQ=
+MD5-Digest: xfp2iLp9vcb5Q/BMgP/lGg==
+
+Name: OSGI-OPT/src/org/osgi/service/monitor/StatusVariable.java
+SHA-Digest: YUGfdznfMumaZVBYXiyZqDb3IVg=
+MD5-Digest: Fet0jASjNW/ETsZ9HNQBPg==
+
+Name: org/osgi/service/condpermadmin/BundleSignerCondition.class
+SHA-Digest: iANkNdLlMwpyhj0IGHBmp3YKh2w=
+MD5-Digest: A/dYhO27IImvzh6gipzhOQ==
+
+Name: org/osgi/framework/AllServiceListener.class
+SHA-Digest: 28VgJ7kCpRkOHbgEXc4DXfwFZTk=
+MD5-Digest: IBHn+/mxcs4FultrY0buNw==
+
+Name: org/osgi/util/measurement/Unit.class
+SHA-Digest: TqsB4Me6SS8qlRKl7Kar9yxHfoE=
+MD5-Digest: YwBA9f2PWNBybbQZuqSkhw==
+
+Name: org/osgi/service/application/package-info.class
+SHA-Digest: uJhraLOvFhHRdd6mRbqNYefLMIs=
+MD5-Digest: btLrIT6T7dZewLepNNZqSQ==
+
+Name: org/osgi/service/wireadmin/package-info.class
+SHA-Digest: 35cqOS5KPPi+2qVC9rRkFUyHRkQ=
+MD5-Digest: uriwlO+iLX2VDs/4xjTWNQ==
+
+Name: org/osgi/service/coordinator/Coordination.class
+SHA-Digest: 0TkyQsfv4mzeMJusSXw/NErW4hA=
+MD5-Digest: 7rn3LU4KQRhrXfbFZ3QvyA==
+
+Name: OSGI-OPT/src/org/osgi/service/useradmin/UserAdminPermission.java
+SHA-Digest: k10xgTfnG2P7Niyzk5jyRzpUkEU=
+MD5-Digest: r0+LUtAbsoCZqWpN5IpAUA==
+
+Name: org/osgi/service/permissionadmin/PermissionAdmin.class
+SHA-Digest: O6CGbwWesQpkJvw4JSl6328pRYs=
+MD5-Digest: rlyYrrFm51t8F8UlpmKaYg==
+
+Name: OSGI-OPT/src/org/osgi/service/jndi/package-info.java
+SHA-Digest: lSNx1KX/oXsKjHOEq6CKncY5Q3g=
+MD5-Digest: 6alpjKCCrqyhd9xWdEPRGA==
+
+Name: OSGI-OPT/src/org/osgi/service/blueprint/container/BlueprintConta
+ iner.java
+SHA-Digest: FRx/AaHDls4X0nhMysclLLpB3Qo=
+MD5-Digest: NepS/OX1tmKM1wWuZCjebA==
+
+Name: OSGI-OPT/src/org/osgi/service/upnp/UPnPException.java
+SHA-Digest: NvgAWf1qsFPFJkwtnMASwSOvBIA=
+MD5-Digest: Sg0/1KzV+c1+6K7kxvr9iA==
+
+Name: OSGI-OPT/src/org/osgi/service/blueprint/reflect/ServiceReference
+ Metadata.java
+SHA-Digest: uu11F0YaNaSbNnJXe7zlirw2xpg=
+MD5-Digest: R4exoeFV5qHFYS5Ca6HbSQ==
+
+Name: org/osgi/service/blueprint/reflect/MapMetadata.class
+SHA-Digest: rkztxH07qGqDzoPeUkA8lG8nOsE=
+MD5-Digest: uUnT990HHk++OyO3b3iZCA==
+
+Name: OSGI-OPT/src/org/osgi/service/packageadmin/ExportedPackage.java
+SHA-Digest: XYuLOpa1D/6Csz6j+tW/QRLss8s=
+MD5-Digest: V3m8wEQKWq1pAXkF4QSknQ==
+
+Name: OSGI-OPT/src/org/osgi/service/component/annotations/packageinfo
+SHA-Digest: r5uYn4Hkb0NJxA6LFYd3cMZf+Qs=
+MD5-Digest: ijfbF0l6UvxtLGGSc2LmTA==
+
+Name: OSGI-OPT/src/org/osgi/service/http/HttpContext.java
+SHA-Digest: dg4+yH6/QZUz33Ehf5ZlMWBb8N0=
+MD5-Digest: 9vEOeiqCt3Bl7dAiBhuEEg==
+
+Name: org/osgi/framework/hooks/service/EventHook.class
+SHA-Digest: 1Y7lOXPJ2sRgqTY5gH3T2AvR3Hg=
+MD5-Digest: 4W2uKeBnatgHHPw8lZoxlw==
+
+Name: org/osgi/service/useradmin/UserAdmin.class
+SHA-Digest: X2Mbn4OMoOOqKMTuXerB2nrvEBQ=
+MD5-Digest: VmK7lEkvFW4r0Byjm77nNg==
+
+Name: OSGI-OPT/src/org/osgi/framework/startlevel/packageinfo
+SHA-Digest: PjGh674JTItklvGASGkWhaF4Ozw=
+MD5-Digest: cUcaoi9RK+TuyZ85gXBzPg==
+
+Name: OSGI-OPT/src/org/osgi/service/blueprint/container/package-info.j
+ ava
+SHA-Digest: P23VdawbMkJSvrX/YgfhtcK2mgk=
+MD5-Digest: iZJIpcww3rtndGKZws31aA==
+
+Name: OSGI-OPT/src/org/osgi/framework/FrameworkEvent.java
+SHA-Digest: +g1dhhI4F8yMd9e5L1A69fcU2l4=
+MD5-Digest: S+GK6s7q0MFlm+hrrev/SA==
+
+Name: OSGI-OPT/src/org/osgi/service/monitor/MonitorPermission.java
+SHA-Digest: 0oLEzF8jxAuTE7UzMqArDx4ib+I=
+MD5-Digest: 89xNNloM3YZXybHx2waYSA==
+
+Name: org/osgi/service/event/package-info.class
+SHA-Digest: mfiWsFYOcOqa6Xg9Oo+pUiVqUWk=
+MD5-Digest: n4c/JewCPz18q2bw02tPBg==
+
+Name: OSGI-OPT/src/org/osgi/service/permissionadmin/package-info.java
+SHA-Digest: BGfLwYE3W3i/jE4POhKZ7PDGQDk=
+MD5-Digest: RR75XZ/FVoJKRdYAv6Gjww==
+
+Name: org/osgi/service/dmt/DmtException.class
+SHA-Digest: 2/c8GiQYDUMLNQOkEv31sM90wG4=
+MD5-Digest: L9NRQfcTcXS3KFOdhwn8eQ==
+
+Name: OSGI-OPT/src/org/osgi/service/coordinator/packageinfo
+SHA-Digest: PjGh674JTItklvGASGkWhaF4Ozw=
+MD5-Digest: cUcaoi9RK+TuyZ85gXBzPg==
+
+Name: org/osgi/service/device/Driver.class
+SHA-Digest: JAlQlcmHExEbYIUjXbaVZQ5Gv88=
+MD5-Digest: l1AFgKE65LQncrKiXbwuUQ==
+
+Name: OSGI-OPT/src/org/osgi/service/remoteserviceadmin/ImportReference
+ .java
+SHA-Digest: vPsg/pIrfCMmk71ePLRnLC0P+9M=
+MD5-Digest: VD/uNYhhpgkADWpG6Pmusw==
+
+Name: OSGI-OPT/src/org/osgi/framework/ServiceFactory.java
+SHA-Digest: 1AFEXzj/2zzkLRjB0BIvkJx0qvs=
+MD5-Digest: +Q2awJIfmCf0+J36xpnZCg==
+
+Name: org/osgi/service/application/ApplicationAdminPermission.class
+SHA-Digest: D6+wbX+JzhUTZLGP8CeMZhaxd0o=
+MD5-Digest: RLoaor0yS70mUbmXS1FY4Q==
+
+Name: OSGI-OPT/src/org/osgi/framework/launch/Framework.java
+SHA-Digest: uXhHgz9C0BwVVA1g6IUr62hbuVI=
+MD5-Digest: MerAXibVw93s50PeA9CHUw==
+
+Name: org/osgi/util/xml/packageinfo
+SHA-Digest: +evdBkKRmsgKjkFemflB3D+DoVU=
+MD5-Digest: ftPKYz9hsF0jxbXDdTfCpA==
+
+Name: org/osgi/framework/hooks/resolver/packageinfo
+SHA-Digest: PjGh674JTItklvGASGkWhaF4Ozw=
+MD5-Digest: cUcaoi9RK+TuyZ85gXBzPg==
+
+Name: org/osgi/service/cm/ConfigurationEvent.class
+SHA-Digest: 0jehtm+89f6cVn1JiDPasapP8UQ=
+MD5-Digest: tr3/s73bj+cK1azc8jKyjQ==
+
+Name: org/osgi/service/component/annotations/package-info.class
+SHA-Digest: RmXMD7mOKSEWl5bMHELcUZqE2P0=
+MD5-Digest: NTYUtwim2DmNknEFpsxAcA==
+
+Name: OSGI-OPT/src/org/osgi/framework/Filter.java
+SHA-Digest: CyCgL3znymjlDa9XUzLcuMRR2NM=
+MD5-Digest: c9n7eKK8rjo8EUj/UWznkQ==
+
+Name: org/osgi/service/url/URLStreamHandlerService.class
+SHA-Digest: O48fe1D0HizfeoCNf5Ge5YFvD+s=
+MD5-Digest: SDTCdi/ofTPS8KY6mkwgkg==
+
+Name: OSGI-OPT/src/org/osgi/service/cm/ManagedServiceFactory.java
+SHA-Digest: qh/1asljlGmWKx16NkKGqgRZlpc=
+MD5-Digest: 6FJBe3co2v0LSbXd4Bq6rg==
+
+Name: OSGI-OPT/src/org/osgi/service/dmt/DmtIllegalStateException.java
+SHA-Digest: Bcel+931UmficzCLHkEx+2ya5ZM=
+MD5-Digest: FBcxGbA6sJLBb4c4b9gkxw==
+
+Name: org/osgi/framework/wiring/FrameworkWiring.class
+SHA-Digest: Ry0dDJr809lzxaqX+BUky/ytS2k=
+MD5-Digest: 3kHPD3spChzaTo/PxqwbHQ==
+
+Name: org/osgi/service/deploymentadmin/spi/packageinfo
+SHA-Digest: YevA+7phDMQI14SpmNZxNw6CMx0=
+MD5-Digest: YwjBAV07gY2hP8TQTgAeKg==
+
+Name: OSGI-OPT/src/org/osgi/service/remoteserviceadmin/EndpointDescrip
+ tion.java
+SHA-Digest: 16fECmdq1uMfOfBm4pbVZrITwjw=
+MD5-Digest: +NVtCTaeKkYN8MnN3nhG1g==
+
+Name: org/osgi/application/Framework.class
+SHA-Digest: at28a3w2c6sVTYtG0wYmFZVXh3g=
+MD5-Digest: JFv5p0ErAg/CvvSFlD/zhQ==
+
+Name: org/osgi/util/position/package-info.class
+SHA-Digest: WV5F8okhTcTjUQJg/pufRgvXEAs=
+MD5-Digest: 7ZQ4GFBuWaocFM4QFJRS6Q==
+
+Name: OSGI-OPT/src/org/osgi/framework/Configurable.java
+SHA-Digest: KPlhQDc+3Sw4XlRvKISNd6QzbFY=
+MD5-Digest: Q7aRLyUeXdcJuU5LHQzxeg==
+
+Name: org/osgi/framework/FrameworkUtil$FilterImpl$Parser.class
+SHA-Digest: +4YxHQVgwQKdGUo8Q00xHM+1Rs8=
+MD5-Digest: 6wDaXB3gpryZYlq4ARxkfg==
+
+Name: xmlns/blueprint/v1.0.0/blueprint.xsd
+SHA-Digest: DOyCZ/3pNKcq3dY2tf6t1EVeClE=
+MD5-Digest: yZfBwCPG5GJPI7PR9eEVBw==
+
+Name: OSGI-OPT/src/org/osgi/service/dmt/spi/package-info.java
+SHA-Digest: sC5QBXXG/maj6lXPUqonCirY19I=
+MD5-Digest: t/9l6F+3cXSClphw0p+hIA==
+
+Name: org/osgi/service/blueprint/reflect/ValueMetadata.class
+SHA-Digest: ls/JQV4JqeJXPNRP1kX7SLXff6s=
+MD5-Digest: laOFZdE8BYZpmcoOTi43Eg==
+
+Name: OSGI-OPT/src/org/osgi/service/deploymentadmin/spi/packageinfo
+SHA-Digest: YevA+7phDMQI14SpmNZxNw6CMx0=
+MD5-Digest: YwjBAV07gY2hP8TQTgAeKg==
+
+Name: OSGI-OPT/src/org/osgi/application/ApplicationServiceListener.jav
+ a
+SHA-Digest: v4qTbcixUt2wVurrXFpOxvQfzjk=
+MD5-Digest: pfluFkjYqxR4LycMmfa3qA==
+
+Name: org/osgi/util/position/packageinfo
+SHA-Digest: +evdBkKRmsgKjkFemflB3D+DoVU=
+MD5-Digest: ftPKYz9hsF0jxbXDdTfCpA==
+
+Name: org/osgi/service/log/LogEntry.class
+SHA-Digest: bIo4E2Y9MVTKi5dsKrP2MbN6o7s=
+MD5-Digest: /4G/J/zWlCazjjEt4RlEBg==
+
+Name: OSGI-OPT/src/org/osgi/service/blueprint/container/BlueprintEvent
+ .java
+SHA-Digest: qBo8okAzMTupIRQ1j8DVWF5agj8=
+MD5-Digest: QMegDIj2TjTg3vR5n7+e2w==
+
+Name: org/osgi/service/device/package-info.class
+SHA-Digest: yHPcKfm9KiS6XS8SDGaIN/SWaJY=
+MD5-Digest: rLMKkdz7vhOp7VxVswxVXw==
+
+Name: org/osgi/service/application/ApplicationHandle$Delegate.class
+SHA-Digest: qghTQny/I2AfijodD+JnEIWnwik=
+MD5-Digest: k/pJImcfWL74Fg6jZe7fSw==
+
+Name: org/osgi/framework/CapabilityPermissionCollection.class
+SHA-Digest: qTNxNvkSwgwOFJHdmzHpquNtUUM=
+MD5-Digest: r8vpx5XDDFQKHkMjydvy3Q==
+
+Name: org/osgi/framework/BundleListener.class
+SHA-Digest: 8HTUDU3HhUprOPcg8oM6IafXqL0=
+MD5-Digest: RLNGVCrxQz7tg55IQ2hU+w==
+
+Name: OSGI-OPT/src/org/osgi/service/deploymentadmin/spi/DeploymentCust
+ omizerPermission.java
+SHA-Digest: kyMboz071AoMlK2UWVKkYNdsc60=
+MD5-Digest: o5vo/vpecAYhUeKv24wwpw==
+
+Name: OSGI-OPT/src/org/osgi/service/component/ComponentException.java
+SHA-Digest: /An4wjTRFwFk3hLqirrqTGkWZLI=
+MD5-Digest: NtUh9GNhEwXmos6IINd8Kg==
+
+Name: OSGI-OPT/src/org/osgi/service/io/ConnectorService.java
+SHA-Digest: goh2iKjey0uQjlkZRBBOI9xIUrM=
+MD5-Digest: 4/QNquhHlNuhtS2dgvZt8A==
+
+Name: org/osgi/service/dmt/security/packageinfo
+SHA-Digest: nbgmAaUdW/zBD5biN/VIZTJsYes=
+MD5-Digest: kvpRabXUueUzjDvOyc0UrA==
+
+Name: org/osgi/util/tracker/BundleTracker$Tracked.class
+SHA-Digest: hc4CvpvFv4Tau140euL3FPW6m9Q=
+MD5-Digest: KJIXKISZoMIFrsB7f8DhSg==
+
+Name: org/osgi/framework/ServiceRegistration.class
+SHA-Digest: Kp5NJCiciHs/e4VAD8KdsY20RsM=
+MD5-Digest: gibkT3dk/OenHBu43mPu7w==
+
+Name: OSGI-OPT/src/org/osgi/service/packageadmin/packageinfo
+SHA-Digest: r5uYn4Hkb0NJxA6LFYd3cMZf+Qs=
+MD5-Digest: ijfbF0l6UvxtLGGSc2LmTA==
+
+Name: OSGI-OPT/src/org/osgi/service/deploymentadmin/spi/package-info.j
+ ava
+SHA-Digest: KewtmmaEMnju8XhJE0ecHuv7bEI=
+MD5-Digest: eZQvFYQGcU7J7LEqThuhNA==
+
+Name: OSGI-OPT/src/org/osgi/service/component/annotations/Deactivate.j
+ ava
+SHA-Digest: Xg3ua8YH6iupUQqkm3Y8b5PEzDs=
+MD5-Digest: 3txk8GcgOHPwN3X5BOImkQ==
+
+Name: org/osgi/service/component/annotations/Modified.class
+SHA-Digest: 9uNXaUY+sEaCJ5pm5+1G2ET53s4=
+MD5-Digest: XepFyKtW3guKgP5V2Ef/Pw==
+
+Name: org/osgi/framework/hooks/resolver/package-info.class
+SHA-Digest: vsFC0AUdS4YvLgeZT/VTiegfeBY=
+MD5-Digest: 3jYG+TALhsYBPimtsYRX1g==
+
+Name: org/osgi/service/deploymentadmin/DeploymentAdminPermission.class
+SHA-Digest: FD57n0+9K6CyjmMtfMHFXy1N3hc=
+MD5-Digest: r0ciGZQVxJAXeR1NGzB8GA==
+
+Name: org/osgi/service/jdbc/DataSourceFactory.class
+SHA-Digest: /oO5JUk33aeNzT47Fl1/RWEjHDU=
+MD5-Digest: /BR+ovSsu0nk3nk+E46szg==
+
+Name: OSGI-OPT/src/org/osgi/service/remoteserviceadmin/RemoteServiceAd
+ min.java
+SHA-Digest: 9ptozmtErxQZryxNXDAZB6pvpDA=
+MD5-Digest: JNRF0x4w6bNUqeYCpAgaIA==
+
+Name: org/osgi/service/metatype/MetaTypeService.class
+SHA-Digest: ckbRz17Bl/XRf+74ODJCB7Do4vg=
+MD5-Digest: Rrxzv6GTgoRDEKaGrnwPtA==
+
+Name: org/osgi/service/blueprint/container/Converter.class
+SHA-Digest: HeogXiBt7SIFJscvne9xl/a13OA=
+MD5-Digest: QHHq4KMCPSk/r5Mx6+zW1A==
+
+Name: OSGI-OPT/src/org/osgi/service/monitor/packageinfo
+SHA-Digest: PjGh674JTItklvGASGkWhaF4Ozw=
+MD5-Digest: cUcaoi9RK+TuyZ85gXBzPg==
+
+Name: about.html
+SHA-Digest: 4DdTWpnjMj8SfbSk7e84wz4NNVM=
+MD5-Digest: vfnhjVBvtlxywlVgMO8TmA==
+
+Name: OSGI-OPT/src/org/osgi/service/event/EventAdmin.java
+SHA-Digest: FdGUFL94Oq0huMdNmTZeMIcd+Us=
+MD5-Digest: Opo2lnE3Zc1I4pNuXcJw7Q==
+
+Name: org/osgi/service/io/ConnectorService.class
+SHA-Digest: UbJzAftL33CSIDlM9xrC1vMby/Q=
+MD5-Digest: rfNN94flpz2GMHU+O9aU1Q==
+
+Name: org/osgi/framework/Constants.class
+SHA-Digest: Gq2HXbfCTkgtib8lbPH5M28vO+o=
+MD5-Digest: QB+2x0dSiQODFiClWxasJg==
+
+Name: org/osgi/util/tracker/AbstractTracked.class
+SHA-Digest: eLvaoUypUGz9zTPRhNft31uOBYo=
+MD5-Digest: t4cjvUVNoQKxFoZvHU8n1A==
+
+Name: org/osgi/service/condpermadmin/ConditionalPermissionAdmin.class
+SHA-Digest: hFvEADWMBSEimGEK5LcOYs2QMrg=
+MD5-Digest: JiMfhXoVHj5dvg4gcTKE6Q==
+
+Name: OSGI-OPT/src/org/osgi/service/device/Driver.java
+SHA-Digest: PtR1JrDj9yR3SxIWV/bl3sStDQ4=
+MD5-Digest: 8cmYVzG3fb4dA3KpuGJcLw==
+
+Name: org/osgi/framework/BundleContext.class
+SHA-Digest: Pwb+bM1nwMS4ZhuqE2AWylWysT4=
+MD5-Digest: +MIgBXNbGq/rKT1yOdqZ2A==
+
+Name: org/osgi/service/dmt/spi/MountPlugin.class
+SHA-Digest: aw8Cq65Vkx8DOqTPwdsY/Grd1kM=
+MD5-Digest: 4hJs2QsdVkhpcuPFlnpArQ==
+
+Name: org/osgi/service/dmt/spi/MountPoint.class
+SHA-Digest: HyQpl1bmPGGrVLyBJFYjdkttBxk=
+MD5-Digest: WpApNj5nfeV/ZN5ZntL+4A==
+
+Name: org/osgi/service/blueprint/container/ComponentDefinitionExceptio
+ n.class
+SHA-Digest: m63jGiqHlhDIqF4c20JqqZb2/9Q=
+MD5-Digest: 3n/ey3kcOGMipK2elsXk/g==
+
+Name: org/osgi/framework/hooks/weaving/package-info.class
+SHA-Digest: voJBVv6sW7osSU1xaBHYo7iG82g=
+MD5-Digest: teqdK6X9/UWmXooEa4D2gg==
+
+Name: org/osgi/service/coordinator/CoordinationPermissionCollection.cl
+ ass
+SHA-Digest: LFpbZug8QbpZGqYJtAvjdsA4tRg=
+MD5-Digest: lP93H4XMLECUNfX+7sZfTA==
+
+Name: org/osgi/service/jndi/package-info.class
+SHA-Digest: bbhReo3lm/mT2NdvL4aqVM42LuQ=
+MD5-Digest: lR40WRGqRPbjtFhr/0P0Aw==
+
+Name: org/osgi/service/startlevel/package-info.class
+SHA-Digest: OYgaqq3cvr1XlRXLUaNRwiSS76c=
+MD5-Digest: g7kMOeIpzc4hk569HAgxbw==
+
+Name: OSGI-OPT/src/org/osgi/service/event/package-info.java
+SHA-Digest: 4SkMAh9c80+sNqhdUsb/9ed/1uw=
+MD5-Digest: 6cx/LvtmzxsfpVLNEg6EKA==
+
+Name: org/osgi/service/dmt/security/DmtAlertPermissionCollection.class
+SHA-Digest: BxWp/3ebaCcYoBiQ1OpbrOqpDX4=
+MD5-Digest: ZOLtRE8+DxiQQJjjAdUcag==
+
+Name: OSGI-OPT/src/org/osgi/service/device/packageinfo
+SHA-Digest: PhMzFYEiVe2dicD0Uo46QHBW068=
+MD5-Digest: YjqPCNiOolZ/nRAQLKGgKg==
+
+Name: OSGI-OPT/src/org/osgi/framework/BundleReference.java
+SHA-Digest: zmA+LFboPgYkVHRk6ePsriXJ4rA=
+MD5-Digest: cH18xZuCMVTt+6EKWD9SwA==
+
+Name: OSGI-OPT/src/org/osgi/service/application/package-info.java
+SHA-Digest: pDkJ1rqZ3OVecuZof9zHlNPeg4A=
+MD5-Digest: 0eT81h9PTex30vEPpWP9QQ==
+
+Name: OSGI-OPT/src/org/osgi/util/measurement/package-info.java
+SHA-Digest: VswbOde4QVhhkPbV1kcszyudLVI=
+MD5-Digest: ZupVIc/7E4eZmDLOq15cgA==
+
+Name: org/osgi/framework/hooks/service/EventListenerHook.class
+SHA-Digest: 5uWnIS4VLnmDNHMkKXUmGHzI4uY=
+MD5-Digest: YkziYKIowUSv/UIGTvWm2w==
+
+Name: org/osgi/service/jpa/EntityManagerFactoryBuilder.class
+SHA-Digest: 3l8Q7M1ejzix3qQnXZFOTMbBuHY=
+MD5-Digest: GrQXiq6YkNR+6p8eAQpW/g==
+
+Name: org/osgi/service/remoteserviceadmin/RemoteServiceAdminListener.c
+ lass
+SHA-Digest: Alg2yBBi9NeFjeNF5xz4HVGK5d8=
+MD5-Digest: 8sQn0fgmNCpc72ZtNN2rkA==
+
+Name: org/osgi/service/dmt/security/DmtPrincipalPermissionCollection.c
+ lass
+SHA-Digest: g9kcwrnxjvd4pcPuVIObzNUwo68=
+MD5-Digest: y+h3z3t29QakplWNoL7a8A==
+
+Name: org/osgi/framework/AdaptPermission.class
+SHA-Digest: AHZa6uYe0p+M+EtQ+OBXdfqGGUI=
+MD5-Digest: AkU4EHL8utVvKCLb1aN48g==
+
+Name: OSGI-OPT/src/org/osgi/service/http/package-info.java
+SHA-Digest: ymCzMqWNqOid82cvQpbxW60Qxlo=
+MD5-Digest: 5ijx8Jhz52YeSehWlfpQ/A==
+
+Name: OSGI-OPT/src/org/osgi/framework/BundleException.java
+SHA-Digest: iyTE5uW5UQ0nVnE+lTlwdxQiAbE=
+MD5-Digest: GhLKYnn8TL2NpIGCnXAjeA==
+
+Name: org/osgi/framework/FrameworkEvent.class
+SHA-Digest: DNRE/r6UUzuZ06/qYArNfOHDc0Y=
+MD5-Digest: PvYRJA0FmtqTSV6jDf31zg==
+
+Name: OSGI-OPT/src/org/osgi/service/dmt/security/packageinfo
+SHA-Digest: nbgmAaUdW/zBD5biN/VIZTJsYes=
+MD5-Digest: kvpRabXUueUzjDvOyc0UrA==
+
+Name: org/osgi/service/useradmin/Role.class
+SHA-Digest: G2XbKKPhrR9NzZOyWVQpMv4/1DU=
+MD5-Digest: Ix2zSLccMk1zP3fXjF8CSw==
+
+Name: org/osgi/service/useradmin/UserAdminListener.class
+SHA-Digest: HXFAKXdacV5tjQq2ZZW/rdtGTSU=
+MD5-Digest: ydu54IhCLl47TdpY7Vhtug==
+
+Name: OSGI-OPT/src/org/osgi/service/io/packageinfo
+SHA-Digest: PjGh674JTItklvGASGkWhaF4Ozw=
+MD5-Digest: cUcaoi9RK+TuyZ85gXBzPg==
+
+Name: org/osgi/framework/ServicePermissionCollection.class
+SHA-Digest: Pf6XYDe8G7XuHjYq95oocrz2vRg=
+MD5-Digest: N5fR3a1tuniv2mA5ORnM0g==
+
+Name: org/osgi/service/dmt/notification/package-info.class
+SHA-Digest: 1OXw+YWS8jei6rVaGV/XNSJa2iI=
+MD5-Digest: uQstp236RxvdvQkYNOjxRQ==
+
+Name: org/osgi/service/useradmin/Group.class
+SHA-Digest: IURWdO08bAZGSE4QAiHgNCUnbLs=
+MD5-Digest: GH/xXjR8uD/yRmK4Z4EUhw==
+
+Name: OSGI-OPT/src/org/osgi/service/blueprint/reflect/ComponentMetadat
+ a.java
+SHA-Digest: 0CcmC/+fqOi63eO1sOiS6eBsf90=
+MD5-Digest: GHnOaQXkY1XPJ5yOyfpt0A==
+
+Name: OSGI-OPT/src/org/osgi/service/remoteserviceadmin/package-info.ja
+ va
+SHA-Digest: pq2r+nCfTH5r0FxGyMUX1lZZQm8=
+MD5-Digest: +j2+aT57C5TG8EkcZooQAw==
+
+Name: OSGI-OPT/src/org/osgi/application/Framework.java
+SHA-Digest: 9TTmPpujLzw8o8TkwHgqswG/0UI=
+MD5-Digest: fQEwBKy0B+gUur8uNk+qeg==
+
+Name: org/osgi/framework/hooks/service/package-info.class
+SHA-Digest: jBpcPlrhvXn7lP6pPhuD8W74m4I=
+MD5-Digest: ZGXfTgkg7z8u8w+AY9OgiQ==
+
+Name: OSGI-OPT/src/org/osgi/service/provisioning/ProvisioningService.j
+ ava
+SHA-Digest: TpWhjq9oKKz9Q8EKLNlMfKeu4Ok=
+MD5-Digest: 8koL7qyl4kj3j3xxfHBDLw==
+
+Name: org/osgi/framework/startlevel/package-info.class
+SHA-Digest: lQiJGkq0Pv/HAyxN+7Z7ncXQ/D8=
+MD5-Digest: DRxYw3H4QmXIKGypuujVtQ==
+
+Name: OSGI-OPT/src/org/osgi/service/jpa/package-info.java
+SHA-Digest: +dOeD8Cex1JHPxuZMWGmhpFma7c=
+MD5-Digest: /cAxmzduG+cgVE+Wca/cXw==
+
+Name: OSGI-OPT/src/org/osgi/util/tracker/BundleTrackerCustomizer.java
+SHA-Digest: 5xLRIfnXxGBWQ8B8omtHkToNgoU=
+MD5-Digest: GKUQi55OxFZz7gwUWFVF9w==
+
+Name: org/osgi/framework/wiring/package-info.class
+SHA-Digest: /NaJ67v4z7SPQLSiH+lReQwhK8I=
+MD5-Digest: j0qABHaX9NTHjg51Iyx5wA==
+
+Name: org/osgi/service/deploymentadmin/packageinfo
+SHA-Digest: PhMzFYEiVe2dicD0Uo46QHBW068=
+MD5-Digest: YjqPCNiOolZ/nRAQLKGgKg==
+
+Name: OSGI-OPT/src/org/osgi/application/ApplicationServiceEvent.java
+SHA-Digest: LVC6SiBiIqU8wGDEahLhi5OSZvc=
+MD5-Digest: viqUwIUzLPgZXHuLRyVN5A==
+
+Name: xmlns/scr/v1.1.0/scr.xsd
+SHA-Digest: uhEBuX9VO1d/fESqusJ+PZLDJQg=
+MD5-Digest: ryYBa/aoqBjQ6+mA/PLZbg==
+
+Name: xmlns/app/v1.0.0/app.xsd
+SHA-Digest: zDLsZh6TZMx4Y8LlKUHpH3015wc=
+MD5-Digest: /Y6Q+9zeXJ7TEgZJBjFrAg==
+
+Name: OSGI-OPT/src/org/osgi/framework/ServiceListener.java
+SHA-Digest: pQX0SC5C0k5IGhIYt9V/VAhN2ck=
+MD5-Digest: Ue/Q6w/0JYlsTCmOHEnlYg==
+
+Name: org/osgi/service/dmt/DmtData.class
+SHA-Digest: BLkCweOfbHiXvrW6ztYXM5Rjt8w=
+MD5-Digest: VPCBoE+7tTI4VrluGizLfw==
+
+Name: org/osgi/service/blueprint/reflect/BeanArgument.class
+SHA-Digest: gO8hB82iU+bqitRYprIqRs8Yz38=
+MD5-Digest: 2kyAWIrXpwvc4KwCbwjc8g==
+
+Name: OSGI-OPT/src/org/osgi/framework/wiring/BundleWiring.java
+SHA-Digest: PVaOuMCKuCF/S4/tZp88hIHwdUQ=
+MD5-Digest: eZJppE8vvXsyQa74ciDWMw==
+
+Name: OSGI-OPT/src/org/osgi/service/cm/ConfigurationAdmin.java
+SHA-Digest: tAu5HGrgrefjIhtlc/AsE5pNKbw=
+MD5-Digest: dytvUPWZNbmvOgMhJnjz0g==
+
+Name: OSGI-OPT/src/org/osgi/framework/PackagePermission.java
+SHA-Digest: iljfVsY2be7aUSAC+bj9EQaTlTw=
+MD5-Digest: J4y2WNzytHCrH0e7QboVJQ==
+
+Name: OSGI-OPT/src/org/osgi/framework/hooks/service/package-info.java
+SHA-Digest: 5NnFX0o/0rYhJSroIG1tbzq0BZ4=
+MD5-Digest: zWsNNnUv2pCLTfbG3Wh2Hw==
+
+Name: org/osgi/service/metatype/package-info.class
+SHA-Digest: nyLj7crdvGKknJAtRwopuSyXV3o=
+MD5-Digest: 0MUdFz6S28bRfJtew0XMAQ==
+
+Name: org.apache.log4j
+Implementation-Vendor: "Apache Software Foundation"
+DynamicImport-Package: *
+Implementation-Title: log4j
+Implementation-Version: 1.2.17
+
+Name: org/osgi/service/component/ComponentContext.class
+SHA-Digest: kZ8veUcKXW2q4iJcmge4eKs7Xa4=
+MD5-Digest: j1xbwyIFrSWNqB8nckvnFw==
+
+Name: OSGI-OPT/src/org/osgi/util/tracker/ServiceTrackerCustomizer.java
+SHA-Digest: PnwhZSjUwwc68sd8wwBQpUAQN2o=
+MD5-Digest: 4CoR3UDjD9FWhg6vprk58Q==
+
+Name: org/osgi/service/wireadmin/Wire.class
+SHA-Digest: jOYn/1rFFZ+4Day1pHdWpWZIsZ8=
+MD5-Digest: PGxY3xSas9iO5opq1TDFqw==
+
+Name: org/osgi/framework/PackagePermission$1.class
+SHA-Digest: 94fbkArUjIrKvEBxVv2QNOgDFYI=
+MD5-Digest: +jPLWGtbhMwHiQXkpXGyPQ==
+
+Name: org/osgi/service/event/TopicPermissionCollection.class
+SHA-Digest: a7kY/Qi5QIFbFjq6DcZV4ZJc074=
+MD5-Digest: ccpMuXsTMqTg2WBPfkwIyQ==
+
+Name: org/osgi/util/measurement/State.class
+SHA-Digest: HpdQbq7rJcQEWKQH2hzT79AIDRU=
+MD5-Digest: 6qLlNtrVyXOk1wiSwy0wiQ==
+
+Name: OSGI-OPT/src/org/osgi/service/deploymentadmin/DeploymentPackage.
+ java
+SHA-Digest: wvcfyX65y9oXHoG4TOtQhEVgY94=
+MD5-Digest: 8gHtnHU071hDgNIJuzMOWw==
+
+Name: org/osgi/service/component/annotations/ConfigurationPolicy.class
+SHA-Digest: UObyNXXC+fPSejU4HwRy/unsGmU=
+MD5-Digest: Nw/4evgPznxYPXHgGSTgSQ==
+
+Name: OSGI-OPT/src/org/osgi/service/event/packageinfo
+SHA-Digest: jyKXN/3sf9hPr8wZXRJMYtX1ZrY=
+MD5-Digest: BaRSxDuyRxflEnbPMmZxqQ==
+
+Name: org/osgi/framework/Configurable.class
+SHA-Digest: zKEECszheR6Ld/GZhE351l5lrNM=
+MD5-Digest: InsgAQs0D1ZFAfZRvxXhqQ==
+
+Name: OSGI-OPT/src/org/osgi/service/blueprint/reflect/RegistrationList
+ ener.java
+SHA-Digest: kXmSMdOlTctLnFIaDzcpWaoWhz8=
+MD5-Digest: 6hmh0sG/2GlnTT9Rm4uKDQ==
+
+Name: OSGI-OPT/src/org/osgi/service/wireadmin/WireAdminListener.java
+SHA-Digest: i/Hme56agJftOfmDKwdmmGzBfMU=
+MD5-Digest: 5+Jx8DQIEJQFLg7YOHHNHQ==
+
+Name: OSGI-OPT/src/org/osgi/service/metatype/MetaTypeInformation.java
+SHA-Digest: VawbqBilVBPsfj1w+Dtlc0bDHXs=
+MD5-Digest: 5rQHmsGdNN7cqK71ZxMEWQ==
+
+Name: org/osgi/service/blueprint/container/BlueprintListener.class
+SHA-Digest: u2iZbYJZR4qMCunbY0htObzsmVU=
+MD5-Digest: j21yMQ7e8CH5TK917ZIldA==
+
+Name: org/osgi/service/remoteserviceadmin/EndpointPermission.class
+SHA-Digest: P2rZsMfQNA96A0J3onNlu9ZlERk=
+MD5-Digest: CRcHL9yoi4hnd8lMsKgTyw==
+
+Name: org/osgi/framework/launch/FrameworkFactory.class
+SHA-Digest: c/izv0tXGjQEfYD9Jjw/nVzn/NQ=
+MD5-Digest: RteZlKF5Q5pKYk5rXa/XTQ==
+
+Name: OSGI-OPT/src/org/osgi/framework/ServiceRegistration.java
+SHA-Digest: 48a2yczdlIeXmm7+ygtWoqtNTmo=
+MD5-Digest: B/UeP7gQNgUiJxq7mrq0ug==
+
+Name: org/osgi/service/blueprint/reflect/Target.class
+SHA-Digest: KBemkr15OFb+UUuu7KrnVkUWAOQ=
+MD5-Digest: 9Cy685ZnHghSIiWp7d/jWw==
+
+Name: OSGI-OPT/src/org/osgi/service/blueprint/reflect/ReferenceListMet
+ adata.java
+SHA-Digest: vYcpYYZ/sgbN2QxX860c9ln5E70=
+MD5-Digest: //BgIw8ZObbwVtz/lWdnHg==
+
+Name: OSGI-OPT/src/org/osgi/service/dmt/DmtData.java
+SHA-Digest: Mdn5suxBAnWcOcOwvPqdFi2Wcv8=
+MD5-Digest: 7iD3fst3vQhoNabJkh74OA==
+
+Name: OSGI-OPT/src/org/osgi/service/condpermadmin/ConditionalPermissio
+ nAdmin.java
+SHA-Digest: LWkePzJC+TQXwRsZAvHet0OCCyQ=
+MD5-Digest: 3Yqd04IjUKAdY41mic5qxQ==
+
+Name: org/osgi/framework/BundleEvent.class
+SHA-Digest: gnd0vP/SBLvyOZNO0mgbwTwukJU=
+MD5-Digest: qRBpGq+FKgG+OA905rS5DA==
+
+Name: org/osgi/framework/ServiceEvent.class
+SHA-Digest: brvrC7YR27fCPuadBXfhRU/NpmU=
+MD5-Digest: enfuJlRGjf3irdC+7XXGuQ==
+
+Name: org/osgi/service/blueprint/reflect/ComponentMetadata.class
+SHA-Digest: 0jdNI0idx1GuQ8X1XXV/slQbFn0=
+MD5-Digest: dTaxZDosRN3rlhYydtvE1g==
+
+Name: OSGI-OPT/src/org/osgi/service/dmt/MetaNode.java
+SHA-Digest: YNS68ljz43GBuN3fVRq9WHKeeQA=
+MD5-Digest: CXBEZUF0cEzCfO/5TeVH9w==
+
+Name: org/osgi/service/remoteserviceadmin/ImportRegistration.class
+SHA-Digest: 7G37g6j4wTOpwD6g5NfS9+c9/TM=
+MD5-Digest: VM42y4zst7/DCcwBfWGabQ==
+
+Name: org/osgi/service/dmt/spi/ExecPlugin.class
+SHA-Digest: 3siCta6ikV1+C+RBub3SBjDYPts=
+MD5-Digest: vgrsTFaTC9EkDWn0B2v4rQ==
+
+Name: OSGI-OPT/src/org/osgi/service/event/EventHandler.java
+SHA-Digest: feyxqZfiAGzONDOCDqSIUjIjJEI=
+MD5-Digest: ADbAHyDYaxkVjlmgUt4KRw==
+
+Name: OSGI-OPT/src/org/osgi/service/prefs/BackingStoreException.java
+SHA-Digest: aj8uL8UnpkbYR46RHg/15PI1A7w=
+MD5-Digest: MIGPkcLw9VmKDFaghOIp+Q==
+
+Name: OSGI-OPT/src/org/osgi/service/blueprint/container/Converter.java
+SHA-Digest: 4jy4UwLa62anGbynGL+TCaQNUbw=
+MD5-Digest: xTV3Fo3igkyij7eYQ4VDyA==
+
+Name: org/osgi/service/wireadmin/WireConstants.class
+SHA-Digest: zHV5SPRc/z3B0DCIM4dhfWODWNQ=
+MD5-Digest: cXhdIYA0Lc1Bnfrj6SqTEA==
+
+Name: OSGI-OPT/src/org/osgi/service/log/LogService.java
+SHA-Digest: T8s1Bz4Py9JrIvl9If8/QIUOpe4=
+MD5-Digest: a4qml6TFXbSgllVVhC2tSw==
+
+Name: org/osgi/framework/hooks/bundle/packageinfo
+SHA-Digest: PjGh674JTItklvGASGkWhaF4Ozw=
+MD5-Digest: cUcaoi9RK+TuyZ85gXBzPg==
+
+Name: OSGI-OPT/src/org/osgi/service/blueprint/reflect/MapMetadata.java
+SHA-Digest: ck079XyyY7k3JFcHGy54DIiEqrU=
+MD5-Digest: nrGRyH+tn51HTnsky2setw==
+
+Name: org/osgi/service/cm/packageinfo
+SHA-Digest: ilePNI9w+d/+QW1PtdDwuNMioLs=
+MD5-Digest: yLHMsoNQXXx5Fq0Q4QPgOQ==
+
+Name: org/osgi/framework/hooks/service/packageinfo
+SHA-Digest: PhMzFYEiVe2dicD0Uo46QHBW068=
+MD5-Digest: YjqPCNiOolZ/nRAQLKGgKg==
+
+Name: org/osgi/service/component/annotations/Component.class
+SHA-Digest: JGxGe2EgL8kpVqxfymk6ywImhZ8=
+MD5-Digest: YH8Pz4yeEhl5ajS5Onclbw==
+
+Name: OSGI-OPT/src/org/osgi/service/cm/packageinfo
+SHA-Digest: ilePNI9w+d/+QW1PtdDwuNMioLs=
+MD5-Digest: yLHMsoNQXXx5Fq0Q4QPgOQ==
+
+Name: org/osgi/service/upnp/packageinfo
+SHA-Digest: r5uYn4Hkb0NJxA6LFYd3cMZf+Qs=
+MD5-Digest: ijfbF0l6UvxtLGGSc2LmTA==
+
+Name: org/osgi/service/wireadmin/Consumer.class
+SHA-Digest: NYR6COmg0D+Dfpf84XNNDZ4ZlDM=
+MD5-Digest: tKsAkuaet9KisXxF6ucxSA==
+
+Name: OSGI-OPT/src/org/osgi/service/coordinator/package-info.java
+SHA-Digest: sE7ilanrgDUA0xlJURhli0V6HAs=
+MD5-Digest: NZSLSWTHndkBrRNw7ISovA==
+
+Name: org/osgi/service/log/LogService.class
+SHA-Digest: KuKA12nj9r93aa6O2/+q0YshENs=
+MD5-Digest: MejhQ6agVkw+BmMJU1GC1A==
+
+Name: OSGI-OPT/src/org/osgi/service/condpermadmin/ConditionalPermissio
+ nUpdate.java
+SHA-Digest: KFZWeCuQCTkBdaB4DgSOxxgpgUM=
+MD5-Digest: O0cCWmp8Nv8J64hVFQ1MXA==
+
+Name: org/osgi/service/wireadmin/packageinfo
+SHA-Digest: YevA+7phDMQI14SpmNZxNw6CMx0=
+MD5-Digest: YwjBAV07gY2hP8TQTgAeKg==
+
+Name: org/osgi/service/metatype/MetaTypeProvider.class
+SHA-Digest: ShIe8Wcry3SeSTc+epzwderB7gY=
+MD5-Digest: t0B8vEB9m+XTl0rJdnT2TA==
+
+Name: OSGI-OPT/src/org/osgi/service/dmt/notification/spi/packageinfo
+SHA-Digest: nbgmAaUdW/zBD5biN/VIZTJsYes=
+MD5-Digest: kvpRabXUueUzjDvOyc0UrA==
+
+Name: org/osgi/service/application/packageinfo
+SHA-Digest: PhMzFYEiVe2dicD0Uo46QHBW068=
+MD5-Digest: YjqPCNiOolZ/nRAQLKGgKg==
+
+Name: OSGI-OPT/src/org/osgi/framework/hooks/bundle/package-info.java
+SHA-Digest: dNrCXH7BCx/PILrLuv6HGE07K0Y=
+MD5-Digest: nMSe+CDEZs4xa3hTZ2m15A==
+
+Name: org/osgi/service/event/TopicPermission.class
+SHA-Digest: mJbK122DWSLOr7ysK+X3dfo5EN8=
+MD5-Digest: PmfXY8LB62nYosa3FBbrZg==
+
+Name: org/osgi/service/log/packageinfo
+SHA-Digest: jyKXN/3sf9hPr8wZXRJMYtX1ZrY=
+MD5-Digest: BaRSxDuyRxflEnbPMmZxqQ==
+
+Name: org/osgi/service/device/Match.class
+SHA-Digest: M1Guc9yzHgGZF5ZR2KhlBvK9soA=
+MD5-Digest: d4JDWloD87KQAp49qt7SeQ==
+
+Name: org/osgi/service/upnp/UPnPService.class
+SHA-Digest: XmB7Il6TfwA3wXYJBvy4cgKxONU=
+MD5-Digest: Fz8UOKBftz6Vgg+/0gqD3w==
+
+Name: OSGI-OPT/src/org/osgi/service/blueprint/reflect/MapEntry.java
+SHA-Digest: Oss+MQv8jxoj2d1H5y9Xw/AswP8=
+MD5-Digest: NmqB8xAYbnEZFxlH1gTOew==
+
+Name: org/osgi/service/dmt/spi/DataPlugin.class
+SHA-Digest: AjzGJLWVMtbUVLDJWbi+GIocfYc=
+MD5-Digest: OGyJdBJXh8Hacaft7kQtgA==
+
+Name: org/osgi/service/jndi/JNDIConstants.class
+SHA-Digest: gdUa6n2OoxZX6m9uPSXGpSba8Gc=
+MD5-Digest: dbsI/gmFUeWLSsARy266eg==
+
+Name: org/osgi/service/blueprint/reflect/NullMetadata.class
+SHA-Digest: 7eQRiJgshJB5qZg2zacRAqc9h6U=
+MD5-Digest: Wwn0UMCKXLjqGblmG4xZ4g==
+
+Name: org/osgi/service/upnp/UPnPAction.class
+SHA-Digest: k7j0hc3CaGZAhlg3PMRrt6AUEXU=
+MD5-Digest: cJI9C1khNyw4CXb7wHoYNQ==
+
+Name: org/osgi/service/io/ConnectionFactory.class
+SHA-Digest: 02BN33fM7U9ApKE0hrlTBgOoZrI=
+MD5-Digest: zJopNz8ej65lqGNuRJPutg==
+
+Name: OSGI-OPT/src/org/osgi/service/dmt/package-info.java
+SHA-Digest: l49vNT63Adrdh1oJ2wSlPHshLho=
+MD5-Digest: fpSOU1BF7t5pYYVwgA2gAw==
+
+Name: OSGI-OPT/src/org/osgi/service/jdbc/packageinfo
+SHA-Digest: PjGh674JTItklvGASGkWhaF4Ozw=
+MD5-Digest: cUcaoi9RK+TuyZ85gXBzPg==
+
+Name: OSGI-OPT/src/org/osgi/service/component/annotations/Activate.jav
+ a
+SHA-Digest: pv9Wi6qKbuh/y8dodz2BZDk7qFo=
+MD5-Digest: m+H6qQiRvcKnaE3Ap5m3ww==
+
+Name: org/osgi/service/application/ApplicationDescriptor$Delegate.clas
+ s
+SHA-Digest: rrJ6sA8+80IJX37I421JMAWnQnY=
+MD5-Digest: 0uIwIsEQZCO/L7xg2Y0Lng==
+
+Name: org/osgi/service/deploymentadmin/BundleInfo.class
+SHA-Digest: xGM/Ws/ZlY98rdxV9TTj0s5SrPA=
+MD5-Digest: /x6ofVj7g+yXCSERdXmU2A==
+
+Name: org/osgi/service/condpermadmin/Condition.class
+SHA-Digest: PFJU7BAFXMjME+yDSpoMzDWAmUI=
+MD5-Digest: 8bZqPU/51ToJtL6GCyzU6w==
+
+Name: OSGI-OPT/src/org/osgi/service/dmt/spi/ReadableDataSession.java
+SHA-Digest: vM3+4zMP2E/33EVlCpEo6XvhqNY=
+MD5-Digest: od6QdanW5EDw3RV+y6qJkw==
+
+Name: org/osgi/service/device/packageinfo
+SHA-Digest: PhMzFYEiVe2dicD0Uo46QHBW068=
+MD5-Digest: YjqPCNiOolZ/nRAQLKGgKg==
+
+Name: org/osgi/service/useradmin/package-info.class
+SHA-Digest: uLD8FpP9XMZnftR4NHc7lMpxLyk=
+MD5-Digest: ek1Egwc7X6ig4LgUqLo/2w==
+
+Name: OSGI-OPT/src/org/osgi/service/jpa/EntityManagerFactoryBuilder.ja
+ va
+SHA-Digest: hFstZHCH88H/UddZp8lG8AZoi1c=
+MD5-Digest: jvyRwa4btHbAMP3bYNptCQ==
+
+Name: OSGI-OPT/src/org/osgi/service/url/URLStreamHandlerService.java
+SHA-Digest: qUBKVQYU7DE3erAWx4AiLF9t7+c=
+MD5-Digest: tswfWC1Mf7z6UlY9KiwI5Q==
+
+Name: OSGI-OPT/src/org/osgi/service/device/Match.java
+SHA-Digest: zdNfD/JvL3SJb91VFbR304sDI7Y=
+MD5-Digest: 5eKEalLBbuUmXNPpEYjbVA==
+
+Name: org/osgi/framework/wiring/BundleCapability.class
+SHA-Digest: oHDq9OeAZucNJualj2TWP4rTrr8=
+MD5-Digest: ogI5zvJHTC12LuyqVLJOOw==
+
+Name: org/osgi/service/application/ApplicationHandle.class
+SHA-Digest: 3icwOB1ba0lXuvlpnkGlJuRtdSY=
+MD5-Digest: LxsMNbu8fsc7AwCNTvHt0Q==
+
+Name: org/osgi/application/packageinfo
+SHA-Digest: PjGh674JTItklvGASGkWhaF4Ozw=
+MD5-Digest: cUcaoi9RK+TuyZ85gXBzPg==
+
+Name: OSGI-OPT/src/org/osgi/service/component/package-info.java
+SHA-Digest: C4VqEQGZ4BzNNdUoHV65ttOskvM=
+MD5-Digest: vQ7nyxqY4PPuqeGG98S+HA==
+
+Name: org/osgi/framework/startlevel/BundleStartLevel.class
+SHA-Digest: Up7kDhKfJ2f26yrvwEDVCSImf08=
+MD5-Digest: qdlHV6pvir1isLiwzgZjMg==
+
+Name: OSGI-OPT/src/org/osgi/service/deploymentadmin/spi/ResourceProces
+ sorException.java
+SHA-Digest: i6Jb57ZXlfm6F8puBNE+G0IqmoM=
+MD5-Digest: 9I4Zz55c30VvRm3FvzR2ow==
+
+Name: org/osgi/service/event/Event.class
+SHA-Digest: vvnVNOwYNvHuI3Vhb/A4MfuHsb4=
+MD5-Digest: vtwBVZahXTjbbu4Hxg92gA==
+
+Name: OSGI-OPT/src/org/osgi/framework/BundleEvent.java
+SHA-Digest: wAkCc6feYkILkIvaOGrqa9CY+L4=
+MD5-Digest: moP6Z6w77aOyYQDVMsJo5w==
+
+Name: org/osgi/framework/PackagePermissionCollection.class
+SHA-Digest: hPCMKRsj11l5i893V/QWel/Lh8U=
+MD5-Digest: x0jkxy3vFxPsW5UJW/TJXg==
+
+Name: org/osgi/service/application/ApplicationException.class
+SHA-Digest: ZF2CQrgt1Vdg5q6LEE8aFO07wig=
+MD5-Digest: GTCACzWhcngS2hbgQfVp4A==
+
+Name: OSGI-OPT/src/org/osgi/service/wireadmin/packageinfo
+SHA-Digest: YevA+7phDMQI14SpmNZxNw6CMx0=
+MD5-Digest: YwjBAV07gY2hP8TQTgAeKg==
+
+Name: org/osgi/application/package-info.class
+SHA-Digest: tUoaDo6l9dvMKQ1bDsAI+Z6QJnY=
+MD5-Digest: wOKzD1jynFwgmCVf8UYmHg==
+
+Name: OSGI-OPT/src/org/osgi/service/dmt/security/DmtPermission.java
+SHA-Digest: YTNz5jfHi1eWsUuBu3FuavbhLMw=
+MD5-Digest: CLE7csE0ipwPu+XETdc/LA==
+
+Name: org/osgi/service/dmt/notification/NotificationService.class
+SHA-Digest: ayxCTWegkgXcShwlVlMnBXFhBqM=
+MD5-Digest: azTvn9Ji6cnpWoM1pRghtQ==
+
+Name: OSGI-OPT/bnd.bnd
+SHA-Digest: 5joavxQT8+vMYyjwfsfaizygne0=
+MD5-Digest: UWGkZ+rTVEC4oeL00FZkxA==
+
+Name: OSGI-OPT/src/org/osgi/util/measurement/Measurement.java
+SHA-Digest: i5CWynOhNPFoppX+kzFulMYjvM0=
+MD5-Digest: ycaHhYd/h8OyyCyXEHWNZg==
+
+Name: OSGI-OPT/src/org/osgi/service/application/ApplicationHandle.java
+SHA-Digest: 8asOe+4j79RPZaYvzmyLh83OrZo=
+MD5-Digest: Zo2PXVz+gpRkdGuXjVofgw==
+
+Name: org/osgi/service/blueprint/reflect/IdRefMetadata.class
+SHA-Digest: 8f+bd1iDm5Qql1wI8uT8d/Hynt0=
+MD5-Digest: icUbxschnxjuyqhLrUkAfg==
+

@@ -1,0 +1,14 @@
+#Fat Jar Configuration File
+#Tue Feb 04 23:19:52 CET 2014
+onejar.license.required=false
+manifest.classpath=configuration/Hibernate
+manifest.removesigners=true
+onejar.checkbox=true
+jarname=osrv.jar
+manifest.mergeall=true
+manifest.mainclass=offensive.Server.Osrv
+manifest.file=<createnew>
+jarname.isextern=false
+onejar.expand=
+excludes=
+includes=

@@ -5,6 +5,10 @@ public class UserType {
 	
 	public UserType() {};
 	
+	public UserType(String name) {
+		this.name = name;
+	}
+	
 	public String getName() {
 		return this.name;
 	}
