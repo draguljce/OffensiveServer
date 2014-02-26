@@ -23,6 +23,7 @@
 		<!-- List of XML mapping files --> 
 		<mapping resource="UserType.hbm.xml"/>
 		<mapping resource="User.hbm.xml"/>
-		<mapping resource="OffensiveUser.hbm.xml"/>  
+		<mapping resource="OffensiveUser.hbm.xml"/>
+		<mapping resource="FacebookUser.hbm.xml"/>
 	</session-factory> 
 </hibernate-configuration>

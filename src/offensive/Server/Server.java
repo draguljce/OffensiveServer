@@ -18,7 +18,7 @@ public class Server {
 	
 	public Environment environment;
 	
-	public static SessionFactory sessionFactory;
+	public SessionFactory sessionFactory;
 	
 	protected ServerSocket serverSocket;
 	
@@ -52,10 +52,10 @@ public class Server {
 		Configuration configuration = new Configuration();
 		configuration.configure();
 		ServiceRegistry serviceRegistry = new StandardServiceRegistryBuilder().applySettings(configuration.getProperties()).build();
-		GameServer.sessionFactory = configuration.buildSessionFactory(serviceRegistry);
+		this.sessionFactory = configuration.buildSessionFactory(serviceRegistry);
 		
 		this.logger.debug("Classes mappings:");
-		for(String key : GameServer.sessionFactory.getAllClassMetadata().keySet()) {
+		for(String key : this.sessionFactory.getAllClassMetadata().keySet()) {
 			this.logger.debug(key);
 		}
 		

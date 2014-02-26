@@ -6,9 +6,14 @@ import java.util.List;
 
 import org.hibernate.Session;
 import org.hibernate.Transaction;
+import org.json.JSONException;
+import org.json.JSONObject;
 
+import com.communication.CommunicationProtos.NoFacebookLoginRequest;
+import com.communication.CommunicationProtos.NoFacebookLoginResponse;
 import com.communication.CommunicationProtos.RegisterRequest;
 import com.communication.CommunicationProtos.RegisterResponse;
+import com.google.protobuf.InvalidProtocolBufferException;
 
 import offensive.Communicator.Communicator;
 import offensive.Communicator.HandlerId;
@@ -35,22 +40,21 @@ public class RegistrationThread implements Runnable {
 		try {
 			Server.getServer().logger.info("Started proccessing register request");
 			
-			Message receivedMessage = Communicator.getCommunicator().acceptMessage(this.socket);
+			Message receivedMessage;
+			
+			try {
+				receivedMessage = Communicator.getCommunicator().acceptMessage(this.socket);
+			} catch (Exception e) {
+				Server.getServer().logger.info(e.getMessage(), e);
+				return;
+			}
 			
 			if(receivedMessage == null) {
 				Server.getServer().logger.error("Failed to read client message.");
 				return;
 			}
 			
-			Message response = new Message(HandlerId.RegisterResponse, receivedMessage.ticketId, null);
-			
-			try {
-				response.data = this.proccessRegisterRequest((RegisterRequest)receivedMessage.data);
-			}
-			catch (Exception e) {
-				Server.getServer().logger.error(e.getMessage(), e);
-				response = PredefinedMessages.getUnkownErrorMessage(receivedMessage.handlerId, receivedMessage.ticketId);
-			}
+			Message response = this.proccessRequest(receivedMessage);
 			
 			try {
 				Communicator.getCommunicator().sendMessage(response, this.socket);
@@ -68,41 +72,171 @@ public class RegistrationThread implements Runnable {
 		}
 	}
 	
-	private RegisterResponse proccessRegisterRequest(RegisterRequest registerRequest) {
-		Server.getServer().logger.info("Received register request.");
-		
-		RegisterResponse response = null;
-		
-		// Open session.
-		Session session = GameServer.sessionFactory.openSession();
+	private Message proccessRequest(Message request) {
+		Message response = new Message(request.handlerId, request.ticketId, null, (byte)0, (byte)1);
 		
 		try {
-		// We need to check if user already exists.
-		Transaction tran = session.beginTransaction();
-		
-		List results = HibernateUtil.executeHql("FROM " + Constants.OffensiveUserClassName + " oUser WHERE oUser.userName = '" + registerRequest.getUsername() + "'", session);
-		
-		if(!results.isEmpty()) {
-			// User already exists, registration is unsuccessful.
-			tran.rollback();
-			response = RegisterResponse.newBuilder().setIsSuccessfull(false).build();
-		} else {
-			User user = new User(new UserType(Constants.OffensiveUserType));
-			
-			Integer id = (Integer)session.save(user);
-			
-			OffensiveUser offensiveUser = new OffensiveUser(id, registerRequest.getUsername(), registerRequest.getPasswordHash());
-			
-			session.save(offensiveUser);
-			tran.commit();
-			
-			response = RegisterResponse.newBuilder().setIsSuccessfull(true).build();
-		}
-		} finally {
-			session.close();
+			switch (request.handlerId) {
+			case RegisterRequest:
+				response.data = this.proccessRegisterRequest(RegisterRequest.parseFrom(request.data));
+				break;
+				
+			case NoFacebookLoginRequest:
+				response.data = this.proccessNoFacebookLoginRequest(NoFacebookLoginRequest.parseFrom(request.data));
+				break;
+	
+			case FacebookLoginRequest:
+				response.data = this.proccessFacebookLoginRequest(NoFacebookLoginRequest.parseFrom(request.data));
+				break;
+				
+			default:
+				break;
+			}
+		} catch (InvalidProtocolBufferException e) {
+			Server.getServer().logger.error(e.getMessage(), e);
+			return PredefinedMessages.getUnkownErrorMessage(response.handlerId, response.ticketId);
 		}
 		
 		return response;
 	}
 	
+	/******************************************************************************************************/
+	private byte[] proccessRegisterRequest(RegisterRequest registerRequest) {
+		Server.getServer().logger.info("Received register request.");
+		
+		JSONObject response = new JSONObject();
+		
+		// Open session.
+		Session session = Server.getServer().sessionFactory.openSession();
+		
+		try {
+			// We need to check if user already exists.
+			Transaction tran = session.beginTransaction();
+			
+			List results = HibernateUtil.executeHql("FROM " + Constants.OffensiveUserClassName + " oUser WHERE oUser.userName = '" + registerRequest.getUsername() + "'", session);
+			
+			if(results == null || !results.isEmpty()) {
+				// User already exists, registration is unsuccessful.
+				tran.rollback();
+				Server.getServer().logger.info("User " + registerRequest.getUsername() + " already exists. Registration failed.");
+				response.put("isSuccessfull", "false");
+			} else {
+				User user = new User(new UserType(Constants.OffensiveUserType));
+				
+				Integer id = (Integer)session.save(user);
+				
+				OffensiveUser offensiveUser = new OffensiveUser(id, registerRequest.getUsername(), registerRequest.getPasswordHash());
+				
+				session.save(offensiveUser);
+				tran.commit();
+				
+				Server.getServer().logger.info("User " + registerRequest.getUsername() + "with password " + registerRequest.getPasswordHash() + " is now registered.");
+				response.put("isSuccessfull", "true");
+			}
+		} catch (Exception e) {
+			Server.getServer().logger.error(e.getMessage(), e);
+			try {
+				response.put("isSuccessfull", "false");
+			} catch (JSONException e1) {
+				Server.getServer().logger.error(e.getMessage(), e);
+			}
+		} finally {
+			session.close();
+		}
+		
+		return response.toString().getBytes();
+	}	
+	
+	private byte[] proccessNoFacebookLoginRequest(NoFacebookLoginRequest noFacebookLoginRequest) {
+		Server.getServer().logger.info("Received no-facebook login request.");
+		
+		JSONObject response = new JSONObject();
+		
+		Session session = Server.getServer().sessionFactory.openSession();
+		
+		Transaction tran = session.beginTransaction();
+		long userId;
+		
+		try {
+			// Check if user exists.
+			List results = HibernateUtil.executeHql("FROM OffensiveUser oUser WHERE oUser.userName='" + noFacebookLoginRequest.getUsername() + "'", session);
+			
+			if(results.isEmpty()) {
+				userId = -1;
+				Server.getServer().logger.info("User does not exist.");
+			} else {
+				assert results.size() == 1;
+				OffensiveUser user = (OffensiveUser)results.remove(0);
+				
+				if(noFacebookLoginRequest.getPasswordHash().equals(user.getPassword())) {
+					userId = user.getId();
+					Server.getServer().logger.info("User ID=" + user.getId() + " Name=" + user.getUserName() + " successfully logged-in.");
+				} else {
+					userId = -1;
+					Server.getServer().logger.info("User provided wrong password.");
+				}
+			}
+			
+		} finally {
+			tran.commit();
+			session.close();
+			
+			Server.getServer().logger.info("Finished proccessing no-facebook login request.");
+		}
+		
+		try {
+			response.put("userId", userId);
+		} catch (JSONException e) {
+			Server.getServer().logger.error(e.getMessage(), e);
+		}
+		
+		return response.toString().getBytes();
+	}
+	
+	private byte[] proccessFacebookLoginRequest(NoFacebookLoginRequest noFacebookLoginRequest) {
+		Server.getServer().logger.info("Received no-facebook login request.");
+		
+		JSONObject response = new JSONObject();
+		
+		Session session = Server.getServer().sessionFactory.openSession();
+		
+		Transaction tran = session.beginTransaction();
+		long userId;
+		
+		try {
+			// Check if user exists.
+			List results = HibernateUtil.executeHql("FROM OffensiveUser oUser WHERE oUser.userName='" + noFacebookLoginRequest.getUsername() + "'", session);
+			
+			if(results.isEmpty()) {
+				userId = -1;
+				Server.getServer().logger.info("User does not exist.");
+			} else {
+				assert results.size() == 1;
+				OffensiveUser user = (OffensiveUser)results.remove(0);
+				
+				if(noFacebookLoginRequest.getPasswordHash().equals(user.getPassword())) {
+					userId = user.getId();
+					Server.getServer().logger.info("User ID=" + user.getId() + " Name=" + user.getUserName() + " successfully logged-in.");
+				} else {
+					userId = -1;
+					Server.getServer().logger.info("User provided wrong password.");
+				}
+			}
+			
+		} finally {
+			tran.commit();
+			session.close();
+			
+			Server.getServer().logger.info("Finished proccessing no-facebook login request.");
+		}
+		
+		try {
+			response.put("userId", userId);
+		} catch (JSONException e) {
+			Server.getServer().logger.error(e.getMessage(), e);
+		}
+		
+		return response.toString().getBytes();
+	}
+
 }

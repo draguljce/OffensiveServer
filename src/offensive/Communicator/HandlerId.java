@@ -5,8 +5,9 @@ import java.util.Map;
 
 public enum HandlerId {
 	RegisterRequest,
-	RegisterResponse,
-	NoFacebookLoginRequest;
+	NoFacebookLoginRequest,
+	FacebookLoginRequest, 
+	GetUserDataRequest;
 	
 	private static Map<Integer, HandlerId> intToHandlerMap;
 	
