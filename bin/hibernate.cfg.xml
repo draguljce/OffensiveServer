@@ -25,5 +25,17 @@
 		<mapping resource="User.hbm.xml"/>
 		<mapping resource="OffensiveUser.hbm.xml"/>
 		<mapping resource="FacebookUser.hbm.xml"/>
+		<mapping resource="CompletedGame.hbm.xml"/>
+		<mapping resource="PlayerStatistics.hbm.xml"/>
+		<mapping resource="Color.hbm.xml"/>
+		<mapping resource="Player.hbm.xml"/>
+		<mapping resource="InviteRecord.hbm.xml"/>
+		<mapping resource="Invite.hbm.xml"/>
+		<mapping resource="CurrentGame.hbm.xml"/>
+		<mapping resource="Board.hbm.xml"/>
+		<mapping resource="Objective.hbm.xml"/>
+		<mapping resource="Phase.hbm.xml"/>
+		<mapping resource="PlayerGameRecord.hbm.xml"/>
+		<mapping resource="Play.hbm.xml"/>
 	</session-factory> 
 </hibernate-configuration>

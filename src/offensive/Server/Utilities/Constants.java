@@ -5,6 +5,8 @@ import offensive.Server.Hybernate.POJO.OffensiveUser;
 public class Constants {
 	public static final String OffensiveUserType = "OffensiveUser";
 	
+	public static final String FacebookUserType = "FacebookUser";
+	
 	public static final String OffensiveUserClassName = OffensiveUser.class.getName();
 	
 	public static final String LogPathVarName = "LogPath";

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?> 
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd"> 
+
+<hibernate-mapping> 
+	<class name="offensive.Server.Hybernate.POJO.CurrentGame" table="CurrentGame">  
+		<id name="id" type="int" column="id">
+			<generator class="identity"/> 
+		</id>
+		
+		<property name="gameName" column="GameName" type="string"/>
+		<property name="numberOfJoinedPlayers" column="NumberOfJoinedPlayers" type="short"/>
+		<property name="numberOfPlayers" column="NumberOfPlayers" type="short"/>
+		<many-to-one name="objective" column="Objective" class="offensive.Server.Hybernate.POJO.Objective"/>
+		<many-to-one name="phase" column="Phase" class="offensive.Server.Hybernate.POJO.Phase"/>
+		<many-to-one name="board" column="Board" class="offensive.Server.Hybernate.POJO.Board"/>
+		<property name="currentRound" column="CurrentRound" type="integer"/>
+	</class> 
+</hibernate-mapping>

@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<rexpfd>
+    <destination path="ve.Offensive Server:/home/veljkoj/osrv"/>
+    <options createDirectoryStructure="false" createSelectedOnly="true" descriptionFilePath="/osrv/configuration/RseSync.rexpfd" overWriteExistingFiles="false" reviewSynchronize="false" saveSettings="true"/>
+    <selectedElements>
+        <folder path="/osrv/bin"/>
+    </selectedElements>
+</rexpfd>

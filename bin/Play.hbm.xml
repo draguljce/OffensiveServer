@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?> 
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd"> 
+
+<hibernate-mapping> 
+	<class name="offensive.Server.Hybernate.POJO.Play" table="Play">  
+		<many-to-one name="game" column="Game" class="offensive.Server.Hybernate.POJO.CurrentGame"/>
+		<many-to-one name="player" column="player" class="offensive.Server.Hybernate.POJO.Player"/>  
+	</class> 
+</hibernate-mapping>

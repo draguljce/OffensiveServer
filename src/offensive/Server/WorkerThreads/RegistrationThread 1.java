@@ -20,6 +20,10 @@ import org.hibernate.Transaction;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import com.communication.CommunicationProtos.NoFacebookLoginRequest;
+import com.communication.CommunicationProtos.RegisterRequest;
+import com.google.protobuf.GeneratedMessage;
+
 public class RegistrationThread implements Runnable {
 
 	private Socket socket;
@@ -47,12 +51,11 @@ public class RegistrationThread implements Runnable {
 				return;
 			}
 			
-			Message response;
+			Message response = this.proccessRequest((JsonMessage)receivedMessage);
 			
 			try {
-				response = this.proccessRequest((JsonMessage)receivedMessage);
 				Communicator.getCommunicator().sendMessage(response, this.socket);
-			} catch (Exception e) {
+			} catch (IOException e) {
 				Server.getServer().logger.error(e.getMessage(), e);
 			}
 			
@@ -70,19 +73,19 @@ public class RegistrationThread implements Runnable {
 		JsonMessage response;
 		
 		try{
-			response = new JsonMessage(request.handlerId, request.ticketId);
+			response = new JsonMessage(request.handlerId, request.ticketId, null);
 			
 			switch (request.handlerId) {
 			case RegisterRequest:
-				response.setData(this.proccessRegisterRequest(request.getData()));
+				response.data = this.proccessRegisterRequest(request.data);
 				break;
 				
 			case NoFacebookLoginRequest:
-				response.setData(this.proccessNoFacebookLoginRequest(request.getData()));
+				response.data = this.proccessNoFacebookLoginRequest(request.data);
 				break;
 	
 			case FacebookLoginRequest:
-				response.setData(this.proccessFacebookLoginRequest(request.getData()));
+				response.data = this.proccessFacebookLoginRequest(request.data);
 				break;
 				
 			default:
@@ -201,7 +204,7 @@ public class RegistrationThread implements Runnable {
 		
 		JSONObject response = new JSONObject();
 		
-		long facebookId = Long.parseLong(facebookLoginRequest.getString("facebookId"));
+		String facebookId = facebookLoginRequest.getString("facebookId");
 		
 		Session session = Server.getServer().sessionFactory.openSession();
 		
@@ -213,19 +216,8 @@ public class RegistrationThread implements Runnable {
 			List results = HibernateUtil.executeHql("FROM FacebookUser fUser WHERE fUser.facebookId ='" + facebookId + "'", session);
 			
 			if(results.isEmpty()) {
+				userId = -1;
 				Server.getServer().logger.info("Facebook user does not exist.");
-				
-				User user = new User(new UserType(Constants.FacebookUserType));
-				
-				Integer id = (Integer)session.save(user);
-				
-				FacebookUser facebookUser = new FacebookUser(id, facebookId);
-				
-				session.save(facebookUser);
-				tran.commit();
-				
-				Server.getServer().logger.info("Registered new facebook user with userId: " + facebookId);
-				userId = id;
 			} else {
 				assert results.size() == 1;
 				FacebookUser user = (FacebookUser)results.remove(0);
@@ -233,6 +225,7 @@ public class RegistrationThread implements Runnable {
 			}
 			
 		} finally {
+			tran.commit();
 			session.close();
 			
 			Server.getServer().logger.info("Finished proccessing no-facebook login request.");

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?> 
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd"> 
+
+<hibernate-mapping> 
+	<class name="offensive.Server.Hybernate.POJO.InviteRecord" table="IsInvited">  
+		<many-to-one name="invite" column="Invite" class="offensive.Server.Hybernate.POJO.Invite"/>
+		<many-to-one name="invitedUser" column="InvitedUser" class="offensive.Server.Hybernate.POJO.User"/>
+	</class> 
+</hibernate-mapping>
