@@ -6,8 +6,12 @@
 		<id name="id" type="int" column="id">
 			<generator class="identity"/> 
 		</id>
-		 
-		<many-to-one name="user" column="user" class="offensive.Server.Hybernate.POJO.User"/>
-		<many-to-one name="color" column="color" class="offensive.Server.Hybernate.POJO.Color"/>
+		<bag name="cards" cascade="all"> 
+			<key column="id"/> <one-to-many class="offensive.Server.Hybernate.POJO.Card"/> 
+		</bag>
+		  
+		<many-to-one name="game" column="Game" class="offensive.Server.Hybernate.POJO.CurrentGame"/>  
+		<many-to-one name="user" column="UserId" class="offensive.Server.Hybernate.POJO.User"/>
+		<many-to-one name="color" column="Color" class="offensive.Server.Hybernate.POJO.Color"/>
 	</class> 
 </hibernate-mapping>

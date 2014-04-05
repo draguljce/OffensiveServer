@@ -1,7 +1,7 @@
 package offensive.Server;
 
 import java.io.IOException;
-import java.net.ServerSocket;
+import java.nio.channels.ServerSocketChannel;
 import java.util.Iterator;
 
 import offensive.Server.Utilities.Environment;
@@ -20,13 +20,13 @@ public class Server {
 	
 	public SessionFactory sessionFactory;
 	
-	protected ServerSocket serverSocket;
+	protected ServerSocketChannel serverSocketChannel;
 	
 	protected boolean shouldShutdown;
 	
 	private static Server server;
 	
-	private Thread mainThread;
+	private Thread serverThread;
 	
 	protected Server(Environment environment) {
 		this.logger = Logger.getLogger(this.getClass());
@@ -34,8 +34,6 @@ public class Server {
 		this.environment = environment;
 		
 		Server.server = this;
-		
-		this.mainThread = Thread.currentThread();
 	}
 	
 	protected static void setServer(Server server) {
@@ -46,7 +44,8 @@ public class Server {
 		return Server.server; 
 	}
 	
-	protected void initialize() {
+	protected void initialize(Thread serverThread) {
+		this.serverThread = serverThread;
 		this.logger.info("Building session factory...");
 		
 		Configuration configuration = new Configuration();
@@ -72,14 +71,14 @@ public class Server {
 		this.shouldShutdown = true;
 		
 		try {
-			this.serverSocket.close();
+			this.serverSocketChannel.close();
 		} catch (IOException e) {
 			this.logger.error(e.getMessage(), e);
 		}
 		
 		// Wait for up to 30 minutes for shutdown to complete.
 		try {
-			this.mainThread.join(30 * 60 * 1000);
+			this.serverThread.join(30 * 60 * 1000);
 		} catch (InterruptedException e) {
 			this.logger.error(e.getMessage(), e);
 		}

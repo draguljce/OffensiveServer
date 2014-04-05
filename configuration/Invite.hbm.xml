@@ -8,6 +8,7 @@
 		</id>
 		 
 		<many-to-one name="creator" column="Creator" class="offensive.Server.Hybernate.POJO.User"/>
-		<one-to-one name="currentGame" column="Game" class="offensive.Server.Hybernate.POJO.CurrentGame"/>
+		<many-to-one name="game" class="offensive.Server.Hybernate.POJO.CurrentGame" cascade="save-update"/>
+		<many-to-one name="invitedUser" column="InvitedUser" class="offensive.Server.Hybernate.POJO.User"/>
 	</class> 
 </hibernate-mapping>

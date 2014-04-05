@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?> 
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd"> 
+
+<hibernate-mapping> 
+	<class name="offensive.Server.Hybernate.POJO.Territory" table="TroopDeployments">
+		<id name="id" type="int" column="id"/>
+		
+		<many-to-one name="game" column="Game" class="offensive.Server.Hybernate.POJO.CurrentGame"/>
+		<many-to-one name="field" column="Field" class="offensive.Server.Hybernate.POJO.Field"/>
+		<many-to-one name="player" column="Player" class="offensive.Server.Hybernate.POJO.Player"/>
+		<property name="troopsOnIt" column="TroopNumber" type="string"/>
+	</class> 
+</hibernate-mapping>

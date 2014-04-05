@@ -2,4 +2,4 @@
 
 call Scripts\setClasspath.bat
 
-java offensive.Server.Osrv -ConfigFilePath configuration\osrv\osrv.config %*
+java offensive.Server.OsrvGame -ConfigFilePath configuration\osrv\osrv.config %*

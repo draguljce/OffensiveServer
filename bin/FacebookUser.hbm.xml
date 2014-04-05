@@ -3,7 +3,7 @@
 
 <hibernate-mapping> 
 	<class name="offensive.Server.Hybernate.POJO.FacebookUser" table="FacebookUsers">  
-		<id name="id" type="int" column="id"/>
+		<id name="id" type="long" column="id"/>
 		 
 		<property name="facebookId" column="FacebookId" type="long"/>
 	</class> 

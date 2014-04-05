@@ -28,7 +28,7 @@ INSERT INTO UserTypes VALUES ('OffensiveUser'), ('FacebookUser');
 --	#####################################################
 CREATE TABLE Users
 (
-	ID			SERIAL,
+	ID			BIGSERIAL,
 	Type		varchar(32)	REFERENCES UserTypes(Name) ON UPDATE CASCADE,
 	
 	PRIMARY KEY (ID)
@@ -43,7 +43,7 @@ CREATE TABLE Users
 --	#####################################################
 CREATE TABLE FacebookUsers
 (
-	ID			integer	REFERENCES Users(ID) ON UPDATE CASCADE,
+	ID			bigint	REFERENCES Users(ID) ON UPDATE CASCADE,
 	FacebookID	bigint	UNIQUE,
 	
 	PRIMARY KEY (ID)
@@ -58,7 +58,7 @@ CREATE TABLE FacebookUsers
 --	#####################################################
 CREATE TABLE OffensiveUsers
 (
-	ID			integer		REFERENCES Users(ID) ON UPDATE CASCADE,
+	ID			bigint		REFERENCES Users(ID) ON UPDATE CASCADE,
 	UserName	varchar(32)	UNIQUE,
 	Password	varchar(512),
 	
@@ -69,28 +69,146 @@ CREATE TABLE OffensiveUsers
 --	---------------------
 --	|		Colors		|
 --	---------------------
---	| PK	Name		|
+--	| PK	ID			|
+--	|   	Name		|
 --	#####################################################
 CREATE TABLE Colors
 (
+	ID		SERIAL,
 	Name	varchar(32),
 	
-	PRIMARY KEY (Name)
+	PRIMARY KEY (ID)
+);
+
+INSERT INTO Colors (Name) VALUES ('Red'), ('Green'), ('Blue'), ('Yellow'), ('Black');
+
+--	#####################################################
+--	---------------------
+--	|		Phases		|
+--	---------------------
+--	| PK	ID		|
+--	| 		Name		|
+--	#####################################################
+CREATE TABLE Phases
+(
+	ID		int,
+	Name	varchar(32),
+	
+	PRIMARY KEY (ID)
+);
+
+INSERT INTO Phases (ID, Name) VALUES (0, 'Not started');
+
+--	#####################################################
+--	---------------------
+--	|		Boards		|
+--	---------------------
+--	| PK	ID			|
+--	#####################################################
+CREATE TABLE Boards
+(
+	ID	SERIAL,
+	
+	PRIMARY KEY (ID)
 );
 
 --	#####################################################
 --	---------------------
---	|		Players		|
+--	|		Objectives	|
 --	---------------------
---	| PK	ID			|
---	| FK	UserName	|
---	| FK	Color		|
+--	| PK	Description	|
+--	#####################################################
+CREATE TABLE Objectives
+(
+	ID			integer,
+	Description	varchar(512),
+	
+	PRIMARY KEY (ID)
+);
+
+INSERT INTO Objectives VALUES (0, 'Conquer the world'), (1, 'Win 24 territories');
+
+
+
+--	#####################################################
+--	---------------------------------
+--	|		CurrentGames			|
+--	---------------------------------
+--	| PK	ID						|
+--	|   	GameName				|
+--	|   	NumberOfJoinedPlayers	|
+--	|   	NumberOfPlayers			|
+--	| FK	Objective				|
+--	| FK	Phase					|
+--	| FK	Board					|
+--	| 		CurrentRound			|
+--	| 		IsOpen					|
+--	#####################################################
+CREATE TABLE CurrentGames
+(
+	ID						BIGSERIAL,
+	GameName				varchar(32),
+	NumberOfJoinedPlayers	smallint,
+	NumberOfPlayers			smallint,
+	Objective				integer		REFERENCES Objectives(ID)	ON UPDATE CASCADE,
+	Phase					integer		REFERENCES Phases(ID)	 	ON UPDATE CASCADE,
+	Board					integer		REFERENCES Boards(ID) 		ON UPDATE CASCADE,
+	CurrentRound			smallint,
+	IsOpen					boolean,
+		
+	PRIMARY KEY (ID)
+);
+
+--	#####################################################
+--	---------------------------------
+--	|			Players				|
+--	---------------------------------
+--	| PK	ID						|
+--	| FK	UserName				|
+--	| FK	Color					|
+--	| FK	Game					|
+--	| 		isPlayedMove			|
+--	| 		numberOfReinforvements	|
 --	#####################################################
 CREATE TABLE Players
 (
-	ID			SERIAL,
-	UserName	integer		REFERENCES Users(ID) ON UPDATE CASCADE,
-	Color		varchar(32)	REFERENCES Colors(Name) ON UPDATE CASCADE,
+	ID						SERIAL,
+	UserId					bigint		REFERENCES Users(ID) 		ON UPDATE CASCADE,
+	Game					integer		REFERENCES CurrentGames(ID) ON UPDATE CASCADE,
+	Color					integer		REFERENCES Colors(ID)	 	ON UPDATE CASCADE,
+	isPlayedMove			boolean,
+	numberOfReinforcements	integer,
+	
+	PRIMARY KEY (ID)
+);
+
+--	#####################################################
+--	---------------------
+--	|		CardTypes	|
+--	---------------------
+--	| PK	ID			|
+--	|   	Type		|
+--	#####################################################
+CREATE TABLE CardTypes
+(
+	ID		SERIAL,
+	Type	varchar(32),
+	
+	PRIMARY KEY (ID)
+);
+
+--	#####################################################
+--	---------------------
+--	|		Cards		|
+--	---------------------
+--	| PK	ID			|
+--	|   	Type		|
+--	#####################################################
+CREATE TABLE Cards
+(
+	ID		SERIAL,
+	type	integer	REFERENCES CardTypes(ID)	ON UPDATE CASCADE,
+	player	integer	REFERENCES Players(ID)		ON UPDATE CASCADE,
 	
 	PRIMARY KEY (ID)
 );
@@ -128,19 +246,6 @@ CREATE TABLE Connections
 
 --	#####################################################
 --	---------------------
---	|		Boards		|
---	---------------------
---	| PK	ID			|
---	#####################################################
-CREATE TABLE Boards
-(
-	ID	SERIAL,
-	
-	PRIMARY KEY (ID)
-);
-
---	#####################################################
---	---------------------
 --	|		HasFields	|
 --	---------------------
 --	| PK FK	Board		|
@@ -155,100 +260,20 @@ CREATE TABLE HasFields
 );
 
 --	#####################################################
---	---------------------
---	|		Phases		|
---	---------------------
---	| PK	ID		|
---	| 		Name		|
+--	---------------------------------
+--	|	CompletedGamesStatistics	|
+--	---------------------------------
+--	| PK 	ID						|
+--	|    FK	Player					|
+--	|    	Ranking					|
 --	#####################################################
-CREATE TABLE Phases
-(
-	ID		SERIAL,
-	Name	varchar(32),
-	
-	PRIMARY KEY (ID)
-);
-
---	#####################################################
---	---------------------
---	|		Objectives	|
---	---------------------
---	| PK	Name		|
---	#####################################################
-CREATE TABLE Objectives
+CREATE TABLE CompletedGamesStatistics
 (
 	ID			SERIAL,
-	Description	varchar(512),
-	
-	PRIMARY KEY (ID)
-);
-
---	#####################################################
---	-------------------------
---	|		CurrentGames	|
---	-------------------------
---	| PK	ID				|
---	| FK	Phase			|
---	| FK	Board			|
---	| 		CurrentRound	|
---	#####################################################
-CREATE TABLE CurrentGames
-(
-	ID						SERIAL,
-	GameName				varchar(32),
-	NumberOfJoinedPlayers	smallint,
-	NumberOfPlayers			smallint,
-	Objective				integer		REFERENCES Objectives(ID)	ON UPDATE CASCADE,
-	Phase					integer		REFERENCES Phases(ID)	 	ON UPDATE CASCADE,
-	Board					integer		REFERENCES Boards(ID) 		ON UPDATE CASCADE,
-	CurrentRound			smallint,
-	
-	PRIMARY KEY (ID)
-);
-
---	#####################################################
---	-------------------------
---	|		CompletedGames	|
---	-------------------------
---	| PK	ID				|
---	#####################################################
-CREATE TABLE CompletedGames
-(
-	ID				SERIAL,
-	
-	PRIMARY KEY (ID)
-);
-
---	#####################################################
---	-----------------------------
---	|		PlayerStatistcs		|
---	-----------------------------
---	| PK FK	ID					|
---	| 		Ranking				|
---	#####################################################
-CREATE TABLE PlayerStatistcs
-(
-	ID			integer,
+	Player		integer REFERENCES Players(ID) 		ON UPDATE CASCADE,
 	Ranking		smallint,
 	
 	PRIMARY KEY (ID)
-);
-
---	#####################################################
---	-----------------------------
---	|			Played			|
---	-----------------------------
---	| PK FK	Game				|
---	| PK FK	Player				|
---	|    FK	PlayerStatistics	|
---	#####################################################
-CREATE TABLE Played
-(
-	Game				integer REFERENCES CurrentGames(ID) 		ON UPDATE CASCADE,
-	Player				integer REFERENCES Players(ID) 		ON UPDATE CASCADE,
-	PlayerStatistics 	integer REFERENCES PlayerStatistcs 	ON UPDATE CASCADE,
-	
-	PRIMARY KEY (Game, Player)
 );
 
 
@@ -274,70 +299,116 @@ CREATE TABLE Plays
 --	| PK 	ID			|
 --	|    FK	Creator		|
 --	|    FK	Game		|
+--	|    FK	InvitedUser	|
 --	#####################################################
 CREATE TABLE Invites
 (
-	ID		SERIAL,
-	Creator	integer REFERENCES Users(ID) 		ON UPDATE CASCADE,
-	Game	integer REFERENCES CurrentGames(ID) ON UPDATE CASCADE,
+	ID			SERIAL,
+	Creator		bigint	REFERENCES Users(ID) 		ON UPDATE CASCADE,
+	Game		integer REFERENCES CurrentGames(ID) ON UPDATE CASCADE,
+	InvitedUser	integer	REFERENCES Users(ID)		ON UPDATE CASCADE,
 	
 	PRIMARY KEY (ID)
-);
-
---	#####################################################
---	---------------------
---	|		IsInvited	|
---	---------------------
---	| PK FK	Invite		|
---	| PK FK	InvitedUser	|
---	#####################################################
-CREATE TABLE IsInvited
-(
-	Invite		integer REFERENCES Invites(ID)	ON UPDATE CASCADE,
-	InvitedUser	integer REFERENCES Users(ID) 	ON UPDATE CASCADE,
-	
-	PRIMARY KEY (Invite, InvitedUser)
 );
 
 --	#####################################################
 --	---------------------------------
 --	|		TroopDeployments		|
 --	---------------------------------
---	| PK FK	Game					|
---	| PK FK	Field					|
---	| FK	Player					|
+--	| PK	ID					|
+--	|    FK	Game					|
+--	|    FK	Field					|
+--	|    FK	Player					|
 --	| 		TroopNumber				|
 --	#####################################################
 CREATE TABLE TroopDeployments
 (
-	Game		integer	REFERENCES CurrentGames(ID)	ON UPDATE CASCADE,
+	ID			integer,
+	Game		bigint	REFERENCES CurrentGames(ID)	ON UPDATE CASCADE,
 	Field		integer	REFERENCES Fields(ID) 	ON UPDATE CASCADE,
 	Player		integer	REFERENCES Players(ID) 	ON UPDATE CASCADE,
 	TroopNumber	smallint,
 	
-	PRIMARY KEY (Game, Field)
+	PRIMARY KEY (ID)
+);
+
+--	#####################################################
+--	-------------------------
+--	|		CommandTypes	|
+--	-------------------------
+--	| PK 	ID				|
+--	| 		Name			|
+--	#####################################################
+CREATE TABLE CommandTypes
+(
+	ID		SERIAL,
+	Name	varchar(32),
+	
+	PRIMARY KEY (ID)
 );
 
 --	#####################################################
 --	-------------------------
 --	|		Commands		|
 --	-------------------------
---	| PK FK	Game			|
---	| PK	Round			|
---	| PK FK	Player			|
---	| FK	Source			|
---	| FK	Destination		|
+--	| PK 	ID				|
+--	|    FK	Game			|
+--	|   	Round			|
+--	|    FK	Player			|
+--	|    FK	Source			|
+--	|    FK	Destination		|
+--	|	 FK Type			|
 --	| 		TroopNumber		|
 --	#####################################################
 CREATE TABLE Commands
 (
+	ID			SERIAL,
 	Game		integer	REFERENCES CurrentGames(ID)	ON UPDATE CASCADE,
-	"Round"		smallint,
-	Player		integer	REFERENCES Players(ID) 	ON UPDATE CASCADE,
-	Source		integer	REFERENCES Fields(ID)	ON UPDATE CASCADE,
-	Destination	integer	REFERENCES Fields(ID)	ON UPDATE CASCADE,
+	Round		smallint,
+	Player		integer	REFERENCES Players(ID) 			ON UPDATE CASCADE,
+	Source		integer	REFERENCES Fields(ID)			ON UPDATE CASCADE,
+	Destination	integer	REFERENCES Fields(ID)			ON UPDATE CASCADE,
+	Type		integer	REFERENCES CommandTypes(ID) 	ON UPDATE CASCADE,
 	TroopNumber	smallint,
 	
-	PRIMARY KEY (Game, "Round", Player),
+	PRIMARY KEY (ID),
 	CHECK (Source<>Destination)
+);
+
+--	#####################################################
+--	-------------------------
+--	|		AllianceTypes	|
+--	-------------------------
+--	| PK 	ID				|
+--	| 		Name			|
+--	#####################################################
+CREATE TABLE AllianceTypes
+(
+	ID		SERIAL,
+	Name	varchar(32),
+	
+	PRIMARY KEY (ID)
+);
+
+INSERT INTO AllianceTypes (Name) VALUES ('Allied'), ('At war');
+
+--	#####################################################
+--	-------------------------
+--	|		Alliances		|
+--	-------------------------
+--	| PK 	ID				|
+--	| 	 FK	Game			|
+--	| 	 FK	Player1			|
+--	| 	 FK	PLayer2			|
+--	| 	 FK	Type			|
+--	#####################################################
+CREATE TABLE Alliances
+(
+	ID		SERIAL,
+	Game	integer	REFERENCES CurrentGames(ID) 	ON UPDATE CASCADE,
+	Player1	integer	REFERENCES Players(ID) 			ON UPDATE CASCADE,
+	Player2	integer	REFERENCES Players(ID) 			ON UPDATE CASCADE,
+	Type	integer	REFERENCES AllianceTypes(ID) 	ON UPDATE CASCADE,
+	
+	PRIMARY KEY (ID)
 );

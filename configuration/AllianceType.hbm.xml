@@ -2,9 +2,9 @@
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd"> 
 
 <hibernate-mapping> 
-	<class name="offensive.Server.Hybernate.POJO.CompletedGame" table="CompletedGames">  
-		<id name="id" type="int" column="id">
-			<generator class="identity"/> 
-		</id>
+	<class name="offensive.Server.Hybernate.POJO.AllianceType" table="AllianceTypes">  
+		<id name="id" type="int" column="id"/>
+		
+		<property name="name" column="Name" type="string"/>  
 	</class> 
 </hibernate-mapping>

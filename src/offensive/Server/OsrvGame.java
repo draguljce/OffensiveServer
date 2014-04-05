@@ -3,7 +3,7 @@ package offensive.Server;
 import offensive.Server.Utilities.Environment;
 import offensive.Server.WorkerThreads.CleanupThread;
 
-public class Osrv {
+public class OsrvGame {
 
 	private static GameServer server;
 	
@@ -21,31 +21,30 @@ public class Osrv {
 		
 		Environment environment = new Environment(args);
 		
-		Osrv.server = new GameServer(environment);
-		Osrv.server.initialize();
-		
-		Osrv.serverThread = new Thread(Osrv.server, "Server");
-		
-		Osrv.serverThread.start();
-		
 		Runtime.getRuntime().addShutdownHook(new Thread(new CleanupThread(), "Cleanup"));
 		
+		OsrvGame.server = new GameServer(environment);
+		OsrvGame.serverThread = new Thread(OsrvGame.server, "Server");
+		OsrvGame.server.initialize(OsrvGame.serverThread);
+		
+		OsrvGame.serverThread.start();
+		
 		try {
-			Osrv.serverThread.join();
+			OsrvGame.serverThread.join();
 		} catch (InterruptedException e) {
-			Osrv.server.logger.error(e.getMessage(), e);
-			Osrv.server.logger.error("Server exited with code 1");
+			OsrvGame.server.logger.error(e.getMessage(), e);
+			OsrvGame.server.logger.error("Server exited with code 1");
 			System.exit(1);
 		}
 	}
 	
 	public static void shutdown() {
-		Osrv.server.shutdown();
+		OsrvGame.server.shutdown();
 		try {
-			// If server thread don't shutdown in 30 minutes just exit...
-			Osrv.serverThread.join(30 * 60 * 1000);
+			// If server thread don't shutdown in 5 minutes just exit...
+			OsrvGame.serverThread.join(5 * 60 * 1000);
 		} catch (InterruptedException e) {
-			Osrv.server.logger.error(e.getMessage(), e);
+			OsrvGame.server.logger.error(e.getMessage(), e);
 		}
 	}
 }

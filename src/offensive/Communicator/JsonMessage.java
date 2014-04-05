@@ -37,7 +37,7 @@ public class JsonMessage extends Message{
 	public String toString() {
 		String header = super.toString();
 		
-		return header + "\n" + this.data;
+		return header + this.data;
 	}
 	
 	public JSONObject getData() {

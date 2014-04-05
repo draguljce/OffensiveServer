@@ -1,15 +1,15 @@
 package offensive.Server.WorkerThreads;
 
 import java.io.IOException;
-import java.net.Socket;
+import java.nio.channels.SocketChannel;
 import java.util.List;
 
 import offensive.Communicator.Communicator;
-import offensive.Communicator.Message;
 import offensive.Communicator.JsonMessage;
+import offensive.Communicator.Message;
 import offensive.Server.Server;
-import offensive.Server.Hybernate.POJO.OffensiveUser;
 import offensive.Server.Hybernate.POJO.FacebookUser;
+import offensive.Server.Hybernate.POJO.OffensiveUser;
 import offensive.Server.Hybernate.POJO.User;
 import offensive.Server.Hybernate.POJO.UserType;
 import offensive.Server.Utilities.Constants;
@@ -22,10 +22,10 @@ import org.json.JSONObject;
 
 public class RegistrationThread implements Runnable {
 
-	private Socket socket;
+	private SocketChannel socketChannel;
 	
-	public RegistrationThread(Socket socket) {
-		this.socket = socket;
+	public RegistrationThread(SocketChannel socketChannel) {
+		this.socketChannel = socketChannel;
 	}
 	
 	@Override
@@ -36,7 +36,7 @@ public class RegistrationThread implements Runnable {
 			Message receivedMessage;
 			
 			try {
-				receivedMessage = Communicator.getCommunicator().acceptMessage(this.socket);
+				receivedMessage = Communicator.getCommunicator().acceptMessage(this.socketChannel);
 			} catch (Exception e) {
 				Server.getServer().logger.info(e.getMessage(), e);
 				return;
@@ -51,7 +51,7 @@ public class RegistrationThread implements Runnable {
 			
 			try {
 				response = this.proccessRequest((JsonMessage)receivedMessage);
-				Communicator.getCommunicator().sendMessage(response, this.socket);
+				Communicator.getCommunicator().sendMessage(response, this.socketChannel);
 			} catch (Exception e) {
 				Server.getServer().logger.error(e.getMessage(), e);
 			}
@@ -59,7 +59,7 @@ public class RegistrationThread implements Runnable {
 			Server.getServer().logger.info("Finished proccessing request.");
 		} finally {
 			try {
-				this.socket.close();
+				this.socketChannel.close();
 			} catch (IOException e) {
 				Server.getServer().logger.error(e.getMessage(), e);
 			}
@@ -113,7 +113,7 @@ public class RegistrationThread implements Runnable {
 			// We need to check if user already exists.
 			Transaction tran = session.beginTransaction();
 			
-			List results = HibernateUtil.executeHql("FROM " + Constants.OffensiveUserClassName + " oUser WHERE oUser.userName = '" + userName + "'", session);
+			List<?> results = HibernateUtil.executeHql("FROM " + Constants.OffensiveUserClassName + " oUser WHERE oUser.userName = '" + userName + "'", session);
 			
 			if(results == null || !results.isEmpty()) {
 				// User already exists, registration is unsuccessful.
@@ -123,7 +123,7 @@ public class RegistrationThread implements Runnable {
 			} else {
 				User user = new User(new UserType(Constants.OffensiveUserType));
 				
-				Integer id = (Integer)session.save(user);
+				Long id = (Long)session.save(user);
 				
 				OffensiveUser offensiveUser = new OffensiveUser(id, userName, passwordHash);
 				
@@ -162,7 +162,7 @@ public class RegistrationThread implements Runnable {
 		
 		try {
 			// Check if user exists.
-			List results = HibernateUtil.executeHql("FROM OffensiveUser oUser WHERE oUser.userName='" + userName + "'", session);
+			List<?> results = HibernateUtil.executeHql("FROM OffensiveUser oUser WHERE oUser.userName='" + userName + "'", session);
 			
 			if(results.isEmpty()) {
 				userId = -1;
@@ -201,7 +201,7 @@ public class RegistrationThread implements Runnable {
 		
 		JSONObject response = new JSONObject();
 		
-		long facebookId = Long.parseLong(facebookLoginRequest.getString("facebookId"));
+		long facebookId = facebookLoginRequest.getLong("facebookId");
 		
 		Session session = Server.getServer().sessionFactory.openSession();
 		
@@ -210,14 +210,14 @@ public class RegistrationThread implements Runnable {
 		
 		try {
 			// Check if user exists.
-			List results = HibernateUtil.executeHql("FROM FacebookUser fUser WHERE fUser.facebookId ='" + facebookId + "'", session);
+			List<?> results = HibernateUtil.executeHql("FROM FacebookUser fUser WHERE fUser.facebookId ='" + facebookId + "'", session);
 			
 			if(results.isEmpty()) {
 				Server.getServer().logger.info("Facebook user does not exist.");
 				
 				User user = new User(new UserType(Constants.FacebookUserType));
 				
-				Integer id = (Integer)session.save(user);
+				Long id = (Long)session.save(user);
 				
 				FacebookUser facebookUser = new FacebookUser(id, facebookId);
 				

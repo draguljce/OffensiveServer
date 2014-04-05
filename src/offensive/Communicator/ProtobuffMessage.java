@@ -1,6 +1,15 @@
 package offensive.Communicator;
 
+import offensive.Server.Server;
+
 import com.google.protobuf.GeneratedMessage;
+import com.google.protobuf.InvalidProtocolBufferException;
+
+import communication.protos.CommunicationProtos.CreateGameRequest;
+import communication.protos.CommunicationProtos.FilterFriendsRequest;
+import communication.protos.CommunicationProtos.GetOpenGamesRequest;
+import communication.protos.CommunicationProtos.GetUserDataRequest;
+import communication.protos.CommunicationProtos.JoinGameRequest;
 
 public class ProtobuffMessage extends Message{
 
@@ -14,6 +23,20 @@ public class ProtobuffMessage extends Message{
 		this.serializationType = SerializationType.protobuff;
 	}
 
+	public ProtobuffMessage(HandlerId handlerId, int ticketId) {
+		super(handlerId, ticketId, (byte)0);
+		
+		this.serializationType = SerializationType.protobuff;
+	}
+	
+	public ProtobuffMessage(HandlerId handlerId, int ticketId, GeneratedMessage message) {
+		super(handlerId, ticketId, (byte)0);
+		
+		this.serializationType = SerializationType.protobuff;
+		this.data = message;
+		this.dataLength = this.getDataLength();
+	}
+	
 	public ProtobuffMessage(HandlerId handlerId, int ticketId, byte[] data) {
 		super(handlerId, ticketId, (byte)0);
 		
@@ -22,16 +45,36 @@ public class ProtobuffMessage extends Message{
 		this.dataLength = this.getDataLength();
 	}
 
-	private GeneratedMessage getDataObject(HandlerId handlerId, byte[] data2) {
+	private GeneratedMessage getDataObject(HandlerId handlerId, byte[] data) {
 		GeneratedMessage generatedMessage = null;
 		
-		switch (handlerId) {
-		case RegisterRequest:
-			
-			break;
+		try {
+			switch (handlerId) {
+			case GetUserDataRequest:
+				generatedMessage = GetUserDataRequest.parseFrom(data);
+				break;
 
-		default:
-			break;
+			case FilterFriendsRequest:
+				generatedMessage = FilterFriendsRequest.parseFrom(data);
+				break;
+				
+			case CreateGameRequest:
+				generatedMessage = CreateGameRequest.parseFrom(data);
+				break;
+				
+			case GetOpenGamesRequest:
+				generatedMessage = GetOpenGamesRequest.parseFrom(data);
+				break;
+				
+			case JoinGameRequest:
+				generatedMessage = JoinGameRequest.parseFrom(data);
+				break;
+
+			default:
+				break;
+			}
+		} catch (InvalidProtocolBufferException e) {
+			Server.getServer().logger.error(e.getMessage(), e);
 		}
 		
 		return generatedMessage;
@@ -46,6 +89,6 @@ public class ProtobuffMessage extends Message{
 	public String toString() {
 		String header = super.toString();
 		
-		return header + "\n" + this.data;
+		return header + this.data;
 	}
 }

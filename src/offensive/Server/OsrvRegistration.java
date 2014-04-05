@@ -22,8 +22,8 @@ public class OsrvRegistration {
 		Environment environment = new Environment(args);
 		
 		OsrvRegistration.registrationServer = new RegistrationServer(environment);
-		OsrvRegistration.registrationServer.initialize();
 		OsrvRegistration.registrationServerThread = new Thread(OsrvRegistration.registrationServer, "RegistrationServer");
+		OsrvRegistration.registrationServer.initialize(OsrvRegistration.registrationServerThread);
 		
 		OsrvRegistration.registrationServerThread.start();
 		

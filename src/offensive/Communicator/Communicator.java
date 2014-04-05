@@ -1,70 +1,57 @@
 package offensive.Communicator;
 
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
-import java.net.Socket;
-import java.net.SocketException;
 import java.nio.ByteBuffer;
+import java.nio.channels.SocketChannel;
+
+import offensive.Server.Server;
 
 import org.json.JSONException;
 
-import offensive.Server.Server;
-import offensive.Server.Utilities.Constants;
-
 public class Communicator {
+	private final int headerLength = 14;
 
-	private static Communicator onlyInstance = new Communicator();
+	protected static Communicator onlyInstance = new Communicator();
 	
 	public static Communicator getCommunicator() {
 		return Communicator.onlyInstance;
 	}
 	
-	public Message acceptMessage(Socket socket) {
-		InputStream inputStream;
-		
-		try {
-			socket.setSoTimeout(Integer.parseInt(Server.getServer().environment.getVariable(Constants.SocketTimeoutVarName)));
-		} catch (SocketException e) {
-			Server.getServer().logger.error(e.getMessage(), e);
-			return null;
-		}
-		
-		try {
-			inputStream = socket.getInputStream();
-		} catch (IOException e) {
-			Server.getServer().logger.error(e.getMessage(), e);
-			return null;
-		}
-				
+	public Message acceptMessage(SocketChannel socketChannel) {
+						
 		int handlerId, ticketId, dataLength;
 		byte status, serializationType;
 		
 		// 14 bytes is header length
-		byte[] messageBytes = new byte[14];
+		ByteBuffer[] messageBytes = new ByteBuffer[] { ByteBuffer.allocate(headerLength)};
 		
 		// Read header.
 		try {
-			inputStream.read(messageBytes, 0, 14);
+			long numberOfReadBytes = socketChannel.read(messageBytes, 0, 1);
+			
+			if(numberOfReadBytes != headerLength) {
+				return null;
+			}
 		} catch (IOException e) {
 			Server.getServer().logger.error(e.getMessage(), e);
 			return null;
 		}
 		
-		ByteBuffer messageBuffer = ByteBuffer.wrap(messageBytes);
-		
+		Server.getServer().logger.debug(messageBytes[0].toString());
 		// First 4 bytes are handler ID.
-		handlerId = messageBuffer.getInt(0);
-		ticketId = messageBuffer.getInt(4);
-		dataLength = messageBuffer.getInt(8);
-		status = messageBuffer.get(12);
-		serializationType = messageBuffer.get(13);
+		handlerId = messageBytes[0].getInt(0);
+		ticketId = messageBytes[0].getInt(4);
+		dataLength = messageBytes[0].getInt(8);
+		status = messageBytes[0].get(12);
+		serializationType = messageBytes[0].get(13);
 		
 		// Now read the rest of the message.
 		Server.getServer().logger.debug("Received header:" + handlerId + "|" + ticketId + "|" + dataLength + "|" + status + "|" + serializationType);
-		messageBytes = new byte[dataLength];
+		
+		messageBytes[0].clear();
+		messageBytes[0] = ByteBuffer.allocate(dataLength);
 		try {
-			inputStream.read(messageBytes, 0, dataLength);
+			socketChannel.read(messageBytes, 0, 1);
 		} catch (IOException e) {
 			Server.getServer().logger.error(e.getMessage(), e);
 			return null;
@@ -72,7 +59,7 @@ public class Communicator {
 		
 		Message receivedMessage;
 		try {
-			receivedMessage = Message.build(handlerId, ticketId, status, serializationType, messageBytes);
+			receivedMessage = Message.build(handlerId, ticketId, status, serializationType, messageBytes[0].array());
 		} catch (JSONException e) {
 			Server.getServer().logger.error(e.getMessage(), e);
 			return null;
@@ -84,10 +71,8 @@ public class Communicator {
 		return receivedMessage;
 	}
 
-	public void sendMessage(Message response, Socket socket) throws IOException {
-		OutputStream outputStream = socket.getOutputStream();
-		
-		Server.getServer().logger.debug("Sending response to client " + socket.getInetAddress() + ": " + response);
-		outputStream.write(response.serialize());
+	public void sendMessage(Message response, SocketChannel socketChannel) throws IOException {
+		Server.getServer().logger.debug("Sending response to client " + socketChannel.getRemoteAddress() + ": " + response);
+		socketChannel.write(response.serialize());
 	}
 }

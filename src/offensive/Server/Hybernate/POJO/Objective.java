@@ -6,6 +6,10 @@ public class Objective {
 	
 	public Objective() {};
 	
+	public Objective(int id) {
+		this.id = id;
+	}
+	
 	public int getId() {
 		return this.id;
 	}

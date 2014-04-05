@@ -2,11 +2,26 @@
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd"> 
 
 <hibernate-mapping> 
-	<class name="offensive.Server.Hybernate.POJO.CurrentGame" table="CurrentGame">  
-		<id name="id" type="int" column="id">
+	<class name="offensive.Server.Hybernate.POJO.CurrentGame" table="CurrentGames">  
+		<id name="id" type="long" column="id">
 			<generator class="identity"/> 
 		</id>
-		
+		<set name="players" cascade="all"> 
+			<key column="id"/> 
+			<one-to-many class="offensive.Server.Hybernate.POJO.Player"/> 
+		</set>
+		<set name="territories" cascade="all"> 
+			<key column="id"/> 
+			<one-to-many class="offensive.Server.Hybernate.POJO.Territory"/> 
+		</set>
+		<set name="alliances" cascade="all"> 
+			<key column="id"/> 
+			<one-to-many class="offensive.Server.Hybernate.POJO.Alliance"/> 
+		</set>
+		<set name="commands" cascade="all"> 
+			<key column="id"/> 
+			<one-to-many class="offensive.Server.Hybernate.POJO.Command"/> 
+		</set>
 		<property name="gameName" column="GameName" type="string"/>
 		<property name="numberOfJoinedPlayers" column="NumberOfJoinedPlayers" type="short"/>
 		<property name="numberOfPlayers" column="NumberOfPlayers" type="short"/>
@@ -14,5 +29,6 @@
 		<many-to-one name="phase" column="Phase" class="offensive.Server.Hybernate.POJO.Phase"/>
 		<many-to-one name="board" column="Board" class="offensive.Server.Hybernate.POJO.Board"/>
 		<property name="currentRound" column="CurrentRound" type="integer"/>
+		<property name="isOpen" column="IsOpen" type="boolean"/>
 	</class> 
 </hibernate-mapping>

@@ -3,7 +3,7 @@
 
 <hibernate-mapping> 
 	<class name="offensive.Server.Hybernate.POJO.OffensiveUser" table="OffensiveUsers">  
-		<id name="id" type="int" column="id"/>
+		<id name="id" type="long" column="id"/>
 		 
 		<property name="userName" column="UserName" type="string"/>
 		<property name="password" column="Password" type="string"/>  

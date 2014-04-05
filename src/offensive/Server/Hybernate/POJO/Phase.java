@@ -6,6 +6,10 @@ public class Phase {
 	
 	public Phase() {};
 	
+	public Phase(int id) {
+		this.id = id;
+	};
+	
 	public int getId() {
 		return this.id;
 	}

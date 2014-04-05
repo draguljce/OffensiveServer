@@ -1,23 +1,23 @@
 package offensive.Server.Hybernate.POJO;
 
 public class OffensiveUser {
-	private int id;
+	private long id;
 	private String userName;
 	private String password;
 	
 	public OffensiveUser(){};
 	
-	public OffensiveUser(int id, String userName, String password) {
+	public OffensiveUser(long id, String userName, String password) {
 		this.id = id;
 		this.userName = userName;
 		this.password = password;
 	}
 	
-	public int getId() {
+	public long getId() {
 		return this.id;
 	}
 	
-	public void setId(int id) {
+	public void setId(long id) {
 		this.id = id;
 	}
 	

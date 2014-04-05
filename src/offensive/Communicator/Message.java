@@ -19,10 +19,10 @@ public abstract class Message {
 	
 	@Override
 	public String toString() {
-		return this.handlerId.toString() + "|" + this.ticketId + "|" + this.dataLength + "|" + this.status + "|" + this.serializationType + "\n";
+		return "\n" + this.handlerId.toString() + "|" + this.ticketId + "|" + this.dataLength + "|" + this.status + "|" + this.serializationType + "\n";
 	}
 	
-	public byte[] serialize() {
+	public ByteBuffer serialize() {
 		byte[] byteData = this.getDataBytes();
 		this.dataLength = byteData.length;
 		
@@ -37,7 +37,8 @@ public abstract class Message {
 		
 		byteBuffer.put(byteData);
 		
-		return byteBuffer.array();
+		byteBuffer.rewind();
+		return byteBuffer;
 	}
 	
 	public static Message build(int handlerIdInt, int ticketId, byte status, byte serializationTypeByte, byte[] data) throws JSONException {

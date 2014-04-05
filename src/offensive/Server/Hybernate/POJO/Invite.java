@@ -3,31 +3,46 @@ package offensive.Server.Hybernate.POJO;
 public class Invite {
 	private int id;
 	private User creator;
-	private CurrentGame currentGame;
+	private CurrentGame game;
+	private User invitedUser;
 	
-	public Invite() {};
+	public Invite() {}
 	
-	public int getId() {
-		return this.id;
+	public Invite(User creator, CurrentGame game, User invitedUser) {
+		this.creator = creator;
+		this.game = game;
+		this.invitedUser = invitedUser;
 	}
-	
+
+	public int getId() {
+		return id;
+	}
+
 	public void setId(int id) {
 		this.id = id;
 	}
-	
-	public User getUser() {
-		return this.creator;
+
+	public User getCreator() {
+		return creator;
 	}
-	
-	public void setUser(User creator) {
+
+	public void setCreator(User creator) {
 		this.creator = creator;
 	}
-	
+
 	public CurrentGame getGame() {
-		return this.currentGame;
+		return game;
 	}
-	
-	public void setGame(CurrentGame currentGame) {
-		this.currentGame = currentGame;
+
+	public void setGame(CurrentGame game) {
+		this.game = game;
+	}
+
+	public User getInvitedUser() {
+		return invitedUser;
+	}
+
+	public void setInvitedUser(User invitedUser) {
+		this.invitedUser = invitedUser;
 	}
 }

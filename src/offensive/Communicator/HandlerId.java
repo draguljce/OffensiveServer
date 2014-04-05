@@ -4,10 +4,14 @@ import java.util.HashMap;
 import java.util.Map;
 
 public enum HandlerId {
-	RegisterRequest,
-	NoFacebookLoginRequest,
-	FacebookLoginRequest, 
-	GetUserDataRequest;
+	RegisterRequest,			//	0
+	NoFacebookLoginRequest,		//	1
+	FacebookLoginRequest, 		//	2
+	GetUserDataRequest,			//	3
+	FilterFriendsRequest,		//	4
+	CreateGameRequest,			//	5
+	GetOpenGamesRequest,		//	6
+	JoinGameRequest;			//	7
 	
 	private static Map<Integer, HandlerId> intToHandlerMap;
 	

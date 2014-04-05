@@ -1,17 +1,18 @@
 package offensive.Server;
 
 import java.io.IOException;
-import java.net.ServerSocket;
-import java.net.Socket;
+import java.net.InetSocketAddress;
 import java.net.SocketException;
 import java.net.SocketTimeoutException;
+import java.nio.channels.AsynchronousCloseException;
+import java.nio.channels.ServerSocketChannel;
+import java.nio.channels.SocketChannel;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 
 import offensive.Server.Utilities.Constants;
 import offensive.Server.Utilities.Environment;
-import offensive.Server.WorkerThreads.HandlerThread;
 import offensive.Server.WorkerThreads.RegistrationThread;
 
 public class RegistrationServer extends Server implements Runnable {	
@@ -22,10 +23,10 @@ public class RegistrationServer extends Server implements Runnable {
 		super(environment);
 	}
 	
-	public void initialize() {
+	public void initialize(Thread serverThread) {
 		this.logger.info("Server initialization started.");
 		
-		super.initialize();
+		super.initialize(serverThread);
 		
 		this.logger.info("Initializing registration threads.");
 		this.registrationExecutorService = Executors.newFixedThreadPool(Integer.parseInt(this.environment.getVariable(Constants.RegistrationThreadNumVarName)));
@@ -33,22 +34,13 @@ public class RegistrationServer extends Server implements Runnable {
 		
 		this.logger.info("Opening server socket on port " + this.environment.getVariable(Constants.RegistrationPortNumberVarName));
 		try {
-			this.serverSocket = new ServerSocket(Integer.parseInt(this.environment.getVariable(Constants.RegistrationPortNumberVarName)));
+			this.serverSocketChannel = ServerSocketChannel.open();
 		} catch (NumberFormatException | IOException e) {
 			this.logger.fatal(e.getMessage(), e);
 			System.exit(4);
 		}
 		this.logger.info("Server socket opened.");
-		
-		try {
-			this.serverSocket.setSoTimeout(Integer.parseInt(this.environment.getVariable(Constants.ServerSocketTimeoutVarName)));
-		} catch (NumberFormatException | SocketException e) {
-			this.logger.fatal(e.getMessage(), e);
-			System.exit(5);
-		}
-		
 		this.logger.info("Server socket timeout is " + this.environment.getVariable(Constants.ServerSocketTimeoutVarName));
-		
 		this.logger.info("Server initialization completed.");
 	}
 
@@ -57,12 +49,19 @@ public class RegistrationServer extends Server implements Runnable {
 	public void run() {
 		this.logger.info("Server is now listening on port " + this.environment.getVariable(Constants.RegistrationPortNumberVarName));
 		
-		Socket socket = null;
+		try {
+			this.serverSocketChannel.bind(new InetSocketAddress(Integer.parseInt(this.environment.getVariable(Constants.RegistrationPortNumberVarName))));
+		} catch (NumberFormatException | IOException e1) {
+			this.logger.error(e1.getMessage(), e1);
+			return;
+		}
+		
+		SocketChannel socketChannel = null;
 		while(true) {
 			try {	
 				try {
-					socket = this.serverSocket.accept();
-				} catch (SocketException socketException) {
+					socketChannel = this.serverSocketChannel.accept();
+				} catch (SocketException | AsynchronousCloseException socketException) {
 					if(this.shouldShutdown) {
 						this.logger.info("Received shutdown request.");
 						try {
@@ -84,8 +83,8 @@ public class RegistrationServer extends Server implements Runnable {
 					continue;
 				}
 				
-				this.logger.info("Accepted connection from address " + socket.getRemoteSocketAddress());
-				this.registrationExecutorService.submit(new RegistrationThread(socket));
+				this.logger.info("Accepted connection from address " + socketChannel.getRemoteAddress());
+				this.registrationExecutorService.submit(new RegistrationThread(socketChannel));
 			} catch (NumberFormatException | IOException e) {
 				this.logger.error(e.getMessage(), e);
 				System.exit(3);

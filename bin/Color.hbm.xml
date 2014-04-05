@@ -3,6 +3,8 @@
 
 <hibernate-mapping> 
 	<class name="offensive.Server.Hybernate.POJO.Color" table="Colors">  
-		<id name="name" type="string" column="name"/>  
+		<id name="id" type="int" column="id"/>
+		
+		<property name="name" column="Name" type="string"/>  
 	</class> 
 </hibernate-mapping>
