@@ -2,7 +2,7 @@
 <classpath>
 	<classpathentry kind="src" path="src"/>
 	<classpathentry excluding="Hibernate/" kind="src" path="configuration"/>
-	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.7"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/jre8"/>
 	<classpathentry kind="lib" path="lib/Log4J/log4j-1.2.17.jar"/>
 	<classpathentry kind="lib" path="lib/Hibernate/envers/hibernate-envers-4.3.1.Final.jar"/>
 	<classpathentry kind="lib" path="lib/Hibernate/jpa/hibernate-entitymanager-4.3.1.Final.jar"/>

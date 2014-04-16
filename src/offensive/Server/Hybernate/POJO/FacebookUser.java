@@ -1,22 +1,22 @@
 package offensive.Server.Hybernate.POJO;
 
 public class FacebookUser {
-	private long id;
 	private long facebookId;
+	private User user;
 	
 	public FacebookUser(){};
 	
-	public FacebookUser(long id, long facebookId) {
-		this.id = id;
+	public FacebookUser(long facebookId, User userId) {
 		this.facebookId = facebookId;
+		this.user = userId;
 	}
 	
-	public long getId() {
-		return this.id;
+	public User getUser() {
+		return this.user;
 	}
 	
-	public void setId(long id) {
-		this.id = id;
+	public void setUser(User userId) {
+		this.user = userId;
 	}
 	
 	public long getFacebookId() {

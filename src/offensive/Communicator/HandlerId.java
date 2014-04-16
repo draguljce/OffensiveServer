@@ -11,7 +11,13 @@ public enum HandlerId {
 	FilterFriendsRequest,		//	4
 	CreateGameRequest,			//	5
 	GetOpenGamesRequest,		//	6
-	JoinGameRequest;			//	7
+	JoinGameRequest,			//	7
+	InvokeAllianceRequest,		//	8
+	TradeCardsRequest,			//	9
+	AddUnitRequest,				//	10
+	MoveUnitsRequest,			//	11
+	AttackRequest,				//	12
+	RollDiceRequest;			//	13
 	
 	private static Map<Integer, HandlerId> intToHandlerMap;
 	

@@ -51,7 +51,14 @@ public class Communicator {
 		messageBytes[0].clear();
 		messageBytes[0] = ByteBuffer.allocate(dataLength);
 		try {
-			socketChannel.read(messageBytes, 0, 1);
+			int readBytes = 0;
+			while(readBytes < dataLength) {
+				readBytes += socketChannel.read(messageBytes, 0, 1);
+				
+				if(readBytes == 0) {
+					return null;
+				}
+			}
 		} catch (IOException e) {
 			Server.getServer().logger.error(e.getMessage(), e);
 			return null;

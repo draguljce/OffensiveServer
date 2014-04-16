@@ -7,11 +7,14 @@
 			<generator class="identity"/> 
 		</id>
 		<bag name="cards" cascade="all"> 
-			<key column="id"/> <one-to-many class="offensive.Server.Hybernate.POJO.Card"/> 
+			<key column="player"/> <one-to-many class="offensive.Server.Hybernate.POJO.Card"/> 
 		</bag>
 		  
 		<many-to-one name="game" column="Game" class="offensive.Server.Hybernate.POJO.CurrentGame"/>  
 		<many-to-one name="user" column="UserId" class="offensive.Server.Hybernate.POJO.User"/>
 		<many-to-one name="color" column="Color" class="offensive.Server.Hybernate.POJO.Color"/>
+		
+		<property name="isPlayedMove" column="isPlayedMove" type="boolean"/>
+		<property name="numberOfReinforcements" column="numberOfReinforcements" type="int"/>
 	</class> 
 </hibernate-mapping>

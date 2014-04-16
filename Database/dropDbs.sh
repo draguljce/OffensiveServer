@@ -7,7 +7,7 @@ fi
 if [ "$2" ]; then
 	PGPASSWORD=$2
 fi
-psql -d postgres -f /home/veljkoj/Database/dropDbs.sql -v ON_ERROR_STOP=1
+psql -d postgres -f /home/veljkoj/osrv/Database/dropDbs.sql -v ON_ERROR_STOP=1
 if [ $? -eq 0 ]; then 
 	echo Databases dropped SUCCESSFULLY!!!
 else 

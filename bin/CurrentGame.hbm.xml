@@ -28,7 +28,7 @@
 		<many-to-one name="objective" column="Objective" class="offensive.Server.Hybernate.POJO.Objective"/>
 		<many-to-one name="phase" column="Phase" class="offensive.Server.Hybernate.POJO.Phase"/>
 		<many-to-one name="board" column="Board" class="offensive.Server.Hybernate.POJO.Board"/>
-		<property name="currentRound" column="CurrentRound" type="integer"/>
+		<property name="currentRound" column="CurrentRound" type="short"/>
 		<property name="isOpen" column="IsOpen" type="boolean"/>
 	</class> 
 </hibernate-mapping>

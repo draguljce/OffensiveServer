@@ -38,16 +38,18 @@ CREATE TABLE Users
 --	---------------------
 --	|	FacebookUser	|
 --	---------------------
---	| PK	ID			|
---	|		FacebookID	|
+--	| PK	FacebookID	|
+--	| 		userID		|
 --	#####################################################
 CREATE TABLE FacebookUsers
 (
-	ID			bigint	REFERENCES Users(ID) ON UPDATE CASCADE,
-	FacebookID	bigint	UNIQUE,
+	FacebookID	bigint,
+	UserID		bigint	REFERENCES Users(ID) ON UPDATE CASCADE,
 	
-	PRIMARY KEY (ID)
+	PRIMARY KEY (FacebookID)
 );
+
+CREATE UNIQUE INDEX facebookUsersIndex ON FacebookUsers (UserID);
 
 --	#####################################################
 --	---------------------
@@ -174,7 +176,7 @@ CREATE TABLE Players
 (
 	ID						SERIAL,
 	UserId					bigint		REFERENCES Users(ID) 		ON UPDATE CASCADE,
-	Game					integer		REFERENCES CurrentGames(ID) ON UPDATE CASCADE,
+	Game					bigint		REFERENCES CurrentGames(ID) ON UPDATE CASCADE,
 	Color					integer		REFERENCES Colors(ID)	 	ON UPDATE CASCADE,
 	isPlayedMove			boolean,
 	numberOfReinforcements	integer,
@@ -196,6 +198,8 @@ CREATE TABLE CardTypes
 	
 	PRIMARY KEY (ID)
 );
+
+INSERT INTO CardTypes VALUES (0, 'Soldier'), (1, 'Horse'), (2, 'Artilery');
 
 --	#####################################################
 --	---------------------
@@ -276,22 +280,6 @@ CREATE TABLE CompletedGamesStatistics
 	PRIMARY KEY (ID)
 );
 
-
---	#####################################################
---	---------------------
---	|		Plays		|
---	---------------------
---	| PK FK	Game		|
---	| PK FK	Player		|
---	#####################################################
-CREATE TABLE Plays
-(
-	Game	integer REFERENCES CurrentGames(ID) ON UPDATE CASCADE,
-	Player	integer REFERENCES Players(ID) ON UPDATE CASCADE,
-	
-	PRIMARY KEY (Game, Player)
-);
-
 --	#####################################################
 --	---------------------
 --	|		Invites		|
@@ -305,7 +293,7 @@ CREATE TABLE Invites
 (
 	ID			SERIAL,
 	Creator		bigint	REFERENCES Users(ID) 		ON UPDATE CASCADE,
-	Game		integer REFERENCES CurrentGames(ID) ON UPDATE CASCADE,
+	Game		bigint	REFERENCES CurrentGames(ID) ON UPDATE CASCADE,
 	InvitedUser	integer	REFERENCES Users(ID)		ON UPDATE CASCADE,
 	
 	PRIMARY KEY (ID)
@@ -332,6 +320,8 @@ CREATE TABLE TroopDeployments
 	PRIMARY KEY (ID)
 );
 
+CREATE UNIQUE INDEX territoryIndex ON TroopDeployments(Field);
+
 --	#####################################################
 --	-------------------------
 --	|		CommandTypes	|
@@ -353,6 +343,7 @@ CREATE TABLE CommandTypes
 --	-------------------------
 --	| PK 	ID				|
 --	|    FK	Game			|
+--	|    FK	Phase			|
 --	|   	Round			|
 --	|    FK	Player			|
 --	|    FK	Source			|
@@ -363,13 +354,14 @@ CREATE TABLE CommandTypes
 CREATE TABLE Commands
 (
 	ID			SERIAL,
-	Game		integer	REFERENCES CurrentGames(ID)	ON UPDATE CASCADE,
+	Game		bigint	REFERENCES CurrentGames(ID)	ON UPDATE CASCADE,
+	Phase		integer	REFERENCES Phases(ID)		ON UPDATE CASCADE,	
 	Round		smallint,
-	Player		integer	REFERENCES Players(ID) 			ON UPDATE CASCADE,
-	Source		integer	REFERENCES Fields(ID)			ON UPDATE CASCADE,
-	Destination	integer	REFERENCES Fields(ID)			ON UPDATE CASCADE,
-	Type		integer	REFERENCES CommandTypes(ID) 	ON UPDATE CASCADE,
-	TroopNumber	smallint,
+	Player		integer	REFERENCES Players(ID) 		ON UPDATE CASCADE,
+	Source		integer	REFERENCES Fields(ID)		ON UPDATE CASCADE,
+	Destination	integer	REFERENCES Fields(ID)		ON UPDATE CASCADE,
+	Type		integer	REFERENCES CommandTypes(ID) ON UPDATE CASCADE,
+	TroopNumber	integer,
 	
 	PRIMARY KEY (ID),
 	CHECK (Source<>Destination)
@@ -390,7 +382,7 @@ CREATE TABLE AllianceTypes
 	PRIMARY KEY (ID)
 );
 
-INSERT INTO AllianceTypes (Name) VALUES ('Allied'), ('At war');
+INSERT INTO AllianceTypes (Name) VALUES ('Allied'), ('At war'), ('Offer');
 
 --	#####################################################
 --	-------------------------
@@ -405,7 +397,7 @@ INSERT INTO AllianceTypes (Name) VALUES ('Allied'), ('At war');
 CREATE TABLE Alliances
 (
 	ID		SERIAL,
-	Game	integer	REFERENCES CurrentGames(ID) 	ON UPDATE CASCADE,
+	Game	bigint	REFERENCES CurrentGames(ID) 	ON UPDATE CASCADE,
 	Player1	integer	REFERENCES Players(ID) 			ON UPDATE CASCADE,
 	Player2	integer	REFERENCES Players(ID) 			ON UPDATE CASCADE,
 	Type	integer	REFERENCES AllianceTypes(ID) 	ON UPDATE CASCADE,

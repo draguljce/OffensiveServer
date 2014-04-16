@@ -3,8 +3,8 @@
 
 <hibernate-mapping> 
 	<class name="offensive.Server.Hybernate.POJO.FacebookUser" table="FacebookUsers">  
-		<id name="id" type="long" column="id"/>
-		 
-		<property name="facebookId" column="FacebookId" type="long"/>
+		<id name="facebookId" type="long" column="facebookID"/>
+		
+		<many-to-one name="user" column="UserID" class="offensive.Server.Hybernate.POJO.User"/>
 	</class> 
 </hibernate-mapping>

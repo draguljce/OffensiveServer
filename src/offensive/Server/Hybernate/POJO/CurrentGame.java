@@ -11,7 +11,7 @@ public class CurrentGame {
 	private Objective objective;
 	private Phase phase;
 	private Board board;
-	private int currentRound;
+	private short currentRound;
 	private boolean isOpen;
 	private Set<Player> players;
 	private Set<Territory> territories;
@@ -20,12 +20,14 @@ public class CurrentGame {
 
 	public CurrentGame() {};
 	
-	public CurrentGame(String name, int numberOfPlayers, Objective objective) {
+	public CurrentGame(String name, int numberOfPlayers, Objective objective, boolean isOpen) {
 		this.gameName = name;
 		this.numberOfPlayers = (short)numberOfPlayers;
 		this.objective = objective;
+		this.isOpen = isOpen;
 		
 		this.phase = new Phase(0);
+		this.numberOfJoinedPlayers = 1;
 	};
 	
 	public long getId() {
@@ -84,11 +86,11 @@ public class CurrentGame {
 		this.board = board;
 	}
 
-	public int getCurrentRound() {
+	public short getCurrentRound() {
 		return currentRound;
 	}
 
-	public void setCurrentRound(int currentRound) {
+	public void setCurrentRound(short currentRound) {
 		this.currentRound = currentRound;
 	}
 

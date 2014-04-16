@@ -17,6 +17,7 @@ import offensive.Server.Utilities.HibernateUtil;
 
 import org.hibernate.Session;
 import org.hibernate.Transaction;
+import org.hibernate.exception.ConstraintViolationException;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -202,44 +203,44 @@ public class RegistrationThread implements Runnable {
 		JSONObject response = new JSONObject();
 		
 		long facebookId = facebookLoginRequest.getLong("facebookId");
+		FacebookUser fbUser = null;
 		
-		Session session = Server.getServer().sessionFactory.openSession();
-		
-		Transaction tran = session.beginTransaction();
-		long userId;
-		
-		try {
-			// Check if user exists.
-			List<?> results = HibernateUtil.executeHql("FROM FacebookUser fUser WHERE fUser.facebookId ='" + facebookId + "'", session);
+		while(fbUser == null) {
+			Session session = Server.getServer().sessionFactory.openSession();
 			
-			if(results.isEmpty()) {
-				Server.getServer().logger.info("Facebook user does not exist.");
-				
-				User user = new User(new UserType(Constants.FacebookUserType));
-				
-				Long id = (Long)session.save(user);
-				
-				FacebookUser facebookUser = new FacebookUser(id, facebookId);
-				
-				session.save(facebookUser);
-				tran.commit();
-				
-				Server.getServer().logger.info("Registered new facebook user with userId: " + facebookId);
-				userId = id;
-			} else {
-				assert results.size() == 1;
-				FacebookUser user = (FacebookUser)results.remove(0);
-				userId = user.getId();
+			Transaction tran = session.beginTransaction();
+			
+			try {
+					fbUser = (FacebookUser)session.get(FacebookUser.class, facebookId);
+					
+					// Check if user exists.
+					if(fbUser == null) {
+						Server.getServer().logger.info("Facebook user does not exist.");
+						
+						User user = new User(new UserType(Constants.FacebookUserType));
+						
+						session.save(user);
+						
+						fbUser = new FacebookUser(facebookId, user);
+						
+						session.save(fbUser);
+						Server.getServer().logger.info("Registered new facebook user with userId: " + facebookId);
+					}
+					
+					tran.commit();
+					
+			} catch(ConstraintViolationException constraintViolationException) {
+				tran.rollback();
+				fbUser = null;
+			} finally {
+				session.close();
 			}
-			
-		} finally {
-			session.close();
-			
-			Server.getServer().logger.info("Finished proccessing no-facebook login request.");
 		}
 		
+		Server.getServer().logger.info("Finished proccessing no-facebook login request.");
+		
 		try {
-			response.put("userId", userId);
+			response.put("userId", fbUser.getUser().getId());
 		} catch (JSONException e) {
 			Server.getServer().logger.error(e.getMessage(), e);
 		}

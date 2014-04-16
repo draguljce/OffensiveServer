@@ -1,13 +1,14 @@
 package offensive.Server.Hybernate.POJO;
 
 import java.util.HashSet;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Set;
 
 public class User {
 	private long id;	
 	private UserType type;
 	private Set<Invite> invites;
-	private Set<CurrentGame> games;
 	private Set<Player> players;
 
 	public User() {};
@@ -48,11 +49,12 @@ public class User {
 		this.players = players;
 	}
 
-	public Set<CurrentGame> getGames() {
-		return this.games != null ? this.games : new HashSet<CurrentGame>();
-	}
-
-	public void setGames(Set<CurrentGame> games) {
-		this.games = games;
+	public List<CurrentGame> getGames() {
+		List<CurrentGame> allGames = new LinkedList<CurrentGame>();
+		for(Player player: this.getPlayers()) {
+			allGames.add(player.getGame());
+		}
+		
+		return allGames;
 	}
 }

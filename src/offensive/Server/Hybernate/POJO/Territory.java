@@ -48,5 +48,8 @@ public class Territory {
 	public void setField(Field field) {
 		this.field = field;
 	}
-
+	
+	public void incrementNumberOfTroops() {
+		this.troopsOnIt++;
+	}
 }

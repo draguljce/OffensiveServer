@@ -19,10 +19,16 @@ import offensive.Server.Utilities.CommonRandom;
 import offensive.Server.Utilities.Constants;
 import offensive.Server.Utilities.HibernateUtil;
 
+import org.hibernate.SQLQuery;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
 import com.google.protobuf.GeneratedMessage;
+import com.google.protobuf.UnknownFieldSet.Field;
+
+import communication.protos.CommunicationProtos.AddUnitRequest;
+import communication.protos.CommunicationProtos.AddUnitResponse;
+import communication.protos.CommunicationProtos.AttackRequest;
 import communication.protos.CommunicationProtos.CreateGameRequest;
 import communication.protos.CommunicationProtos.CreateGameResponse;
 import communication.protos.CommunicationProtos.FilterFriendsRequest;
@@ -31,8 +37,15 @@ import communication.protos.CommunicationProtos.GetOpenGamesRequest;
 import communication.protos.CommunicationProtos.GetOpenGamesResponse;
 import communication.protos.CommunicationProtos.GetUserDataRequest;
 import communication.protos.CommunicationProtos.GetUserDataResponse;
+import communication.protos.CommunicationProtos.InvokeAllianceRequest;
+import communication.protos.CommunicationProtos.InvokeAllianceResponse;
 import communication.protos.CommunicationProtos.JoinGameRequest;
 import communication.protos.CommunicationProtos.JoinGameResponse;
+import communication.protos.CommunicationProtos.MoveUnitsRequest;
+import communication.protos.CommunicationProtos.RollDiceRequest;
+import communication.protos.CommunicationProtos.RollDiceResponse;
+import communication.protos.CommunicationProtos.TradeCardsRequest;
+import communication.protos.CommunicationProtos.TradeCardsResponse;
 import communication.protos.DataProtos.Alliance;
 import communication.protos.DataProtos.Command;
 import communication.protos.DataProtos.GameContext;
@@ -100,6 +113,30 @@ public class HandlerThread implements Runnable {
 				response.data = this.proccessJoinGameRequest((JoinGameRequest)request.data, session);
 				break;
 				
+			case InvokeAllianceRequest:
+				response.data = this.proccessInvokeAllianceRequest((InvokeAllianceRequest)request.data, session);
+				break;
+				
+			case TradeCardsRequest:
+				response.data = this.proccessTradeCardsRequest((TradeCardsRequest)request.data, session);
+				break;
+				
+			case AddUnitRequest:
+				response.data = this.proccessAddUnitRequest((AddUnitRequest)request.data, session);
+				break;
+				
+			case MoveUnitsRequest:
+				response.data = this.proccessCommandRequest(((MoveUnitsRequest)request.data).getGameId(), ((MoveUnitsRequest)request.data).getCommand(), session);
+				break;
+				
+			case AttackRequest:
+				response.data = this.proccessCommandRequest(((AttackRequest)request.data).getGameId(), ((AttackRequest)request.data).getCommand(), session);
+				break;
+				
+			case RollDiceRequest:
+				response.data = this.proccessRollDiceRequest((RollDiceRequest)request.data, session);
+				break;
+				
 			default:
 				throw new IllegalArgumentException(String.format("Illegal handler ID: %s!!!", request.handlerId));
 			}
@@ -149,7 +186,14 @@ public class HandlerThread implements Runnable {
 	private GeneratedMessage proccessCreateGameRequest(CreateGameRequest request, Session session) throws UserNotFoundException {
 		CreateGameResponse.Builder createGameResponseBuilder = CreateGameResponse.newBuilder();
 		
-		offensive.Server.Hybernate.POJO.CurrentGame newGame = new CurrentGame(request.getGameName(), request.getNumberOfPlayers(), new Objective(request.getObjectiveCode()));
+		offensive.Server.Hybernate.POJO.CurrentGame newGame = new CurrentGame(request.getGameName(), request.getNumberOfPlayers(), new Objective(request.getObjectiveCode()), request.getUserIdsCount() == 0);
+
+		@SuppressWarnings("unchecked")
+		List<Color> allColors = (List<Color>)HibernateUtil.executeHql("FROM Color", session);
+		
+		Color chosenColor = allColors.get(CommonRandom.next(allColors.size()));
+		
+		offensive.Server.Hybernate.POJO.Player newPlayer = new offensive.Server.Hybernate.POJO.Player(this.session.user, newGame, chosenColor);
 		
 		List<Invite> invites = new LinkedList<Invite>();
 		
@@ -157,6 +201,7 @@ public class HandlerThread implements Runnable {
 		
 		try{
 			session.save(newGame);
+			session.save(newPlayer);
 			tran.commit();
 		}
 		catch(Exception e){
@@ -196,7 +241,14 @@ public class HandlerThread implements Runnable {
 		List<CurrentGame> openedGames;
 		
 		try {
-			openedGames = (List<CurrentGame>)HibernateUtil.executeHql("FROM CurrentGame games WHERE games.isOpen = true", session);
+			// Give me all games where i haven't joined already and that are either open or i have invite.
+			String sql = "SELECT * FROM currentgames game WHERE (game.isopen = true OR game.id IN (SELECT game FROM invites WHERE inviteduser = :userId)) AND (game.id NOT IN (SELECT game FROM players player WHERE player.userId = :userId));";
+			SQLQuery query = session.createSQLQuery(sql);
+			query.setParameter("userId", this.session.user.getId());
+			
+			query.addEntity(CurrentGame.class);
+			
+			openedGames = query.list();
 		} catch (Exception e) {
 			Server.getServer().logger.error(e.getMessage(), e);
 			return null;
@@ -245,6 +297,134 @@ public class HandlerThread implements Runnable {
 		return responsebuilder.build();
 	}
 	
+	private GeneratedMessage proccessInvokeAllianceRequest(InvokeAllianceRequest request, Session session) {
+		InvokeAllianceResponse.Builder responseBuilder = InvokeAllianceResponse.newBuilder();
+		
+		Transaction tran = session.beginTransaction();
+		
+		try {
+			
+		} catch (Exception e) {
+			
+		} finally {
+			tran.commit();
+		}
+		
+		return responseBuilder.build();
+	}
+	
+	private GeneratedMessage proccessTradeCardsRequest(TradeCardsRequest request, Session session) {
+		TradeCardsResponse.Builder responseBuilder = TradeCardsResponse.newBuilder();
+		
+		short numberOfReinforcements = this.tradeCards(request.getCardId1(), request.getCardId2(), request.getCardId3());
+		 
+		Transaction tran = session.beginTransaction();
+		
+		try {
+			@SuppressWarnings("unchecked")
+			List<offensive.Server.Hybernate.POJO.Player> players = (List<offensive.Server.Hybernate.POJO.Player>)HibernateUtil.executeHql(String.format("FROM Player player WHERE player.id = %s AND player.game.id = %s", this.session.user.getId(), request.getGameId()), session);
+			
+			offensive.Server.Hybernate.POJO.Player player = players.get(0);
+			player.setNumberOfReinforcements(player.getNumberOfReinforcements() + numberOfReinforcements);
+			
+			List<Integer> cardsToRemove = new LinkedList<Integer>();
+			cardsToRemove.add(request.getCardId1());
+			cardsToRemove.add(request.getCardId2());
+			cardsToRemove.add(request.getCardId3());
+			
+			for(Card card: player.getCards()) {
+				if(cardsToRemove.remove(new Integer(card.getType().getId()))) {
+					session.delete(card);
+				}
+				
+				if(cardsToRemove.size() == 0) {
+					break;
+				}
+			}
+			
+			session.update(player);
+
+			responseBuilder.setNumberOfReinforcements(numberOfReinforcements);
+		} catch (Exception e) {
+			Server.getServer().logger.error(e.getMessage(), e);
+			tran.rollback();
+			return null;
+		} finally {
+			tran.commit();
+		}
+		
+		return responseBuilder.build();
+	}
+	private GeneratedMessage proccessAddUnitRequest(AddUnitRequest request, Session session) {
+		AddUnitResponse.Builder responseBuilder = AddUnitResponse.newBuilder();
+		
+		Transaction tran = session.beginTransaction();
+		
+		try{
+			offensive.Server.Hybernate.POJO.Player player = this.getPlayerForGame(request.getGameId(), session);
+			
+			if(player.getNumberOfReinforcements() > 0) { 
+				offensive.Server.Hybernate.POJO.Territory territory = (offensive.Server.Hybernate.POJO.Territory) HibernateUtil.executeScalarHql(String.format("FROM Territory territory WHERE territory.field = %s", request.getTerritoryId()), session);
+				
+				territory.incrementNumberOfTroops();
+				player.decreaseNumberOfUnits();
+				
+				session.update(territory);
+				session.update(player);
+				
+				responseBuilder.setIsSuccessfull(true);
+			} else {
+				responseBuilder.setIsSuccessfull(false);
+			}
+		} catch (Exception e) {
+			Server.getServer().logger.error(e.getMessage(), e);
+			tran.rollback();
+			return null;
+		} finally {
+			tran.commit();
+		}
+		
+		return responseBuilder.build();
+	}
+	
+	private GeneratedMessage proccessCommandRequest(long gameId, Command request, Session session) {
+		MoveUnitsRequest.Builder responseBuilder = MoveUnitsRequest.newBuilder();
+
+		offensive.Server.Hybernate.POJO.Command command = new offensive.Server.Hybernate.POJO.Command();
+
+		Transaction tran = session.beginTransaction();
+
+		try {
+			CurrentGame game = (CurrentGame)session.get(CurrentGame.class, gameId);
+			
+			command.setGame(game);
+			command.setPlayer(this.getPlayerForGame(gameId, session));
+			command.setRound(game.getCurrentRound());
+			command.setPhase(game.getPhase());
+			command.setSource((offensive.Server.Hybernate.POJO.Field)session.get(Field.class, request.getSourceTerritory()));
+			command.setSource((offensive.Server.Hybernate.POJO.Field)session.get(Field.class, request.getDestinationTerritory()));
+			command.setTroopNumber(request.getNumberOfUnits());
+			
+			session.save(command);
+		} catch (Exception e) {
+			Server.getServer().logger.error(e.getMessage(), e);
+			tran.rollback();
+			return null;
+		} finally {
+			tran.commit();
+		}
+		
+		return responseBuilder.build();
+	}
+	
+	private GeneratedMessage proccessRollDiceRequest(RollDiceRequest reqest, Session session) {
+		RollDiceResponse.Builder responseBuilder = RollDiceResponse.newBuilder();
+		
+		responseBuilder.setNumber(CommonRandom.next(6) + 1);
+		
+		return responseBuilder.build();
+		
+	}
 	// Helper methods
 	// ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 	private UserData getUserData(long userId, Session session) throws UserNotFoundException {
@@ -437,9 +617,10 @@ public class HandlerThread implements Runnable {
 			userBuilder.setUserId(user.getId());
 			
 			if(user.getType().getName().equals(Constants.FacebookUserType)) {
-				FacebookUser facebookUser = (FacebookUser)session.get(FacebookUser.class, user.getId());
+				@SuppressWarnings("unchecked")
+				List<FacebookUser> facebookUser = (List<FacebookUser>)HibernateUtil.executeHql(String.format("FROM FacebookUser fbUser WHERE fbUser.user.id = %s", user.getId()), session);
 				
-				userBuilder.setFacebookId(facebookUser.getFacebookId());
+				userBuilder.setFacebookId(facebookUser.get(0).getFacebookId());
 			}
 		} else {
 			return null;
@@ -452,7 +633,7 @@ public class HandlerThread implements Runnable {
 		Builder userBuilder = User.newBuilder();
 		
 		if(user != null) {
-			userBuilder.setUserId(user.getId());
+			userBuilder.setUserId(user.getUser().getId());
 			
 			userBuilder.setFacebookId(user.getFacebookId());
 		} else {
@@ -480,5 +661,33 @@ public class HandlerThread implements Runnable {
 		}
 		
 		return gameContextBuilder.build();
+	}
+	
+	private short tradeCards(int card1, int card2, int card3) {
+		if(card1 != card2 && card1 != card3 && card2 != card3) {
+			return 10;
+		}
+		
+		if(card1 == card2 && card2 == card3) {
+			switch (card1) {
+			case 0:
+				return 4;
+			
+			case 1:
+				return 6;
+				
+			case 2:
+				return 8;
+
+			default:
+				break;
+			}
+		}
+		
+		return 0;
+	}
+	
+	private offensive.Server.Hybernate.POJO.Player getPlayerForGame(long gameId, Session session) {
+		return (offensive.Server.Hybernate.POJO.Player) HibernateUtil.executeScalarHql(String.format("FROM Player player WHERE player.game.id = %s AND player.user.id = %s", gameId, this.session.user.getId()), session);
 	}
 }

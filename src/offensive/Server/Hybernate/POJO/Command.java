@@ -8,8 +8,8 @@ public class Command {
 	private Field source;
 	private Field destination;
 	private CommandType type;
-	
-	private short troopNumber;
+	private Phase phase;
+	private int troopNumber;
 	
 	public Command () {};
 	
@@ -61,11 +61,11 @@ public class Command {
 		this.destination = destination;
 	}
 	
-	public short getTroopNumber() {
+	public int getTroopNumber() {
 		return troopNumber;
 	}
 	
-	public void setTroopNumber(short troopNumber) {
+	public void setTroopNumber(int troopNumber) {
 		this.troopNumber = troopNumber;
 	}
 	
@@ -77,4 +77,11 @@ public class Command {
 		this.type = type;
 	}
 
+	public Phase getPhase() {
+		return phase;
+	}
+
+	public void setPhase(Phase phase) {
+		this.phase = phase;
+	}
 }

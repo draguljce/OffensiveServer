@@ -47,7 +47,7 @@ public class Player {
 		return isPlayedMove;
 	}
 
-	public void setPlayedMove(boolean isPlayedMove) {
+	public void setIsPlayedMove(boolean isPlayedMove) {
 		this.isPlayedMove = isPlayedMove;
 	}
 
@@ -73,6 +73,10 @@ public class Player {
 
 	public void setGame(CurrentGame game) {
 		this.game = game;
+	}
+	
+	public void decreaseNumberOfUnits() {
+		this.numberOfReinforcements--;
 	}
 
 	@Override

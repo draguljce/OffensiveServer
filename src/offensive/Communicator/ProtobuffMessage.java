@@ -5,11 +5,17 @@ import offensive.Server.Server;
 import com.google.protobuf.GeneratedMessage;
 import com.google.protobuf.InvalidProtocolBufferException;
 
+import communication.protos.CommunicationProtos.AddUnitRequest;
+import communication.protos.CommunicationProtos.AttackRequest;
 import communication.protos.CommunicationProtos.CreateGameRequest;
 import communication.protos.CommunicationProtos.FilterFriendsRequest;
 import communication.protos.CommunicationProtos.GetOpenGamesRequest;
 import communication.protos.CommunicationProtos.GetUserDataRequest;
+import communication.protos.CommunicationProtos.InvokeAllianceRequest;
 import communication.protos.CommunicationProtos.JoinGameRequest;
+import communication.protos.CommunicationProtos.MoveUnitsRequest;
+import communication.protos.CommunicationProtos.RollDiceRequest;
+import communication.protos.CommunicationProtos.TradeCardsRequest;
 
 public class ProtobuffMessage extends Message{
 
@@ -68,6 +74,30 @@ public class ProtobuffMessage extends Message{
 				
 			case JoinGameRequest:
 				generatedMessage = JoinGameRequest.parseFrom(data);
+				break;
+				
+			case InvokeAllianceRequest:
+				generatedMessage = InvokeAllianceRequest.parseFrom(data);
+				break;
+				
+			case TradeCardsRequest:
+				generatedMessage = TradeCardsRequest.parseFrom(data);
+				break;
+				
+			case AddUnitRequest:
+				generatedMessage = AddUnitRequest.parseFrom(data);
+				break;
+			
+			case MoveUnitsRequest:
+				generatedMessage = MoveUnitsRequest.parseFrom(data);
+				break;
+			
+			case AttackRequest:
+				generatedMessage = AttackRequest.parseFrom(data);
+				break;
+				
+			case RollDiceRequest:
+				generatedMessage = RollDiceRequest.parseFrom(data);
 				break;
 
 			default:

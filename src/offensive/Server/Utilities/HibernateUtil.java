@@ -21,6 +21,13 @@ public class HibernateUtil {
 		return results;
 	}
 	
+	public static Object executeScalarHql(String hql, Session session) {
+		@SuppressWarnings("unchecked")
+		List<Object> allResults = (List<Object>) HibernateUtil.executeHql(hql, session);
+		
+		return allResults.get(0);
+	}
+	
 	public static User getPojoUser(long userId, Session session) {
 		Transaction tran = session.beginTransaction();
 
