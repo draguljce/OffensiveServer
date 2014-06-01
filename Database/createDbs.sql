@@ -17,8 +17,6 @@ CREATE TABLE UserTypes
 	PRIMARY KEY (Name)
 );
 
-INSERT INTO UserTypes VALUES ('OffensiveUser'), ('FacebookUser');
-
 --	#####################################################
 --	---------------------
 --	|		Users		|
@@ -82,8 +80,6 @@ CREATE TABLE Colors
 	PRIMARY KEY (ID)
 );
 
-INSERT INTO Colors (Name) VALUES ('Red'), ('Green'), ('Blue'), ('Yellow'), ('Black');
-
 --	#####################################################
 --	---------------------
 --	|		Phases		|
@@ -98,8 +94,6 @@ CREATE TABLE Phases
 	
 	PRIMARY KEY (ID)
 );
-
-INSERT INTO Phases (ID, Name) VALUES (0, 'Not started');
 
 --	#####################################################
 --	---------------------
@@ -127,10 +121,6 @@ CREATE TABLE Objectives
 	
 	PRIMARY KEY (ID)
 );
-
-INSERT INTO Objectives VALUES (0, 'Conquer the world'), (1, 'Win 24 territories');
-
-
 
 --	#####################################################
 --	---------------------------------
@@ -184,6 +174,8 @@ CREATE TABLE Players
 	PRIMARY KEY (ID)
 );
 
+CREATE INDEX gameIndex ON Players (Game);
+
 --	#####################################################
 --	---------------------
 --	|		CardTypes	|
@@ -198,8 +190,6 @@ CREATE TABLE CardTypes
 	
 	PRIMARY KEY (ID)
 );
-
-INSERT INTO CardTypes VALUES (0, 'Soldier'), (1, 'Horse'), (2, 'Artilery');
 
 --	#####################################################
 --	---------------------
@@ -381,8 +371,6 @@ CREATE TABLE AllianceTypes
 	
 	PRIMARY KEY (ID)
 );
-
-INSERT INTO AllianceTypes (Name) VALUES ('Allied'), ('At war'), ('Offer');
 
 --	#####################################################
 --	-------------------------

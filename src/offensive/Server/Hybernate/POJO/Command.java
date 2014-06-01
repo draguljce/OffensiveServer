@@ -1,5 +1,7 @@
 package offensive.Server.Hybernate.POJO;
 
+import communication.protos.DataProtos;
+
 public class Command {
 	private int id;
 	private CurrentGame game;
@@ -83,5 +85,16 @@ public class Command {
 
 	public void setPhase(Phase phase) {
 		this.phase = phase;
+	}
+	
+	public communication.protos.DataProtos.Command toProtoCommand() {
+		DataProtos.Command.Builder commandBuilder = DataProtos.Command.newBuilder();
+		
+		commandBuilder.setCommandId(this.id);
+		commandBuilder.setSourceTerritory(this.source.getId());
+		commandBuilder.setDestinationTerritory(this.destination.getId());
+		commandBuilder.setNumberOfUnits(this.troopNumber);
+		
+		return commandBuilder.build();
 	}
 }

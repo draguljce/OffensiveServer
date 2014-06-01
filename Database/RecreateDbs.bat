@@ -12,3 +12,4 @@ REM			OPTIONAL: default is current directory
 
 call DropDbs %1 %2 %3 %4
 call CreateDbs %1 %2 %3 %4
+call LoadDbs %1 %2 %3 %4

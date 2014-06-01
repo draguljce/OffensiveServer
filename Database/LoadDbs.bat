@@ -34,12 +34,12 @@ if NOT [%4]==[] (
 )
 
 %println%
-echo %PSQLPATH% -U %USERNAME% -f CreateDbs.sql -v ON_ERROR_STOP=1
-%PSQLPATH% -U %USERNAME% -f CreateDbs.sql -v ON_ERROR_STOP=1
+echo %PSQLPATH% -U %USERNAME% -f LoadDbs.sql -v ON_ERROR_STOP=1
+%PSQLPATH% -U %USERNAME% -f LoadDbs.sql -v ON_ERROR_STOP=1
 
 %println%
 if %ERRORLEVEL%==0 (
-	echo Databases created SUCCESSFULLY!!!
+	echo Databases loaded SUCCESSFULLY!!!
 ) else (
-	echo Databases creating FAILED!!!
+	echo Databases loading FAILED!!!
 )

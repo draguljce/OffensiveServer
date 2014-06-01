@@ -17,7 +17,12 @@ public enum HandlerId {
 	AddUnitRequest,				//	10
 	MoveUnitsRequest,			//	11
 	AttackRequest,				//	12
-	RollDiceRequest;			//	13
+	CommandsSubmittedRequest,	//	13
+	AllCommands,				//	14
+	BorderClashes,				//	15
+	AdvanceToNextBattle,		//	16
+	RollDiceClicked,			//	17
+	PlayerRolledDice;			//	18
 	
 	private static Map<Integer, HandlerId> intToHandlerMap;
 	

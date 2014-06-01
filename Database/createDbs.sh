@@ -9,7 +9,7 @@ if [ "$2" ]; then
 fi
 psql -d postgres -f /home/veljkoj/osrv/Database/createDbs.sql -v ON_ERROR_STOP=1
 if [ $? -eq 0 ]; then 
-	echo Databases loaded SUCCESSFULLY!!!
+	echo Databases created SUCCESSFULLY!!!
 else 
-	echo Databases loading FAILED!!!
+	echo Databases creating FAILED!!!
 fi

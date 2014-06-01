@@ -133,4 +133,26 @@ public class CurrentGame {
 	public void setIsOpen(boolean isOpen) {
 		this.isOpen = isOpen;
 	}
+	
+	public void nextRound() {
+		this.currentRound++;
+	}
+	
+	public void joinPlayer() {
+		this.numberOfJoinedPlayers++;
+	}
+	
+	@Override
+	public boolean equals(Object other) {
+		if(other == null) {
+			return false;
+		}
+		
+		if(!other.getClass().equals(this.getClass())) {
+			return false;
+		}
+		
+		CurrentGame otherGame = (CurrentGame)other;
+		return this.id == otherGame.id;
+	}
 }

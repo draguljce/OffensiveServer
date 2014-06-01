@@ -2,6 +2,8 @@ package offensive.Communicator;
 
 import java.nio.ByteBuffer;
 
+import offensive.Server.Sessions.Session;
+
 import org.json.JSONException;
 
 public abstract class Message {
@@ -10,6 +12,10 @@ public abstract class Message {
 	public int dataLength;
 	public byte status;
 	public SerializationType serializationType;
+	
+	public Session sender;
+	
+	public Message(){};
 	
 	Message(HandlerId handlerId, int ticketId, byte status) {
 		this.handlerId = handlerId;

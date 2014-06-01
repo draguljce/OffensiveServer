@@ -5,7 +5,7 @@ import java.nio.channels.ClosedChannelException;
 import java.nio.channels.SelectionKey;
 import java.nio.channels.Selector;
 import java.nio.channels.SocketChannel;
-import java.util.HashSet;
+import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.concurrent.ExecutorService;
@@ -15,13 +15,16 @@ import java.util.concurrent.TimeUnit;
 import offensive.Communicator.Communicator;
 import offensive.Communicator.ProtobuffMessage;
 import offensive.Server.Server;
+import offensive.Server.Hybernate.POJO.CurrentGame;
+import offensive.Server.Sessions.Game.GameManager;
 import offensive.Server.Utilities.Constants;
 import offensive.Server.Utilities.Environment;
+import offensive.Server.Utilities.Callbacks.ZeroParamsCallback;
 import offensive.Server.WorkerThreads.HandlerThread;
+import offensive.Server.WorkerThreads.BattleThread.BattleThread;
 
 public class SessionManager implements Runnable{
 	private Selector selector;
-	private HashSet<Session> allSessions;
 	
 	private Environment environment;
 	
@@ -36,6 +39,8 @@ public class SessionManager implements Runnable{
 	
 	private List<SocketChannel> newChannels = new LinkedList<SocketChannel>();
 	
+	private HashMap<Long, BattleThread> battleThreadMap = new HashMap<>();
+	
 	public void initialize(Environment environment, Thread sessionThread) {
 		this.environment = environment;
 		
@@ -48,10 +53,6 @@ public class SessionManager implements Runnable{
 		Server.getServer().logger.info("Initialization of handler threads completed. Number of battle threads is " + this.environment.getVariable(Constants.BattleThreadNumVarName));
 		
 		this.sessionThread = sessionThread;
-	}
-	
-	private SessionManager() {
-		this.allSessions = new HashSet<Session>();
 	}
 	
 	public void CreateSession(SocketChannel socketChannel) {
@@ -80,12 +81,14 @@ public class SessionManager implements Runnable{
 		}
 	}
 	
-	private void register(SocketChannel socketChannel) {
+	private Session register(SocketChannel socketChannel) {
+		Session newSession = null;
+
 		try {
 			SelectionKey key = socketChannel.register(this.selector, SelectionKey.OP_READ);
 			
-			key.attach(new Session(socketChannel));
-			this.allSessions.add(new Session(socketChannel));
+			newSession = new Session(socketChannel); 
+			key.attach(newSession);
 			
 			try {
 				Server.getServer().logger.info("Created new session for client: " + socketChannel.getRemoteAddress());
@@ -95,6 +98,8 @@ public class SessionManager implements Runnable{
 		} catch (ClosedChannelException e) {
 			Server.getServer().logger.error(e.getMessage(), e);
 		}
+		
+		return newSession;
 	}
 	
 	public static SessionManager getOnlyInstance() {
@@ -145,11 +150,20 @@ public class SessionManager implements Runnable{
 				if(session.socketChannel.isOpen()) {
 					try {
 						request = (ProtobuffMessage)Communicator.getCommunicator().acceptMessage(session.socketChannel);
+						
 						if(request == null) {
 							Server.getServer().logger.error("Failed to read client message. Closing channel.");
 							
 							this.removeKey(key);
 							continue;
+						}
+						
+						request.sender = session;
+						
+						if(request.IsBattleThreadMessage) {
+							this.battleThreadMap.get(request.gameId).addMessage(request);
+						} else {
+							this.handlerExecutorService.submit(new HandlerThread(session, request));
 						}
 					} catch (Exception e) {
 						Server.getServer().logger.error(e.getMessage(), e);
@@ -161,8 +175,6 @@ public class SessionManager implements Runnable{
 					
 					continue;
 				}
-				
-				this.handlerExecutorService.submit(new HandlerThread(session, request));
 			}
 			
 			this.selector.selectedKeys().clear();
@@ -189,10 +201,39 @@ public class SessionManager implements Runnable{
 	
 	private void removeKey(SelectionKey key) {
 		key.cancel();
+		
+		GameManager.onlyInstance.removeGames((Session)key.attachment());
+		
 		try {
 			key.channel().close();
 		} catch (IOException e) {
 			Server.getServer().logger.error(e.getMessage(), e);
 		}
+	}
+	
+	public void startBattle(CurrentGame game) {
+		ZeroParamsCallback callback = new ZeroParamsCallback()  {
+			private HashMap<Long, BattleThread> map;
+			private long gameId;
+			
+			ZeroParamsCallback initialise(HashMap<Long, BattleThread> map, long gameId) {
+				this.map = map;
+				this.gameId = gameId;
+				
+				return this;
+			}
+			
+			@Override
+			public void call() {
+				this.map.remove(this.gameId);
+			}
+		}.initialise(this.battleThreadMap, game.getId());
+		
+		BattleThread battleThread = new BattleThread(game, callback);
+		Thread newBattleThread = new Thread(battleThread);
+		
+		this.battleThreadMap.put(game.getId(), battleThread);
+		
+		this.battleExecutorService.submit(newBattleThread);
 	}
 }

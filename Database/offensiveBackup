@@ -1,0 +1,1999 @@
+--
+-- PostgreSQL database dump
+--
+
+SET statement_timeout = 0;
+SET client_encoding = 'UTF8';
+SET standard_conforming_strings = on;
+SET check_function_bodies = false;
+SET client_min_messages = warning;
+
+--
+-- Name: plpgsql; Type: EXTENSION; Schema: -; Owner: 
+--
+
+CREATE EXTENSION IF NOT EXISTS plpgsql WITH SCHEMA pg_catalog;
+
+
+--
+-- Name: EXTENSION plpgsql; Type: COMMENT; Schema: -; Owner: 
+--
+
+COMMENT ON EXTENSION plpgsql IS 'PL/pgSQL procedural language';
+
+
+SET search_path = public, pg_catalog;
+
+SET default_tablespace = '';
+
+SET default_with_oids = false;
+
+--
+-- Name: alliances; Type: TABLE; Schema: public; Owner: root; Tablespace: 
+--
+
+CREATE TABLE alliances (
+    id integer NOT NULL,
+    game bigint,
+    player1 integer,
+    player2 integer,
+    type integer
+);
+
+
+ALTER TABLE public.alliances OWNER TO root;
+
+--
+-- Name: alliances_id_seq; Type: SEQUENCE; Schema: public; Owner: root
+--
+
+CREATE SEQUENCE alliances_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.alliances_id_seq OWNER TO root;
+
+--
+-- Name: alliances_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: root
+--
+
+ALTER SEQUENCE alliances_id_seq OWNED BY alliances.id;
+
+
+--
+-- Name: alliancetypes; Type: TABLE; Schema: public; Owner: root; Tablespace: 
+--
+
+CREATE TABLE alliancetypes (
+    id integer NOT NULL,
+    name character varying(32)
+);
+
+
+ALTER TABLE public.alliancetypes OWNER TO root;
+
+--
+-- Name: alliancetypes_id_seq; Type: SEQUENCE; Schema: public; Owner: root
+--
+
+CREATE SEQUENCE alliancetypes_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.alliancetypes_id_seq OWNER TO root;
+
+--
+-- Name: alliancetypes_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: root
+--
+
+ALTER SEQUENCE alliancetypes_id_seq OWNED BY alliancetypes.id;
+
+
+--
+-- Name: boards; Type: TABLE; Schema: public; Owner: root; Tablespace: 
+--
+
+CREATE TABLE boards (
+    id integer NOT NULL
+);
+
+
+ALTER TABLE public.boards OWNER TO root;
+
+--
+-- Name: boards_id_seq; Type: SEQUENCE; Schema: public; Owner: root
+--
+
+CREATE SEQUENCE boards_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.boards_id_seq OWNER TO root;
+
+--
+-- Name: boards_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: root
+--
+
+ALTER SEQUENCE boards_id_seq OWNED BY boards.id;
+
+
+--
+-- Name: cards; Type: TABLE; Schema: public; Owner: root; Tablespace: 
+--
+
+CREATE TABLE cards (
+    id integer NOT NULL,
+    type integer,
+    player integer
+);
+
+
+ALTER TABLE public.cards OWNER TO root;
+
+--
+-- Name: cards_id_seq; Type: SEQUENCE; Schema: public; Owner: root
+--
+
+CREATE SEQUENCE cards_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.cards_id_seq OWNER TO root;
+
+--
+-- Name: cards_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: root
+--
+
+ALTER SEQUENCE cards_id_seq OWNED BY cards.id;
+
+
+--
+-- Name: cardtypes; Type: TABLE; Schema: public; Owner: root; Tablespace: 
+--
+
+CREATE TABLE cardtypes (
+    id integer NOT NULL,
+    type character varying(32)
+);
+
+
+ALTER TABLE public.cardtypes OWNER TO root;
+
+--
+-- Name: cardtypes_id_seq; Type: SEQUENCE; Schema: public; Owner: root
+--
+
+CREATE SEQUENCE cardtypes_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.cardtypes_id_seq OWNER TO root;
+
+--
+-- Name: cardtypes_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: root
+--
+
+ALTER SEQUENCE cardtypes_id_seq OWNED BY cardtypes.id;
+
+
+--
+-- Name: colors; Type: TABLE; Schema: public; Owner: root; Tablespace: 
+--
+
+CREATE TABLE colors (
+    id integer NOT NULL,
+    name character varying(32)
+);
+
+
+ALTER TABLE public.colors OWNER TO root;
+
+--
+-- Name: colors_id_seq; Type: SEQUENCE; Schema: public; Owner: root
+--
+
+CREATE SEQUENCE colors_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.colors_id_seq OWNER TO root;
+
+--
+-- Name: colors_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: root
+--
+
+ALTER SEQUENCE colors_id_seq OWNED BY colors.id;
+
+
+--
+-- Name: commands; Type: TABLE; Schema: public; Owner: root; Tablespace: 
+--
+
+CREATE TABLE commands (
+    id integer NOT NULL,
+    game bigint,
+    phase integer,
+    round smallint,
+    player integer,
+    source integer,
+    destination integer,
+    type integer,
+    troopnumber integer,
+    CONSTRAINT commands_check CHECK ((source <> destination))
+);
+
+
+ALTER TABLE public.commands OWNER TO root;
+
+--
+-- Name: commands_id_seq; Type: SEQUENCE; Schema: public; Owner: root
+--
+
+CREATE SEQUENCE commands_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.commands_id_seq OWNER TO root;
+
+--
+-- Name: commands_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: root
+--
+
+ALTER SEQUENCE commands_id_seq OWNED BY commands.id;
+
+
+--
+-- Name: commandtypes; Type: TABLE; Schema: public; Owner: root; Tablespace: 
+--
+
+CREATE TABLE commandtypes (
+    id integer NOT NULL,
+    name character varying(32)
+);
+
+
+ALTER TABLE public.commandtypes OWNER TO root;
+
+--
+-- Name: commandtypes_id_seq; Type: SEQUENCE; Schema: public; Owner: root
+--
+
+CREATE SEQUENCE commandtypes_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.commandtypes_id_seq OWNER TO root;
+
+--
+-- Name: commandtypes_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: root
+--
+
+ALTER SEQUENCE commandtypes_id_seq OWNED BY commandtypes.id;
+
+
+--
+-- Name: completedgamesstatistics; Type: TABLE; Schema: public; Owner: root; Tablespace: 
+--
+
+CREATE TABLE completedgamesstatistics (
+    id integer NOT NULL,
+    player integer,
+    ranking smallint
+);
+
+
+ALTER TABLE public.completedgamesstatistics OWNER TO root;
+
+--
+-- Name: completedgamesstatistics_id_seq; Type: SEQUENCE; Schema: public; Owner: root
+--
+
+CREATE SEQUENCE completedgamesstatistics_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.completedgamesstatistics_id_seq OWNER TO root;
+
+--
+-- Name: completedgamesstatistics_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: root
+--
+
+ALTER SEQUENCE completedgamesstatistics_id_seq OWNED BY completedgamesstatistics.id;
+
+
+--
+-- Name: connections; Type: TABLE; Schema: public; Owner: root; Tablespace: 
+--
+
+CREATE TABLE connections (
+    field1 integer NOT NULL,
+    field2 integer NOT NULL,
+    CONSTRAINT connections_check CHECK ((field1 <> field2))
+);
+
+
+ALTER TABLE public.connections OWNER TO root;
+
+--
+-- Name: currentgames; Type: TABLE; Schema: public; Owner: root; Tablespace: 
+--
+
+CREATE TABLE currentgames (
+    id bigint NOT NULL,
+    gamename character varying(32),
+    numberofjoinedplayers smallint,
+    numberofplayers smallint,
+    objective integer,
+    phase integer,
+    board integer,
+    currentround smallint,
+    isopen boolean
+);
+
+
+ALTER TABLE public.currentgames OWNER TO root;
+
+--
+-- Name: currentgames_id_seq; Type: SEQUENCE; Schema: public; Owner: root
+--
+
+CREATE SEQUENCE currentgames_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.currentgames_id_seq OWNER TO root;
+
+--
+-- Name: currentgames_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: root
+--
+
+ALTER SEQUENCE currentgames_id_seq OWNED BY currentgames.id;
+
+
+--
+-- Name: facebookusers; Type: TABLE; Schema: public; Owner: root; Tablespace: 
+--
+
+CREATE TABLE facebookusers (
+    facebookid bigint NOT NULL,
+    userid bigint
+);
+
+
+ALTER TABLE public.facebookusers OWNER TO root;
+
+--
+-- Name: fields; Type: TABLE; Schema: public; Owner: root; Tablespace: 
+--
+
+CREATE TABLE fields (
+    id integer NOT NULL,
+    name character varying(32)
+);
+
+
+ALTER TABLE public.fields OWNER TO root;
+
+--
+-- Name: fields_id_seq; Type: SEQUENCE; Schema: public; Owner: root
+--
+
+CREATE SEQUENCE fields_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.fields_id_seq OWNER TO root;
+
+--
+-- Name: fields_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: root
+--
+
+ALTER SEQUENCE fields_id_seq OWNED BY fields.id;
+
+
+--
+-- Name: hasfields; Type: TABLE; Schema: public; Owner: root; Tablespace: 
+--
+
+CREATE TABLE hasfields (
+    board integer NOT NULL,
+    field integer NOT NULL
+);
+
+
+ALTER TABLE public.hasfields OWNER TO root;
+
+--
+-- Name: invites; Type: TABLE; Schema: public; Owner: root; Tablespace: 
+--
+
+CREATE TABLE invites (
+    id integer NOT NULL,
+    creator bigint,
+    game bigint,
+    inviteduser integer
+);
+
+
+ALTER TABLE public.invites OWNER TO root;
+
+--
+-- Name: invites_id_seq; Type: SEQUENCE; Schema: public; Owner: root
+--
+
+CREATE SEQUENCE invites_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.invites_id_seq OWNER TO root;
+
+--
+-- Name: invites_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: root
+--
+
+ALTER SEQUENCE invites_id_seq OWNED BY invites.id;
+
+
+--
+-- Name: objectives; Type: TABLE; Schema: public; Owner: root; Tablespace: 
+--
+
+CREATE TABLE objectives (
+    id integer NOT NULL,
+    description character varying(512)
+);
+
+
+ALTER TABLE public.objectives OWNER TO root;
+
+--
+-- Name: offensiveusers; Type: TABLE; Schema: public; Owner: root; Tablespace: 
+--
+
+CREATE TABLE offensiveusers (
+    id bigint NOT NULL,
+    username character varying(32),
+    password character varying(512)
+);
+
+
+ALTER TABLE public.offensiveusers OWNER TO root;
+
+--
+-- Name: phases; Type: TABLE; Schema: public; Owner: root; Tablespace: 
+--
+
+CREATE TABLE phases (
+    id integer NOT NULL,
+    name character varying(32)
+);
+
+
+ALTER TABLE public.phases OWNER TO root;
+
+--
+-- Name: players; Type: TABLE; Schema: public; Owner: root; Tablespace: 
+--
+
+CREATE TABLE players (
+    id integer NOT NULL,
+    userid bigint,
+    game bigint,
+    color integer,
+    isplayedmove boolean,
+    numberofreinforcements integer
+);
+
+
+ALTER TABLE public.players OWNER TO root;
+
+--
+-- Name: players_id_seq; Type: SEQUENCE; Schema: public; Owner: root
+--
+
+CREATE SEQUENCE players_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.players_id_seq OWNER TO root;
+
+--
+-- Name: players_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: root
+--
+
+ALTER SEQUENCE players_id_seq OWNED BY players.id;
+
+
+--
+-- Name: troopdeployments; Type: TABLE; Schema: public; Owner: root; Tablespace: 
+--
+
+CREATE TABLE troopdeployments (
+    id integer NOT NULL,
+    game bigint,
+    field integer,
+    player integer,
+    troopnumber smallint
+);
+
+
+ALTER TABLE public.troopdeployments OWNER TO root;
+
+--
+-- Name: troopdeployments_id_seq; Type: SEQUENCE; Schema: public; Owner: root
+--
+
+CREATE SEQUENCE troopdeployments_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.troopdeployments_id_seq OWNER TO root;
+
+--
+-- Name: troopdeployments_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: root
+--
+
+ALTER SEQUENCE troopdeployments_id_seq OWNED BY troopdeployments.id;
+
+
+--
+-- Name: users; Type: TABLE; Schema: public; Owner: root; Tablespace: 
+--
+
+CREATE TABLE users (
+    id bigint NOT NULL,
+    type character varying(32)
+);
+
+
+ALTER TABLE public.users OWNER TO root;
+
+--
+-- Name: users_id_seq; Type: SEQUENCE; Schema: public; Owner: root
+--
+
+CREATE SEQUENCE users_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.users_id_seq OWNER TO root;
+
+--
+-- Name: users_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: root
+--
+
+ALTER SEQUENCE users_id_seq OWNED BY users.id;
+
+
+--
+-- Name: usertypes; Type: TABLE; Schema: public; Owner: root; Tablespace: 
+--
+
+CREATE TABLE usertypes (
+    name character varying(32) NOT NULL
+);
+
+
+ALTER TABLE public.usertypes OWNER TO root;
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: root
+--
+
+ALTER TABLE ONLY alliances ALTER COLUMN id SET DEFAULT nextval('alliances_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: root
+--
+
+ALTER TABLE ONLY alliancetypes ALTER COLUMN id SET DEFAULT nextval('alliancetypes_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: root
+--
+
+ALTER TABLE ONLY boards ALTER COLUMN id SET DEFAULT nextval('boards_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: root
+--
+
+ALTER TABLE ONLY cards ALTER COLUMN id SET DEFAULT nextval('cards_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: root
+--
+
+ALTER TABLE ONLY cardtypes ALTER COLUMN id SET DEFAULT nextval('cardtypes_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: root
+--
+
+ALTER TABLE ONLY colors ALTER COLUMN id SET DEFAULT nextval('colors_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: root
+--
+
+ALTER TABLE ONLY commands ALTER COLUMN id SET DEFAULT nextval('commands_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: root
+--
+
+ALTER TABLE ONLY commandtypes ALTER COLUMN id SET DEFAULT nextval('commandtypes_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: root
+--
+
+ALTER TABLE ONLY completedgamesstatistics ALTER COLUMN id SET DEFAULT nextval('completedgamesstatistics_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: root
+--
+
+ALTER TABLE ONLY currentgames ALTER COLUMN id SET DEFAULT nextval('currentgames_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: root
+--
+
+ALTER TABLE ONLY fields ALTER COLUMN id SET DEFAULT nextval('fields_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: root
+--
+
+ALTER TABLE ONLY invites ALTER COLUMN id SET DEFAULT nextval('invites_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: root
+--
+
+ALTER TABLE ONLY players ALTER COLUMN id SET DEFAULT nextval('players_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: root
+--
+
+ALTER TABLE ONLY troopdeployments ALTER COLUMN id SET DEFAULT nextval('troopdeployments_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: root
+--
+
+ALTER TABLE ONLY users ALTER COLUMN id SET DEFAULT nextval('users_id_seq'::regclass);
+
+
+--
+-- Data for Name: alliances; Type: TABLE DATA; Schema: public; Owner: root
+--
+
+COPY alliances (id, game, player1, player2, type) FROM stdin;
+\.
+
+
+--
+-- Name: alliances_id_seq; Type: SEQUENCE SET; Schema: public; Owner: root
+--
+
+SELECT pg_catalog.setval('alliances_id_seq', 1, false);
+
+
+--
+-- Data for Name: alliancetypes; Type: TABLE DATA; Schema: public; Owner: root
+--
+
+COPY alliancetypes (id, name) FROM stdin;
+1	Allied
+2	At war
+3	Offer
+\.
+
+
+--
+-- Name: alliancetypes_id_seq; Type: SEQUENCE SET; Schema: public; Owner: root
+--
+
+SELECT pg_catalog.setval('alliancetypes_id_seq', 3, true);
+
+
+--
+-- Data for Name: boards; Type: TABLE DATA; Schema: public; Owner: root
+--
+
+COPY boards (id) FROM stdin;
+0
+\.
+
+
+--
+-- Name: boards_id_seq; Type: SEQUENCE SET; Schema: public; Owner: root
+--
+
+SELECT pg_catalog.setval('boards_id_seq', 1, false);
+
+
+--
+-- Data for Name: cards; Type: TABLE DATA; Schema: public; Owner: root
+--
+
+COPY cards (id, type, player) FROM stdin;
+\.
+
+
+--
+-- Name: cards_id_seq; Type: SEQUENCE SET; Schema: public; Owner: root
+--
+
+SELECT pg_catalog.setval('cards_id_seq', 1, false);
+
+
+--
+-- Data for Name: cardtypes; Type: TABLE DATA; Schema: public; Owner: root
+--
+
+COPY cardtypes (id, type) FROM stdin;
+0	Soldier
+1	Horse
+2	Artilery
+\.
+
+
+--
+-- Name: cardtypes_id_seq; Type: SEQUENCE SET; Schema: public; Owner: root
+--
+
+SELECT pg_catalog.setval('cardtypes_id_seq', 1, false);
+
+
+--
+-- Data for Name: colors; Type: TABLE DATA; Schema: public; Owner: root
+--
+
+COPY colors (id, name) FROM stdin;
+1	Red
+2	Green
+3	Blue
+4	Yellow
+5	Black
+\.
+
+
+--
+-- Name: colors_id_seq; Type: SEQUENCE SET; Schema: public; Owner: root
+--
+
+SELECT pg_catalog.setval('colors_id_seq', 5, true);
+
+
+--
+-- Data for Name: commands; Type: TABLE DATA; Schema: public; Owner: root
+--
+
+COPY commands (id, game, phase, round, player, source, destination, type, troopnumber) FROM stdin;
+\.
+
+
+--
+-- Name: commands_id_seq; Type: SEQUENCE SET; Schema: public; Owner: root
+--
+
+SELECT pg_catalog.setval('commands_id_seq', 1, false);
+
+
+--
+-- Data for Name: commandtypes; Type: TABLE DATA; Schema: public; Owner: root
+--
+
+COPY commandtypes (id, name) FROM stdin;
+\.
+
+
+--
+-- Name: commandtypes_id_seq; Type: SEQUENCE SET; Schema: public; Owner: root
+--
+
+SELECT pg_catalog.setval('commandtypes_id_seq', 1, false);
+
+
+--
+-- Data for Name: completedgamesstatistics; Type: TABLE DATA; Schema: public; Owner: root
+--
+
+COPY completedgamesstatistics (id, player, ranking) FROM stdin;
+\.
+
+
+--
+-- Name: completedgamesstatistics_id_seq; Type: SEQUENCE SET; Schema: public; Owner: root
+--
+
+SELECT pg_catalog.setval('completedgamesstatistics_id_seq', 1, false);
+
+
+--
+-- Data for Name: connections; Type: TABLE DATA; Schema: public; Owner: root
+--
+
+COPY connections (field1, field2) FROM stdin;
+1	2
+1	6
+2	6
+5	6
+6	7
+5	8
+5	7
+2	7
+7	8
+4	7
+7	9
+4	9
+3	4
+3	9
+3	13
+12	13
+11	13
+11	12
+10	12
+10	11
+11	25
+25	21
+23	25
+25	22
+21	22
+21	26
+22	26
+22	24
+24	26
+22	23
+18	23
+18	25
+20	25
+18	20
+14	20
+16	20
+14	15
+5	15
+15	17
+14	17
+14	16
+16	18
+18	19
+16	17
+16	19
+17	19
+18	33
+23	33
+19	33
+19	27
+19	37
+33	27
+33	29
+27	29
+27	28
+27	37
+36	37
+28	37
+36	38
+30	36
+34	36
+28	36
+32	38
+30	38
+1	32
+30	32
+32	34
+31	32
+30	34
+31	34
+28	34
+28	29
+28	35
+29	35
+35	40
+40	41
+40	42
+41	42
+39	41
+39	42
+\.
+
+
+--
+-- Data for Name: currentgames; Type: TABLE DATA; Schema: public; Owner: root
+--
+
+COPY currentgames (id, gamename, numberofjoinedplayers, numberofplayers, objective, phase, board, currentround, isopen) FROM stdin;
+1	testGame	3	3	1	1	0	0	t
+3	crknibrdjo	2	5	0	0	\N	0	t
+5	bbb	2	5	0	0	\N	0	t
+6	ccc	2	5	0	0	\N	0	t
+7	dsafa	2	5	0	0	\N	0	t
+8	Igra	1	5	0	0	\N	0	t
+9	TestIgra1	3	3	0	1	0	0	t
+2	test igra	4	4	1	1	0	0	t
+4	aaa	3	5	0	0	\N	0	t
+10	lepi velja	1	3	0	0	0	0	t
+11	lepi velja 2	1	3	0	0	0	0	t
+14	lepiVelja3	1	3	0	0	0	0	t
+\.
+
+
+--
+-- Name: currentgames_id_seq; Type: SEQUENCE SET; Schema: public; Owner: root
+--
+
+SELECT pg_catalog.setval('currentgames_id_seq', 14, true);
+
+
+--
+-- Data for Name: facebookusers; Type: TABLE DATA; Schema: public; Owner: root
+--
+
+COPY facebookusers (facebookid, userid) FROM stdin;
+100000564933202	1
+678984766	4
+100004177114182	5
+1282639449	6
+1531485737	8
+100000595995675	9
+100001098078869	12
+\.
+
+
+--
+-- Data for Name: fields; Type: TABLE DATA; Schema: public; Owner: root
+--
+
+COPY fields (id, name) FROM stdin;
+1	ALASKA
+2	ALBERTA
+3	CENTRAL_AMERICA
+4	EASTERN_US
+5	GREENLAND
+6	NORTHWEST_TERRITORY
+7	ONTARIO
+8	QUEBEC
+9	WESTERN_US
+10	ARGENTINA
+11	BRAZIL
+12	PERU
+13	VENEZUELA
+14	GREAT_BRITAIN
+15	ICELAND
+16	NORTHERN_EUROPE
+17	SCANDINAVIA
+18	SOUTHERN_EUROPE
+19	UKRAINE
+20	WESTERN_EUROPE
+21	CONGO
+22	EAST_AFRICA
+23	EGYPT
+24	MADAGASCAR
+25	NORTH_AFRICA
+26	SOUTH_AFRICA
+27	AFGHANISTAN
+28	CHINA
+29	INDIA
+30	IRKUTSK
+31	JAPAN
+32	KAMCHATKA
+33	MIDDLE_EAST
+34	MONGOLIA
+35	SIAM
+36	SIBERIA
+37	URAL
+38	YAKUTSK
+39	EASTERN_AUSTRALIA
+40	INDONESIA
+41	NEW_GUINEA
+42	WESTERN_AUSTRALIA
+\.
+
+
+--
+-- Name: fields_id_seq; Type: SEQUENCE SET; Schema: public; Owner: root
+--
+
+SELECT pg_catalog.setval('fields_id_seq', 1, false);
+
+
+--
+-- Data for Name: hasfields; Type: TABLE DATA; Schema: public; Owner: root
+--
+
+COPY hasfields (board, field) FROM stdin;
+0	1
+0	2
+0	3
+0	4
+0	5
+0	6
+0	7
+0	8
+0	9
+0	10
+0	11
+0	12
+0	13
+0	14
+0	15
+0	16
+0	17
+0	18
+0	19
+0	20
+0	21
+0	22
+0	23
+0	24
+0	25
+0	26
+0	27
+0	28
+0	29
+0	30
+0	31
+0	32
+0	33
+0	34
+0	35
+0	36
+0	37
+0	38
+0	39
+0	40
+0	41
+0	42
+\.
+
+
+--
+-- Data for Name: invites; Type: TABLE DATA; Schema: public; Owner: root
+--
+
+COPY invites (id, creator, game, inviteduser) FROM stdin;
+\.
+
+
+--
+-- Name: invites_id_seq; Type: SEQUENCE SET; Schema: public; Owner: root
+--
+
+SELECT pg_catalog.setval('invites_id_seq', 1, false);
+
+
+--
+-- Data for Name: objectives; Type: TABLE DATA; Schema: public; Owner: root
+--
+
+COPY objectives (id, description) FROM stdin;
+0	Conquer the world
+1	Win 24 territories
+\.
+
+
+--
+-- Data for Name: offensiveusers; Type: TABLE DATA; Schema: public; Owner: root
+--
+
+COPY offensiveusers (id, username, password) FROM stdin;
+2	testUser1	098f6bcd4621d373cade4e832627b4f6
+3	testUser2	098f6bcd4621d373cade4e832627b4f6
+7	djordjevukovic	202cb962ac59075b964b07152d234b70
+10	test	098f6bcd4621d373cade4e832627b4f6
+11	test2	ad0234829205b9033196ba818f7a872b
+\.
+
+
+--
+-- Data for Name: phases; Type: TABLE DATA; Schema: public; Owner: root
+--
+
+COPY phases (id, name) FROM stdin;
+0	Not started
+1	Reinforcements
+2	Attack
+3	Battle
+4	Move
+\.
+
+
+--
+-- Data for Name: players; Type: TABLE DATA; Schema: public; Owner: root
+--
+
+COPY players (id, userid, game, color, isplayedmove, numberofreinforcements) FROM stdin;
+1	1	1	3	f	0
+2	2	1	1	f	0
+5	3	1	2	f	0
+6	1	2	2	f	0
+7	5	2	4	f	0
+8	6	2	3	f	0
+9	4	3	5	f	0
+10	1	3	2	f	0
+11	7	4	4	f	0
+12	7	5	4	f	0
+13	7	6	1	f	0
+14	1	4	1	f	0
+15	1	5	3	f	0
+16	1	6	4	f	0
+17	7	7	4	f	0
+18	1	7	1	f	0
+19	8	8	5	f	0
+20	6	9	5	f	0
+21	7	9	4	f	0
+22	1	9	1	f	0
+23	9	2	1	f	0
+24	9	4	2	f	0
+25	10	10	1	f	-7
+26	10	11	3	f	-7
+36	\N	14	5	f	21
+37	11	14	2	f	21
+38	\N	14	1	f	21
+\.
+
+
+--
+-- Name: players_id_seq; Type: SEQUENCE SET; Schema: public; Owner: root
+--
+
+SELECT pg_catalog.setval('players_id_seq', 38, true);
+
+
+--
+-- Data for Name: troopdeployments; Type: TABLE DATA; Schema: public; Owner: root
+--
+
+COPY troopdeployments (id, game, field, player, troopnumber) FROM stdin;
+89	1	33	1	1
+85	1	12	2	1
+87	1	32	5	1
+112	1	27	5	1
+126	1	10	5	1
+122	1	5	2	1
+166	9	42	21	1
+150	9	10	22	1
+145	9	3	21	1
+133	9	21	22	1
+153	9	19	21	1
+162	9	6	22	1
+149	9	2	22	1
+147	9	15	21	1
+146	9	35	21	1
+157	9	17	20	1
+130	9	12	22	1
+131	9	30	21	1
+163	9	38	21	1
+148	9	9	21	1
+132	9	13	20	1
+160	9	41	20	1
+168	9	31	21	1
+155	9	27	20	1
+167	9	22	21	1
+152	9	40	20	1
+139	9	16	20	1
+151	9	11	22	1
+154	9	25	22	1
+142	9	14	21	1
+141	9	20	21	1
+164	9	28	22	1
+129	9	32	20	1
+158	9	34	22	1
+140	9	36	20	1
+165	9	33	20	1
+127	9	24	22	1
+137	9	29	21	1
+161	9	4	20	1
+144	9	26	20	1
+156	9	7	20	1
+136	9	1	21	1
+103	1	42	5	1
+110	1	34	2	1
+121	1	21	5	1
+118	1	29	5	1
+92	1	6	2	1
+96	1	4	5	1
+104	1	35	2	1
+101	1	31	1	1
+109	1	7	2	1
+123	1	38	2	1
+117	1	9	1	1
+119	1	37	5	1
+93	1	36	1	1
+94	1	28	5	1
+91	1	15	5	1
+120	1	13	2	1
+86	1	23	2	1
+116	1	17	1	1
+114	1	1	2	1
+97	1	2	1	1
+102	1	30	1	1
+113	1	22	2	1
+100	1	16	1	1
+111	1	26	5	1
+108	1	18	5	1
+98	1	41	1	1
+115	1	24	1	1
+125	1	11	1	1
+107	1	39	1	1
+99	1	14	2	1
+88	1	40	2	1
+124	1	8	5	1
+105	1	3	1	1
+95	1	25	5	1
+90	1	20	1	1
+106	1	19	2	1
+138	9	39	22	1
+134	9	18	22	1
+143	9	23	22	1
+135	9	37	22	1
+128	9	5	20	1
+159	9	8	20	1
+180	2	21	6	1
+207	2	10	8	1
+202	2	25	23	1
+169	2	28	7	1
+178	2	39	6	1
+196	2	29	8	1
+173	2	23	6	1
+175	2	3	6	1
+188	2	11	8	1
+171	2	27	23	1
+209	2	22	8	1
+185	2	13	7	1
+170	2	19	6	1
+184	2	26	23	1
+197	2	32	6	1
+192	2	31	7	1
+183	2	14	6	1
+176	2	12	23	1
+199	2	42	23	1
+191	2	2	23	1
+182	2	18	6	1
+201	2	8	7	1
+174	2	35	23	1
+189	2	36	23	1
+179	2	34	8	1
+190	2	38	7	1
+204	2	37	8	1
+206	2	30	8	1
+194	2	33	7	1
+208	2	4	8	1
+200	2	7	6	1
+210	2	20	7	1
+172	2	16	7	1
+195	2	9	7	1
+181	2	5	23	1
+177	2	6	6	1
+198	2	40	8	1
+203	2	1	23	1
+205	2	17	8	1
+193	2	24	23	1
+187	2	15	6	1
+186	2	41	7	1
+211	10	9	25	1
+212	10	31	25	1
+213	10	10	25	1
+214	10	23	25	1
+215	10	26	25	1
+216	10	40	25	1
+217	10	39	25	1
+218	10	34	25	1
+219	10	35	25	1
+220	10	32	25	1
+221	10	24	25	1
+222	10	11	25	1
+223	10	5	25	1
+224	10	42	25	1
+225	10	13	25	1
+226	10	14	25	1
+227	10	12	25	1
+228	10	30	25	1
+229	10	7	25	1
+230	10	27	25	1
+231	10	2	25	1
+232	10	33	25	1
+233	10	17	25	1
+234	10	41	25	1
+235	10	21	25	1
+236	10	16	25	1
+237	10	18	25	1
+238	10	8	25	1
+239	10	29	25	1
+240	10	19	25	1
+241	10	38	25	1
+242	10	28	25	1
+243	10	4	25	1
+244	10	3	25	1
+245	10	37	25	1
+246	10	20	25	1
+247	10	15	25	1
+248	10	6	25	1
+249	10	25	25	1
+250	10	1	25	1
+251	10	22	25	1
+252	10	36	25	1
+253	11	24	26	1
+254	11	19	26	1
+255	11	9	26	1
+256	11	39	26	1
+257	11	36	26	1
+258	11	22	26	1
+259	11	18	26	1
+260	11	33	26	1
+261	11	25	26	1
+262	11	37	26	1
+263	11	41	26	1
+264	11	23	26	1
+265	11	3	26	1
+266	11	14	26	1
+267	11	6	26	1
+268	11	31	26	1
+269	11	40	26	1
+270	11	5	26	1
+271	11	20	26	1
+272	11	35	26	1
+273	11	12	26	1
+274	11	10	26	1
+275	11	34	26	1
+276	11	17	26	1
+277	11	11	26	1
+278	11	13	26	1
+279	11	15	26	1
+280	11	38	26	1
+281	11	26	26	1
+282	11	27	26	1
+283	11	21	26	1
+284	11	29	26	1
+285	11	28	26	1
+286	11	2	26	1
+287	11	4	26	1
+288	11	8	26	1
+289	11	16	26	1
+290	11	32	26	1
+291	11	42	26	1
+292	11	7	26	1
+293	11	1	26	1
+294	11	30	26	1
+379	14	1	36	1
+380	14	21	36	1
+381	14	3	37	1
+382	14	35	36	1
+383	14	26	38	1
+384	14	25	37	1
+385	14	19	38	1
+386	14	27	38	1
+387	14	7	37	1
+388	14	36	38	1
+389	14	17	37	1
+390	14	24	36	1
+391	14	31	36	1
+392	14	12	38	1
+393	14	9	38	1
+394	14	4	37	1
+395	14	33	38	1
+396	14	18	37	1
+397	14	14	36	1
+398	14	39	38	1
+399	14	28	37	1
+400	14	15	36	1
+401	14	30	38	1
+402	14	41	36	1
+403	14	11	37	1
+404	14	37	37	1
+405	14	22	36	1
+406	14	10	37	1
+407	14	40	36	1
+408	14	42	37	1
+409	14	6	36	1
+410	14	5	36	1
+411	14	20	37	1
+412	14	8	38	1
+413	14	23	38	1
+414	14	13	37	1
+415	14	32	38	1
+416	14	38	37	1
+417	14	16	36	1
+418	14	29	36	1
+419	14	2	38	1
+420	14	34	38	1
+\.
+
+
+--
+-- Name: troopdeployments_id_seq; Type: SEQUENCE SET; Schema: public; Owner: root
+--
+
+SELECT pg_catalog.setval('troopdeployments_id_seq', 420, true);
+
+
+--
+-- Data for Name: users; Type: TABLE DATA; Schema: public; Owner: root
+--
+
+COPY users (id, type) FROM stdin;
+1	FacebookUser
+2	OffensiveUser
+3	OffensiveUser
+4	FacebookUser
+5	FacebookUser
+6	FacebookUser
+7	OffensiveUser
+8	FacebookUser
+9	FacebookUser
+10	OffensiveUser
+11	OffensiveUser
+12	FacebookUser
+\.
+
+
+--
+-- Name: users_id_seq; Type: SEQUENCE SET; Schema: public; Owner: root
+--
+
+SELECT pg_catalog.setval('users_id_seq', 12, true);
+
+
+--
+-- Data for Name: usertypes; Type: TABLE DATA; Schema: public; Owner: root
+--
+
+COPY usertypes (name) FROM stdin;
+OffensiveUser
+FacebookUser
+\.
+
+
+--
+-- Name: alliances_pkey; Type: CONSTRAINT; Schema: public; Owner: root; Tablespace: 
+--
+
+ALTER TABLE ONLY alliances
+    ADD CONSTRAINT alliances_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: alliancetypes_pkey; Type: CONSTRAINT; Schema: public; Owner: root; Tablespace: 
+--
+
+ALTER TABLE ONLY alliancetypes
+    ADD CONSTRAINT alliancetypes_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: boards_pkey; Type: CONSTRAINT; Schema: public; Owner: root; Tablespace: 
+--
+
+ALTER TABLE ONLY boards
+    ADD CONSTRAINT boards_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: cards_pkey; Type: CONSTRAINT; Schema: public; Owner: root; Tablespace: 
+--
+
+ALTER TABLE ONLY cards
+    ADD CONSTRAINT cards_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: cardtypes_pkey; Type: CONSTRAINT; Schema: public; Owner: root; Tablespace: 
+--
+
+ALTER TABLE ONLY cardtypes
+    ADD CONSTRAINT cardtypes_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: colors_pkey; Type: CONSTRAINT; Schema: public; Owner: root; Tablespace: 
+--
+
+ALTER TABLE ONLY colors
+    ADD CONSTRAINT colors_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: commands_pkey; Type: CONSTRAINT; Schema: public; Owner: root; Tablespace: 
+--
+
+ALTER TABLE ONLY commands
+    ADD CONSTRAINT commands_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: commandtypes_pkey; Type: CONSTRAINT; Schema: public; Owner: root; Tablespace: 
+--
+
+ALTER TABLE ONLY commandtypes
+    ADD CONSTRAINT commandtypes_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: completedgamesstatistics_pkey; Type: CONSTRAINT; Schema: public; Owner: root; Tablespace: 
+--
+
+ALTER TABLE ONLY completedgamesstatistics
+    ADD CONSTRAINT completedgamesstatistics_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: connections_pkey; Type: CONSTRAINT; Schema: public; Owner: root; Tablespace: 
+--
+
+ALTER TABLE ONLY connections
+    ADD CONSTRAINT connections_pkey PRIMARY KEY (field1, field2);
+
+
+--
+-- Name: currentgames_pkey; Type: CONSTRAINT; Schema: public; Owner: root; Tablespace: 
+--
+
+ALTER TABLE ONLY currentgames
+    ADD CONSTRAINT currentgames_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: facebookusers_pkey; Type: CONSTRAINT; Schema: public; Owner: root; Tablespace: 
+--
+
+ALTER TABLE ONLY facebookusers
+    ADD CONSTRAINT facebookusers_pkey PRIMARY KEY (facebookid);
+
+
+--
+-- Name: fields_pkey; Type: CONSTRAINT; Schema: public; Owner: root; Tablespace: 
+--
+
+ALTER TABLE ONLY fields
+    ADD CONSTRAINT fields_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: hasfields_pkey; Type: CONSTRAINT; Schema: public; Owner: root; Tablespace: 
+--
+
+ALTER TABLE ONLY hasfields
+    ADD CONSTRAINT hasfields_pkey PRIMARY KEY (board, field);
+
+
+--
+-- Name: invites_pkey; Type: CONSTRAINT; Schema: public; Owner: root; Tablespace: 
+--
+
+ALTER TABLE ONLY invites
+    ADD CONSTRAINT invites_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: objectives_pkey; Type: CONSTRAINT; Schema: public; Owner: root; Tablespace: 
+--
+
+ALTER TABLE ONLY objectives
+    ADD CONSTRAINT objectives_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: offensiveusers_pkey; Type: CONSTRAINT; Schema: public; Owner: root; Tablespace: 
+--
+
+ALTER TABLE ONLY offensiveusers
+    ADD CONSTRAINT offensiveusers_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: offensiveusers_username_key; Type: CONSTRAINT; Schema: public; Owner: root; Tablespace: 
+--
+
+ALTER TABLE ONLY offensiveusers
+    ADD CONSTRAINT offensiveusers_username_key UNIQUE (username);
+
+
+--
+-- Name: phases_pkey; Type: CONSTRAINT; Schema: public; Owner: root; Tablespace: 
+--
+
+ALTER TABLE ONLY phases
+    ADD CONSTRAINT phases_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: players_pkey; Type: CONSTRAINT; Schema: public; Owner: root; Tablespace: 
+--
+
+ALTER TABLE ONLY players
+    ADD CONSTRAINT players_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: troopdeployments_pkey; Type: CONSTRAINT; Schema: public; Owner: root; Tablespace: 
+--
+
+ALTER TABLE ONLY troopdeployments
+    ADD CONSTRAINT troopdeployments_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: users_pkey; Type: CONSTRAINT; Schema: public; Owner: root; Tablespace: 
+--
+
+ALTER TABLE ONLY users
+    ADD CONSTRAINT users_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: usertypes_pkey; Type: CONSTRAINT; Schema: public; Owner: root; Tablespace: 
+--
+
+ALTER TABLE ONLY usertypes
+    ADD CONSTRAINT usertypes_pkey PRIMARY KEY (name);
+
+
+--
+-- Name: facebookusersindex; Type: INDEX; Schema: public; Owner: root; Tablespace: 
+--
+
+CREATE UNIQUE INDEX facebookusersindex ON facebookusers USING btree (userid);
+
+
+--
+-- Name: gameindex; Type: INDEX; Schema: public; Owner: root; Tablespace: 
+--
+
+CREATE INDEX gameindex ON players USING btree (game);
+
+
+--
+-- Name: territoryindex; Type: INDEX; Schema: public; Owner: root; Tablespace: 
+--
+
+CREATE INDEX territoryindex ON troopdeployments USING btree (field);
+
+
+--
+-- Name: alliances_game_fkey; Type: FK CONSTRAINT; Schema: public; Owner: root
+--
+
+ALTER TABLE ONLY alliances
+    ADD CONSTRAINT alliances_game_fkey FOREIGN KEY (game) REFERENCES currentgames(id) ON UPDATE CASCADE;
+
+
+--
+-- Name: alliances_player1_fkey; Type: FK CONSTRAINT; Schema: public; Owner: root
+--
+
+ALTER TABLE ONLY alliances
+    ADD CONSTRAINT alliances_player1_fkey FOREIGN KEY (player1) REFERENCES players(id) ON UPDATE CASCADE;
+
+
+--
+-- Name: alliances_player2_fkey; Type: FK CONSTRAINT; Schema: public; Owner: root
+--
+
+ALTER TABLE ONLY alliances
+    ADD CONSTRAINT alliances_player2_fkey FOREIGN KEY (player2) REFERENCES players(id) ON UPDATE CASCADE;
+
+
+--
+-- Name: alliances_type_fkey; Type: FK CONSTRAINT; Schema: public; Owner: root
+--
+
+ALTER TABLE ONLY alliances
+    ADD CONSTRAINT alliances_type_fkey FOREIGN KEY (type) REFERENCES alliancetypes(id) ON UPDATE CASCADE;
+
+
+--
+-- Name: cards_player_fkey; Type: FK CONSTRAINT; Schema: public; Owner: root
+--
+
+ALTER TABLE ONLY cards
+    ADD CONSTRAINT cards_player_fkey FOREIGN KEY (player) REFERENCES players(id) ON UPDATE CASCADE;
+
+
+--
+-- Name: cards_type_fkey; Type: FK CONSTRAINT; Schema: public; Owner: root
+--
+
+ALTER TABLE ONLY cards
+    ADD CONSTRAINT cards_type_fkey FOREIGN KEY (type) REFERENCES cardtypes(id) ON UPDATE CASCADE;
+
+
+--
+-- Name: commands_destination_fkey; Type: FK CONSTRAINT; Schema: public; Owner: root
+--
+
+ALTER TABLE ONLY commands
+    ADD CONSTRAINT commands_destination_fkey FOREIGN KEY (destination) REFERENCES fields(id) ON UPDATE CASCADE;
+
+
+--
+-- Name: commands_game_fkey; Type: FK CONSTRAINT; Schema: public; Owner: root
+--
+
+ALTER TABLE ONLY commands
+    ADD CONSTRAINT commands_game_fkey FOREIGN KEY (game) REFERENCES currentgames(id) ON UPDATE CASCADE;
+
+
+--
+-- Name: commands_phase_fkey; Type: FK CONSTRAINT; Schema: public; Owner: root
+--
+
+ALTER TABLE ONLY commands
+    ADD CONSTRAINT commands_phase_fkey FOREIGN KEY (phase) REFERENCES phases(id) ON UPDATE CASCADE;
+
+
+--
+-- Name: commands_player_fkey; Type: FK CONSTRAINT; Schema: public; Owner: root
+--
+
+ALTER TABLE ONLY commands
+    ADD CONSTRAINT commands_player_fkey FOREIGN KEY (player) REFERENCES players(id) ON UPDATE CASCADE;
+
+
+--
+-- Name: commands_source_fkey; Type: FK CONSTRAINT; Schema: public; Owner: root
+--
+
+ALTER TABLE ONLY commands
+    ADD CONSTRAINT commands_source_fkey FOREIGN KEY (source) REFERENCES fields(id) ON UPDATE CASCADE;
+
+
+--
+-- Name: commands_type_fkey; Type: FK CONSTRAINT; Schema: public; Owner: root
+--
+
+ALTER TABLE ONLY commands
+    ADD CONSTRAINT commands_type_fkey FOREIGN KEY (type) REFERENCES commandtypes(id) ON UPDATE CASCADE;
+
+
+--
+-- Name: completedgamesstatistics_player_fkey; Type: FK CONSTRAINT; Schema: public; Owner: root
+--
+
+ALTER TABLE ONLY completedgamesstatistics
+    ADD CONSTRAINT completedgamesstatistics_player_fkey FOREIGN KEY (player) REFERENCES players(id) ON UPDATE CASCADE;
+
+
+--
+-- Name: connections_field1_fkey; Type: FK CONSTRAINT; Schema: public; Owner: root
+--
+
+ALTER TABLE ONLY connections
+    ADD CONSTRAINT connections_field1_fkey FOREIGN KEY (field1) REFERENCES fields(id) ON UPDATE CASCADE;
+
+
+--
+-- Name: connections_field2_fkey; Type: FK CONSTRAINT; Schema: public; Owner: root
+--
+
+ALTER TABLE ONLY connections
+    ADD CONSTRAINT connections_field2_fkey FOREIGN KEY (field2) REFERENCES fields(id) ON UPDATE CASCADE;
+
+
+--
+-- Name: currentgames_board_fkey; Type: FK CONSTRAINT; Schema: public; Owner: root
+--
+
+ALTER TABLE ONLY currentgames
+    ADD CONSTRAINT currentgames_board_fkey FOREIGN KEY (board) REFERENCES boards(id) ON UPDATE CASCADE;
+
+
+--
+-- Name: currentgames_objective_fkey; Type: FK CONSTRAINT; Schema: public; Owner: root
+--
+
+ALTER TABLE ONLY currentgames
+    ADD CONSTRAINT currentgames_objective_fkey FOREIGN KEY (objective) REFERENCES objectives(id) ON UPDATE CASCADE;
+
+
+--
+-- Name: currentgames_phase_fkey; Type: FK CONSTRAINT; Schema: public; Owner: root
+--
+
+ALTER TABLE ONLY currentgames
+    ADD CONSTRAINT currentgames_phase_fkey FOREIGN KEY (phase) REFERENCES phases(id) ON UPDATE CASCADE;
+
+
+--
+-- Name: facebookusers_userid_fkey; Type: FK CONSTRAINT; Schema: public; Owner: root
+--
+
+ALTER TABLE ONLY facebookusers
+    ADD CONSTRAINT facebookusers_userid_fkey FOREIGN KEY (userid) REFERENCES users(id) ON UPDATE CASCADE;
+
+
+--
+-- Name: hasfields_board_fkey; Type: FK CONSTRAINT; Schema: public; Owner: root
+--
+
+ALTER TABLE ONLY hasfields
+    ADD CONSTRAINT hasfields_board_fkey FOREIGN KEY (board) REFERENCES boards(id) ON UPDATE CASCADE;
+
+
+--
+-- Name: hasfields_field_fkey; Type: FK CONSTRAINT; Schema: public; Owner: root
+--
+
+ALTER TABLE ONLY hasfields
+    ADD CONSTRAINT hasfields_field_fkey FOREIGN KEY (field) REFERENCES fields(id) ON UPDATE CASCADE;
+
+
+--
+-- Name: invites_creator_fkey; Type: FK CONSTRAINT; Schema: public; Owner: root
+--
+
+ALTER TABLE ONLY invites
+    ADD CONSTRAINT invites_creator_fkey FOREIGN KEY (creator) REFERENCES users(id) ON UPDATE CASCADE;
+
+
+--
+-- Name: invites_game_fkey; Type: FK CONSTRAINT; Schema: public; Owner: root
+--
+
+ALTER TABLE ONLY invites
+    ADD CONSTRAINT invites_game_fkey FOREIGN KEY (game) REFERENCES currentgames(id) ON UPDATE CASCADE;
+
+
+--
+-- Name: invites_inviteduser_fkey; Type: FK CONSTRAINT; Schema: public; Owner: root
+--
+
+ALTER TABLE ONLY invites
+    ADD CONSTRAINT invites_inviteduser_fkey FOREIGN KEY (inviteduser) REFERENCES users(id) ON UPDATE CASCADE;
+
+
+--
+-- Name: offensiveusers_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: root
+--
+
+ALTER TABLE ONLY offensiveusers
+    ADD CONSTRAINT offensiveusers_id_fkey FOREIGN KEY (id) REFERENCES users(id) ON UPDATE CASCADE;
+
+
+--
+-- Name: players_color_fkey; Type: FK CONSTRAINT; Schema: public; Owner: root
+--
+
+ALTER TABLE ONLY players
+    ADD CONSTRAINT players_color_fkey FOREIGN KEY (color) REFERENCES colors(id) ON UPDATE CASCADE;
+
+
+--
+-- Name: players_game_fkey; Type: FK CONSTRAINT; Schema: public; Owner: root
+--
+
+ALTER TABLE ONLY players
+    ADD CONSTRAINT players_game_fkey FOREIGN KEY (game) REFERENCES currentgames(id) ON UPDATE CASCADE;
+
+
+--
+-- Name: players_userid_fkey; Type: FK CONSTRAINT; Schema: public; Owner: root
+--
+
+ALTER TABLE ONLY players
+    ADD CONSTRAINT players_userid_fkey FOREIGN KEY (userid) REFERENCES users(id) ON UPDATE CASCADE;
+
+
+--
+-- Name: troopdeployments_field_fkey; Type: FK CONSTRAINT; Schema: public; Owner: root
+--
+
+ALTER TABLE ONLY troopdeployments
+    ADD CONSTRAINT troopdeployments_field_fkey FOREIGN KEY (field) REFERENCES fields(id) ON UPDATE CASCADE;
+
+
+--
+-- Name: troopdeployments_game_fkey; Type: FK CONSTRAINT; Schema: public; Owner: root
+--
+
+ALTER TABLE ONLY troopdeployments
+    ADD CONSTRAINT troopdeployments_game_fkey FOREIGN KEY (game) REFERENCES currentgames(id) ON UPDATE CASCADE;
+
+
+--
+-- Name: troopdeployments_player_fkey; Type: FK CONSTRAINT; Schema: public; Owner: root
+--
+
+ALTER TABLE ONLY troopdeployments
+    ADD CONSTRAINT troopdeployments_player_fkey FOREIGN KEY (player) REFERENCES players(id) ON UPDATE CASCADE;
+
+
+--
+-- Name: users_type_fkey; Type: FK CONSTRAINT; Schema: public; Owner: root
+--
+
+ALTER TABLE ONLY users
+    ADD CONSTRAINT users_type_fkey FOREIGN KEY (type) REFERENCES usertypes(name) ON UPDATE CASCADE;
+
+
+--
+-- Name: public; Type: ACL; Schema: -; Owner: postgres
+--
+
+REVOKE ALL ON SCHEMA public FROM PUBLIC;
+REVOKE ALL ON SCHEMA public FROM postgres;
+GRANT ALL ON SCHEMA public TO postgres;
+GRANT ALL ON SCHEMA public TO PUBLIC;
+
+
+--
+-- PostgreSQL database dump complete
+--
+
