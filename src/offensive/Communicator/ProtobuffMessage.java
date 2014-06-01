@@ -140,6 +140,7 @@ public class ProtobuffMessage extends Message{
 	
 	@Override
 	public String toString() {
+		this.dataLength = this.getDataBytes().length; 
 		String header = super.toString();
 		
 		return header + this.data;
