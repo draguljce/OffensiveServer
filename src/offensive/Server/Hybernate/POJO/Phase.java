@@ -25,4 +25,14 @@ public class Phase {
 	public void setName(String name) {
 		this.name = name;
 	}
+	
+	public int nextPhaseId() {
+		int nextId = (this.id + 1) % 5;
+		
+		if(nextId == 0) {
+			nextId++;
+		}
+		
+		return nextId;
+	}
 }

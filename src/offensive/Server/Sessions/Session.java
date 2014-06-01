@@ -1,17 +1,13 @@
 package offensive.Server.Sessions;
 
 import java.nio.channels.SocketChannel;
-import java.util.HashSet;
 
 import offensive.Server.Hybernate.POJO.User;
-import offensive.Server.Sessions.Game.Game;
 
 public class Session {
 	public User user;
 	
 	public SocketChannel socketChannel;
-	
-	public HashSet<Game> myGames;
 	
 	Session(SocketChannel socketChannel){
 		this.socketChannel = socketChannel;
@@ -24,6 +20,25 @@ public class Session {
 		}
 		else {
 			return (int)this.user.getId();
+		}
+	}
+	
+	@Override
+	public boolean equals(Object other) {
+		if(other == null) {
+			return false;
+		}
+		
+		if(this == other) {
+			return true;
+		}
+		
+		if(this.getClass().equals(other.getClass())) {
+			Session otherSession = (Session)other;
+		
+			return this.user.getId() == otherSession.user.getId();
+		} else {
+			return false;
 		}
 	}
 }

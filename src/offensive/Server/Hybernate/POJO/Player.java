@@ -1,5 +1,6 @@
 package offensive.Server.Hybernate.POJO;
 
+import java.util.LinkedList;
 import java.util.List;
 
 public class Player {
@@ -17,6 +18,12 @@ public class Player {
 		this.user = user;
 		this.game = game;
 		this.color = color;
+	}
+	
+	public Player(CurrentGame game, Color color, int numberOfTroops) {
+		this.game = game;
+		this.color = color;
+		this.numberOfReinforcements = numberOfTroops;
 	}
 	
 	public int getId() {
@@ -60,6 +67,10 @@ public class Player {
 	}
 
 	public List<Card> getCards() {
+		if(this.cards == null) {
+			this.cards = new LinkedList<Card>();
+		}
+		
 		return cards;
 	}
 
@@ -77,29 +88,5 @@ public class Player {
 	
 	public void decreaseNumberOfUnits() {
 		this.numberOfReinforcements--;
-	}
-
-	@Override
-	public boolean equals(Object other) {
-		if(other == null || !other.getClass().equals(Player.class)) {
-			return false;
-		}
-		
-		if(this == other) {
-			return true;
-		}
-		
-		Player otherPlayer = (Player)other;
-		
-		if(this.id == otherPlayer.id) {
-			return true;
-		} else {
-			return false;
-		}
-	}
-	
-	@Override
-	public int hashCode() {
-		return this.id;
 	}
 }

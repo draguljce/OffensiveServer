@@ -1,12 +1,15 @@
 package offensive.Server.Hybernate.POJO;
 
+import offensive.Server.WorkerThreads.BattleThread.Army;
+import communication.protos.DataProtos;
+
 public class Command {
 	private int id;
 	private CurrentGame game;
 	private short round;
 	private Player player;
-	private Field source;
-	private Field destination;
+	private Territory source;
+	private Territory destination;
 	private CommandType type;
 	private Phase phase;
 	private int troopNumber;
@@ -45,19 +48,19 @@ public class Command {
 		this.player = player;
 	}
 	
-	public Field getSource() {
+	public Territory getSource() {
 		return source;
 	}
 	
-	public void setSource(Field source) {
+	public void setSource(Territory source) {
 		this.source = source;
 	}
 	
-	public Field getDestination() {
+	public Territory getDestination() {
 		return destination;
 	}
 	
-	public void setDestination(Field destination) {
+	public void setDestination(Territory destination) {
 		this.destination = destination;
 	}
 	
@@ -83,5 +86,20 @@ public class Command {
 
 	public void setPhase(Phase phase) {
 		this.phase = phase;
+	}
+	
+	public communication.protos.DataProtos.Command toProtoCommand() {
+		DataProtos.Command.Builder commandBuilder = DataProtos.Command.newBuilder();
+		
+		commandBuilder.setCommandId(this.id);
+		commandBuilder.setSourceTerritory(this.source.getId());
+		commandBuilder.setDestinationTerritory(this.destination.getId());
+		commandBuilder.setNumberOfUnits(this.troopNumber);
+		
+		return commandBuilder.build();
+	}
+	
+	public Army toArmy() {
+		return new Army(this);
 	}
 }

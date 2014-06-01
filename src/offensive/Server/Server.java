@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.nio.channels.ServerSocketChannel;
 import java.util.Iterator;
 
+import offensive.Server.Utilities.CommonRandom;
 import offensive.Server.Utilities.Environment;
 
 import org.apache.log4j.Logger;
@@ -19,6 +20,8 @@ public class Server {
 	public Environment environment;
 	
 	public SessionFactory sessionFactory;
+	
+	public CommonRandom rand = new CommonRandom();
 	
 	protected ServerSocketChannel serverSocketChannel;
 	

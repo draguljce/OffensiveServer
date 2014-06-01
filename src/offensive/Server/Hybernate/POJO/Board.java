@@ -5,6 +5,10 @@ public class Board {
 	
 	public Board() {};
 	
+	public Board(int id) {
+		this.id = id;
+	};
+	
 	public int getId() {
 		return this.id;
 	}

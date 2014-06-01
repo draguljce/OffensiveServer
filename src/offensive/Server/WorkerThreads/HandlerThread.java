@@ -1,13 +1,18 @@
 package offensive.Server.WorkerThreads;
 
+import java.nio.channels.SelectionKey;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
 
-import offensive.Communicator.Communicator;
-import offensive.Communicator.Message;
 import offensive.Communicator.ProtobuffMessage;
+import offensive.Communicator.SendableMessage;
+import offensive.Communicator.SerializationType;
 import offensive.Server.Server;
+import offensive.Server.Exceptions.InvalidStateException;
 import offensive.Server.Exceptions.UserNotFoundException;
+import offensive.Server.Hybernate.POJO.Board;
 import offensive.Server.Hybernate.POJO.Card;
 import offensive.Server.Hybernate.POJO.Color;
 import offensive.Server.Hybernate.POJO.CompletedGameStatistics;
@@ -15,20 +20,25 @@ import offensive.Server.Hybernate.POJO.CurrentGame;
 import offensive.Server.Hybernate.POJO.FacebookUser;
 import offensive.Server.Hybernate.POJO.Invite;
 import offensive.Server.Hybernate.POJO.Objective;
+import offensive.Server.Hybernate.POJO.Phase;
+import offensive.Server.Hybernate.POJO.Phases;
+import offensive.Server.Sessions.SessionManager;
+import offensive.Server.Sessions.Game.GameManager;
 import offensive.Server.Utilities.CommonRandom;
 import offensive.Server.Utilities.Constants;
 import offensive.Server.Utilities.HibernateUtil;
 
+import org.hibernate.Query;
 import org.hibernate.SQLQuery;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
-import com.google.protobuf.GeneratedMessage;
-import com.google.protobuf.UnknownFieldSet.Field;
-
 import communication.protos.CommunicationProtos.AddUnitRequest;
 import communication.protos.CommunicationProtos.AddUnitResponse;
+import communication.protos.CommunicationProtos.AdvancePhaseNotification;
 import communication.protos.CommunicationProtos.AttackRequest;
+import communication.protos.CommunicationProtos.CommandsSubmittedRequest;
+import communication.protos.CommunicationProtos.CommandsSubmittedResponse;
 import communication.protos.CommunicationProtos.CreateGameRequest;
 import communication.protos.CommunicationProtos.CreateGameResponse;
 import communication.protos.CommunicationProtos.FilterFriendsRequest;
@@ -42,8 +52,6 @@ import communication.protos.CommunicationProtos.InvokeAllianceResponse;
 import communication.protos.CommunicationProtos.JoinGameRequest;
 import communication.protos.CommunicationProtos.JoinGameResponse;
 import communication.protos.CommunicationProtos.MoveUnitsRequest;
-import communication.protos.CommunicationProtos.RollDiceRequest;
-import communication.protos.CommunicationProtos.RollDiceResponse;
 import communication.protos.CommunicationProtos.TradeCardsRequest;
 import communication.protos.CommunicationProtos.TradeCardsResponse;
 import communication.protos.DataProtos.Alliance;
@@ -60,12 +68,14 @@ import communication.protos.DataProtos.UserStatistics;
 
 public class HandlerThread implements Runnable {
 
+	private SelectionKey key;
 	private offensive.Server.Sessions.Session session;
 	
 	private ProtobuffMessage request;
 	
-	public HandlerThread(offensive.Server.Sessions.Session session, ProtobuffMessage request) {
-		this.session = session;
+	public HandlerThread(SelectionKey key, ProtobuffMessage request) {
+		this.key = key;
+		this.session = (offensive.Server.Sessions.Session)key.attachment();
 		this.request = request;
 	}
 
@@ -74,12 +84,16 @@ public class HandlerThread implements Runnable {
 		try {
 			Server.getServer().logger.info("Started proccessing request");
 			
-			Message response;
+			List<SendableMessage> response;
 			
 			response = this.proccessRequest(this.request);
 			
-			Communicator.getCommunicator().sendMessage(response, this.session.socketChannel);
-			
+			for(SendableMessage sendableMessage: response) {
+				sendableMessage.send();
+			}
+		} catch (InvalidStateException invalidStateException) {
+			Server.getServer().logger.error(invalidStateException.getMessage(), invalidStateException);
+			SessionManager.getOnlyInstance().removeKey(this.key);
 		} catch (Exception e) {
 			Server.getServer().logger.error(e.getMessage(), e);
 		} finally {
@@ -87,54 +101,55 @@ public class HandlerThread implements Runnable {
 		}
 	}
 	
-	private Message proccessRequest(ProtobuffMessage request) throws UserNotFoundException {
-		ProtobuffMessage response = new ProtobuffMessage(request.handlerId, request.ticketId);
+	private List<SendableMessage> proccessRequest(ProtobuffMessage request) throws Exception {
+		List<SendableMessage> response = new LinkedList<>();
+		
 		Session session = Server.getServer().sessionFactory.openSession();
 		
 		try {
 			switch(request.handlerId) {
 			case GetUserDataRequest:
-				response.data = this.proccessGetUserDataRequest((GetUserDataRequest)request.data, session);
+				this.proccessGetUserDataRequest((GetUserDataRequest)request.data, session, response);
 				break;
 				
 			case FilterFriendsRequest:
-				response.data = this.proccessFilterFriendsRequest((FilterFriendsRequest)request.data, session);
+				this.proccessFilterFriendsRequest((FilterFriendsRequest)request.data, session, response);
 				break;
 				
 			case CreateGameRequest:
-				response.data = this.proccessCreateGameRequest((CreateGameRequest)request.data, session);
+				this.proccessCreateGameRequest((CreateGameRequest)request.data, session, response);
 				break;
 				
 			case GetOpenGamesRequest:
-				response.data = this.proccessGetOpenGamesRequest((GetOpenGamesRequest)request.data, session);
+				this.proccessGetOpenGamesRequest((GetOpenGamesRequest)request.data, session, response);
 				break;
 				
 			case JoinGameRequest:
-				response.data = this.proccessJoinGameRequest((JoinGameRequest)request.data, session);
+				this.proccessJoinGameRequest((JoinGameRequest)request.data, session, response);
 				break;
 				
 			case InvokeAllianceRequest:
-				response.data = this.proccessInvokeAllianceRequest((InvokeAllianceRequest)request.data, session);
+				this.proccessInvokeAllianceRequest((InvokeAllianceRequest)request.data, session, response);
 				break;
 				
 			case TradeCardsRequest:
-				response.data = this.proccessTradeCardsRequest((TradeCardsRequest)request.data, session);
+				this.proccessTradeCardsRequest((TradeCardsRequest)request.data, session, response);
 				break;
 				
 			case AddUnitRequest:
-				response.data = this.proccessAddUnitRequest((AddUnitRequest)request.data, session);
+				this.proccessAddUnitRequest((AddUnitRequest)request.data, session, response);
 				break;
 				
 			case MoveUnitsRequest:
-				response.data = this.proccessCommandRequest(((MoveUnitsRequest)request.data).getGameId(), ((MoveUnitsRequest)request.data).getCommand(), session);
+				this.proccessCommandRequest(((MoveUnitsRequest)request.data).getGameId(), ((MoveUnitsRequest)request.data).getCommand(), session, response);
 				break;
 				
 			case AttackRequest:
-				response.data = this.proccessCommandRequest(((AttackRequest)request.data).getGameId(), ((AttackRequest)request.data).getCommand(), session);
+				this.proccessCommandRequest(((AttackRequest)request.data).getGameId(), ((AttackRequest)request.data).getCommand(), session, response);
 				break;
 				
-			case RollDiceRequest:
-				response.data = this.proccessRollDiceRequest((RollDiceRequest)request.data, session);
+			case CommandsSubmittedRequest:
+				this.proccessCommandsSubmittedRequest((CommandsSubmittedRequest)request.data, session, response);
 				break;
 				
 			default:
@@ -145,45 +160,51 @@ public class HandlerThread implements Runnable {
 			session.close();
 		}
 		
+		response.get(0).message.handlerId = request.handlerId;
+		response.get(0).message.ticketId = request.ticketId;
+		response.get(0).message.serializationType = SerializationType.protobuff;
 		return response;
 	}
 	
 	// Here are handlers definitions.
 	/**
 	 * @throws UserNotFoundException *****************************************************************************************************************************************************/
-	private GeneratedMessage proccessGetUserDataRequest(GetUserDataRequest request, Session session) throws UserNotFoundException {
+	private void proccessGetUserDataRequest(GetUserDataRequest request, Session session, List<SendableMessage> response) throws UserNotFoundException {
 
 		this.session.user = (offensive.Server.Hybernate.POJO.User)session.get(offensive.Server.Hybernate.POJO.User.class, request.getUserId());
 		GetUserDataResponse.Builder getUserDataResponseBuilder = GetUserDataResponse.newBuilder();
 		
 		getUserDataResponseBuilder.setUserData(this.getUserData(request.getUserId(), session));
 		
-		return getUserDataResponseBuilder.build();
+		response.add(new SendableMessage(new ProtobuffMessage(getUserDataResponseBuilder.build()), this.session));
+		
+		GameManager.onlyInstance.addGames(this.session);
 	}
 	
-	private GeneratedMessage proccessFilterFriendsRequest(FilterFriendsRequest request, Session session) {
+	private void proccessFilterFriendsRequest(FilterFriendsRequest request, Session session, List<SendableMessage> response) {
 		FilterFriendsResponse.Builder filterFriendsResponseBuilder = FilterFriendsResponse.newBuilder();
 		
-		StringBuilder conditionBuilder = new StringBuilder();
+		Query query = session.createQuery("FROM FacebookUser fbUsers WHERE fbUsers.facebookId IN (:ids)");
 		
-		for(long facebookId: request.getFacebookIdsList()) {
-			conditionBuilder.append(String.format("fbUsers.facebookId = %s", facebookId)).append(" OR ");
+		List<Long> idList = request.getFacebookIdsCount() != 0 ? request.getFacebookIdsList() : new LinkedList<Long>();
+		
+		if (idList.size() == 0) {
+			idList.add(-1L);
 		}
 		
-		// Remove last "OR"
-		conditionBuilder.delete(conditionBuilder.length() - 4, conditionBuilder.length());
+		query.setParameterList("ids", idList);
 		
 		@SuppressWarnings("unchecked")
-		List<FacebookUser> filteredFriends = (List<FacebookUser>) HibernateUtil.executeHql(String.format("FROM FacebookUser fbUsers WHERE %s", conditionBuilder.toString()), session);
+		List<FacebookUser> filteredFriends = query.list();
 		
 		for(FacebookUser friend: filteredFriends) {
 			filterFriendsResponseBuilder.addFriends(this.getUserFromPOJO(friend));
 		}
 		
-		return filterFriendsResponseBuilder.build();
+		response.add(new SendableMessage(new ProtobuffMessage(filterFriendsResponseBuilder.build()), this.session));
 	}
 	
-	private GeneratedMessage proccessCreateGameRequest(CreateGameRequest request, Session session) throws UserNotFoundException {
+	private void proccessCreateGameRequest(CreateGameRequest request, Session session, List<SendableMessage> response) throws UserNotFoundException {
 		CreateGameResponse.Builder createGameResponseBuilder = CreateGameResponse.newBuilder();
 		
 		offensive.Server.Hybernate.POJO.CurrentGame newGame = new CurrentGame(request.getGameName(), request.getNumberOfPlayers(), new Objective(request.getObjectiveCode()), request.getUserIdsCount() == 0);
@@ -191,50 +212,47 @@ public class HandlerThread implements Runnable {
 		@SuppressWarnings("unchecked")
 		List<Color> allColors = (List<Color>)HibernateUtil.executeHql("FROM Color", session);
 		
-		Color chosenColor = allColors.get(CommonRandom.next(allColors.size()));
-		
-		offensive.Server.Hybernate.POJO.Player newPlayer = new offensive.Server.Hybernate.POJO.Player(this.session.user, newGame, chosenColor);
-		
-		List<Invite> invites = new LinkedList<Invite>();
+		Collection<Color> chosenColors = CommonRandom.chooseRandomSubset(allColors, request.getNumberOfPlayers());
 		
 		Transaction tran = session.beginTransaction();
 		
-		try{
-			session.save(newGame);
-			session.save(newPlayer);
-			tran.commit();
-		}
-		catch(Exception e){
-			Server.getServer().logger.error(e.getMessage(), e);
-			tran.rollback();
-			return null;
-		}
-		
-		for(long userId: request.getUserIdsList()){
-			invites.add(new Invite(this.session.user, newGame, HibernateUtil.getPojoUser(userId, session)));
-		}
-		
-		tran = session.beginTransaction();
-		try{
-			for(Invite invite: invites) {
-				session.save(invite);
+		try {
+			int numberOfTroops = 50 - 5 * request.getNumberOfPlayers();
+			boolean isFirst = true;
+			for(Color color: chosenColors) {
+				offensive.Server.Hybernate.POJO.Player newPlayer = new offensive.Server.Hybernate.POJO.Player(newGame, color, numberOfTroops);
+				
+				if(isFirst) {
+					newPlayer.setUser(this.session.user);
+					isFirst = false;
+				}
+				
+				newGame.getPlayers().add(newPlayer);
 			}
 			
+			for(long userId: request.getUserIdsList()){
+				newGame.getInvites().add(new Invite(this.session.user, newGame, HibernateUtil.getPojoUser(userId, session)));
+			}
+			
+			this.divideTerritories(newGame, session);
+			
+			
+			session.save(newGame);
 			tran.commit();
 		}
 		catch(Exception e){
 			Server.getServer().logger.error(e.getMessage(), e);
 			tran.rollback();
-			return null;
+			return;
 		}
 		
 		createGameResponseBuilder.setGameContext(this.getGameContextFromPOJO(newGame, session));
 
-		return createGameResponseBuilder.build();
+		response.add(new SendableMessage(new ProtobuffMessage(createGameResponseBuilder.build()), this.session));
 	}
 	
 	@SuppressWarnings("unchecked")
-	private GeneratedMessage proccessGetOpenGamesRequest (GetOpenGamesRequest request, Session session) throws UserNotFoundException {
+	private void proccessGetOpenGamesRequest (GetOpenGamesRequest request, Session session, List<SendableMessage> response) throws UserNotFoundException {
 		Transaction tran = session.beginTransaction();
 		GetOpenGamesResponse.Builder getOpenGamesResponseBuilder = GetOpenGamesResponse.newBuilder();
 		
@@ -242,7 +260,7 @@ public class HandlerThread implements Runnable {
 		
 		try {
 			// Give me all games where i haven't joined already and that are either open or i have invite.
-			String sql = "SELECT * FROM currentgames game WHERE (game.isopen = true OR game.id IN (SELECT game FROM invites WHERE inviteduser = :userId)) AND (game.id NOT IN (SELECT game FROM players player WHERE player.userId = :userId));";
+			String sql = "SELECT * FROM currentgames game WHERE (game.numberOfJoinedPlayers < game.numberOfPlayers) AND (game.isopen = true OR game.id IN (SELECT game FROM invites WHERE inviteduser = :userId)) AND (game.id NOT IN (SELECT game FROM players player WHERE player.userId = :userId));";
 			SQLQuery query = session.createSQLQuery(sql);
 			query.setParameter("userId", this.session.user.getId());
 			
@@ -251,7 +269,7 @@ public class HandlerThread implements Runnable {
 			openedGames = query.list();
 		} catch (Exception e) {
 			Server.getServer().logger.error(e.getMessage(), e);
-			return null;
+			return;
 		} finally {
 			tran.commit();
 		}
@@ -262,10 +280,10 @@ public class HandlerThread implements Runnable {
 			}
 		}
 		
-		return getOpenGamesResponseBuilder.build();
+		response.add(new SendableMessage(new ProtobuffMessage(getOpenGamesResponseBuilder.build()), this.session));
 	}
 	
-	private GeneratedMessage proccessJoinGameRequest (JoinGameRequest request, Session session) {
+	private void proccessJoinGameRequest (JoinGameRequest request, Session session, List<SendableMessage> response) {
 		Transaction tran = session.beginTransaction();
 		JoinGameResponse.Builder responsebuilder = JoinGameResponse.newBuilder();
 		
@@ -280,24 +298,34 @@ public class HandlerThread implements Runnable {
 				allColors.remove(player.getColor());
 			}
 			
-			Color chosenColor = allColors.get(CommonRandom.next(allColors.size()));
+			Color chosenColor = allColors.get(Server.getServer().rand.nextInt(allColors.size()));
 			
 			offensive.Server.Hybernate.POJO.Player newPlayer = new offensive.Server.Hybernate.POJO.Player(this.session.user, targetGame, chosenColor);
 			
-			session.save(newPlayer);
+			targetGame.getPlayers().add(newPlayer);
+			
+			targetGame.joinPlayer();
+			
+			if(targetGame.isAllplayersJoined()) {
+				targetGame.setPhase(new Phase(Phases.Reinforcements.ordinal()));
+			}
+			
+			session.update(targetGame);
+			
+			tran.commit();
 			
 			responsebuilder.setGameContext(this.getGameContextFromPOJO(targetGame, session));
 			
 		} catch (Exception e) {
 			Server.getServer().logger.error(e.getMessage(), e);
-		} finally {
-			tran.commit();
+			tran.rollback();
+			return;
 		}
 		
-		return responsebuilder.build();
+		response.add(new SendableMessage(new ProtobuffMessage(responsebuilder.build()), this.session));
 	}
 	
-	private GeneratedMessage proccessInvokeAllianceRequest(InvokeAllianceRequest request, Session session) {
+	private void proccessInvokeAllianceRequest(InvokeAllianceRequest request, Session session, List<SendableMessage> response) {
 		InvokeAllianceResponse.Builder responseBuilder = InvokeAllianceResponse.newBuilder();
 		
 		Transaction tran = session.beginTransaction();
@@ -310,10 +338,10 @@ public class HandlerThread implements Runnable {
 			tran.commit();
 		}
 		
-		return responseBuilder.build();
+		response.add(new SendableMessage(new ProtobuffMessage(responseBuilder.build()), this.session));
 	}
 	
-	private GeneratedMessage proccessTradeCardsRequest(TradeCardsRequest request, Session session) {
+	private void proccessTradeCardsRequest(TradeCardsRequest request, Session session, List<SendableMessage> response) {
 		TradeCardsResponse.Builder responseBuilder = TradeCardsResponse.newBuilder();
 		
 		short numberOfReinforcements = this.tradeCards(request.getCardId1(), request.getCardId2(), request.getCardId3());
@@ -348,27 +376,40 @@ public class HandlerThread implements Runnable {
 		} catch (Exception e) {
 			Server.getServer().logger.error(e.getMessage(), e);
 			tran.rollback();
-			return null;
+			return;
 		} finally {
 			tran.commit();
 		}
 		
-		return responseBuilder.build();
+		response.add(new SendableMessage(new ProtobuffMessage(responseBuilder.build()), this.session));
 	}
-	private GeneratedMessage proccessAddUnitRequest(AddUnitRequest request, Session session) {
+	private void proccessAddUnitRequest(AddUnitRequest request, Session session, List<SendableMessage> response) {
 		AddUnitResponse.Builder responseBuilder = AddUnitResponse.newBuilder();
 		
 		Transaction tran = session.beginTransaction();
 		
 		try{
 			offensive.Server.Hybernate.POJO.Player player = this.getPlayerForGame(request.getGameId(), session);
+			offensive.Server.Hybernate.POJO.CurrentGame game = player.getGame();
 			
-			if(player.getNumberOfReinforcements() > 0) { 
+			if(!game.getPhase().getName().equals("Reinforcements")) {
+				return;
+			}
+			
+			if(player.getNumberOfReinforcements() > 0 && !player.getIsPlayedMove()) { 
 				offensive.Server.Hybernate.POJO.Territory territory = (offensive.Server.Hybernate.POJO.Territory) HibernateUtil.executeScalarHql(String.format("FROM Territory territory WHERE territory.field = %s", request.getTerritoryId()), session);
 				
 				territory.incrementNumberOfTroops();
 				player.decreaseNumberOfUnits();
 				
+				if(player.getNumberOfReinforcements() == 0) {
+					player.setIsPlayedMove(true);
+					
+					if(this.shouldAdvanceToNextPhase(game)) {
+						response.add(this.advanceToNextPhase(game, session));
+					}
+				}
+
 				session.update(territory);
 				session.update(player);
 				
@@ -376,18 +417,19 @@ public class HandlerThread implements Runnable {
 			} else {
 				responseBuilder.setIsSuccessfull(false);
 			}
+
 		} catch (Exception e) {
 			Server.getServer().logger.error(e.getMessage(), e);
 			tran.rollback();
-			return null;
+			return;
 		} finally {
 			tran.commit();
 		}
 		
-		return responseBuilder.build();
+		response.add(new SendableMessage(new ProtobuffMessage(responseBuilder.build()), this.session));
 	}
 	
-	private GeneratedMessage proccessCommandRequest(long gameId, Command request, Session session) {
+	private void proccessCommandRequest(long gameId, Command request, Session session, List<SendableMessage> response) throws Exception {
 		MoveUnitsRequest.Builder responseBuilder = MoveUnitsRequest.newBuilder();
 
 		offensive.Server.Hybernate.POJO.Command command = new offensive.Server.Hybernate.POJO.Command();
@@ -401,30 +443,64 @@ public class HandlerThread implements Runnable {
 			command.setPlayer(this.getPlayerForGame(gameId, session));
 			command.setRound(game.getCurrentRound());
 			command.setPhase(game.getPhase());
-			command.setSource((offensive.Server.Hybernate.POJO.Field)session.get(Field.class, request.getSourceTerritory()));
-			command.setSource((offensive.Server.Hybernate.POJO.Field)session.get(Field.class, request.getDestinationTerritory()));
+			
+			offensive.Server.Hybernate.POJO.Territory sourceTerritory = game.getTerritory(request.getSourceTerritory());
+			sourceTerritory.setTroopsOnIt((short)(sourceTerritory.getTroopsOnIt() - request.getNumberOfUnits()));
+			
+			if(sourceTerritory.getTroopsOnIt() <= request.getNumberOfUnits()) {
+				throw new InvalidStateException("User does not have enough troops!!!");
+			}
+			
+			sourceTerritory.setTroopsOnIt((short)(sourceTerritory.getTroopsOnIt() - request.getNumberOfUnits()));
+			
+			command.setSource(sourceTerritory);
+			command.setDestination(game.getTerritory(request.getDestinationTerritory()));
 			command.setTroopNumber(request.getNumberOfUnits());
 			
 			session.save(command);
+			session.update(sourceTerritory);
+			
+			tran.commit();
 		} catch (Exception e) {
 			Server.getServer().logger.error(e.getMessage(), e);
 			tran.rollback();
-			return null;
+			throw e;
+		}
+		
+		response.add(new SendableMessage(new ProtobuffMessage(responseBuilder.build()), this.session));
+	}
+	
+	private void proccessCommandsSubmittedRequest(CommandsSubmittedRequest request, Session session, List<SendableMessage> response) {
+		offensive.Server.Hybernate.POJO.Player player = this.getPlayerForGame(request.getGameId(), session);
+		CommandsSubmittedResponse.Builder responseBuilder = CommandsSubmittedResponse.newBuilder(); 
+		
+		Transaction tran = session.beginTransaction();
+		
+		try {
+			player.setIsPlayedMove(true);
+			session.update(player);
+			
+			CurrentGame game = (CurrentGame)session.get(CurrentGame.class, request.getGameId());
+			if(this.shouldAdvanceToNextPhase(game)) {
+				response.add(this.advanceToNextPhase(game, session));
+			}
+			
+			if(game.getPhase().getName().equals("Battle")) {
+				SessionManager.getOnlyInstance().startBattle(game);
+			}
+			
+		} catch(Exception e) {
+			tran.rollback();
+			Server.getServer().logger.error(e.getMessage(), e);
+			return;
 		} finally {
 			tran.commit();
 		}
 		
-		return responseBuilder.build();
+		response.add(new SendableMessage(new ProtobuffMessage(responseBuilder.build()), this.session));
+		return;
 	}
 	
-	private GeneratedMessage proccessRollDiceRequest(RollDiceRequest reqest, Session session) {
-		RollDiceResponse.Builder responseBuilder = RollDiceResponse.newBuilder();
-		
-		responseBuilder.setNumber(CommonRandom.next(6) + 1);
-		
-		return responseBuilder.build();
-		
-	}
 	// Helper methods
 	// ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 	private UserData getUserData(long userId, Session session) throws UserNotFoundException {
@@ -440,20 +516,14 @@ public class HandlerThread implements Runnable {
 	}
 	
 	private User getUser(long userId, Session session) throws UserNotFoundException {
-		Transaction tran = session.beginTransaction();
-		
 		User user = null;
 
-		try {
-			offensive.Server.Hybernate.POJO.User userPOJO = (offensive.Server.Hybernate.POJO.User)session.get(offensive.Server.Hybernate.POJO.User.class, userId);
-			
-			user = this.getUserFromPOJO(userPOJO, session);
-			
-			if(user == null) {
-				throw new UserNotFoundException(String.format("User with id = %s is not found", userId));
-			}
-		} finally {
-			tran.rollback();
+		offensive.Server.Hybernate.POJO.User userPOJO = (offensive.Server.Hybernate.POJO.User)session.get(offensive.Server.Hybernate.POJO.User.class, userId);
+		
+		user = this.getUserFromPOJO(userPOJO, session);
+		
+		if(user == null) {
+			throw new UserNotFoundException(String.format("User with id = %s is not found", userId));
 		}
 		
 		return user;
@@ -566,9 +636,13 @@ public class HandlerThread implements Runnable {
 	private Player getPlayerFromPOJO(offensive.Server.Hybernate.POJO.Player player, Session session) throws UserNotFoundException {
 		Player.Builder playerBuilder = Player.newBuilder();
 		
-		playerBuilder.setUser(this.getUser(player.getUser().getId(), session));
+		playerBuilder.setPlayerId(player.getId());
 		playerBuilder.setColor(player.getColor().getId());
 		playerBuilder.setIsPlayedMove(player.getIsPlayedMove());
+		
+		if(player.getUser() != null) {
+			playerBuilder.setUser(this.getUser(player.getUser().getId(), session));
+		}
 		
 		for(Card card: player.getCards()){
 			playerBuilder.addCards(card.getId());
@@ -584,7 +658,7 @@ public class HandlerThread implements Runnable {
 		
 		territoryBuilder.setId(territory.getField().getId());
 		territoryBuilder.setTroopsOnIt(territory.getTroopsOnIt());
-		territoryBuilder.setUserId(territory.getPlayer().getUser().getId());
+		territoryBuilder.setPlayerId(territory.getPlayer().getId());
 		
 		return territoryBuilder.build();
 	}
@@ -689,5 +763,53 @@ public class HandlerThread implements Runnable {
 	
 	private offensive.Server.Hybernate.POJO.Player getPlayerForGame(long gameId, Session session) {
 		return (offensive.Server.Hybernate.POJO.Player) HibernateUtil.executeScalarHql(String.format("FROM Player player WHERE player.game.id = %s AND player.user.id = %s", gameId, this.session.user.getId()), session);
+	}
+	
+	private boolean shouldAdvanceToNextPhase(CurrentGame game) {
+		boolean shouldAdvanceToNextPhase = true;
+		
+		for(offensive.Server.Hybernate.POJO.Player player: game.getPlayers()) {
+			shouldAdvanceToNextPhase &= player.getIsPlayedMove();
+		}
+		
+		return shouldAdvanceToNextPhase;
+	}
+	
+	private SendableMessage advanceToNextPhase(CurrentGame game, Session session) {
+		Phase nextPhase = (Phase)session.get(Phase.class, game.getPhase().nextPhaseId());
+		game.setPhase(nextPhase);
+		
+		if(nextPhase.getId() == 1) {
+			game.nextRound();
+		}
+		
+		for(offensive.Server.Hybernate.POJO.Player player: game.getPlayers()) {
+			player.setIsPlayedMove(false);
+		}
+		
+		session.update(game);
+		
+		AdvancePhaseNotification.Builder advancePhaseNotificationBuilder = AdvancePhaseNotification.newBuilder();
+		
+		return new SendableMessage(new ProtobuffMessage(advancePhaseNotificationBuilder.build()), GameManager.onlyInstance.getSessionsForGame(game.getId()));
+	}
+	
+	private void divideTerritories(CurrentGame game, Session session) {
+		@SuppressWarnings("unchecked")
+		List<offensive.Server.Hybernate.POJO.Field> fields = (List<offensive.Server.Hybernate.POJO.Field>)HibernateUtil.executeHql("FROM Field", session);
+		
+		Collections.shuffle(fields);
+		
+		int nextPlayer = 0;
+		offensive.Server.Hybernate.POJO.Player[] players = game.getPlayers().toArray(new offensive.Server.Hybernate.POJO.Player[game.getPlayers().size()]);
+
+		for(offensive.Server.Hybernate.POJO.Field field: fields) {
+			game.getTerritories().add(new offensive.Server.Hybernate.POJO.Territory(game, field, players[nextPlayer]));
+			
+			players[nextPlayer].decreaseNumberOfUnits();
+			nextPlayer = ++nextPlayer % players.length;
+		}
+
+		game.setBoard((Board)session.get(Board.class, 0));
 	}
 }

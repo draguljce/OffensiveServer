@@ -7,21 +7,26 @@
 			<generator class="identity"/> 
 		</id>
 		<set name="players" cascade="all"> 
-			<key column="id"/> 
+			<key column="Game"/> 
 			<one-to-many class="offensive.Server.Hybernate.POJO.Player"/> 
 		</set>
 		<set name="territories" cascade="all"> 
-			<key column="id"/> 
+			<key column="Game"/> 
 			<one-to-many class="offensive.Server.Hybernate.POJO.Territory"/> 
 		</set>
 		<set name="alliances" cascade="all"> 
-			<key column="id"/> 
+			<key column="Game"/> 
 			<one-to-many class="offensive.Server.Hybernate.POJO.Alliance"/> 
 		</set>
 		<set name="commands" cascade="all"> 
-			<key column="id"/> 
+			<key column="Game"/> 
 			<one-to-many class="offensive.Server.Hybernate.POJO.Command"/> 
 		</set>
+		<set name="invites" cascade="all"> 
+			<key column="Game"/> 
+			<one-to-many class="offensive.Server.Hybernate.POJO.Invite"/> 
+		</set>
+		
 		<property name="gameName" column="GameName" type="string"/>
 		<property name="numberOfJoinedPlayers" column="NumberOfJoinedPlayers" type="short"/>
 		<property name="numberOfPlayers" column="NumberOfPlayers" type="short"/>

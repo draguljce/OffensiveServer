@@ -5,6 +5,8 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Set;
 
+import communication.protos.DataProtos;
+
 public class User {
 	private long id;	
 	private UserType type;
@@ -56,5 +58,37 @@ public class User {
 		}
 		
 		return allGames;
+	}
+	
+	public DataProtos.User toProtoUser() {
+		DataProtos.User.Builder userBuilder = DataProtos.User.newBuilder();
+		
+		userBuilder.setUserId(this.id);
+		
+		return userBuilder.build();
+	}
+	
+	@Override
+	public int hashCode() {
+		return (int) this.id;
+	}
+	
+	@Override
+	public boolean equals(Object other) {
+		if(other == null) {
+			return false;
+		}
+		
+		if(this == other) {
+			return true;
+		}
+		
+		if(this.getClass().equals(other.getClass())) {
+			User otherUser = (User)other;
+			
+			return this.id == otherUser.id;
+		}
+		
+		return false;
 	}
 }

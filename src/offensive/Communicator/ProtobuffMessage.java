@@ -6,7 +6,9 @@ import com.google.protobuf.GeneratedMessage;
 import com.google.protobuf.InvalidProtocolBufferException;
 
 import communication.protos.CommunicationProtos.AddUnitRequest;
+import communication.protos.CommunicationProtos.AdvanceToNextBattle;
 import communication.protos.CommunicationProtos.AttackRequest;
+import communication.protos.CommunicationProtos.CommandsSubmittedRequest;
 import communication.protos.CommunicationProtos.CreateGameRequest;
 import communication.protos.CommunicationProtos.FilterFriendsRequest;
 import communication.protos.CommunicationProtos.GetOpenGamesRequest;
@@ -14,12 +16,15 @@ import communication.protos.CommunicationProtos.GetUserDataRequest;
 import communication.protos.CommunicationProtos.InvokeAllianceRequest;
 import communication.protos.CommunicationProtos.JoinGameRequest;
 import communication.protos.CommunicationProtos.MoveUnitsRequest;
-import communication.protos.CommunicationProtos.RollDiceRequest;
+import communication.protos.CommunicationProtos.RollDiceClicked;
 import communication.protos.CommunicationProtos.TradeCardsRequest;
 
 public class ProtobuffMessage extends Message{
 
 	public GeneratedMessage data;
+	
+	public boolean IsBattleThreadMessage = false;
+	public Long gameId = null;
 	
 	public ProtobuffMessage(HandlerId handlerId, int ticketId, byte status, GeneratedMessage data) {
 		super(handlerId, ticketId, status);
@@ -27,6 +32,10 @@ public class ProtobuffMessage extends Message{
 		this.data = data;
 		this.dataLength = this.getDataLength();
 		this.serializationType = SerializationType.protobuff;
+	}
+	
+	public ProtobuffMessage (GeneratedMessage data) {
+		this.data = data;
 	}
 
 	public ProtobuffMessage(HandlerId handlerId, int ticketId) {
@@ -87,18 +96,32 @@ public class ProtobuffMessage extends Message{
 			case AddUnitRequest:
 				generatedMessage = AddUnitRequest.parseFrom(data);
 				break;
-			
+
 			case MoveUnitsRequest:
 				generatedMessage = MoveUnitsRequest.parseFrom(data);
 				break;
-			
+
 			case AttackRequest:
 				generatedMessage = AttackRequest.parseFrom(data);
 				break;
-				
-			case RollDiceRequest:
-				generatedMessage = RollDiceRequest.parseFrom(data);
-				break;
+
+			case CommandsSubmittedRequest:
+				CommandsSubmittedRequest commandsSubmittedRequest = CommandsSubmittedRequest.parseFrom(data);
+				generatedMessage = commandsSubmittedRequest;
+				this.IsBattleThreadMessage = true;
+				this.gameId = commandsSubmittedRequest.getGameId();
+
+			case AdvanceToNextBattle:
+				AdvanceToNextBattle advanceToNextBattle = AdvanceToNextBattle.parseFrom(data);
+				generatedMessage = advanceToNextBattle;
+				this.IsBattleThreadMessage = true;
+				this.gameId = advanceToNextBattle.getGameId();
+
+			case RollDiceClicked:
+				RollDiceClicked rollDiceClicked = RollDiceClicked.parseFrom(data);
+				generatedMessage = rollDiceClicked;
+				this.IsBattleThreadMessage = true;
+				this.gameId = rollDiceClicked.getGameId();
 
 			default:
 				break;

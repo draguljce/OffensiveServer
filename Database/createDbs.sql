@@ -17,8 +17,6 @@ CREATE TABLE UserTypes
 	PRIMARY KEY (Name)
 );
 
-INSERT INTO UserTypes VALUES ('OffensiveUser'), ('FacebookUser');
-
 --	#####################################################
 --	---------------------
 --	|		Users		|
@@ -82,8 +80,6 @@ CREATE TABLE Colors
 	PRIMARY KEY (ID)
 );
 
-INSERT INTO Colors (Name) VALUES ('Red'), ('Green'), ('Blue'), ('Yellow'), ('Black');
-
 --	#####################################################
 --	---------------------
 --	|		Phases		|
@@ -98,8 +94,6 @@ CREATE TABLE Phases
 	
 	PRIMARY KEY (ID)
 );
-
-INSERT INTO Phases (ID, Name) VALUES (0, 'Not started');
 
 --	#####################################################
 --	---------------------
@@ -127,10 +121,6 @@ CREATE TABLE Objectives
 	
 	PRIMARY KEY (ID)
 );
-
-INSERT INTO Objectives VALUES (0, 'Conquer the world'), (1, 'Win 24 territories');
-
-
 
 --	#####################################################
 --	---------------------------------
@@ -184,6 +174,8 @@ CREATE TABLE Players
 	PRIMARY KEY (ID)
 );
 
+CREATE INDEX gameIndex ON Players (Game);
+
 --	#####################################################
 --	---------------------
 --	|		CardTypes	|
@@ -198,8 +190,6 @@ CREATE TABLE CardTypes
 	
 	PRIMARY KEY (ID)
 );
-
-INSERT INTO CardTypes VALUES (0, 'Soldier'), (1, 'Horse'), (2, 'Artilery');
 
 --	#####################################################
 --	---------------------
@@ -303,7 +293,7 @@ CREATE TABLE Invites
 --	---------------------------------
 --	|		TroopDeployments		|
 --	---------------------------------
---	| PK	ID					|
+--	| PK	ID						|
 --	|    FK	Game					|
 --	|    FK	Field					|
 --	|    FK	Player					|
@@ -311,16 +301,16 @@ CREATE TABLE Invites
 --	#####################################################
 CREATE TABLE TroopDeployments
 (
-	ID			integer,
+	ID			SERIAL,
 	Game		bigint	REFERENCES CurrentGames(ID)	ON UPDATE CASCADE,
-	Field		integer	REFERENCES Fields(ID) 	ON UPDATE CASCADE,
-	Player		integer	REFERENCES Players(ID) 	ON UPDATE CASCADE,
+	Field		integer	REFERENCES Fields(ID) 		ON UPDATE CASCADE,
+	Player		integer	REFERENCES Players(ID) 		ON UPDATE CASCADE,
 	TroopNumber	smallint,
 	
 	PRIMARY KEY (ID)
 );
 
-CREATE UNIQUE INDEX territoryIndex ON TroopDeployments(Field);
+CREATE INDEX territoryIndex ON TroopDeployments(Field);
 
 --	#####################################################
 --	-------------------------
@@ -354,13 +344,13 @@ CREATE TABLE CommandTypes
 CREATE TABLE Commands
 (
 	ID			SERIAL,
-	Game		bigint	REFERENCES CurrentGames(ID)	ON UPDATE CASCADE,
-	Phase		integer	REFERENCES Phases(ID)		ON UPDATE CASCADE,	
+	Game		bigint	REFERENCES CurrentGames(ID)		ON UPDATE CASCADE,
+	Phase		integer	REFERENCES Phases(ID)			ON UPDATE CASCADE,	
 	Round		smallint,
-	Player		integer	REFERENCES Players(ID) 		ON UPDATE CASCADE,
-	Source		integer	REFERENCES Fields(ID)		ON UPDATE CASCADE,
-	Destination	integer	REFERENCES Fields(ID)		ON UPDATE CASCADE,
-	Type		integer	REFERENCES CommandTypes(ID) ON UPDATE CASCADE,
+	Player		integer	REFERENCES Players(ID) 			ON UPDATE CASCADE,
+	Source		integer	REFERENCES TroopDeployments(ID)	ON UPDATE CASCADE,
+	Destination	integer	REFERENCES TroopDeployments(ID)	ON UPDATE CASCADE,
+	Type		integer	REFERENCES CommandTypes(ID) 	ON UPDATE CASCADE,
 	TroopNumber	integer,
 	
 	PRIMARY KEY (ID),
@@ -381,8 +371,6 @@ CREATE TABLE AllianceTypes
 	
 	PRIMARY KEY (ID)
 );
-
-INSERT INTO AllianceTypes (Name) VALUES ('Allied'), ('At war'), ('Offer');
 
 --	#####################################################
 --	-------------------------

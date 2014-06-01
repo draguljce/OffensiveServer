@@ -1,19 +1,28 @@
 package offensive.Server.Hybernate.POJO;
 
+import offensive.Server.WorkerThreads.BattleThread.Army;
+
 public class Territory {
-	private int id;
+	private Integer id;
 	private CurrentGame game;
 	private Field field;
 	private Player player;
 	private short troopsOnIt;
 	
 	public Territory() {};
+	
+	public Territory(CurrentGame game, Field field, Player player) {
+		this.game = game;
+		this.field = field;
+		this.player = player;
+		this.troopsOnIt = 1;
+	}
 
-	public int getId() {
+	public Integer getId() {
 		return this.id;
 	}
 
-	public void setId(int id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 
@@ -51,5 +60,9 @@ public class Territory {
 	
 	public void incrementNumberOfTroops() {
 		this.troopsOnIt++;
+	}
+	
+	public Army getArmy() {	
+		return new Army(this.troopsOnIt, this.player, this);
 	}
 }

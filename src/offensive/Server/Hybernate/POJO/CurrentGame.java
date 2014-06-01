@@ -17,6 +17,7 @@ public class CurrentGame {
 	private Set<Territory> territories;
 	private Set<Alliance> alliances;
 	private Set<Command> commands;
+	private Set<Invite> invites;
 
 	public CurrentGame() {};
 	
@@ -95,7 +96,11 @@ public class CurrentGame {
 	}
 
 	public Set<Player> getPlayers() {
-		return this.players != null? this.players : new HashSet<Player>() ;
+		if(this.players == null) {
+			this.players = new HashSet<Player>();
+		}
+		
+		return this.players;
 	}
 
 	public void setPlayers(Set<Player> players) {
@@ -103,7 +108,11 @@ public class CurrentGame {
 	}
 
 	public Set<Territory> getTerritories() {
-		return this.territories != null? this.territories : new HashSet<Territory>() ;
+		if(this.territories == null) {
+			this.territories = new HashSet<Territory>();
+		}
+		
+		return this.territories;
 	}
 
 	public void setTerritories(Set<Territory> territories) {
@@ -132,5 +141,53 @@ public class CurrentGame {
 
 	public void setIsOpen(boolean isOpen) {
 		this.isOpen = isOpen;
+	}
+	
+	public void nextRound() {
+		this.currentRound++;
+	}
+	
+	public void joinPlayer() {
+		this.numberOfJoinedPlayers++;
+	}
+	
+	public boolean isAllplayersJoined() {
+		return this.numberOfJoinedPlayers == this.numberOfPlayers;
+	}
+	
+	public Set<Invite> getInvites() {
+		if(this.invites == null) {
+			this.invites = new HashSet<Invite>();
+		}
+		
+		return invites;
+	}
+
+	public void setInvites(Set<Invite> invites) {
+		this.invites = invites;
+	}
+	
+	public Territory getTerritory(int fieldId) {
+		for(Territory territory: this.getTerritories()) {
+			if (territory.getField().getId() == fieldId) {
+				return territory;
+			}
+		}
+		
+		return null;
+	}
+	
+	@Override
+	public boolean equals(Object other) {
+		if(other == null) {
+			return false;
+		}
+		
+		if(!other.getClass().equals(this.getClass())) {
+			return false;
+		}
+		
+		CurrentGame otherGame = (CurrentGame)other;
+		return this.id == otherGame.id;
 	}
 }

@@ -11,8 +11,8 @@
 		<many-to-one name="phase" column="Phase" class="offensive.Server.Hybernate.POJO.Phase"/>
 		<property name="round" column="Round" type="string"/>
 		<many-to-one name="player" column="Player" class="offensive.Server.Hybernate.POJO.Player"/>
-		<many-to-one name="source" column="Source" class="offensive.Server.Hybernate.POJO.Field"/>
-		<many-to-one name="destination" column="Destination" class="offensive.Server.Hybernate.POJO.Field"/>
+		<many-to-one name="source" column="Source" class="offensive.Server.Hybernate.POJO.Territory"/>
+		<many-to-one name="destination" column="Destination" class="offensive.Server.Hybernate.POJO.Territory"/>
 		<many-to-one name="type" column="Type" class="offensive.Server.Hybernate.POJO.CommandType"/>
 		<property name="troopNumber" column="TroopNumber" type="int"/>
 	</class> 
