@@ -298,6 +298,7 @@ CREATE TABLE Invites
 --	|    FK	Field					|
 --	|    FK	Player					|
 --	| 		TroopNumber				|
+--	| 		AddedTroops				|
 --	#####################################################
 CREATE TABLE TroopDeployments
 (
@@ -306,6 +307,7 @@ CREATE TABLE TroopDeployments
 	Field		integer	REFERENCES Fields(ID) 		ON UPDATE CASCADE,
 	Player		integer	REFERENCES Players(ID) 		ON UPDATE CASCADE,
 	TroopNumber	smallint,
+	AddedTroops	smallint,
 	
 	PRIMARY KEY (ID)
 );

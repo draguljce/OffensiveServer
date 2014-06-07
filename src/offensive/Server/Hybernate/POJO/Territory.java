@@ -8,6 +8,7 @@ public class Territory {
 	private Field field;
 	private Player player;
 	private short troopsOnIt;
+	private short addedTroops;
 	
 	public Territory() {};
 	
@@ -57,12 +58,28 @@ public class Territory {
 	public void setField(Field field) {
 		this.field = field;
 	}
+
+	public short getAddedTroops() {
+		return addedTroops;
+	}
+
+	public void setAddedTroops(short addedTroops) {
+		this.addedTroops = addedTroops;
+	}
 	
 	public void incrementNumberOfTroops() {
 		this.troopsOnIt++;
 	}
 	
+	public void addTroop() {
+		this.addedTroops++;
+	}
+	
 	public Army getArmy() {	
 		return new Army(this.troopsOnIt, this.player, this);
+	}
+
+	public void submitTroops() {
+		this.troopsOnIt += this.addedTroops;
 	}
 }

@@ -159,6 +159,10 @@ public class HandlerThread implements Runnable {
 		finally {
 			session.close();
 		}
+
+		if(response.size() == 0) {
+			throw new InvalidStateException("Handler did not return any message!!!");
+		}
 		
 		response.get(0).message.handlerId = request.handlerId;
 		response.get(0).message.ticketId = request.ticketId;
@@ -392,14 +396,14 @@ public class HandlerThread implements Runnable {
 			offensive.Server.Hybernate.POJO.Player player = this.getPlayerForGame(request.getGameId(), session);
 			offensive.Server.Hybernate.POJO.CurrentGame game = player.getGame();
 			
-			if(!game.getPhase().getName().equals("Reinforcements")) {
+			if(game.getPhase().getId() != 0 && game.getPhase().getId() != 0) {
 				return;
 			}
 			
 			if(player.getNumberOfReinforcements() > 0 && !player.getIsPlayedMove()) { 
 				offensive.Server.Hybernate.POJO.Territory territory = (offensive.Server.Hybernate.POJO.Territory) HibernateUtil.executeScalarHql(String.format("FROM Territory territory WHERE territory.field = %s", request.getTerritoryId()), session);
 				
-				territory.incrementNumberOfTroops();
+				territory.addTroop();
 				player.decreaseNumberOfUnits();
 				
 				if(player.getNumberOfReinforcements() == 0) {
@@ -781,6 +785,8 @@ public class HandlerThread implements Runnable {
 		
 		if(nextPhase.getId() == 1) {
 			game.nextRound();
+		} else if(nextPhase.getId() == 2) {
+			game.getTerritories().forEach(territory -> territory.submitTroops());
 		}
 		
 		for(offensive.Server.Hybernate.POJO.Player player: game.getPlayers()) {

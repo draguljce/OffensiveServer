@@ -11,5 +11,6 @@
 		<many-to-one name="field" column="Field" class="offensive.Server.Hybernate.POJO.Field"/>
 		<many-to-one name="player" column="Player" class="offensive.Server.Hybernate.POJO.Player"/>
 		<property name="troopsOnIt" column="TroopNumber" type="short"/>
+		<property name="addedTroops" column="Addedtroops" type="short"/>
 	</class> 
 </hibernate-mapping>
