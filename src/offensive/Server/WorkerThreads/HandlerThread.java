@@ -1,6 +1,7 @@
 package offensive.Server.WorkerThreads;
 
 import java.nio.channels.SelectionKey;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.LinkedList;
@@ -48,6 +49,7 @@ import communication.protos.CommunicationProtos.GetUserDataRequest;
 import communication.protos.CommunicationProtos.GetUserDataResponse;
 import communication.protos.CommunicationProtos.InvokeAllianceRequest;
 import communication.protos.CommunicationProtos.InvokeAllianceResponse;
+import communication.protos.CommunicationProtos.JoinGameNotification;
 import communication.protos.CommunicationProtos.JoinGameRequest;
 import communication.protos.CommunicationProtos.JoinGameResponse;
 import communication.protos.CommunicationProtos.MoveUnitsRequest;
@@ -286,15 +288,19 @@ public class HandlerThread implements Runnable {
 		response.add(new SendableMessage(new ProtobuffMessage(getOpenGamesResponseBuilder.build()), this.session));
 	}
 	
-	private void proccessJoinGameRequest (JoinGameRequest request, Session session, List<SendableMessage> response) {
+	private void proccessJoinGameRequest (JoinGameRequest request, Session session, List<SendableMessage> response) throws UserNotFoundException {
 		Transaction tran = session.beginTransaction();
 		JoinGameResponse.Builder responsebuilder = JoinGameResponse.newBuilder();
+		offensive.Server.Hybernate.POJO.Player chosenPlayer;
 		
 		CurrentGame targetGame;
 		try {
 			targetGame = (CurrentGame)session.get(CurrentGame.class, request.getGameId());
 
-			offensive.Server.Hybernate.POJO.Player chosenPlayer = Server.getServer().rand.chooseRandomElement(targetGame.getPlayers());
+			Collection<offensive.Server.Hybernate.POJO.Player> eligiblePlayers = new ArrayList<>(targetGame.getPlayers());
+			eligiblePlayers.removeIf(player -> player.getUser() != null);
+			
+			chosenPlayer = Server.getServer().rand.chooseRandomElement(eligiblePlayers);
 			
 			chosenPlayer.setUser(this.session.user);
 			
@@ -317,6 +323,17 @@ public class HandlerThread implements Runnable {
 		}
 		
 		response.add(new SendableMessage(new ProtobuffMessage(responsebuilder.build()), this.session));
+		
+		JoinGameNotification.Builder joinGameNotificationBuilder = JoinGameNotification.newBuilder();
+		joinGameNotificationBuilder.setPlayer(this.getPlayerFromPOJO(chosenPlayer, session));
+		joinGameNotificationBuilder.setGameId(request.getGameId());
+		
+		JoinGameNotification joinGameNotification = joinGameNotificationBuilder.build();
+		
+		// We should notify the rest of players of a new player.
+		for(offensive.Server.Sessions.Session playerSession: GameManager.onlyInstance.getSessionsForGame(request.getGameId())) {	
+			response.add(new SendableMessage(new ProtobuffMessage(joinGameNotification), playerSession));
+		}
 	}
 	
 	private void proccessInvokeAllianceRequest(InvokeAllianceRequest request, Session session, List<SendableMessage> response) {
@@ -386,7 +403,7 @@ public class HandlerThread implements Runnable {
 			offensive.Server.Hybernate.POJO.Player player = this.getPlayerForGame(request.getGameId(), session);
 			offensive.Server.Hybernate.POJO.CurrentGame game = player.getGame();
 			
-			if(game.getPhase().getId() != 0 && game.getPhase().getId() != 0) {
+			if(game.getPhase().getId() != 0 && game.getPhase().getId() != 1) {
 				return;
 			}
 			
