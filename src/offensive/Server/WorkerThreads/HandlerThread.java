@@ -650,8 +650,9 @@ public class HandlerThread implements Runnable {
 	private Territory getTerritoryFromPOJO(offensive.Server.Hybernate.POJO.Territory territory) {
 		Territory.Builder territoryBuilder = Territory.newBuilder();
 		
+		int totalTroopsOnTerritory = territory.getTroopsOnIt() + (this.session.user.equals(territory.getPlayer().getUser()) ? territory.getAddedTroops() : 0);
 		territoryBuilder.setId(territory.getField().getId());
-		territoryBuilder.setTroopsOnIt(territory.getTroopsOnIt());
+		territoryBuilder.setTroopsOnIt(totalTroopsOnTerritory);
 		territoryBuilder.setPlayerId(territory.getPlayer().getId());
 		
 		return territoryBuilder.build();
