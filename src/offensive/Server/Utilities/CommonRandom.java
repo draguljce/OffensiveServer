@@ -6,6 +6,8 @@ import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
 
+import offensive.Server.Server;
+
 public class CommonRandom {
 	public long seed;
 	
@@ -51,7 +53,7 @@ public class CommonRandom {
 		return ((long)next(32) << 32) + next(32);
 	}
 	
-	public static <T> Collection<T> chooseRandomSubset(List<T> sourceCollection, int numberOfElements) {
+	public <T> Collection<T> chooseRandomSubset(Collection<T> sourceCollection, int numberOfElements) {
 		List<T> copyCollection = new LinkedList<T>();
 		
 		sourceCollection.forEach(element -> copyCollection.add(element));
@@ -59,5 +61,18 @@ public class CommonRandom {
 		Collections.shuffle(copyCollection);
 		
 		return copyCollection.subList(0, numberOfElements);
+	}
+	
+	public <T> T chooseRandomElement(Collection<T> sourceCollection) {
+		int chosenElement = Server.getServer().rand.nextInt(sourceCollection.size());
+		
+		int currentElement = 0;
+		for(T element: sourceCollection) {
+			if(chosenElement == currentElement++) {
+				return element;
+			}
+		}
+		
+		return null;
 	}
 }

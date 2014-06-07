@@ -24,7 +24,6 @@ import offensive.Server.Hybernate.POJO.Phase;
 import offensive.Server.Hybernate.POJO.Phases;
 import offensive.Server.Sessions.SessionManager;
 import offensive.Server.Sessions.Game.GameManager;
-import offensive.Server.Utilities.CommonRandom;
 import offensive.Server.Utilities.Constants;
 import offensive.Server.Utilities.HibernateUtil;
 
@@ -216,7 +215,7 @@ public class HandlerThread implements Runnable {
 		@SuppressWarnings("unchecked")
 		List<Color> allColors = (List<Color>)HibernateUtil.executeHql("FROM Color", session);
 		
-		Collection<Color> chosenColors = CommonRandom.chooseRandomSubset(allColors, request.getNumberOfPlayers());
+		Collection<Color> chosenColors = Server.getServer().rand.chooseRandomSubset(allColors, request.getNumberOfPlayers());
 		
 		Transaction tran = session.beginTransaction();
 		
@@ -294,19 +293,10 @@ public class HandlerThread implements Runnable {
 		CurrentGame targetGame;
 		try {
 			targetGame = (CurrentGame)session.get(CurrentGame.class, request.getGameId());
+
+			offensive.Server.Hybernate.POJO.Player chosenPlayer = Server.getServer().rand.chooseRandomElement(targetGame.getPlayers());
 			
-			@SuppressWarnings("unchecked")
-			List<Color> allColors = (List<Color>)HibernateUtil.executeHql("FROM Color", session);
-			
-			for(offensive.Server.Hybernate.POJO.Player player: targetGame.getPlayers()) {
-				allColors.remove(player.getColor());
-			}
-			
-			Color chosenColor = allColors.get(Server.getServer().rand.nextInt(allColors.size()));
-			
-			offensive.Server.Hybernate.POJO.Player newPlayer = new offensive.Server.Hybernate.POJO.Player(this.session.user, targetGame, chosenColor);
-			
-			targetGame.getPlayers().add(newPlayer);
+			chosenPlayer.setUser(this.session.user);
 			
 			targetGame.joinPlayer();
 			
