@@ -17,15 +17,19 @@ public class GameManager {
 	
 	public void addGames(Session session) {
 		for(CurrentGame pojoGame: session.user.getGames()) {
-			Game game = this.allGames.get(pojoGame.getId());
+			this.addGame(pojoGame, session);
+		}
+	}
+	
+	public void addGame(CurrentGame pojoGame, Session session) {
+		Game game = this.allGames.get(pojoGame.getId());
+		
+		if (game == null) {
+			Game newGame = new Game(pojoGame, session);
 			
-			if (game == null) {
-				Game newGame = new Game(pojoGame, session);
-				
-				this.allGames.put(pojoGame.getId(), newGame);
-			} else {
-				game.activeSessions.add(session);
-			}
+			this.allGames.put(pojoGame.getId(), newGame);
+		} else {
+			game.activeSessions.add(session);
 		}
 	}
 	
