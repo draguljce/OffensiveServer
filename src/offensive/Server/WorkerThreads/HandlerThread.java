@@ -808,7 +808,7 @@ public class HandlerThread implements Runnable {
 		
 		AdvancePhaseNotification.Builder advancePhaseNotificationBuilder = AdvancePhaseNotification.newBuilder();
 		
-		return new SendableMessage(new ProtobuffMessage(advancePhaseNotificationBuilder.build()), GameManager.onlyInstance.getSessionsForGame(game.getId()));
+		return new SendableMessage(new ProtobuffMessage(HandlerId.AdvancePhaseNotification, 0, advancePhaseNotificationBuilder.build()), GameManager.onlyInstance.getSessionsForGame(game.getId()));
 	}
 	
 	private void divideTerritories(CurrentGame game, Session session) {

@@ -23,7 +23,8 @@ public enum HandlerId {
 	AdvanceToNextBattle,		//	16
 	RollDiceClicked,			//	17
 	PlayerRolledDice,			//	18
-	JoinGameNotification;		//	19
+	JoinGameNotification,		//	19
+	AdvancePhaseNotification;	//	20
 	
 	private static Map<Integer, HandlerId> intToHandlerMap;
 	
