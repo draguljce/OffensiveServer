@@ -244,7 +244,9 @@ public class HandlerThread implements Runnable {
 			
 			
 			session.save(newGame);
-			tran.commit();
+			
+			GameManager.onlyInstance.addGame(newGame, this.session);
+ 			tran.commit();
 		}
 		catch(Exception e){
 			Server.getServer().logger.error(e.getMessage(), e);

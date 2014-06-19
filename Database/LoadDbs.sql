@@ -15,7 +15,8 @@ INSERT INTO UserTypes VALUES ('OffensiveUser'), ('FacebookUser');
 --	| PK	ID			|
 --	| FK	Type		|
 --	#####################################################
-INSERT INTO Users VALUES (1, 'FacebookUser');
+INSERT INTO Users VALUES (default, 'FacebookUser');
+INSERT INTO Users VALUES (default, 'FacebookUser');
 
 --	#####################################################
 --	---------------------
@@ -25,6 +26,7 @@ INSERT INTO Users VALUES (1, 'FacebookUser');
 --	| 		userID		|
 --	#####################################################
 INSERT INTO FacebookUsers VALUES (1282639449, 1);
+INSERT INTO FacebookUsers VALUES (100000564933202, 2);
 
 --	#####################################################
 --	---------------------
