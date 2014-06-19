@@ -108,20 +108,23 @@ public class ProtobuffMessage extends Message{
 			case CommandsSubmittedRequest:
 				CommandsSubmittedRequest commandsSubmittedRequest = CommandsSubmittedRequest.parseFrom(data);
 				generatedMessage = commandsSubmittedRequest;
-				this.IsBattleThreadMessage = true;
+				this.IsBattleThreadMessage = false;
 				this.gameId = commandsSubmittedRequest.getGameId();
-
+				break;
+				
 			case AdvanceToNextBattle:
 				AdvanceToNextBattle advanceToNextBattle = AdvanceToNextBattle.parseFrom(data);
 				generatedMessage = advanceToNextBattle;
 				this.IsBattleThreadMessage = true;
 				this.gameId = advanceToNextBattle.getGameId();
+				break;
 
 			case RollDiceClicked:
 				RollDiceClicked rollDiceClicked = RollDiceClicked.parseFrom(data);
 				generatedMessage = rollDiceClicked;
 				this.IsBattleThreadMessage = true;
 				this.gameId = rollDiceClicked.getGameId();
+				break;
 
 			default:
 				break;

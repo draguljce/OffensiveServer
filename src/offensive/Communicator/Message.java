@@ -25,7 +25,17 @@ public abstract class Message {
 	
 	@Override
 	public String toString() {
-		return "\n" + this.handlerId.toString() + "|" + this.ticketId + "|" + this.dataLength + "|" + this.status + "|" + this.serializationType + "\n";
+		return 
+				"\n" + 
+				this.handlerId.toString() + 
+				"|" + 
+				this.ticketId + 
+				"|" + 
+				this.dataLength + 
+				"|" + 
+				this.status + 
+				"|" + 
+				this.serializationType + "\n";
 	}
 	
 	public ByteBuffer serialize() {

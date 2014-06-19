@@ -415,14 +415,6 @@ public class HandlerThread implements Runnable {
 				
 				territory.addTroop();
 				player.decreaseNumberOfUnits();
-				
-				if(player.getNumberOfReinforcements() == 0) {
-					player.setIsPlayedMove(true);
-					
-					if(this.shouldAdvanceToNextPhase(game)) {
-						response.add(this.advanceToNextPhase(game, session));
-					}
-				}
 
 				session.update(territory);
 				session.update(player);
@@ -495,6 +487,7 @@ public class HandlerThread implements Runnable {
 			session.update(player);
 			
 			CurrentGame game = (CurrentGame)session.get(CurrentGame.class, request.getGameId());
+			response.add(new SendableMessage(new ProtobuffMessage(responseBuilder.build()), this.session));
 			if(this.shouldAdvanceToNextPhase(game)) {
 				response.add(this.advanceToNextPhase(game, session));
 			}
@@ -510,8 +503,7 @@ public class HandlerThread implements Runnable {
 		} finally {
 			tran.commit();
 		}
-		
-		response.add(new SendableMessage(new ProtobuffMessage(responseBuilder.build()), this.session));
+
 		return;
 	}
 	
