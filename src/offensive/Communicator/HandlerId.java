@@ -22,7 +22,8 @@ public enum HandlerId {
 	BorderClashes,				//	15
 	AdvanceToNextBattle,		//	16
 	RollDiceClicked,			//	17
-	PlayerRolledDice;			//	18
+	PlayerRolledDice,			//	18
+	JoinGameNotification;		//	19
 	
 	private static Map<Integer, HandlerId> intToHandlerMap;
 	

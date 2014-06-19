@@ -7,6 +7,7 @@ import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
 
+import offensive.Communicator.HandlerId;
 import offensive.Communicator.ProtobuffMessage;
 import offensive.Communicator.SendableMessage;
 import offensive.Communicator.SerializationType;
@@ -332,7 +333,7 @@ public class HandlerThread implements Runnable {
 		
 		// We should notify the rest of players of a new player.
 		for(offensive.Server.Sessions.Session playerSession: GameManager.onlyInstance.getSessionsForGame(request.getGameId())) {	
-			response.add(new SendableMessage(new ProtobuffMessage(joinGameNotification), playerSession));
+			response.add(new SendableMessage(new ProtobuffMessage(HandlerId.JoinGameNotification, 0, joinGameNotification), playerSession));
 		}
 	}
 	
