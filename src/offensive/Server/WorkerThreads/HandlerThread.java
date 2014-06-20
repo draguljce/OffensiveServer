@@ -316,7 +316,7 @@ public class HandlerThread implements Runnable {
 			session.update(targetGame);
 			
 			tran.commit();
-			
+			GameManager.onlyInstance.addGame(targetGame, this.session);
 			responsebuilder.setGameContext(this.getGameContextFromPOJO(targetGame, session));
 			
 		} catch (Exception e) {
@@ -334,8 +334,10 @@ public class HandlerThread implements Runnable {
 		JoinGameNotification joinGameNotification = joinGameNotificationBuilder.build();
 		
 		// We should notify the rest of players of a new player.
-		for(offensive.Server.Sessions.Session playerSession: GameManager.onlyInstance.getSessionsForGame(request.getGameId())) {	
-			response.add(new SendableMessage(new ProtobuffMessage(HandlerId.JoinGameNotification, 0, joinGameNotification), playerSession));
+		for(offensive.Server.Sessions.Session playerSession: GameManager.onlyInstance.getSessionsForGame(request.getGameId())) {
+			if(playerSession != this.session) {
+				response.add(new SendableMessage(new ProtobuffMessage(HandlerId.JoinGameNotification, 0, joinGameNotification), playerSession));
+			}
 		}
 	}
 	
