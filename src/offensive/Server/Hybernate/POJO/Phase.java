@@ -27,6 +27,6 @@ public class Phase {
 	}
 	
 	public int nextPhaseId() {
-		return (this.id + 1) % 5;
+		return (this.id + 1) % 4;
 	}
 }
