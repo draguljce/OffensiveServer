@@ -44,7 +44,7 @@ INSERT INTO Colors (Name) VALUES ('Red'), ('Green'), ('Blue'), ('Yellow'), ('Bla
 --	| PK	ID		|
 --	| 		Name		|
 --	#####################################################
-INSERT INTO Phases (ID, Name) VALUES (0, 'Not started'), (1, 'Reinforcements'), (2, 'Attack'), (3, 'Battle'), (4, 'Move');
+INSERT INTO Phases (ID, Name) VALUES (0, 'Reinforcements'), (1, 'Attack'), (2, 'Battle'), (3, 'Move');
 
 --	#####################################################
 --	---------------------

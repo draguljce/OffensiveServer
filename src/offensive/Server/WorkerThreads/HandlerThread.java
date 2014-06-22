@@ -788,9 +788,9 @@ public class HandlerThread implements Runnable {
 		Phase nextPhase = (Phase)session.get(Phase.class, game.getPhase().nextPhaseId());
 		game.setPhase(nextPhase);
 		
-		if(nextPhase.getId() == 1) {
+		if(nextPhase.getId() == 0) {
 			game.nextRound();
-		} else if(nextPhase.getId() == 2) {
+		} else if(nextPhase.getId() == 1) {
 			game.getTerritories().forEach(territory -> territory.submitTroops());
 		}
 		
@@ -801,6 +801,8 @@ public class HandlerThread implements Runnable {
 		session.update(game);
 		
 		AdvancePhaseNotification.Builder advancePhaseNotificationBuilder = AdvancePhaseNotification.newBuilder();
+		
+		advancePhaseNotificationBuilder.setGameId(game.getId());
 		
 		return new SendableMessage(new ProtobuffMessage(HandlerId.AdvancePhaseNotification, 0, advancePhaseNotificationBuilder.build()), GameManager.onlyInstance.getSessionsForGame(game.getId()));
 	}
