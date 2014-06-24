@@ -81,5 +81,6 @@ public class Territory {
 
 	public void submitTroops() {
 		this.troopsOnIt += this.addedTroops;
+		this.addedTroops = 0;
 	}
 }

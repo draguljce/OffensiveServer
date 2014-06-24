@@ -5,6 +5,11 @@ public class CommandType {
 	private String name;
 	
 	public CommandType() {};
+	
+	public CommandType(int id) {
+		this.id = id;
+	};
+	
 	public int getId() {
 		return id;
 	}

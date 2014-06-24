@@ -17,6 +17,7 @@ import offensive.Server.Exceptions.UserNotFoundException;
 import offensive.Server.Hybernate.POJO.Board;
 import offensive.Server.Hybernate.POJO.Card;
 import offensive.Server.Hybernate.POJO.Color;
+import offensive.Server.Hybernate.POJO.CommandType;
 import offensive.Server.Hybernate.POJO.CompletedGameStatistics;
 import offensive.Server.Hybernate.POJO.CurrentGame;
 import offensive.Server.Hybernate.POJO.FacebookUser;
@@ -34,10 +35,13 @@ import org.hibernate.SQLQuery;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
+import com.google.protobuf.GeneratedMessage;
+
 import communication.protos.CommunicationProtos.AddUnitRequest;
 import communication.protos.CommunicationProtos.AddUnitResponse;
 import communication.protos.CommunicationProtos.AdvancePhaseNotification;
 import communication.protos.CommunicationProtos.AttackRequest;
+import communication.protos.CommunicationProtos.AttackResponse;
 import communication.protos.CommunicationProtos.CommandsSubmittedRequest;
 import communication.protos.CommunicationProtos.CommandsSubmittedResponse;
 import communication.protos.CommunicationProtos.CreateGameRequest;
@@ -54,6 +58,7 @@ import communication.protos.CommunicationProtos.JoinGameNotification;
 import communication.protos.CommunicationProtos.JoinGameRequest;
 import communication.protos.CommunicationProtos.JoinGameResponse;
 import communication.protos.CommunicationProtos.MoveUnitsRequest;
+import communication.protos.CommunicationProtos.MoveUnitsResponse;
 import communication.protos.CommunicationProtos.TradeCardsRequest;
 import communication.protos.CommunicationProtos.TradeCardsResponse;
 import communication.protos.DataProtos.Alliance;
@@ -438,8 +443,10 @@ public class HandlerThread implements Runnable {
 	}
 	
 	private void proccessCommandRequest(long gameId, Command request, Session session, List<SendableMessage> response) throws Exception {
-		MoveUnitsRequest.Builder responseBuilder = MoveUnitsRequest.newBuilder();
-
+		
+		@SuppressWarnings("rawtypes")
+		GeneratedMessage.Builder responseBuilder = null;
+		
 		offensive.Server.Hybernate.POJO.Command command = new offensive.Server.Hybernate.POJO.Command();
 
 		Transaction tran = session.beginTransaction();
@@ -447,13 +454,18 @@ public class HandlerThread implements Runnable {
 		try {
 			CurrentGame game = (CurrentGame)session.get(CurrentGame.class, gameId);
 			
+			if(game.getPhase().getId() == Phases.Attack.ordinal()) {
+				responseBuilder = AttackResponse.newBuilder();
+			} else if (game.getPhase().getId() == Phases.Move.ordinal()) {
+				responseBuilder = MoveUnitsResponse.newBuilder();
+			}
+			
 			command.setGame(game);
 			command.setPlayer(this.getPlayerForGame(gameId, session));
 			command.setRound(game.getCurrentRound());
 			command.setPhase(game.getPhase());
 			
 			offensive.Server.Hybernate.POJO.Territory sourceTerritory = game.getTerritory(request.getSourceTerritory());
-			sourceTerritory.setTroopsOnIt((short)(sourceTerritory.getTroopsOnIt() - request.getNumberOfUnits()));
 			
 			if(sourceTerritory.getTroopsOnIt() <= request.getNumberOfUnits()) {
 				throw new InvalidStateException("User does not have enough troops!!!");
@@ -465,6 +477,7 @@ public class HandlerThread implements Runnable {
 			command.setDestination(game.getTerritory(request.getDestinationTerritory()));
 			command.setTroopNumber(request.getNumberOfUnits());
 			
+			command.setType(new CommandType(0));
 			session.save(command);
 			session.update(sourceTerritory);
 			
@@ -475,7 +488,7 @@ public class HandlerThread implements Runnable {
 			throw e;
 		}
 		
-		response.add(new SendableMessage(new ProtobuffMessage(responseBuilder.build()), this.session));
+		response.add(new SendableMessage(new ProtobuffMessage((GeneratedMessage)responseBuilder.build()), this.session));
 	}
 	
 	private void proccessCommandsSubmittedRequest(CommandsSubmittedRequest request, Session session, List<SendableMessage> response) {
@@ -785,13 +798,21 @@ public class HandlerThread implements Runnable {
 	}
 	
 	private SendableMessage advanceToNextPhase(CurrentGame game, Session session) {
+		AdvancePhaseNotification.Builder advancePhaseNotificationBuilder = AdvancePhaseNotification.newBuilder();
+		
+		advancePhaseNotificationBuilder.setGameId(game.getId());
+		
 		Phase nextPhase = (Phase)session.get(Phase.class, game.getPhase().nextPhaseId());
 		game.setPhase(nextPhase);
 		
 		if(nextPhase.getId() == 0) {
 			game.nextRound();
 		} else if(nextPhase.getId() == 1) {
-			game.getTerritories().forEach(territory -> territory.submitTroops());
+			for(offensive.Server.Hybernate.POJO.Territory territory :game.getTerritories()) {
+				territory.submitTroops();
+				advancePhaseNotificationBuilder.addTerritories(this.getTerritoryFromPOJO(territory));
+			}
+			
 		}
 		
 		for(offensive.Server.Hybernate.POJO.Player player: game.getPlayers()) {
@@ -799,10 +820,6 @@ public class HandlerThread implements Runnable {
 		}
 		
 		session.update(game);
-		
-		AdvancePhaseNotification.Builder advancePhaseNotificationBuilder = AdvancePhaseNotification.newBuilder();
-		
-		advancePhaseNotificationBuilder.setGameId(game.getId());
 		
 		return new SendableMessage(new ProtobuffMessage(HandlerId.AdvancePhaseNotification, 0, advancePhaseNotificationBuilder.build()), GameManager.onlyInstance.getSessionsForGame(game.getId()));
 	}
