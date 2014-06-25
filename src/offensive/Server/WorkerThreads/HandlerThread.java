@@ -466,6 +466,16 @@ public class HandlerThread implements Runnable {
 			command.setPhase(game.getPhase());
 			
 			offensive.Server.Hybernate.POJO.Territory sourceTerritory = game.getTerritory(request.getSourceTerritory());
+			offensive.Server.Hybernate.POJO.Territory destinationTerritory = game.getTerritory(request.getDestinationTerritory());
+			
+			Query query = session.createQuery("FROM Connection con WHERE (con.field1.id = :src AND con.field2.id = :dst) OR (con.field1.id = :dst AND con.field2.id = :src)");
+			
+			query.setParameter("src", sourceTerritory.getField().getId());
+			query.setParameter("dst", destinationTerritory.getField().getId());
+			
+			if(query.list().size() == 0) {
+				throw new InvalidStateException("Territories are not connected!");
+			}
 			
 			if(sourceTerritory.getTroopsOnIt() <= request.getNumberOfUnits()) {
 				throw new InvalidStateException("User does not have enough troops!!!");
@@ -474,7 +484,7 @@ public class HandlerThread implements Runnable {
 			sourceTerritory.setTroopsOnIt((short)(sourceTerritory.getTroopsOnIt() - request.getNumberOfUnits()));
 			
 			command.setSource(sourceTerritory);
-			command.setDestination(game.getTerritory(request.getDestinationTerritory()));
+			command.setDestination(destinationTerritory);
 			command.setTroopNumber(request.getNumberOfUnits());
 			
 			command.setType(new CommandType(0));
@@ -699,8 +709,8 @@ public class HandlerThread implements Runnable {
 		Command.Builder commandBuilder = Command.newBuilder();
 		
 		commandBuilder.setCommandId(command.getType().getId());
-		commandBuilder.setSourceTerritory(command.getSource().getId());
-		commandBuilder.setDestinationTerritory(command.getDestination().getId());
+		commandBuilder.setSourceTerritory(command.getSource().getField().getId());
+		commandBuilder.setDestinationTerritory(command.getDestination().getField().getId());
 		commandBuilder.setNumberOfUnits(command.getTroopNumber());
 		
 		return commandBuilder.build();
@@ -753,7 +763,9 @@ public class HandlerThread implements Runnable {
 		}
 		
 		for(offensive.Server.Hybernate.POJO.Command command: game.getCommands()) {
-			gameContextBuilder.addPendingComands(this.getCommandFromPOJO(command));
+			if(command.getPlayer().getUser().equals(this.session.user)) {
+				gameContextBuilder.addPendingComands(this.getCommandFromPOJO(command));
+			}
 		}
 		
 		return gameContextBuilder.build();

@@ -226,15 +226,16 @@ CREATE TABLE Fields
 --	-------------------------
 --	|		Connections		|
 --	-------------------------
---	| PK FK	Field1			|
---	| PK FK	Field2			|
+--	| PK 	ID				|
+--	|    FK	Field1			|
+--	|    FK	Field2			|
 --	#####################################################
 CREATE TABLE Connections
 (
+	ID		SERIAL,
 	Field1	integer	REFERENCES Fields(ID) ON UPDATE CASCADE,
 	Field2	integer	REFERENCES Fields(ID) ON UPDATE CASCADE,
 	
-	PRIMARY KEY (Field1, Field2),
 	CHECK (Field1<>Field2)
 );
 

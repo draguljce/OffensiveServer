@@ -142,7 +142,7 @@ INSERT INTO HasFields VALUES
 --	| PK FK	Field1			|
 --	| PK FK	Field2			|
 --	#####################################################
-INSERT INTO Connections VALUES
+INSERT INTO Connections (Field1, Field2) VALUES
 (1, 2), (1, 6), (2, 6),
 (5, 6), (6, 7), (5, 8),
 (5, 7), (2, 7), (7, 8),

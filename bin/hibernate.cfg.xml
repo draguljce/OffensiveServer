@@ -41,5 +41,6 @@
 		<mapping resource="Alliance.hbm.xml"/>
 		<mapping resource="Command.hbm.xml"/>
 		<mapping resource="CommandType.hbm.xml"/>
+		<mapping resource="Connection.hbm.xml"/>
 	</session-factory> 
 </hibernate-configuration>

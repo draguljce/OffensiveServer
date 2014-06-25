@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?> 
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd"> 
+
+<hibernate-mapping> 
+	<class name="offensive.Server.Hybernate.POJO.Connection" table="Connections">  
+		<id name="id" type="int" column="id"/>
+		
+		<many-to-one name="field1" column="Field1" class="offensive.Server.Hybernate.POJO.Field"/>
+		<many-to-one name="field2" column="Field2" class="offensive.Server.Hybernate.POJO.Field"/>  
+	</class> 
+</hibernate-mapping>
