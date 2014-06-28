@@ -411,35 +411,40 @@ public class HandlerThread implements Runnable {
 		AddUnitResponse.Builder responseBuilder = AddUnitResponse.newBuilder();
 		
 		Transaction tran = session.beginTransaction();
+		Server.getServer().logger.debug("AddUnit handler started transaction");
 		
 		try{
 			offensive.Server.Hybernate.POJO.Player player = this.getPlayerForGame(request.getGameId(), session);
 			offensive.Server.Hybernate.POJO.CurrentGame game = player.getGame();
 			
+			Server.getServer().logger.debug(String.format("Adding units in game:%s", game.getGameName()));
 			if(game.getPhase().getId() != 0 && game.getPhase().getId() != 1) {
 				return;
 			}
 			
 			if(player.getNumberOfReinforcements() > 0 && !player.getIsPlayedMove()) { 
-				offensive.Server.Hybernate.POJO.Territory territory = (offensive.Server.Hybernate.POJO.Territory) HibernateUtil.executeScalarHql(String.format("FROM Territory territory WHERE territory.field = %s", request.getTerritoryId()), session);
+				offensive.Server.Hybernate.POJO.Territory territory = game.getTerritory(request.getTerritoryId());
 				
+				Server.getServer().logger.debug(String.format("Adding troop on territory:%s\nTroops before:%s\nTroops added before:%s", territory.getField().getName(), territory.getTroopsOnIt(), territory.getAddedTroops()));
 				territory.addTroop();
 				player.decreaseNumberOfUnits();
 
 				session.update(territory);
 				session.update(player);
-				
+
+				Server.getServer().logger.debug(String.format("Adding troop on territory:%s\nTroops after:%s\nTroops added after:%s", territory.getField().getName(), territory.getTroopsOnIt(), territory.getAddedTroops()));
 				responseBuilder.setIsSuccessfull(true);
 			} else {
 				responseBuilder.setIsSuccessfull(false);
 			}
-
+			
+			Server.getServer().logger.debug("AddUnit handler commited transaction");
+			tran.commit();
 		} catch (Exception e) {
 			Server.getServer().logger.error(e.getMessage(), e);
+			Server.getServer().logger.debug("AddUnitHandler rolled back transaction");
 			tran.rollback();
 			return;
-		} finally {
-			tran.commit();
 		}
 		
 		response.add(new SendableMessage(new ProtobuffMessage(responseBuilder.build()), this.session));
