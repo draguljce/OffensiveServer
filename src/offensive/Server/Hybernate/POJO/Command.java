@@ -92,8 +92,8 @@ public class Command {
 		DataProtos.Command.Builder commandBuilder = DataProtos.Command.newBuilder();
 		
 		commandBuilder.setCommandId(this.id);
-		commandBuilder.setSourceTerritory(this.source.getId());
-		commandBuilder.setDestinationTerritory(this.destination.getId());
+		commandBuilder.setSourceTerritory(this.source.getField().getId());
+		commandBuilder.setDestinationTerritory(this.destination.getField().getId());
 		commandBuilder.setNumberOfUnits(this.troopNumber);
 		
 		return commandBuilder.build();

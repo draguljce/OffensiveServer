@@ -100,7 +100,7 @@ public class HandlerThread implements Runnable {
 			}
 		} catch (InvalidStateException invalidStateException) {
 			Server.getServer().logger.error(invalidStateException.getMessage(), invalidStateException);
-			SessionManager.getOnlyInstance().removeKey(this.key);
+			SessionManager.onlyInstance.removeKey(this.key);
 		} catch (Exception e) {
 			Server.getServer().logger.error(e.getMessage(), e);
 		} finally {
@@ -182,7 +182,10 @@ public class HandlerThread implements Runnable {
 	 * @throws UserNotFoundException *****************************************************************************************************************************************************/
 	private void proccessGetUserDataRequest(GetUserDataRequest request, Session session, List<SendableMessage> response) throws UserNotFoundException {
 
-		this.session.user = (offensive.Server.Hybernate.POJO.User)session.get(offensive.Server.Hybernate.POJO.User.class, request.getUserId());
+		offensive.Server.Hybernate.POJO.User user = (offensive.Server.Hybernate.POJO.User)session.get(offensive.Server.Hybernate.POJO.User.class, request.getUserId());
+		SessionManager.onlyInstance.removeIfExist(user);
+		this.session.user = user;
+		
 		GetUserDataResponse.Builder getUserDataResponseBuilder = GetUserDataResponse.newBuilder();
 		
 		getUserDataResponseBuilder.setUserData(this.getUserData(request.getUserId(), session));
@@ -518,7 +521,7 @@ public class HandlerThread implements Runnable {
 			}
 			
 			if(game.getPhase().getName().equals("Battle")) {
-				SessionManager.getOnlyInstance().startBattle(game);
+				SessionManager.onlyInstance.startBattle(game.getId());
 			}
 			
 		} catch(Exception e) {

@@ -15,7 +15,7 @@ import java.util.concurrent.TimeUnit;
 import offensive.Communicator.Communicator;
 import offensive.Communicator.ProtobuffMessage;
 import offensive.Server.Server;
-import offensive.Server.Hybernate.POJO.CurrentGame;
+import offensive.Server.Hybernate.POJO.User;
 import offensive.Server.Sessions.Game.GameManager;
 import offensive.Server.Utilities.Constants;
 import offensive.Server.Utilities.Environment;
@@ -24,6 +24,8 @@ import offensive.Server.WorkerThreads.HandlerThread;
 import offensive.Server.WorkerThreads.BattleThread.BattleThread;
 
 public class SessionManager implements Runnable{
+	public static SessionManager onlyInstance = new SessionManager();
+	
 	private Selector selector;
 	
 	private Environment environment;
@@ -34,8 +36,6 @@ public class SessionManager implements Runnable{
 	
 	private boolean shouldShutdown;
 	private Thread sessionThread;
-	
-	private static SessionManager onlyInstance = new SessionManager();
 	
 	private List<SocketChannel> newChannels = new LinkedList<SocketChannel>();
 	
@@ -102,8 +102,14 @@ public class SessionManager implements Runnable{
 		return newSession;
 	}
 	
-	public static SessionManager getOnlyInstance() {
-		return SessionManager.onlyInstance;
+	public void removeIfExist(User user) {
+		for(SelectionKey key :this.selector.keys()) {
+			User existingUser = ((Session)key.attachment()).user;
+			if(existingUser != null && existingUser.equals(user)) {
+				this.removeKey(key);
+				break;
+			}
+		}
 	}
 
 	@Override
@@ -211,12 +217,12 @@ public class SessionManager implements Runnable{
 		}
 	}
 	
-	public void startBattle(CurrentGame game) {
+	public void startBattle(long gameId) {
 		ZeroParamsCallback callback = new ZeroParamsCallback()  {
 			private HashMap<Long, BattleThread> map;
 			private long gameId;
 			
-			ZeroParamsCallback initialise(HashMap<Long, BattleThread> map, long gameId) {
+			ZeroParamsCallback initialize(HashMap<Long, BattleThread> map, long gameId) {
 				this.map = map;
 				this.gameId = gameId;
 				
@@ -227,12 +233,12 @@ public class SessionManager implements Runnable{
 			public void call() {
 				this.map.remove(this.gameId);
 			}
-		}.initialise(this.battleThreadMap, game.getId());
+		}.initialize(this.battleThreadMap, gameId);
 		
-		BattleThread battleThread = new BattleThread(game, callback);
+		BattleThread battleThread = new BattleThread(gameId, callback);
 		Thread newBattleThread = new Thread(battleThread);
 		
-		this.battleThreadMap.put(game.getId(), battleThread);
+		this.battleThreadMap.put(gameId, battleThread);
 		
 		this.battleExecutorService.submit(newBattleThread);
 	}

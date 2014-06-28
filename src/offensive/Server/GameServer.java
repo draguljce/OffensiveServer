@@ -37,7 +37,7 @@ public class GameServer extends Server implements Runnable {
 		this.logger.info("Server socket timeout is " + this.environment.getVariable(Constants.ServerSocketTimeoutVarName));
 		
 		this.logger.info("Session manager initialization started.");
-		this.sessionManager = SessionManager.getOnlyInstance();
+		this.sessionManager = SessionManager.onlyInstance;
 		this.sessionManagerThread = new Thread(this.sessionManager, "Session manager");
 		this.sessionManager.initialize(environment, this.sessionManagerThread);
 		
@@ -81,7 +81,7 @@ public class GameServer extends Server implements Runnable {
 				}
 				
 				this.logger.info("Accepted connection from address " + socketChannel.getRemoteAddress());
-				SessionManager.getOnlyInstance().CreateSession(socketChannel);
+				SessionManager.onlyInstance.CreateSession(socketChannel);
 			} catch (NumberFormatException | IOException e) {
 				this.logger.error(e.getMessage(), e);
 				System.exit(3);

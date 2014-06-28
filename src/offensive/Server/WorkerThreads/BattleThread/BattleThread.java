@@ -34,6 +34,7 @@ import communication.protos.CommunicationProtos.SpoilsOfWar;
 import communication.protos.DataProtos;
 
 public class BattleThread implements Runnable {
+	private long gameId;
 	private CurrentGame game;
 	
 	private Collection<Session> onlinePlayers;
@@ -42,11 +43,11 @@ public class BattleThread implements Runnable {
 	
 	private Collection<ProtobuffMessage> messages = new LinkedList<>();
 	
-	public BattleThread(CurrentGame game, ZeroParamsCallback callback) {
-		this.game = game;
+	public BattleThread(long gameId, ZeroParamsCallback callback) {
+		this.gameId = gameId;
 		
 		this.signalFinishCallback = callback;
-		onlinePlayers = GameManager.onlyInstance.getSessionsForGame(game.getId());
+		onlinePlayers = GameManager.onlyInstance.getSessionsForGame(gameId);
 	}
 	
 	@Override
@@ -54,11 +55,17 @@ public class BattleThread implements Runnable {
 		Transaction tran = null;
 		
 		try {
+			org.hibernate.Session session = Server.getServer().sessionFactory.openSession();
+			tran = session.beginTransaction();
+			
+			this.game = (CurrentGame) session.get(CurrentGame.class, this.gameId);
+			
 			Set<Command> allCommands = this.game.getCommands();
 			Collection<Army> armies = new LinkedList<Army>();
 			
 			CommunicationProtos.AllCommands.Builder allCommandsBuilder = CommunicationProtos.AllCommands.newBuilder();
 			
+			allCommandsBuilder.setGameId(this.gameId);
 			allCommands.forEach(command -> {
 					allCommandsBuilder.addCommands(command.toProtoCommand());
 					armies.add(command.toArmy());
@@ -101,8 +108,6 @@ public class BattleThread implements Runnable {
 				armyDestination.setTroopsOnIt((short)army.troopNumber);
 			}
 			
-			org.hibernate.Session session = Server.getServer().sessionFactory.openSession();
-			tran = session.beginTransaction();
 			this.advanceToNextPhase(this.game, session).send();
 			tran.commit();
 		} catch(Exception e) {
@@ -337,6 +342,7 @@ public class BattleThread implements Runnable {
 		switch (battleType) {
 		case borderClash:
 			BorderClashes.Builder borderClashesBuilder = BorderClashes.newBuilder();
+			borderClashesBuilder.setGameId(this.gameId);
 			
 			SendableMessage borderClashesMessage = new SendableMessage(new ProtobuffMessage(HandlerId.BorderClashes, 0,borderClashesBuilder.build()), this.onlinePlayers);
 			borderClashesMessage.send();
@@ -345,6 +351,7 @@ public class BattleThread implements Runnable {
 			
 		case multipleAttack:
 			MultipleAttacks.Builder multipleAttacksBuilder = MultipleAttacks.newBuilder();
+			multipleAttacksBuilder.setGameId(this.gameId);
 			
 			SendableMessage multipleAttacksMessage = new SendableMessage(new ProtobuffMessage(HandlerId.BorderClashes, 0,multipleAttacksBuilder.build()), this.onlinePlayers);
 			multipleAttacksMessage.send();
@@ -353,6 +360,7 @@ public class BattleThread implements Runnable {
 
 		case singleAttack:
 			SingleAttacks.Builder singleAttacksBuilder = SingleAttacks.newBuilder();
+			singleAttacksBuilder.setGameId(this.gameId);
 			
 			SendableMessage singleAttacksMessage = new SendableMessage(new ProtobuffMessage(HandlerId.BorderClashes, 0,singleAttacksBuilder.build()), this.onlinePlayers);
 			singleAttacksMessage.send();
@@ -361,6 +369,7 @@ public class BattleThread implements Runnable {
 			
 		case spoilsOfWar:
 			SpoilsOfWar.Builder spoilsOfWarBuilder = SpoilsOfWar.newBuilder();
+			spoilsOfWarBuilder.setGameId(this.gameId);
 			
 			SendableMessage spoilsOfWarMessage = new SendableMessage(new ProtobuffMessage(HandlerId.BorderClashes, 0,spoilsOfWarBuilder.build()), this.onlinePlayers);
 			spoilsOfWarMessage.send();
