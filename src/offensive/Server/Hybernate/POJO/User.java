@@ -12,6 +12,8 @@ public class User {
 	private UserType type;
 	private Set<Invite> invites;
 	private Set<Player> players;
+	
+	private long version;
 
 	public User() {};
 	
@@ -90,5 +92,13 @@ public class User {
 		}
 		
 		return false;
+	}
+
+	public long getVersion() {
+		return version;
+	}
+
+	public void setVersion(long version) {
+		this.version = version;
 	}
 }

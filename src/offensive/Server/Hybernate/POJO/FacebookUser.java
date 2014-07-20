@@ -4,6 +4,8 @@ public class FacebookUser {
 	private long facebookId;
 	private User user;
 	
+	private long version;
+	
 	public FacebookUser(){};
 	
 	public FacebookUser(long facebookId, User userId) {
@@ -25,5 +27,13 @@ public class FacebookUser {
 	
 	public void setFacebookId(long facebookId) {
 		this.facebookId = facebookId;
+	}
+
+	public long getVersion() {
+		return version;
+	}
+
+	public void setVersion(long version) {
+		this.version = version;
 	}
 }

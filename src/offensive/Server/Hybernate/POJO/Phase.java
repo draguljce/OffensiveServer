@@ -4,6 +4,8 @@ public class Phase {
 	private int id;
 	private String name;
 	
+	private long version;
+	
 	public Phase() {};
 	
 	public Phase(int id) {
@@ -28,5 +30,13 @@ public class Phase {
 	
 	public int nextPhaseId() {
 		return (this.id + 1) % 4;
+	}
+
+	public long getVersion() {
+		return version;
+	}
+
+	public void setVersion(long version) {
+		this.version = version;
 	}
 }

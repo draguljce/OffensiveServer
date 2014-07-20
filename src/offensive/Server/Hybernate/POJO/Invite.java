@@ -6,6 +6,8 @@ public class Invite {
 	private CurrentGame game;
 	private User invitedUser;
 	
+	private long version;
+	
 	public Invite() {}
 	
 	public Invite(User creator, CurrentGame game, User invitedUser) {
@@ -44,5 +46,13 @@ public class Invite {
 
 	public void setInvitedUser(User invitedUser) {
 		this.invitedUser = invitedUser;
+	}
+
+	public long getVersion() {
+		return version;
+	}
+
+	public void setVersion(long version) {
+		this.version = version;
 	}
 }

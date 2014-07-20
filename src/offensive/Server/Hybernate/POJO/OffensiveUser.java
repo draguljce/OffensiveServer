@@ -5,6 +5,8 @@ public class OffensiveUser {
 	private String userName;
 	private String password;
 	
+	private long version;
+	
 	public OffensiveUser(){};
 	
 	public OffensiveUser(long id, String userName, String password) {
@@ -35,5 +37,13 @@ public class OffensiveUser {
 	
 	public void setPassword(String password) {
 		this.password = password;
+	}
+
+	public long getVersion() {
+		return version;
+	}
+
+	public void setVersion(long version) {
+		this.version = version;
 	}
 }

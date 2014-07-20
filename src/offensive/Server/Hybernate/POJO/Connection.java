@@ -6,6 +6,8 @@ public class Connection {
 	private Field field1;
 	private Field field2;
 	
+	private long version;
+	
 	public Connection() {}
 
 	public int getId() {
@@ -30,5 +32,13 @@ public class Connection {
 
 	public void setField2(Field field2) {
 		this.field2 = field2;
+	}
+
+	public long getVersion() {
+		return version;
+	}
+
+	public void setVersion(long version) {
+		this.version = version;
 	};
 }

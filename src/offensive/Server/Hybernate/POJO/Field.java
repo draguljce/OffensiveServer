@@ -4,6 +4,8 @@ public class Field {
 	private int id;
 	private String name;
 	
+	private long version;
+	
 	public Field() {}
 
 	public int getId() {
@@ -20,5 +22,13 @@ public class Field {
 
 	public void setName(String name) {
 		this.name = name;
+	}
+
+	public long getVersion() {
+		return version;
+	}
+
+	public void setVersion(long version) {
+		this.version = version;
 	};
 }

@@ -13,6 +13,7 @@ CREATE DATABASE offensive WITH ENCODING = 'UTF8';
 CREATE TABLE UserTypes
 (
 	Name		varchar(32),
+	Version		bigint,
 	
 	PRIMARY KEY (Name)
 );
@@ -28,6 +29,7 @@ CREATE TABLE Users
 (
 	ID			BIGSERIAL,
 	Type		varchar(32)	REFERENCES UserTypes(Name) ON UPDATE CASCADE,
+	Version		bigint,
 	
 	PRIMARY KEY (ID)
 );
@@ -43,6 +45,7 @@ CREATE TABLE FacebookUsers
 (
 	FacebookID	bigint,
 	UserID		bigint	REFERENCES Users(ID) ON UPDATE CASCADE,
+	Version		bigint,
 	
 	PRIMARY KEY (FacebookID)
 );
@@ -61,6 +64,7 @@ CREATE TABLE OffensiveUsers
 	ID			bigint		REFERENCES Users(ID) ON UPDATE CASCADE,
 	UserName	varchar(32)	UNIQUE,
 	Password	varchar(512),
+	Version		bigint,
 	
 	PRIMARY KEY (ID)
 );
@@ -76,6 +80,7 @@ CREATE TABLE Colors
 (
 	ID		SERIAL,
 	Name	varchar(32),
+	Version		bigint,
 	
 	PRIMARY KEY (ID)
 );
@@ -91,6 +96,7 @@ CREATE TABLE Phases
 (
 	ID		int,
 	Name	varchar(32),
+	Version		bigint,
 	
 	PRIMARY KEY (ID)
 );
@@ -104,6 +110,7 @@ CREATE TABLE Phases
 CREATE TABLE Boards
 (
 	ID	SERIAL,
+	Version		bigint,
 	
 	PRIMARY KEY (ID)
 );
@@ -118,6 +125,7 @@ CREATE TABLE Objectives
 (
 	ID			integer,
 	Description	varchar(512),
+	Version		bigint,
 	
 	PRIMARY KEY (ID)
 );
@@ -147,7 +155,8 @@ CREATE TABLE CurrentGames
 	Board					integer		REFERENCES Boards(ID) 		ON UPDATE CASCADE,
 	CurrentRound			smallint,
 	IsOpen					boolean,
-		
+	Version		bigint,
+	
 	PRIMARY KEY (ID)
 );
 
@@ -170,6 +179,7 @@ CREATE TABLE Players
 	Color					integer		REFERENCES Colors(ID)	 	ON UPDATE CASCADE,
 	isPlayedMove			boolean,
 	numberOfReinforcements	integer,
+	Version		bigint,
 	
 	PRIMARY KEY (ID)
 );
@@ -187,6 +197,7 @@ CREATE TABLE CardTypes
 (
 	ID		SERIAL,
 	Type	varchar(32),
+	Version		bigint,
 	
 	PRIMARY KEY (ID)
 );
@@ -203,6 +214,7 @@ CREATE TABLE Cards
 	ID		SERIAL,
 	type	integer	REFERENCES CardTypes(ID)	ON UPDATE CASCADE,
 	player	integer	REFERENCES Players(ID)		ON UPDATE CASCADE,
+	Version		bigint,
 	
 	PRIMARY KEY (ID)
 );
@@ -218,6 +230,7 @@ CREATE TABLE Fields
 (
 	ID		SERIAL,
 	Name	varchar(32),
+	Version		bigint,
 	
 	PRIMARY KEY (ID)
 );
@@ -235,6 +248,7 @@ CREATE TABLE Connections
 	ID		SERIAL,
 	Field1	integer	REFERENCES Fields(ID) ON UPDATE CASCADE,
 	Field2	integer	REFERENCES Fields(ID) ON UPDATE CASCADE,
+	Version		bigint,
 	
 	CHECK (Field1<>Field2)
 );
@@ -250,6 +264,7 @@ CREATE TABLE HasFields
 (
 	Board	integer REFERENCES Boards(ID) ON UPDATE CASCADE,
 	Field	integer REFERENCES Fields(ID) ON UPDATE CASCADE,
+	Version		bigint,
 	
 	PRIMARY KEY (Board, Field)
 );
@@ -267,6 +282,7 @@ CREATE TABLE CompletedGamesStatistics
 	ID			SERIAL,
 	Player		integer REFERENCES Players(ID) 		ON UPDATE CASCADE,
 	Ranking		smallint,
+	Version		bigint,
 	
 	PRIMARY KEY (ID)
 );
@@ -286,6 +302,7 @@ CREATE TABLE Invites
 	Creator		bigint	REFERENCES Users(ID) 		ON UPDATE CASCADE,
 	Game		bigint	REFERENCES CurrentGames(ID) ON UPDATE CASCADE,
 	InvitedUser	integer	REFERENCES Users(ID)		ON UPDATE CASCADE,
+	Version		bigint,
 	
 	PRIMARY KEY (ID)
 );
@@ -309,6 +326,7 @@ CREATE TABLE TroopDeployments
 	Player		integer	REFERENCES Players(ID) 		ON UPDATE CASCADE,
 	TroopNumber	smallint,
 	AddedTroops	smallint,
+	Version		bigint,
 	
 	PRIMARY KEY (ID)
 );
@@ -326,6 +344,7 @@ CREATE TABLE CommandTypes
 (
 	ID		SERIAL,
 	Name	varchar(32),
+	Version		bigint,
 	
 	PRIMARY KEY (ID)
 );
@@ -355,6 +374,7 @@ CREATE TABLE Commands
 	Destination	integer	REFERENCES TroopDeployments(ID)	ON UPDATE CASCADE,
 	Type		integer	REFERENCES CommandTypes(ID) 	ON UPDATE CASCADE,
 	TroopNumber	integer,
+	Version		bigint,
 	
 	PRIMARY KEY (ID),
 	CHECK (Source<>Destination)
@@ -371,6 +391,7 @@ CREATE TABLE AllianceTypes
 (
 	ID		SERIAL,
 	Name	varchar(32),
+	Version		bigint,
 	
 	PRIMARY KEY (ID)
 );
@@ -392,6 +413,7 @@ CREATE TABLE Alliances
 	Player1	integer	REFERENCES Players(ID) 			ON UPDATE CASCADE,
 	Player2	integer	REFERENCES Players(ID) 			ON UPDATE CASCADE,
 	Type	integer	REFERENCES AllianceTypes(ID) 	ON UPDATE CASCADE,
+	Version		bigint,
 	
 	PRIMARY KEY (ID)
 );

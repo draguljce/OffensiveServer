@@ -4,6 +4,8 @@ public class Color {
 	private int id;
 	private String name;
 	
+	private long version;
+	
 	public Color() {};
 	
 	public Color(String name) {
@@ -24,5 +26,13 @@ public class Color {
 
 	public void setId(int id) {
 		this.id = id;
+	}
+
+	public long getVersion() {
+		return version;
+	}
+
+	public void setVersion(long version) {
+		this.version = version;
 	}
 }

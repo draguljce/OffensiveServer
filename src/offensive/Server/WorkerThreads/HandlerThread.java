@@ -33,6 +33,7 @@ import offensive.Server.Utilities.HibernateUtil;
 import org.hibernate.Query;
 import org.hibernate.SQLQuery;
 import org.hibernate.Session;
+import org.hibernate.StaleObjectStateException;
 import org.hibernate.Transaction;
 
 import com.google.protobuf.GeneratedMessage;
@@ -80,6 +81,8 @@ public class HandlerThread implements Runnable {
 	
 	private ProtobuffMessage request;
 	
+	private final int maxNumberOfTries = 5;
+	
 	public HandlerThread(SelectionKey key, ProtobuffMessage request) {
 		this.key = key;
 		this.session = (offensive.Server.Sessions.Session)key.attachment();
@@ -111,70 +114,80 @@ public class HandlerThread implements Runnable {
 	private List<SendableMessage> proccessRequest(ProtobuffMessage request) throws Exception {
 		List<SendableMessage> response = new LinkedList<>();
 		
-		Session session = Server.getServer().sessionFactory.openSession();
+		int numberOfTries = 0;
 		
-		try {
-			switch(request.handlerId) {
-			case GetUserDataRequest:
-				this.proccessGetUserDataRequest((GetUserDataRequest)request.data, session, response);
-				break;
-				
-			case FilterFriendsRequest:
-				this.proccessFilterFriendsRequest((FilterFriendsRequest)request.data, session, response);
-				break;
-				
-			case CreateGameRequest:
-				this.proccessCreateGameRequest((CreateGameRequest)request.data, session, response);
-				break;
-				
-			case GetOpenGamesRequest:
-				this.proccessGetOpenGamesRequest((GetOpenGamesRequest)request.data, session, response);
-				break;
-				
-			case JoinGameRequest:
-				this.proccessJoinGameRequest((JoinGameRequest)request.data, session, response);
-				break;
-				
-			case InvokeAllianceRequest:
-				this.proccessInvokeAllianceRequest((InvokeAllianceRequest)request.data, session, response);
-				break;
-				
-			case TradeCardsRequest:
-				this.proccessTradeCardsRequest((TradeCardsRequest)request.data, session, response);
-				break;
-				
-			case AddUnitRequest:
-				this.proccessAddUnitRequest((AddUnitRequest)request.data, session, response);
-				break;
-				
-			case MoveUnitsRequest:
-				this.proccessCommandRequest(((MoveUnitsRequest)request.data).getGameId(), ((MoveUnitsRequest)request.data).getCommand(), session, response);
-				break;
-				
-			case AttackRequest:
-				this.proccessCommandRequest(((AttackRequest)request.data).getGameId(), ((AttackRequest)request.data).getCommand(), session, response);
-				break;
-				
-			case CommandsSubmittedRequest:
-				this.proccessCommandsSubmittedRequest((CommandsSubmittedRequest)request.data, session, response);
-				break;
-				
-			default:
-				throw new IllegalArgumentException(String.format("Illegal handler ID: %s!!!", request.handlerId));
+		while (numberOfTries++ <= this.maxNumberOfTries) {
+			Session session = Server.getServer().sessionFactory.openSession();
+			
+			try {
+				switch(request.handlerId) {
+				case GetUserDataRequest:
+					this.proccessGetUserDataRequest((GetUserDataRequest)request.data, session, response);
+					break;
+					
+				case FilterFriendsRequest:
+					this.proccessFilterFriendsRequest((FilterFriendsRequest)request.data, session, response);
+					break;
+					
+				case CreateGameRequest:
+					this.proccessCreateGameRequest((CreateGameRequest)request.data, session, response);
+					break;
+					
+				case GetOpenGamesRequest:
+					this.proccessGetOpenGamesRequest((GetOpenGamesRequest)request.data, session, response);
+					break;
+					
+				case JoinGameRequest:
+					this.proccessJoinGameRequest((JoinGameRequest)request.data, session, response);
+					break;
+					
+				case InvokeAllianceRequest:
+					this.proccessInvokeAllianceRequest((InvokeAllianceRequest)request.data, session, response);
+					break;
+					
+				case TradeCardsRequest:
+					this.proccessTradeCardsRequest((TradeCardsRequest)request.data, session, response);
+					break;
+					
+				case AddUnitRequest:
+					this.proccessAddUnitRequest((AddUnitRequest)request.data, session, response);
+					break;
+					
+				case MoveUnitsRequest:
+					this.proccessCommandRequest(((MoveUnitsRequest)request.data).getGameId(), ((MoveUnitsRequest)request.data).getCommand(), session, response);
+					break;
+					
+				case AttackRequest:
+					this.proccessCommandRequest(((AttackRequest)request.data).getGameId(), ((AttackRequest)request.data).getCommand(), session, response);
+					break;
+					
+				case CommandsSubmittedRequest:
+					this.proccessCommandsSubmittedRequest((CommandsSubmittedRequest)request.data, session, response);
+					break;
+					
+				default:
+					throw new IllegalArgumentException(String.format("Illegal handler ID: %s!!!", request.handlerId));
+				}
 			}
-		}
-		finally {
-			session.close();
-		}
-
-		if(response.size() == 0) {
-			throw new InvalidStateException("Handler did not return any message!!!");
+			catch(StaleObjectStateException e) {
+				Server.getServer().logger.error(e.getMessage(), e);
+				continue;
+			}
+			finally {
+				session.close();
+			}
+	
+			if(response.size() == 0) {
+				throw new InvalidStateException("Handler did not return any message!!!");
+			}
+			
+			response.get(0).message.handlerId = request.handlerId;
+			response.get(0).message.ticketId = request.ticketId;
+			response.get(0).message.serializationType = SerializationType.protobuff;
+			return response;
 		}
 		
-		response.get(0).message.handlerId = request.handlerId;
-		response.get(0).message.ticketId = request.ticketId;
-		response.get(0).message.serializationType = SerializationType.protobuff;
-		return response;
+		throw new InvalidStateException(String.format("Request couldn't be proccessed after maximum number of attempts (%s)", this.maxNumberOfTries));
 	}
 	
 	// Here are handlers definitions.
@@ -407,6 +420,7 @@ public class HandlerThread implements Runnable {
 		
 		response.add(new SendableMessage(new ProtobuffMessage(responseBuilder.build()), this.session));
 	}
+	
 	private void proccessAddUnitRequest(AddUnitRequest request, Session session, List<SendableMessage> response) {
 		AddUnitResponse.Builder responseBuilder = AddUnitResponse.newBuilder();
 		
@@ -427,7 +441,9 @@ public class HandlerThread implements Runnable {
 				
 				Server.getServer().logger.debug(String.format("Adding troop on territory:%s\nTroops before:%s\nTroops added before:%s", territory.getField().getName(), territory.getTroopsOnIt(), territory.getAddedTroops()));
 				territory.addTroop();
+				
 				player.decreaseNumberOfUnits();
+				Server.getServer().logger.debug(String.format("Player:%s has %s troops left", player.getId(), player.getNumberOfReinforcements()));
 
 				session.update(territory);
 				session.update(player);
@@ -438,8 +454,8 @@ public class HandlerThread implements Runnable {
 				responseBuilder.setIsSuccessfull(false);
 			}
 			
-			Server.getServer().logger.debug("AddUnit handler commited transaction");
 			tran.commit();
+			Server.getServer().logger.debug("AddUnit handler commited transaction");
 		} catch (Exception e) {
 			Server.getServer().logger.error(e.getMessage(), e);
 			Server.getServer().logger.debug("AddUnitHandler rolled back transaction");

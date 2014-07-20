@@ -4,6 +4,8 @@ public class Objective {
 	private int id;
 	private String description;
 	
+	private long version;
+	
 	public Objective() {};
 	
 	public Objective(int id) {
@@ -24,5 +26,13 @@ public class Objective {
 	
 	public void setDescription(String description) {
 		this.description = description;
+	}
+
+	public long getVersion() {
+		return version;
+	}
+
+	public void setVersion(long version) {
+		this.version = version;
 	}
 }

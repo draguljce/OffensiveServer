@@ -18,6 +18,8 @@ public class CurrentGame {
 	private Set<Alliance> alliances;
 	private Set<Command> commands;
 	private Set<Invite> invites;
+	
+	private long version;
 
 	public CurrentGame() {};
 	
@@ -189,5 +191,13 @@ public class CurrentGame {
 		
 		CurrentGame otherGame = (CurrentGame)other;
 		return this.id == otherGame.id;
+	}
+
+	public long getVersion() {
+		return version;
+	}
+
+	public void setVersion(long version) {
+		this.version = version;
 	}
 }

@@ -5,6 +5,8 @@ public class CompletedGameStatistics {
 	private Player player;
 	private short ranking;
 	
+	private long version;
+	
 	public CompletedGameStatistics() {}
 
 	public int getId() {
@@ -29,5 +31,13 @@ public class CompletedGameStatistics {
 
 	public void setRanking(short ranking) {
 		this.ranking = ranking;
+	}
+
+	public long getVersion() {
+		return version;
+	}
+
+	public void setVersion(long version) {
+		this.version = version;
 	};
 }

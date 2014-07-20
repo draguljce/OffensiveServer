@@ -3,6 +3,8 @@
 
 <hibernate-mapping> 
 	<class name="offensive.Server.Hybernate.POJO.UserType" table="UserTypes">  
-		<id name="name" type="string" column="name"/>  
-	</class> 
+		<id name="name" type="string" column="name"/>
+		
+		<version name="version" type="long"/>  
+	</class>
 </hibernate-mapping>

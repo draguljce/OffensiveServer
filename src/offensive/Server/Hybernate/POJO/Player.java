@@ -12,6 +12,8 @@ public class Player {
 	private int numberOfReinforcements;
 	private List<Card> cards;
 
+	private long version;
+	
 	public Player() {};
 	
 	public Player(User user, CurrentGame game, Color color) {
@@ -88,5 +90,13 @@ public class Player {
 	
 	public void decreaseNumberOfUnits() {
 		this.numberOfReinforcements--;
+	}
+
+	public long getVersion() {
+		return version;
+	}
+
+	public void setVersion(long version) {
+		this.version = version;
 	}
 }

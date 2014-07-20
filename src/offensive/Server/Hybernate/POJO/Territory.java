@@ -10,6 +10,8 @@ public class Territory {
 	private short troopsOnIt;
 	private short addedTroops;
 	
+	private long version;
+	
 	public Territory() {};
 	
 	public Territory(CurrentGame game, Field field, Player player) {
@@ -82,5 +84,13 @@ public class Territory {
 	public void submitTroops() {
 		this.troopsOnIt += this.addedTroops;
 		this.addedTroops = 0;
+	}
+
+	public long getVersion() {
+		return version;
+	}
+
+	public void setVersion(long version) {
+		this.version = version;
 	}
 }

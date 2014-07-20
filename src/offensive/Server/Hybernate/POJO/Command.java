@@ -14,6 +14,8 @@ public class Command {
 	private Phase phase;
 	private int troopNumber;
 	
+	private long version;
+	
 	public Command () {};
 	
 	public int getId() {
@@ -101,5 +103,13 @@ public class Command {
 	
 	public Army toArmy() {
 		return new Army(this);
+	}
+
+	public long getVersion() {
+		return version;
+	}
+
+	public void setVersion(long version) {
+		this.version = version;
 	}
 }

@@ -15,7 +15,7 @@
     </appender>
  
     <logger name="offensive.Server.GameServer">
-      <level value="info"/>
+      <level value="debug"/>
       <appender-ref ref="STDOUT"/>
 	  <appender-ref ref="FileAppender"/>
     </logger>

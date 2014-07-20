@@ -5,6 +5,8 @@ public class Card {
 	private CardType type;
 	private int player;
 	
+	private long version;
+	
 	public Card() {}
 
 	public int getId() {
@@ -48,5 +50,13 @@ public class Card {
 		} else {
 			return false;
 		}
+	}
+
+	public long getVersion() {
+		return version;
+	}
+
+	public void setVersion(long version) {
+		this.version = version;
 	}
 }
