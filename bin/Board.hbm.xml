@@ -6,5 +6,7 @@
 		<id name="id" type="int" column="id">
 			<generator class="identity"/> 
 		</id>
+		
+		<version name="version" type="long"/>
 	</class> 
 </hibernate-mapping>

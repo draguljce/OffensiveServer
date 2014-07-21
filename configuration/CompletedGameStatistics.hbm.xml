@@ -7,6 +7,7 @@
 			<generator class="identity"/> 
 		</id>
 
+		<version name="version" type="long"/>
 		<many-to-one name="player" column="Player" class="offensive.Server.Hybernate.POJO.Player"/>
 		<property name="ranking" column="Ranking" type="short"/>
 	</class> 

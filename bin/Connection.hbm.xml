@@ -5,6 +5,7 @@
 	<class name="offensive.Server.Hybernate.POJO.Connection" table="Connections">  
 		<id name="id" type="int" column="id"/>
 		
+		<version name="version" type="long"/>
 		<many-to-one name="field1" column="Field1" class="offensive.Server.Hybernate.POJO.Field"/>
 		<many-to-one name="field2" column="Field2" class="offensive.Server.Hybernate.POJO.Field"/>  
 	</class> 

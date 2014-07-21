@@ -6,7 +6,7 @@
 --	---------------------
 --	| PK	Name		|
 --	#####################################################
-INSERT INTO UserTypes VALUES ('OffensiveUser'), ('FacebookUser');
+INSERT INTO UserTypes VALUES ('OffensiveUser', 1), ('FacebookUser', 1);
 
 --	#####################################################
 --	---------------------
@@ -15,8 +15,8 @@ INSERT INTO UserTypes VALUES ('OffensiveUser'), ('FacebookUser');
 --	| PK	ID			|
 --	| FK	Type		|
 --	#####################################################
-INSERT INTO Users VALUES (default, 'FacebookUser');
-INSERT INTO Users VALUES (default, 'FacebookUser');
+INSERT INTO Users VALUES (default, 'FacebookUser', 1);
+INSERT INTO Users VALUES (default, 'FacebookUser', 1);
 
 --	#####################################################
 --	---------------------
@@ -25,8 +25,8 @@ INSERT INTO Users VALUES (default, 'FacebookUser');
 --	| PK	FacebookID	|
 --	| 		userID		|
 --	#####################################################
-INSERT INTO FacebookUsers VALUES (1282639449, 1);
-INSERT INTO FacebookUsers VALUES (100000564933202, 2);
+INSERT INTO FacebookUsers VALUES (1282639449, 1, 1);
+INSERT INTO FacebookUsers VALUES (100000564933202, 2, 1);
 
 --	#####################################################
 --	---------------------
@@ -35,7 +35,7 @@ INSERT INTO FacebookUsers VALUES (100000564933202, 2);
 --	| PK	ID			|
 --	|   	Name		|
 --	#####################################################
-INSERT INTO Colors (Name) VALUES ('Red'), ('Green'), ('Blue'), ('Yellow'), ('Black');
+INSERT INTO Colors (Name, Version) VALUES ('Red', 1), ('Green', 1), ('Blue', 1), ('Yellow', 1), ('Black', 1);
 
 --	#####################################################
 --	---------------------
@@ -44,7 +44,7 @@ INSERT INTO Colors (Name) VALUES ('Red'), ('Green'), ('Blue'), ('Yellow'), ('Bla
 --	| PK	ID		|
 --	| 		Name		|
 --	#####################################################
-INSERT INTO Phases (ID, Name) VALUES (0, 'Reinforcements'), (1, 'Attack'), (2, 'Battle'), (3, 'Move');
+INSERT INTO Phases (ID, Name, Version) VALUES (0, 'Reinforcements', 1), (1, 'Attack', 1), (2, 'Battle', 1), (3, 'Move', 1);
 
 --	#####################################################
 --	---------------------
@@ -52,7 +52,7 @@ INSERT INTO Phases (ID, Name) VALUES (0, 'Reinforcements'), (1, 'Attack'), (2, '
 --	---------------------
 --	| PK	Description	|
 --	#####################################################
-INSERT INTO Objectives VALUES (0, 'Conquer the world'), (1, 'Win 24 territories');
+INSERT INTO Objectives VALUES (0, 'Conquer the world', 1), (1, 'Win 24 territories', 1);
 
 --	#####################################################
 --	---------------------
@@ -61,7 +61,7 @@ INSERT INTO Objectives VALUES (0, 'Conquer the world'), (1, 'Win 24 territories'
 --	| PK	ID			|
 --	|   	Type		|
 --	#####################################################
-INSERT INTO CardTypes VALUES (0, 'Soldier'), (1, 'Horse'), (2, 'Artilery');
+INSERT INTO CardTypes VALUES (0, 'Soldier', 1), (1, 'Horse', 1), (2, 'Artilery', 1);
 
 --	#####################################################
 --	-------------------------
@@ -70,7 +70,7 @@ INSERT INTO CardTypes VALUES (0, 'Soldier'), (1, 'Horse'), (2, 'Artilery');
 --	| PK 	ID				|
 --	| 		Name			|
 --	#####################################################
-INSERT INTO CommandTypes VALUES (0, 'Attack');
+INSERT INTO CommandTypes VALUES (0, 'Attack', 1);
 
 --	#####################################################
 --	-------------------------
@@ -79,7 +79,7 @@ INSERT INTO CommandTypes VALUES (0, 'Attack');
 --	| PK 	ID				|
 --	| 		Name			|
 --	#####################################################
-INSERT INTO AllianceTypes (Name) VALUES ('Allied'), ('At war'), ('Offer');
+INSERT INTO AllianceTypes (Name, Version) VALUES ('Allied', 1), ('At war', 1), ('Offer', 1);
 
 --	#####################################################
 --	---------------------
@@ -89,20 +89,20 @@ INSERT INTO AllianceTypes (Name) VALUES ('Allied'), ('At war'), ('Offer');
 --	|		Name		|
 --	#####################################################
 INSERT INTO Fields VALUES 
-(1, 'ALASKA'),(2, 'ALBERTA'), (3, 'CENTRAL_AMERICA'),
-(4, 'EASTERN_US'), (5, 'GREENLAND'), (6, 'NORTHWEST_TERRITORY'),
-(7, 'ONTARIO'), (8, 'QUEBEC'), (9, 'WESTERN_US'),
-(10, 'ARGENTINA'), (11, 'BRAZIL'), (12, 'PERU'),
-(13, 'VENEZUELA'), (14, 'GREAT_BRITAIN'), (15, 'ICELAND'),
-(16, 'NORTHERN_EUROPE'), (17, 'SCANDINAVIA'), (18, 'SOUTHERN_EUROPE'),
-(19, 'UKRAINE'), (20, 'WESTERN_EUROPE'), (21, 'CONGO'),
-(22, 'EAST_AFRICA'), (23, 'EGYPT'), (24, 'MADAGASCAR'),
-(25, 'NORTH_AFRICA'), (26, 'SOUTH_AFRICA'), (27, 'AFGHANISTAN'),
-(28, 'CHINA'), (29, 'INDIA'), (30, 'IRKUTSK'),
-(31, 'JAPAN'), (32, 'KAMCHATKA'), (33, 'MIDDLE_EAST'),
-(34, 'MONGOLIA'), (35, 'SIAM'), (36, 'SIBERIA'),
-(37, 'URAL'), (38, 'YAKUTSK'), (39, 'EASTERN_AUSTRALIA'),
-(40, 'INDONESIA'), (41, 'NEW_GUINEA'), (42, 'WESTERN_AUSTRALIA');
+(1, 'ALASKA', 1),(2, 'ALBERTA', 1), (3, 'CENTRAL_AMERICA', 1),
+(4, 'EASTERN_US', 1), (5, 'GREENLAND', 1), (6, 'NORTHWEST_TERRITORY', 1),
+(7, 'ONTARIO', 1), (8, 'QUEBEC', 1), (9, 'WESTERN_US', 1),
+(10, 'ARGENTINA', 1), (11, 'BRAZIL', 1), (12, 'PERU', 1),
+(13, 'VENEZUELA', 1), (14, 'GREAT_BRITAIN', 1), (15, 'ICELAND', 1),
+(16, 'NORTHERN_EUROPE', 1), (17, 'SCANDINAVIA', 1), (18, 'SOUTHERN_EUROPE', 1),
+(19, 'UKRAINE', 1), (20, 'WESTERN_EUROPE', 1), (21, 'CONGO', 1),
+(22, 'EAST_AFRICA', 1), (23, 'EGYPT', 1), (24, 'MADAGASCAR', 1),
+(25, 'NORTH_AFRICA', 1), (26, 'SOUTH_AFRICA', 1), (27, 'AFGHANISTAN', 1),
+(28, 'CHINA', 1), (29, 'INDIA', 1), (30, 'IRKUTSK', 1),
+(31, 'JAPAN', 1), (32, 'KAMCHATKA', 1), (33, 'MIDDLE_EAST', 1),
+(34, 'MONGOLIA', 1), (35, 'SIAM', 1), (36, 'SIBERIA', 1),
+(37, 'URAL', 1), (38, 'YAKUTSK', 1), (39, 'EASTERN_AUSTRALIA', 1),
+(40, 'INDONESIA', 1), (41, 'NEW_GUINEA', 1), (42, 'WESTERN_AUSTRALIA', 1);
 
 --	#####################################################
 --	---------------------
@@ -110,7 +110,7 @@ INSERT INTO Fields VALUES
 --	---------------------
 --	| PK	ID			|
 --	#####################################################
-INSERT INTO Boards VALUES (0);
+INSERT INTO Boards VALUES (0, 1);
 
 --	#####################################################
 --	---------------------
@@ -120,20 +120,20 @@ INSERT INTO Boards VALUES (0);
 --	| PK FK	Field		|
 --	#####################################################
 INSERT INTO HasFields VALUES
-(0, 1), (0, 2), (0, 3),
-(0, 4), (0, 5), (0, 6),
-(0, 7), (0, 8), (0, 9),
-(0, 10), (0, 11), (0, 12),
-(0, 13), (0, 14), (0, 15),
-(0, 16), (0, 17), (0, 18),
-(0, 19), (0, 20), (0, 21),
-(0, 22), (0, 23), (0, 24),
-(0, 25), (0, 26), (0, 27),
-(0, 28), (0, 29), (0, 30),
-(0, 31), (0, 32), (0, 33),
-(0, 34), (0, 35), (0, 36),
-(0, 37), (0, 38), (0, 39),
-(0, 40), (0, 41), (0, 42);
+(0, 1, 1), (0, 2, 1), (0, 3, 1),
+(0, 4, 1), (0, 5, 1), (0, 6, 1),
+(0, 7, 1), (0, 8, 1), (0, 9, 1),
+(0, 10, 1), (0, 11, 1), (0, 12, 1),
+(0, 13, 1), (0, 14, 1), (0, 15, 1),
+(0, 16, 1), (0, 17, 1), (0, 18, 1),
+(0, 19, 1), (0, 20, 1), (0, 21, 1),
+(0, 22, 1), (0, 23, 1), (0, 24, 1),
+(0, 25, 1), (0, 26, 1), (0, 27, 1),
+(0, 28, 1), (0, 29, 1), (0, 30, 1),
+(0, 31, 1), (0, 32, 1), (0, 33, 1),
+(0, 34, 1), (0, 35, 1), (0, 36, 1),
+(0, 37, 1), (0, 38, 1), (0, 39, 1),
+(0, 40, 1), (0, 41, 1), (0, 42, 1);
 
 --	#####################################################
 --	-------------------------
@@ -142,31 +142,31 @@ INSERT INTO HasFields VALUES
 --	| PK FK	Field1			|
 --	| PK FK	Field2			|
 --	#####################################################
-INSERT INTO Connections (Field1, Field2) VALUES
-(1, 2), (1, 6), (2, 6),
-(5, 6), (6, 7), (5, 8),
-(5, 7), (2, 7), (7, 8),
-(4, 7), (7, 9), (4, 9),
-(3, 4), (3, 9), (3, 13),
-(12, 13), (11, 13), (11, 12),
-(10, 12), (10, 11), (11, 25),
-(25, 21), (23, 25), (25, 22),
-(21, 22), (21, 26), (22, 26),
-(22, 24), (24, 26), 
-(22, 23), (18, 23), (18, 25),
-(20, 25), (18, 20), (14, 20),
-(16, 20), (14, 15), (5, 15),
-(15, 17), (14, 17), (14, 16),
-(16, 18), (18, 19), (16, 17),
-(16, 19), (17, 19), (18, 33),
-(23, 33), (19, 33), (19, 27),
-(19, 37), (33, 27), (33, 29),
-(27, 29), (27, 28), (27, 37),
-(36, 37), (28, 37), (36, 38),
-(30, 36), (34, 36), (28, 36),
-(32, 38), (30, 38), (1, 32),
-(30, 32), (32, 34), (31, 32),
-(30, 34), (31, 34), (28, 34),
-(28, 29), (28, 35), (29, 35),
-(35, 40), (40, 41), (40, 42),
-(41, 42), (39, 41), (39, 42);
+INSERT INTO Connections (Field1, Field2, Version) VALUES
+(1, 2, 1), (1, 6, 1), (2, 6, 1),
+(5, 6, 1), (6, 7, 1), (5, 8, 1),
+(5, 7, 1), (2, 7, 1), (7, 8, 1),
+(4, 7, 1), (7, 9, 1), (4, 9, 1),
+(3, 4, 1), (3, 9, 1), (3, 13, 1),
+(12, 13, 1), (11, 13, 1), (11, 12, 1),
+(10, 12, 1), (10, 11, 1), (11, 25, 1),
+(25, 21, 1), (23, 25, 1), (25, 22, 1),
+(21, 22, 1), (21, 26, 1), (22, 26, 1),
+(22, 24, 1), (24, 26, 1), 
+(22, 23, 1), (18, 23, 1), (18, 25, 1),
+(20, 25, 1), (18, 20, 1), (14, 20, 1),
+(16, 20, 1), (14, 15, 1), (5, 15, 1),
+(15, 17, 1), (14, 17, 1), (14, 16, 1),
+(16, 18, 1), (18, 19, 1), (16, 17, 1),
+(16, 19, 1), (17, 19, 1), (18, 33, 1),
+(23, 33, 1), (19, 33, 1), (19, 27, 1),
+(19, 37, 1), (33, 27, 1), (33, 29, 1),
+(27, 29, 1), (27, 28, 1), (27, 37, 1),
+(36, 37, 1), (28, 37, 1), (36, 38, 1),
+(30, 36, 1), (34, 36, 1), (28, 36, 1),
+(32, 38, 1), (30, 38, 1), (1, 32, 1),
+(30, 32, 1), (32, 34, 1), (31, 32, 1),
+(30, 34, 1), (31, 34, 1), (28, 34, 1),
+(28, 29, 1), (28, 35, 1), (29, 35, 1),
+(35, 40, 1), (40, 41, 1), (40, 42, 1),
+(41, 42, 1), (39, 41, 1), (39, 42, 1);

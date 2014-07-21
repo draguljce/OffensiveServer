@@ -5,6 +5,7 @@
 	<class name="offensive.Server.Hybernate.POJO.FacebookUser" table="FacebookUsers">  
 		<id name="facebookId" type="long" column="facebookID"/>
 		
+		<version name="version" type="long"/>
 		<many-to-one name="user" column="UserID" class="offensive.Server.Hybernate.POJO.User"/>
 	</class> 
 </hibernate-mapping>

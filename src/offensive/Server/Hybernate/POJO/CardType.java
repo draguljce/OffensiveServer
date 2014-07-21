@@ -4,6 +4,8 @@ public class CardType {
 	private int id;
 	private String type;
 	
+	private long version;
+	
 	public CardType () {};
 	
 	public int getId() {
@@ -17,5 +19,13 @@ public class CardType {
 	}
 	public void setType(String type) {
 		this.type = type;
+	}
+	
+	public long getVersion() {
+		return version;
+	}
+
+	public void setVersion(long version) {
+		this.version = version;
 	}
 }

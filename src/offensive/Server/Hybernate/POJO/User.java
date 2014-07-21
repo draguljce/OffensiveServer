@@ -13,7 +13,7 @@ public class User {
 	private Set<Invite> invites;
 	private Set<Player> players;
 	
-	private long version;
+	private Long version;
 
 	public User() {};
 	
@@ -94,11 +94,11 @@ public class User {
 		return false;
 	}
 
-	public long getVersion() {
+	public Long getVersion() {
 		return version;
 	}
 
-	public void setVersion(long version) {
+	public void setVersion(Long version) {
 		this.version = version;
 	}
 }

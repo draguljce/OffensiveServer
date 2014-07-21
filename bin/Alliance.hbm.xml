@@ -7,6 +7,7 @@
 			<generator class="identity"/> 
 		</id>
 
+		<version name="version" type="long"/>
 		<many-to-one name="game" column="Game" class="offensive.Server.Hybernate.POJO.CurrentGame"/>
 		<many-to-one name="player1" column="Player1" class="offensive.Server.Hybernate.POJO.Player"/>
 		<many-to-one name="player2" column="Player2" class="offensive.Server.Hybernate.POJO.Player"/>

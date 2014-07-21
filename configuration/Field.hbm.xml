@@ -4,7 +4,8 @@
 <hibernate-mapping> 
 	<class name="offensive.Server.Hybernate.POJO.Field" table="Fields">  
 		<id name="id" type="int" column="id"/>
-		 
+		
+		<version name="version" type="long"/>
 		<property name="name" column="Name" type="string"/>
 	</class> 
 </hibernate-mapping>

@@ -5,6 +5,7 @@
 	<class name="offensive.Server.Hybernate.POJO.AllianceType" table="AllianceTypes">  
 		<id name="id" type="int" column="id"/>
 		
+		<version name="version" type="long"/>
 		<property name="name" column="Name" type="string"/>  
 	</class> 
 </hibernate-mapping>

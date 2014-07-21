@@ -4,6 +4,8 @@ public class AllianceType {
 	private int id;
 	private String name;
 	
+	private long version;
+	
 	public AllianceType() {};
 	public int getId() {
 		return id;
@@ -16,5 +18,11 @@ public class AllianceType {
 	}
 	public void setName(String name) {
 		this.name = name;
+	}
+	public long getVersion() {
+		return version;
+	}
+	public void setVersion(long version) {
+		this.version = version;
 	}	
 }

@@ -7,6 +7,8 @@ public class Alliance {
 	private Player player2;
 	private AllianceType type;
 	
+	private long version;
+	
 	public Alliance () {};
 	
 	public int getId() {
@@ -45,5 +47,13 @@ public class Alliance {
 	
 	public void setType(AllianceType type) {
 		this.type = type;
+	}
+
+	public long getVersion() {
+		return version;
+	}
+
+	public void setVersion(long version) {
+		this.version = version;
 	}
 }

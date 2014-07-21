@@ -6,6 +6,8 @@
 		<id name="id" type="long" column="id">
 			<generator class="identity"/> 
 		</id>
+		
+		<version name="version" type="long"/>
 		<set name="invites" cascade="all"> 
 			<key column="id"/> <one-to-many class="offensive.Server.Hybernate.POJO.Invite"/> 
 		</set>
