@@ -3,6 +3,8 @@ package offensive.Server.Hybernate.POJO;
 import java.util.HashSet;
 import java.util.Set;
 
+import offensive.Server.Validator.CommandValidator;
+
 public class CurrentGame {
 	private long id;
 	private String gameName;
@@ -20,8 +22,12 @@ public class CurrentGame {
 	private Set<Invite> invites;
 	
 	private long version;
+	
+	public CommandValidator validator;
 
-	public CurrentGame() {};
+	public CurrentGame() {
+		this.validator = new CommandValidator(this);
+	};
 	
 	public CurrentGame(String name, int numberOfPlayers, Objective objective, boolean isOpen) {
 		this.gameName = name;
@@ -30,6 +36,7 @@ public class CurrentGame {
 		this.isOpen = isOpen;
 		
 		this.phase = new Phase(0);
+		this.validator = new CommandValidator(this);
 		this.numberOfJoinedPlayers = 1;
 	};
 	
@@ -79,6 +86,7 @@ public class CurrentGame {
 
 	public void setPhase(Phase phase) {
 		this.phase = phase;
+		this.validator.setPhase(phase);
 	}
 
 	public Board getBoard() {
@@ -199,5 +207,15 @@ public class CurrentGame {
 
 	public void setVersion(long version) {
 		this.version = version;
+	}
+	
+	public Player getPlayer(User user) {
+		for(Player player :this.players) {
+			if(player.getUser().getId() == user.getId()) {
+				return player;
+			}
+		}
+		
+		return null;
 	}
 }

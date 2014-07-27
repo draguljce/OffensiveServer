@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 
+import offensive.Server.Exceptions.InvalidStateException;
 import offensive.Server.Hybernate.POJO.CurrentGame;
 import offensive.Server.Sessions.Session;
 
@@ -57,5 +58,15 @@ public class GameManager {
 		}
 		
 		return response;
+	}
+	
+	public CurrentGame getCurrentGame(long gameId) throws InvalidStateException {
+		CurrentGame wantedGame = this.allGames.get(gameId).game;
+		
+		if (wantedGame == null) {
+			throw new InvalidStateException("Game is not loaded in memory!!!");
+		}
+		
+		return wantedGame;
 	}
 }

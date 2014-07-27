@@ -492,18 +492,7 @@ public class HandlerThread implements Runnable {
 			offensive.Server.Hybernate.POJO.Territory sourceTerritory = game.getTerritory(request.getSourceTerritory());
 			offensive.Server.Hybernate.POJO.Territory destinationTerritory = game.getTerritory(request.getDestinationTerritory());
 			
-			Query query = session.createQuery("FROM Connection con WHERE (con.field1.id = :src AND con.field2.id = :dst) OR (con.field1.id = :dst AND con.field2.id = :src)");
-			
-			query.setParameter("src", sourceTerritory.getField().getId());
-			query.setParameter("dst", destinationTerritory.getField().getId());
-			
-			if(query.list().size() == 0) {
-				throw new InvalidStateException("Territories are not connected!");
-			}
-			
-			if(sourceTerritory.getTroopsOnIt() <= request.getNumberOfUnits()) {
-				throw new InvalidStateException("User does not have enough troops!!!");
-			}
+			game.validator.validate(game.getPlayer(this.session.user), request);
 			
 			sourceTerritory.setTroopsOnIt((short)(sourceTerritory.getTroopsOnIt() - request.getNumberOfUnits()));
 			
