@@ -1,5 +1,6 @@
 package offensive.Server.WorkerThreads.BattleThread;
 
+import java.util.Collections;
 import java.util.LinkedList;
 
 import offensive.Server.Utilities.CommonRandom;
@@ -20,7 +21,7 @@ class Dices {
 			this.diceValues.add(this.rand.nextInt(1, 7));
 		}
 		
-		this.diceValues.sort((oneInt, otherInt) -> Integer.compare(oneInt, otherInt));
+		Collections.sort(this.diceValues, Collections.reverseOrder());
 	}
 	
 	@Override
@@ -50,5 +51,22 @@ class Dices {
 		}
 		
 		return false;
+	}
+	
+	@Override 
+	public String toString() {
+		StringBuilder diceValuesBuilder = new StringBuilder("[");
+		
+		for(int value :this.diceValues) {
+			diceValuesBuilder.append(value).append(", ");
+		}
+		
+		if(this.diceValues.size() > 0) {
+			diceValuesBuilder.delete(diceValuesBuilder.length() - 2, diceValuesBuilder.length());
+		}
+		
+		diceValuesBuilder.append("]");
+		
+		return diceValuesBuilder.toString();
 	}
 }

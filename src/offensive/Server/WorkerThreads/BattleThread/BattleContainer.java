@@ -4,7 +4,9 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.LinkedList;
+import java.util.StringJoiner;
 
+import offensive.Server.Server;
 import communication.protos.DataProtos;
 
 public class BattleContainer {
@@ -59,6 +61,12 @@ public class BattleContainer {
 		this.oneSide.forEach(army -> army.roll());
 		this.otherSide.forEach(army -> army.roll());
 		
+		Server.getServer().logger.info("One side attack info: " + this.printAttackInfo(this.oneSide));
+		Server.getServer().logger.info("One side attack info: " + this.printAttackInfo(this.otherSide));
+		
+		Server.getServer().logger.info("One side dices: " + this.printDices(this.oneSide));
+		Server.getServer().logger.info("Other side dices: " + this.printDices(this.otherSide));
+		
 		int numberOfdices = this.numberOfDices();
 		
 		for(int i = 0; i <  numberOfdices; i++) {
@@ -112,5 +120,21 @@ public class BattleContainer {
 	private void removeUnits(Collection<Army> armies) {
 		armies.forEach(army -> army.troopNumber--);
 		armies.removeIf(army -> army.troopNumber == 0);
+	}
+	
+	private String printDices(Collection<Army> armies) {
+		StringJoiner armyDicesJoiner = new StringJoiner(", ");
+		
+		armies.forEach(army -> armyDicesJoiner.add(army.dices.toString()));
+		
+		return armyDicesJoiner.toString();
+	}
+	
+	private String printAttackInfo(Collection<Army> armies) {
+		StringJoiner armyDicesJoiner = new StringJoiner("; ");
+		
+		armies.forEach(army -> armyDicesJoiner.add(String.format("%s->%s (%s)", army.sourceTerritory.getField().getName(), army.destinationTerritory.getField().getName(), army.troopNumber)));
+		
+		return armyDicesJoiner.toString();
 	}
 }

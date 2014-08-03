@@ -37,7 +37,6 @@ import org.hibernate.StaleObjectStateException;
 import org.hibernate.Transaction;
 
 import com.google.protobuf.GeneratedMessage;
-
 import communication.protos.CommunicationProtos.AddUnitRequest;
 import communication.protos.CommunicationProtos.AddUnitResponse;
 import communication.protos.CommunicationProtos.AdvancePhaseNotification;
@@ -68,7 +67,6 @@ import communication.protos.DataProtos.GameContext;
 import communication.protos.DataProtos.GameDescription;
 import communication.protos.DataProtos.LightGameContext;
 import communication.protos.DataProtos.Player;
-import communication.protos.DataProtos.Territory;
 import communication.protos.DataProtos.User;
 import communication.protos.DataProtos.User.Builder;
 import communication.protos.DataProtos.UserData;
@@ -520,6 +518,9 @@ public class HandlerThread implements Runnable {
 		
 		Transaction tran = session.beginTransaction();
 		
+		int nextPhase = 0;
+		long gameId = 0;
+		
 		try {
 			player.setIsPlayedMove(true);
 			session.update(player);
@@ -530,16 +531,17 @@ public class HandlerThread implements Runnable {
 				response.add(this.advanceToNextPhase(game, session));
 			}
 			
-			if(game.getPhase().getName().equals("Battle")) {
-				SessionManager.onlyInstance.startBattle(game.getId());
-			}
-			
+			nextPhase = game.getPhase().getId();
+			gameId = game.getId();
 		} catch(Exception e) {
 			tran.rollback();
 			Server.getServer().logger.error(e.getMessage(), e);
 			return;
 		} finally {
 			tran.commit();
+			if(nextPhase == 2) {
+				SessionManager.onlyInstance.startBattle(gameId);
+			}
 		}
 
 		return;
@@ -696,18 +698,7 @@ public class HandlerThread implements Runnable {
 		
 		return playerBuilder.build();
 	}
-	
-	private Territory getTerritoryFromPOJO(offensive.Server.Hybernate.POJO.Territory territory) {
-		Territory.Builder territoryBuilder = Territory.newBuilder();
 		
-		int totalTroopsOnTerritory = territory.getTroopsOnIt() + (this.session.user.equals(territory.getPlayer().getUser()) ? territory.getAddedTroops() : 0);
-		territoryBuilder.setId(territory.getField().getId());
-		territoryBuilder.setTroopsOnIt(totalTroopsOnTerritory);
-		territoryBuilder.setPlayerId(territory.getPlayer().getId());
-		
-		return territoryBuilder.build();
-	}
-	
 	private Alliance getAllianceFromPOJO(offensive.Server.Hybernate.POJO.Alliance alliance) {
 		Alliance.Builder allianceBuilder = Alliance.newBuilder();
 		
@@ -768,7 +759,7 @@ public class HandlerThread implements Runnable {
 		gameContextBuilder.setLightGameContext(this.getLightGameContextFromGame(game, session));
 		
 		for(offensive.Server.Hybernate.POJO.Territory territory: game.getTerritories()) {
-			gameContextBuilder.addTerritories(this.getTerritoryFromPOJO(territory));
+			gameContextBuilder.addTerritories(territory.toProtoTerritory(this.session.user));
 		}
 		
 		for(offensive.Server.Hybernate.POJO.Alliance alliance: game.getAlliances()) {
@@ -835,7 +826,7 @@ public class HandlerThread implements Runnable {
 		} else if(nextPhase.getId() == 1) {
 			for(offensive.Server.Hybernate.POJO.Territory territory :game.getTerritories()) {
 				territory.submitTroops();
-				advancePhaseNotificationBuilder.addTerritories(this.getTerritoryFromPOJO(territory));
+				advancePhaseNotificationBuilder.addTerritories(territory.toProtoTerritory(this.session.user));
 			}
 			
 		}

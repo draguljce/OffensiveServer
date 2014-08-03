@@ -18,6 +18,7 @@ import offensive.Server.Hybernate.POJO.Territory;
 import offensive.Server.Hybernate.POJO.User;
 import offensive.Server.Sessions.Session;
 import offensive.Server.Sessions.Game.GameManager;
+import offensive.Server.Utilities.Constants;
 import offensive.Server.Utilities.Callbacks.ZeroParamsCallback;
 
 import org.hibernate.Transaction;
@@ -53,9 +54,9 @@ public class BattleThread implements Runnable {
 	@Override
 	public void run() {
 		Transaction tran = null;
+		org.hibernate.Session session = Server.getServer().sessionFactory.openSession();
 		
 		try {
-			org.hibernate.Session session = Server.getServer().sessionFactory.openSession();
 			tran = session.beginTransaction();
 			
 			this.game = (CurrentGame) session.get(CurrentGame.class, this.gameId);
@@ -114,6 +115,7 @@ public class BattleThread implements Runnable {
 			Server.getServer().logger.error(e.getMessage(), e);
 			tran.rollback();
 		} finally {
+			session.close();
 			this.signalFinishCallback.call();
 		}
 	}
@@ -209,19 +211,29 @@ public class BattleThread implements Runnable {
 	}
 	
 	private Collection<LinkedList<Army>> armiesWithSameDestination(Collection<Army> armies) {
-		HashSet<Territory> destinationTerritories = new HashSet<>();
-		HashMap<Territory, LinkedList<Army>> destinationTerritoryToArmies = new HashMap<Territory, LinkedList<Army>>();
+		HashSet<Integer> destinationTerritories = new HashSet<>();
+		HashMap<Integer, LinkedList<Army>> destinationTerritoryToArmies = new HashMap<Integer, LinkedList<Army>>();
 		
 		for(Army army: armies) {
-			if(destinationTerritories.contains(army.destinationTerritory)) {
-				destinationTerritoryToArmies.get(army.destinationTerritory).add(army);
+			if(destinationTerritories.contains(army.destinationTerritory.getField().getId())) {
+				destinationTerritoryToArmies.get(army.destinationTerritory.getField().getId()).add(army);
 			} else {
-				destinationTerritories.add(army.destinationTerritory);
-				destinationTerritoryToArmies.put(army.destinationTerritory, new LinkedList<Army>());
+				destinationTerritories.add(army.destinationTerritory.getField().getId());
+				LinkedList<Army> armyCol = new LinkedList<Army>();
+				armyCol.add(army);
+				destinationTerritoryToArmies.put(army.destinationTerritory.getField().getId(), armyCol);
 			}
 		}
 		
-		return destinationTerritoryToArmies.values();
+		LinkedList<LinkedList<Army>> armyCol = new LinkedList<LinkedList<Army>>();
+		
+		for(LinkedList<Army> allArmies :destinationTerritoryToArmies.values()) {
+			if(allArmies.size() > 1) {
+				armyCol.add(allArmies);
+			}
+		}
+		
+		return armyCol;
 	}
 	
 	private void sleep() {
@@ -265,11 +277,16 @@ public class BattleThread implements Runnable {
 		
 		offlineUsersThatNeedToRoll.forEach(user -> this.sendRollDiceMessage(user));
 		
+		long startTime = System.currentTimeMillis();
+		long endTime = startTime + Constants.UserWaitTime;
+		long waitTime = endTime - System.currentTimeMillis();
+		
 		synchronized (this.messages) {
-			while (usersThatNeedToRoll.size() != 0) {
+			while (usersThatNeedToRoll.size() != 0 && waitTime > 0) {
 				try {
-					while(this.messages.size() == 0) {
-						this.messages.wait();
+					while(this.messages.size() == 0 && waitTime > 0) {
+						this.messages.wait(waitTime);
+						waitTime = endTime - System.currentTimeMillis();
 					}
 				} catch (InterruptedException e) {
 					Server.getServer().logger.error(e.getMessage(), e);
@@ -291,13 +308,17 @@ public class BattleThread implements Runnable {
 				this.messages.clear();
 			}
 		}
+		
+		Server.getServer().logger.info("User timeout exceeded broadcasting roll dice messages.");
+		// Enough waiting. Just go ahead and send RollDiceMessage.
+		usersThatNeedToRoll.forEach(user -> this.sendRollDiceMessage(user));
 	}
 	
 	public void populateOnlineAndOfflineUsers(Collection<User> onlineUsers, Collection<User> offlineUser, BattleContainer commandContainer) {
 		for(Army army: commandContainer.oneSide) {
 			boolean isOnline = false;
 			for(Session session: this.onlinePlayers) {
-				if(session.user.equals(army.player.getUser())) {
+				if(session.user.getId() == army.player.getUser().getId()) {
 					onlineUsers.add(session.user);
 					isOnline = true;
 					break;
@@ -312,7 +333,7 @@ public class BattleThread implements Runnable {
 		for(Army army: commandContainer.otherSide) {
 			boolean isOnline = false;
 			for(Session session: this.onlinePlayers) {
-				if(session.user.equals(army.player.getUser())) {
+				if(session.user.getId() == army.player.getUser().getId()) {
 					onlineUsers.add(session.user);
 					isOnline = true;
 					break;
@@ -384,19 +405,19 @@ public class BattleThread implements Runnable {
 	}
 	
 	private SendableMessage advanceToNextPhase(CurrentGame game, org.hibernate.Session session) {
+		AdvancePhaseNotification.Builder advancePhaseNotificationBuilder = AdvancePhaseNotification.newBuilder();
+		
+		advancePhaseNotificationBuilder.setGameId(game.getId());
+		
 		Phase nextPhase = (Phase)session.get(Phase.class, game.getPhase().nextPhaseId());
 		game.setPhase(nextPhase);
-		
-		if(nextPhase.getId() == 1) {
-			game.nextRound();
-		}
 		
 		for(offensive.Server.Hybernate.POJO.Player player: game.getPlayers()) {
 			player.setIsPlayedMove(false);
 		}
 
-		AdvancePhaseNotification.Builder advancePhaseNotificationBuilder = AdvancePhaseNotification.newBuilder();
+		session.update(game);
 		
-		return new SendableMessage(new ProtobuffMessage(advancePhaseNotificationBuilder.build()), GameManager.onlyInstance.getSessionsForGame(game.getId()));
+		return new SendableMessage(new ProtobuffMessage(HandlerId.AdvancePhaseNotification, 0, advancePhaseNotificationBuilder.build()), GameManager.onlyInstance.getSessionsForGame(game.getId()));
 	}
 }

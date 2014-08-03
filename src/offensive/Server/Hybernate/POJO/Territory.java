@@ -2,6 +2,8 @@ package offensive.Server.Hybernate.POJO;
 
 import offensive.Server.WorkerThreads.BattleThread.Army;
 
+import communication.protos.DataProtos;
+
 public class Territory {
 	private Integer id;
 	private CurrentGame game;
@@ -92,5 +94,16 @@ public class Territory {
 
 	public void setVersion(long version) {
 		this.version = version;
+	}
+	
+	public DataProtos.Territory toProtoTerritory(User user) {
+		DataProtos.Territory.Builder territoryBuilder = DataProtos.Territory.newBuilder();
+		
+		int totalTroopsOnTerritory = this.getTroopsOnIt() + (user.equals(this.getPlayer().getUser()) ? this.getAddedTroops() : 0);
+		territoryBuilder.setId(this.getField().getId());
+		territoryBuilder.setTroopsOnIt(totalTroopsOnTerritory);
+		territoryBuilder.setPlayerId(this.getPlayer().getId());
+		
+		return territoryBuilder.build();
 	}
 }

@@ -23,8 +23,7 @@ public class Army {
 	Dices dices = new Dices(this.rand);
 	
 	public Army(int troopNumber, Player player, Territory sourceTerritory) {
-		this.sourceTerritory = sourceTerritory;
-		this.destinationTerritory = null;
+		this.destinationTerritory = this.sourceTerritory = sourceTerritory;
 		this.isDefending = true;
 		
 		this.troopNumber = troopNumber;
