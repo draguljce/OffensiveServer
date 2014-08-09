@@ -1,3 +1,3 @@
 . ./Scripts/setClasspath.sh
 
-java offensive.Server.Osrv -ConfigFilePath configuration/osrv/osrv.config $@
+java offensive.Server.OsrvGame -ConfigFilePath configuration/osrv/osrv.config $@

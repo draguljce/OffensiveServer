@@ -96,6 +96,10 @@ public class Territory {
 		this.version = version;
 	}
 	
+	public void decreaseNumberOfTroops(short numberOfTroops) {
+		this.troopsOnIt -= numberOfTroops;
+	}
+	
 	public DataProtos.Territory toProtoTerritory(User user) {
 		DataProtos.Territory.Builder territoryBuilder = DataProtos.Territory.newBuilder();
 		

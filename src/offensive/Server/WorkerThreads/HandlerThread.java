@@ -458,7 +458,7 @@ public class HandlerThread implements Runnable {
 			Server.getServer().logger.error(e.getMessage(), e);
 			Server.getServer().logger.debug("AddUnitHandler rolled back transaction");
 			tran.rollback();
-			return;
+			throw e;
 		}
 		
 		response.add(new SendableMessage(new ProtobuffMessage(responseBuilder.build()), this.session));
@@ -492,15 +492,12 @@ public class HandlerThread implements Runnable {
 			
 			game.validator.validate(game.getPlayer(this.session.user), request);
 			
-			sourceTerritory.setTroopsOnIt((short)(sourceTerritory.getTroopsOnIt() - request.getNumberOfUnits()));
-			
 			command.setSource(sourceTerritory);
 			command.setDestination(destinationTerritory);
 			command.setTroopNumber(request.getNumberOfUnits());
 			
 			command.setType(new CommandType(0));
 			session.save(command);
-			session.update(sourceTerritory);
 			
 			tran.commit();
 		} catch (Exception e) {
@@ -532,6 +529,13 @@ public class HandlerThread implements Runnable {
 			}
 			
 			nextPhase = game.getPhase().getId();
+			
+			if(nextPhase == 2) {
+				for(offensive.Server.Hybernate.POJO.Command command :game.getCommands()) {
+					command.getSource().decreaseNumberOfTroops((short) command.getTroopNumber());
+				}
+			}
+			
 			gameId = game.getId();
 		} catch(Exception e) {
 			tran.rollback();
