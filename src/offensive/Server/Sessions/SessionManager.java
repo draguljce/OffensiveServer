@@ -71,9 +71,11 @@ public class SessionManager implements Runnable{
 		
 	}
 	
-	private void registerNewChannels() {
+	private void registerNewChannels() throws IOException {
 		synchronized(this.newChannels) {
 			for(SocketChannel channel : this.newChannels) {
+				Server.getServer().logger.info("Accepted connection from address " + channel.getRemoteAddress());
+				channel.socket().setTcpNoDelay(true);
 				this.register(channel);
 			}
 			
@@ -106,6 +108,7 @@ public class SessionManager implements Runnable{
 		for(SelectionKey key :this.selector.keys()) {
 			User existingUser = ((Session)key.attachment()).user;
 			if(existingUser != null && existingUser.equals(user)) {
+				Server.getServer().logger.info("User is already connected. Terminating previous connection.");
 				this.removeKey(key);
 				break;
 			}
@@ -206,11 +209,11 @@ public class SessionManager implements Runnable{
 	}
 	
 	public void removeKey(SelectionKey key) {
-		key.cancel();
-		
-		GameManager.onlyInstance.removeGames((Session)key.attachment());
+		Session session = (Session)key.attachment();
+		GameManager.onlyInstance.removeGames(session);
 		
 		try {
+			Server.getServer().logger.info("Removing key for user: " + session.user.getId());
 			key.channel().close();
 		} catch (IOException e) {
 			Server.getServer().logger.error(e.getMessage(), e);

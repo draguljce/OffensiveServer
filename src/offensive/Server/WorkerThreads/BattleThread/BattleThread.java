@@ -15,7 +15,6 @@ import offensive.Server.Hybernate.POJO.Command;
 import offensive.Server.Hybernate.POJO.CurrentGame;
 import offensive.Server.Hybernate.POJO.Phase;
 import offensive.Server.Hybernate.POJO.Territory;
-import offensive.Server.Hybernate.POJO.User;
 import offensive.Server.Sessions.Session;
 import offensive.Server.Sessions.Game.GameManager;
 import offensive.Server.Utilities.Constants;
@@ -268,21 +267,21 @@ public class BattleThread implements Runnable {
 	}
 	
 	private void allUsersRoll(BattleContainer commandContainer) {
-		HashSet<User> usersThatNeedToRoll = new HashSet<>();
-		HashSet<User> offlineUsersThatNeedToRoll = new HashSet<>();
+		HashSet<Army> armiesThatNeedToRoll = new HashSet<>();
+		HashSet<Army> offlineArmiesThatNeedToRoll = new HashSet<>();
 		
-		this.populateOnlineAndOfflineUsers(usersThatNeedToRoll, offlineUsersThatNeedToRoll, commandContainer);
+		this.populateOnlineAndOfflineUsers(armiesThatNeedToRoll, offlineArmiesThatNeedToRoll, commandContainer);
 		
 		this.sleep();
 		
-		offlineUsersThatNeedToRoll.forEach(user -> this.sendRollDiceMessage(user));
+		offlineArmiesThatNeedToRoll.forEach(army -> this.sendRollDiceMessage(army.sourceTerritory.getField().getId()));
 		
 		long startTime = System.currentTimeMillis();
 		long endTime = startTime + Constants.UserWaitTime;
 		long waitTime = endTime - System.currentTimeMillis();
 		
 		synchronized (this.messages) {
-			while (usersThatNeedToRoll.size() != 0 && waitTime > 0) {
+			while (armiesThatNeedToRoll.size() != 0 && waitTime > 0) {
 				try {
 					while(this.messages.size() == 0 && waitTime > 0) {
 						this.messages.wait(waitTime);
@@ -297,10 +296,10 @@ public class BattleThread implements Runnable {
 					if(RollDiceClicked.class.equals(message.data.getClass())) {
 						RollDiceClicked rollDiceClicked = (RollDiceClicked)message.data;
 						
-						if(rollDiceClicked.getGameId() == this.game.getId() && usersThatNeedToRoll.contains(message.sender.user)) {
-							this.sendRollDiceMessage(message.sender.user);
+						if(rollDiceClicked.getGameId() == this.game.getId() && armiesThatNeedToRoll.contains(message.sender.user)) {
+							this.sendRollDiceMessage(rollDiceClicked.getTerritoryId());
 							
-							usersThatNeedToRoll.remove(message.sender.user);
+							armiesThatNeedToRoll.remove(message.sender.user);
 						}
 					}
 				}
@@ -311,22 +310,22 @@ public class BattleThread implements Runnable {
 		
 		Server.getServer().logger.info("User timeout exceeded broadcasting roll dice messages.");
 		// Enough waiting. Just go ahead and send RollDiceMessage.
-		usersThatNeedToRoll.forEach(user -> this.sendRollDiceMessage(user));
+		armiesThatNeedToRoll.forEach(army -> this.sendRollDiceMessage(army.sourceTerritory.getField().getId()));
 	}
 	
-	public void populateOnlineAndOfflineUsers(Collection<User> onlineUsers, Collection<User> offlineUser, BattleContainer commandContainer) {
+	public void populateOnlineAndOfflineUsers(Collection<Army> onlinePlayers, Collection<Army> offlinePlayer, BattleContainer commandContainer) {
 		for(Army army: commandContainer.oneSide) {
 			boolean isOnline = false;
 			for(Session session: this.onlinePlayers) {
 				if(session.user.getId() == army.player.getUser().getId()) {
-					onlineUsers.add(session.user);
+					onlinePlayers.add(army);
 					isOnline = true;
 					break;
 				}
 			}
 			
 			if(!isOnline) {
-				offlineUser.add(army.player.getUser());
+				offlinePlayer.add(army);
 			}
 		}
 		
@@ -334,22 +333,22 @@ public class BattleThread implements Runnable {
 			boolean isOnline = false;
 			for(Session session: this.onlinePlayers) {
 				if(session.user.getId() == army.player.getUser().getId()) {
-					onlineUsers.add(session.user);
+					onlinePlayers.add(army);
 					isOnline = true;
 					break;
 				}
 			}
 			
 			if(!isOnline) {
-				offlineUser.add(army.player.getUser());
+				offlinePlayer.add(army);
 			}
 		}
 	}
 	
-	private void sendRollDiceMessage(User user) {
+	private void sendRollDiceMessage(int territoryId) {
 		PlayerRolledDice.Builder playerRolledDiceBuilder = PlayerRolledDice.newBuilder();
 		playerRolledDiceBuilder.setGameId(this.game.getId());
-		playerRolledDiceBuilder.setUser(user.toProtoUser());
+		playerRolledDiceBuilder.setTerritoryId(territoryId);
 		
 		SendableMessage playerRolledDiceMessage = new SendableMessage(new ProtobuffMessage(HandlerId.PlayerRolledDice, 0, playerRolledDiceBuilder.build()), this.onlinePlayers);
 		playerRolledDiceMessage.send();
@@ -374,7 +373,7 @@ public class BattleThread implements Runnable {
 			MultipleAttacks.Builder multipleAttacksBuilder = MultipleAttacks.newBuilder();
 			multipleAttacksBuilder.setGameId(this.gameId);
 			
-			SendableMessage multipleAttacksMessage = new SendableMessage(new ProtobuffMessage(HandlerId.BorderClashes, 0,multipleAttacksBuilder.build()), this.onlinePlayers);
+			SendableMessage multipleAttacksMessage = new SendableMessage(new ProtobuffMessage(HandlerId.MultipleAttacks, 0,multipleAttacksBuilder.build()), this.onlinePlayers);
 			multipleAttacksMessage.send();
 			
 			break;
@@ -383,7 +382,7 @@ public class BattleThread implements Runnable {
 			SingleAttacks.Builder singleAttacksBuilder = SingleAttacks.newBuilder();
 			singleAttacksBuilder.setGameId(this.gameId);
 			
-			SendableMessage singleAttacksMessage = new SendableMessage(new ProtobuffMessage(HandlerId.BorderClashes, 0,singleAttacksBuilder.build()), this.onlinePlayers);
+			SendableMessage singleAttacksMessage = new SendableMessage(new ProtobuffMessage(HandlerId.SingleAttacks, 0,singleAttacksBuilder.build()), this.onlinePlayers);
 			singleAttacksMessage.send();
 			
 			break;
@@ -392,8 +391,10 @@ public class BattleThread implements Runnable {
 			SpoilsOfWar.Builder spoilsOfWarBuilder = SpoilsOfWar.newBuilder();
 			spoilsOfWarBuilder.setGameId(this.gameId);
 			
-			SendableMessage spoilsOfWarMessage = new SendableMessage(new ProtobuffMessage(HandlerId.BorderClashes, 0,spoilsOfWarBuilder.build()), this.onlinePlayers);
+			SendableMessage spoilsOfWarMessage = new SendableMessage(new ProtobuffMessage(HandlerId.SpoilsOfWar, 0,spoilsOfWarBuilder.build()), this.onlinePlayers);
 			spoilsOfWarMessage.send();
+			
+			break;
 			
 		default:
 			break;

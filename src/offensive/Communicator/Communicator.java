@@ -17,7 +17,7 @@ public class Communicator {
 		return Communicator.onlyInstance;
 	}
 	
-	public Message acceptMessage(SocketChannel socketChannel) {
+	public Message acceptMessage(SocketChannel socketChannel) throws IOException {
 						
 		int handlerId, ticketId, dataLength;
 		byte status, serializationType;
@@ -28,6 +28,11 @@ public class Communicator {
 		// Read header.
 		try {
 			long numberOfReadBytes = socketChannel.read(messageBytes, 0, 1);
+			
+			if(numberOfReadBytes == 0) {
+				Server.getServer().logger.info("Client closed channel.");
+				return null;
+			}
 			
 			if(numberOfReadBytes != headerLength) {
 				return null;
@@ -72,7 +77,7 @@ public class Communicator {
 			return null;
 		}
 		
-		Server.getServer().logger.debug("Received message from client:");
+		Server.getServer().logger.debug("Received message from client: " + socketChannel.getRemoteAddress());
 		Server.getServer().logger.debug(receivedMessage);
 		
 		return receivedMessage;
@@ -81,5 +86,6 @@ public class Communicator {
 	public void sendMessage(Message response, SocketChannel socketChannel) throws IOException {
 		Server.getServer().logger.debug("Sending response to client " + socketChannel.getRemoteAddress() + ": " + response);
 		socketChannel.write(response.serialize());
+		socketChannel.socket().getOutputStream().flush();
 	}
 }

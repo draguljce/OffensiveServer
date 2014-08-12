@@ -9,48 +9,38 @@ import java.util.List;
 import offensive.Server.Server;
 
 public class CommonRandom {
-	public long seed;
+	private int modConst = 2147483647;
+	
+	public int seed;
 	
 	public CommonRandom() {
-		this((new Date()).getTime());
+		this(Math.abs((int)(new Date()).getTime()));
 	}
 	
-	public CommonRandom(long seed) {
-		this.seed = (seed ^ 0x5DEECE66DL) & ((1L << 48) - 1);
+	public CommonRandom(int seed) {
+		this.seed = seed;
 	}
 	
-	private int next(int bits) {
-		this.seed = (seed * 0x5DEECE66DL + 0xBL) & ((1L << 48) - 1);
+	private double next() {
+		this.seed = (int) ((this.seed * (long)16807) % modConst);
 		
-		return (int)(seed >>> (48 - bits));
+		if(this.seed < 0) {
+			this.seed += modConst;
+		}
+		
+		return this.seed / (double)0x7FFFFFFF + 0.000000000233;
 	}
 	
-	public int nextInt(int n) {
-		if (n <= 0) {
-			throw new IllegalArgumentException("n must be positive");
-		}
-
-		if ((n & -n) == n) {  // i.e., n is a power of 2
-			return (int)((n * (long)next(31)) >> 31);
-		}
-
-		int bits, val;
-		do {
-			bits = next(31);
-			val = bits % n;
-		} while (bits - val + (n-1) < 0);
+	public int nextInt() {
+		return this.nextInt(Integer.MAX_VALUE);
+	}
 	
-		return val;
+	public int nextInt(int max) {
+		return this.nextInt(0, max);
 	}
 	
 	public int nextInt(int min, int max) {
-		int range = max - min;
-		
-		return this.nextInt(range) + min;
-	}
-	
-	public long nextLong() {
-		return ((long)next(32) << 32) + next(32);
+		return (int) Math.floor(this.next() * (max - min) + min);
 	}
 	
 	public <T> Collection<T> chooseRandomSubset(Collection<T> sourceCollection, int numberOfElements) {

@@ -19,6 +19,7 @@ public class AttackValidator extends ValidatorBase{
 		query.setParameter("dst", game.getTerritory(command.getDestinationTerritory()).getField().getId());
 		
 		if(query.list().size() == 0) {
+			Server.getServer().logger.info(String.format("Territories %s and %s are not connected", game.getTerritory(command.getSourceTerritory()).getField().getName(), game.getTerritory(command.getDestinationTerritory()).getField().getName()));
 			throw new InvalidStateException("Territories are not connected!");
 		}
 		
