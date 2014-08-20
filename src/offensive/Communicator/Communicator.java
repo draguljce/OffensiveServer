@@ -5,6 +5,7 @@ import java.nio.ByteBuffer;
 import java.nio.channels.SocketChannel;
 
 import offensive.Server.Server;
+import offensive.Server.Exceptions.FatalErrorException;
 
 import org.json.JSONException;
 
@@ -83,9 +84,11 @@ public class Communicator {
 		return receivedMessage;
 	}
 
-	public void sendMessage(Message response, SocketChannel socketChannel) throws IOException {
-		Server.getServer().logger.debug("Sending response to client " + socketChannel.getRemoteAddress() + ": " + response);
-		socketChannel.write(response.serialize());
-		socketChannel.socket().getOutputStream().flush();
+	public void sendMessage(Message response, SocketChannel socketChannel) throws IOException, FatalErrorException {
+		int bytesSent = socketChannel.write(response.serialize());
+		Server.getServer().logger.debug(String.format("Server sent %s/%s bytes to client %s\n%s", bytesSent, response.dataLength, socketChannel.getRemoteAddress(), response));
+		if(bytesSent != response.dataLength + headerLength) {
+			throw new FatalErrorException(String.format("Server sent only %s/%s bytes!!!", bytesSent, response.dataLength));
+		}
 	}
 }

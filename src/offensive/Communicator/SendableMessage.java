@@ -5,6 +5,7 @@ import java.util.Collection;
 import java.util.LinkedList;
 
 import offensive.Server.Server;
+import offensive.Server.Exceptions.FatalErrorException;
 import offensive.Server.Sessions.Session;
 
 public class SendableMessage {
@@ -23,7 +24,7 @@ public class SendableMessage {
 		this.recipients = recipients;
 	}
 	
-	public void send() {
+	public void send() throws FatalErrorException {
 		for(Session recipient: this.recipients) {
 			try {
 				Communicator.getCommunicator().sendMessage(this.message, recipient.socketChannel);

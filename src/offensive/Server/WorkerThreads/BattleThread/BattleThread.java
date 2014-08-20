@@ -11,6 +11,7 @@ import offensive.Communicator.HandlerId;
 import offensive.Communicator.ProtobuffMessage;
 import offensive.Communicator.SendableMessage;
 import offensive.Server.Server;
+import offensive.Server.Exceptions.FatalErrorException;
 import offensive.Server.Hybernate.POJO.Command;
 import offensive.Server.Hybernate.POJO.CurrentGame;
 import offensive.Server.Hybernate.POJO.Phase;
@@ -250,7 +251,7 @@ public class BattleThread implements Runnable {
 		}
 	}
 	
-	private void execute(BattleContainer battleContainer) {
+	private void execute(BattleContainer battleContainer) throws FatalErrorException {
 		AdvanceToNextBattle.Builder advanceToNextBattleBuilder = AdvanceToNextBattle.newBuilder();
 		
 		advanceToNextBattleBuilder.setGameId(this.game.getId());
@@ -266,7 +267,7 @@ public class BattleThread implements Runnable {
 		}
 	}
 	
-	private void allUsersRoll(BattleContainer commandContainer) {
+	private void allUsersRoll(BattleContainer commandContainer) throws FatalErrorException {
 		HashSet<Army> armiesThatNeedToRoll = new HashSet<>();
 		HashSet<Army> offlineArmiesThatNeedToRoll = new HashSet<>();
 		
@@ -274,7 +275,10 @@ public class BattleThread implements Runnable {
 		
 		this.sleep();
 		
-		offlineArmiesThatNeedToRoll.forEach(army -> this.sendRollDiceMessage(army.sourceTerritory.getField().getId()));
+		for(Army army :offlineArmiesThatNeedToRoll) {
+			this.sendRollDiceMessage(army.sourceTerritory.getField().getId());
+		}
+
 		
 		long startTime = System.currentTimeMillis();
 		long endTime = startTime + Constants.UserWaitTime;
@@ -310,7 +314,9 @@ public class BattleThread implements Runnable {
 		
 		Server.getServer().logger.info("User timeout exceeded broadcasting roll dice messages.");
 		// Enough waiting. Just go ahead and send RollDiceMessage.
-		armiesThatNeedToRoll.forEach(army -> this.sendRollDiceMessage(army.sourceTerritory.getField().getId()));
+		for(Army army : armiesThatNeedToRoll) {
+			this.sendRollDiceMessage(army.sourceTerritory.getField().getId());
+		}
 	}
 	
 	public void populateOnlineAndOfflineUsers(Collection<Army> onlinePlayers, Collection<Army> offlinePlayer, BattleContainer commandContainer) {
@@ -345,7 +351,7 @@ public class BattleThread implements Runnable {
 		}
 	}
 	
-	private void sendRollDiceMessage(int territoryId) {
+	private void sendRollDiceMessage(int territoryId) throws FatalErrorException {
 		PlayerRolledDice.Builder playerRolledDiceBuilder = PlayerRolledDice.newBuilder();
 		playerRolledDiceBuilder.setGameId(this.game.getId());
 		playerRolledDiceBuilder.setTerritoryId(territoryId);
@@ -354,7 +360,7 @@ public class BattleThread implements Runnable {
 		playerRolledDiceMessage.send();
 	}
 	
-	private void notifyAndExecute(Collection<BattleContainer> battleContainers, BattleType battleType) {
+	private void notifyAndExecute(Collection<BattleContainer> battleContainers, BattleType battleType) throws FatalErrorException {
 		Collection<DataProtos.BattleInfo> protoBattleInfos = new LinkedList<DataProtos.BattleInfo>();
 		
 		battleContainers.forEach(battleContainer -> protoBattleInfos.addAll(protoBattleInfos));
