@@ -1,5 +1,6 @@
 package offensive.Server.WorkerThreads.BattleThread;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -76,31 +77,31 @@ public class BattleThread implements Runnable {
 			SendableMessage allCommandsMessage = new SendableMessage(new ProtobuffMessage(HandlerId.AllCommands, 0, allCommandsBuilder.build()), this.onlinePlayers);
 			allCommandsMessage.send();
 			
-			this.sleep();
+			this.sleep(1000);
 			
 			Collection<BattleContainer> borderClashes = this.getBorderClashes(armies);
 			this.notifyAndExecute(borderClashes, BattleType.borderClash);
 			armies.removeIf(army -> army.troopNumber == 0);
 			
-			this.sleep();
+			this.sleep(1000);
 			
 			Collection<BattleContainer> multipleAttacks = this.getMultipleAttacks(armies);
 			this.notifyAndExecute(multipleAttacks, BattleType.multipleAttack);
 			armies.removeIf(army -> army.troopNumber == 0);
 			
-			this.sleep();
+			this.sleep(1000);
 			
 			Collection<BattleContainer> singleAttacks = this.getSingleAttacks(armies);
 			this.notifyAndExecute(singleAttacks, BattleType.singleAttack);
 			armies.removeIf(army -> army.troopNumber == 0);
 			
-			this.sleep();
+			this.sleep(1000);
 			
 			Collection<BattleContainer> spoilsOfWar = this.getSpoilsOfWar(armies);
 			this.notifyAndExecute(spoilsOfWar, BattleType.spoilsOfWar);
 			armies.removeIf(army -> army.troopNumber == 0);
 			
-			this.sleep();
+			this.sleep(1000);
 			
 			for(Army army: armies) {
 				Territory armyDestination = army.destinationTerritory;
@@ -236,9 +237,9 @@ public class BattleThread implements Runnable {
 		return armyCol;
 	}
 	
-	private void sleep() {
+	private void sleep(long milis) {
 		try {
-			Thread.sleep(1000);
+			Thread.sleep(milis);
 		} catch (InterruptedException e) {
 			Server.getServer().logger.error(e.getMessage(), e);
 		}
@@ -273,10 +274,10 @@ public class BattleThread implements Runnable {
 		
 		this.populateOnlineAndOfflineUsers(armiesThatNeedToRoll, offlineArmiesThatNeedToRoll, commandContainer);
 		
-		this.sleep();
+		this.sleep(2000);
 		
 		for(Army army :offlineArmiesThatNeedToRoll) {
-			this.sendRollDiceMessage(army.sourceTerritory.getField().getId());
+			this.sendRollDiceMessage(army.sourceTerritory.getField().getId(), null);
 		}
 
 		
@@ -301,7 +302,7 @@ public class BattleThread implements Runnable {
 						RollDiceClicked rollDiceClicked = (RollDiceClicked)message.data;
 						
 						if(rollDiceClicked.getGameId() == this.game.getId() && armiesThatNeedToRoll.contains(message.sender.user)) {
-							this.sendRollDiceMessage(rollDiceClicked.getTerritoryId());
+							this.sendRollDiceMessage(rollDiceClicked.getTerritoryId(), message.sender);
 							
 							armiesThatNeedToRoll.remove(message.sender.user);
 						}
@@ -315,7 +316,7 @@ public class BattleThread implements Runnable {
 		Server.getServer().logger.info("User timeout exceeded broadcasting roll dice messages.");
 		// Enough waiting. Just go ahead and send RollDiceMessage.
 		for(Army army : armiesThatNeedToRoll) {
-			this.sendRollDiceMessage(army.sourceTerritory.getField().getId());
+			this.sendRollDiceMessage(army.sourceTerritory.getField().getId(), null);
 		}
 	}
 	
@@ -351,12 +352,18 @@ public class BattleThread implements Runnable {
 		}
 	}
 	
-	private void sendRollDiceMessage(int territoryId) throws FatalErrorException {
+	private void sendRollDiceMessage(int territoryId, Session sender) throws FatalErrorException {
 		PlayerRolledDice.Builder playerRolledDiceBuilder = PlayerRolledDice.newBuilder();
 		playerRolledDiceBuilder.setGameId(this.game.getId());
 		playerRolledDiceBuilder.setTerritoryId(territoryId);
 		
-		SendableMessage playerRolledDiceMessage = new SendableMessage(new ProtobuffMessage(HandlerId.PlayerRolledDice, 0, playerRolledDiceBuilder.build()), this.onlinePlayers);
+		Collection<Session> recepients = new ArrayList<>(this.onlinePlayers);
+		
+		if(sender != null) {
+			recepients.removeIf(recepient -> recepient.user.getId() == sender.user.getId());
+		}
+		
+		SendableMessage playerRolledDiceMessage = new SendableMessage(new ProtobuffMessage(HandlerId.PlayerRolledDice, 0, playerRolledDiceBuilder.build()), recepients);
 		playerRolledDiceMessage.send();
 	}
 	

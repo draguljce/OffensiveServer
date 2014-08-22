@@ -1,12 +1,12 @@
 package offensive.Server.WorkerThreads.BattleThread;
 
+import java.util.ArrayList;
 import java.util.Collections;
-import java.util.LinkedList;
 
 import offensive.Server.Utilities.CommonRandom;
 
 class Dices {
-	LinkedList<Integer> diceValues = new LinkedList<Integer>();
+	ArrayList<Integer> diceValues = new ArrayList<Integer>();
 	
 	CommonRandom rand;
 	
@@ -15,7 +15,7 @@ class Dices {
 	}
 	
 	void roll(int numberOfDices) {
-		this.diceValues.clear();
+		this.diceValues.clear();;
 		
 		for(int i = 0; i < numberOfDices; i++) {
 			this.diceValues.add(this.rand.nextInt(1, 7));
@@ -42,7 +42,7 @@ class Dices {
 			}
 			
 			for(int i = 0; i < this.diceValues.size(); i++) {
-				if(this.diceValues.remove() != otherDices.diceValues.remove()) {
+				if(this.diceValues.get(i) != otherDices.diceValues.get(i)) {
 					return false;
 				}
 			}

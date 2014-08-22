@@ -33,7 +33,7 @@ import offensive.Server.Utilities.HibernateUtil;
 import org.hibernate.Query;
 import org.hibernate.SQLQuery;
 import org.hibernate.Session;
-import org.hibernate.StaleObjectStateException;
+import org.hibernate.StaleStateException;
 import org.hibernate.Transaction;
 
 import com.google.protobuf.GeneratedMessage;
@@ -110,12 +110,13 @@ public class HandlerThread implements Runnable {
 	}
 	
 	private List<SendableMessage> proccessRequest(ProtobuffMessage request) throws Exception {
-		List<SendableMessage> response = new LinkedList<>();
+		
 		
 		int numberOfTries = 0;
 		
 		while (numberOfTries++ <= this.maxNumberOfTries) {
 			Session session = Server.getServer().sessionFactory.openSession();
+			List<SendableMessage> response = new LinkedList<>();
 			
 			try {
 				switch(request.handlerId) {
@@ -167,14 +168,13 @@ public class HandlerThread implements Runnable {
 					throw new IllegalArgumentException(String.format("Illegal handler ID: %s!!!", request.handlerId));
 				}
 			}
-			catch(StaleObjectStateException e) {
+			catch(StaleStateException e) {
 				Server.getServer().logger.error(e.getMessage(), e);
 				continue;
 			}
 			finally {
 				session.close();
 			}
-	
 			if(response.size() == 0) {
 				throw new InvalidStateException("Handler did not return any message!!!");
 			}
@@ -454,10 +454,10 @@ public class HandlerThread implements Runnable {
 			
 			tran.commit();
 			Server.getServer().logger.debug("AddUnit handler commited transaction");
-		} catch (Exception e) {
-			Server.getServer().logger.error(e.getMessage(), e);
-			Server.getServer().logger.debug("AddUnitHandler rolled back transaction");
+		}
+		catch (Exception e) {
 			tran.rollback();
+			Server.getServer().logger.debug("AddUnit handler rolled back transaction");
 			throw e;
 		}
 		
@@ -535,14 +535,14 @@ public class HandlerThread implements Runnable {
 					command.getSource().decreaseNumberOfTroops((short) command.getTroopNumber());
 				}
 			}
-			
+
 			gameId = game.getId();
+			tran.commit();
 		} catch(Exception e) {
 			tran.rollback();
 			Server.getServer().logger.error(e.getMessage(), e);
 			return;
 		} finally {
-			tran.commit();
 			if(nextPhase == 2) {
 				SessionManager.onlyInstance.startBattle(gameId);
 			}

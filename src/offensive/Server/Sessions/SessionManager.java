@@ -170,7 +170,12 @@ public class SessionManager implements Runnable{
 						request.sender = session;
 						
 						if(request.IsBattleThreadMessage) {
-							this.battleThreadMap.get(request.gameId).addMessage(request);
+							if(this.battleThreadMap.containsKey(request.gameId)) {
+								this.battleThreadMap.get(request.gameId).addMessage(request);
+							}
+							else {
+								Server.getServer().logger.error("Game not found, dismising message");
+							}
 						} else {
 							this.handlerExecutorService.submit(new HandlerThread(key, request));
 						}
@@ -207,7 +212,7 @@ public class SessionManager implements Runnable{
 			}
 		}
 	}
-	
+
 	public void removeKey(SelectionKey key) {
 		Session session = (Session)key.attachment();
 		GameManager.onlyInstance.removeGames(session);
@@ -219,7 +224,7 @@ public class SessionManager implements Runnable{
 			Server.getServer().logger.error(e.getMessage(), e);
 		}
 	}
-	
+
 	public void startBattle(long gameId) {
 		ZeroParamsCallback callback = new ZeroParamsCallback()  {
 			private HashMap<Long, BattleThread> map;
