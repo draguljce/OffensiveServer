@@ -140,6 +140,14 @@ public class CurrentGame {
 	public Set<Command> getCommands() {
 		return this.commands != null? this.commands : new HashSet<Command>();
 	}
+	
+	public Set<Command> getMoveCommands() {
+		Set<Command> moveCommands = this.commands != null? new HashSet<Command>(this.commands) : new HashSet<Command>();
+		
+		moveCommands.removeIf(command -> command.getType().getId() != 1);
+		
+		return moveCommands;
+	}
 
 	public void setCommands(Set<Command> commands) {
 		this.commands = commands;

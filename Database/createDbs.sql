@@ -169,7 +169,7 @@ CREATE TABLE CurrentGames
 --	| FK	Color					|
 --	| FK	Game					|
 --	| 		isPlayedMove			|
---	| 		numberOfReinforvements	|
+--	| 		numberOfReinforcements	|
 --	#####################################################
 CREATE TABLE Players
 (
@@ -221,15 +221,36 @@ CREATE TABLE Cards
 
 --	#####################################################
 --	---------------------
+--	|		Continents	|
+--	---------------------
+--	| PK	ID			|
+--	|		Name		|
+--	|		Bonus		|
+--	#####################################################
+CREATE TABLE Continents
+(
+	ID			SERIAL,
+	Name		varchar(32),
+	Bonus		smallint,
+	
+	PRIMARY KEY (ID)
+);
+
+
+--	#####################################################
+--	---------------------
 --	|		Fields		|
 --	---------------------
 --	| PK	ID			|
 --	|		Name		|
+--	| FK	Continent	|
+--	|		Version		|
 --	#####################################################
 CREATE TABLE Fields
 (
-	ID		SERIAL,
-	Name	varchar(32),
+	ID			SERIAL,
+	Name		varchar(32),
+	Continent	integer			REFERENCES Continents(ID),
 	Version		bigint,
 	
 	PRIMARY KEY (ID)

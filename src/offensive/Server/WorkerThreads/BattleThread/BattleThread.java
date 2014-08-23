@@ -333,6 +333,7 @@ public class BattleThread implements Runnable {
 		}
 		
 		Server.getServer().logger.info("User timeout exceeded broadcasting roll dice messages.");
+
 		// Enough waiting. Just go ahead and send RollDiceMessage.
 		for(Army army : armiesThatNeedToRoll) {
 			this.sendRollDiceMessage(army.sourceTerritory.getField().getId(), null);

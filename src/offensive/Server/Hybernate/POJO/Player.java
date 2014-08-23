@@ -2,6 +2,7 @@ package offensive.Server.Hybernate.POJO;
 
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Set;
 
 public class Player {
 	private int id;
@@ -11,7 +12,8 @@ public class Player {
 	private boolean isPlayedMove;
 	private int numberOfReinforcements;
 	private List<Card> cards;
-
+	private Set<Territory> territories;
+	
 	private long version;
 	
 	public Player() {};
@@ -99,4 +101,17 @@ public class Player {
 	public void setVersion(long version) {
 		this.version = version;
 	}
+	
+	public Set<Territory> getTerritories() {
+		return territories;
+	}
+
+	public void setTerritories(Set<Territory> territories) {
+		this.territories = territories;
+	}
+	
+	public void increaseReinforcements(int additionalReinforcements) {
+		this.numberOfReinforcements += additionalReinforcements;
+	}
+
 }

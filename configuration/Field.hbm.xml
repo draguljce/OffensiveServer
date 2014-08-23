@@ -7,5 +7,6 @@
 		
 		<version name="version" type="long"/>
 		<property name="name" column="Name" type="string"/>
+		<many-to-one name="continent" column="Continent" class="offensive.Server.Hybernate.POJO.Continent"/>
 	</class> 
 </hibernate-mapping>

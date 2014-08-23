@@ -9,8 +9,14 @@
 		
 		<version name="version" type="long"/>
 		<bag name="cards" cascade="all"> 
-			<key column="player"/> <one-to-many class="offensive.Server.Hybernate.POJO.Card"/> 
+			<key column="player"/> 
+			<one-to-many class="offensive.Server.Hybernate.POJO.Card"/> 
 		</bag>
+		
+		<set name="territories" cascade="all"> 
+			<key column="player"/> 
+			<one-to-many class="offensive.Server.Hybernate.POJO.Territory"/> 
+		</set>
 		
 		<many-to-one name="game" column="Game" class="offensive.Server.Hybernate.POJO.CurrentGame"/>  
 		<many-to-one name="user" column="UserId" class="offensive.Server.Hybernate.POJO.User"/>

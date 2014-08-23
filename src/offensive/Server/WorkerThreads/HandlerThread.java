@@ -19,12 +19,15 @@ import offensive.Server.Hybernate.POJO.Card;
 import offensive.Server.Hybernate.POJO.Color;
 import offensive.Server.Hybernate.POJO.CommandType;
 import offensive.Server.Hybernate.POJO.CompletedGameStatistics;
+import offensive.Server.Hybernate.POJO.Continent;
+import offensive.Server.Hybernate.POJO.Continents;
 import offensive.Server.Hybernate.POJO.CurrentGame;
 import offensive.Server.Hybernate.POJO.FacebookUser;
 import offensive.Server.Hybernate.POJO.Invite;
 import offensive.Server.Hybernate.POJO.Objective;
 import offensive.Server.Hybernate.POJO.Phase;
 import offensive.Server.Hybernate.POJO.Phases;
+import offensive.Server.Hybernate.POJO.Territory;
 import offensive.Server.Sessions.SessionManager;
 import offensive.Server.Sessions.Game.GameManager;
 import offensive.Server.Utilities.Constants;
@@ -37,6 +40,7 @@ import org.hibernate.StaleStateException;
 import org.hibernate.Transaction;
 
 import com.google.protobuf.GeneratedMessage;
+
 import communication.protos.CommunicationProtos.AddUnitRequest;
 import communication.protos.CommunicationProtos.AddUnitResponse;
 import communication.protos.CommunicationProtos.AdvancePhaseNotification;
@@ -478,8 +482,10 @@ public class HandlerThread implements Runnable {
 			
 			if(game.getPhase().getId() == Phases.Attack.ordinal()) {
 				responseBuilder = AttackResponse.newBuilder();
+				command.setType(new CommandType(0));
 			} else if (game.getPhase().getId() == Phases.Move.ordinal()) {
 				responseBuilder = MoveUnitsResponse.newBuilder();
+				command.setType(new CommandType(1));
 			}
 			
 			command.setGame(game);
@@ -496,7 +502,6 @@ public class HandlerThread implements Runnable {
 			command.setDestination(destinationTerritory);
 			command.setTroopNumber(request.getNumberOfUnits());
 			
-			command.setType(new CommandType(0));
 			session.save(command);
 			
 			tran.commit();
@@ -827,12 +832,20 @@ public class HandlerThread implements Runnable {
 		
 		if(nextPhase.getId() == 0) {
 			game.nextRound();
-		} else if(nextPhase.getId() == 1) {
+		} else if(nextPhase.getId() == Phases.Attack.ordinal()) {
 			for(offensive.Server.Hybernate.POJO.Territory territory :game.getTerritories()) {
 				territory.submitTroops();
 				advancePhaseNotificationBuilder.addTerritories(territory.toProtoTerritory(this.session.user));
 			}
+		} else if (nextPhase.getId() == Phases.Move.ordinal()) {
+			// Execute commands.
+			for(offensive.Server.Hybernate.POJO.Command command :game.getMoveCommands()) {
+				command.getSource().decreaseNumberOfTroops((short)command.getTroopNumber());
+				command.getDestination().increaseNumberOfTroops((short)command.getTroopNumber());
+			}
 			
+			// Calculate reinforcements.
+			this.addReinforcements(game, session);
 		}
 		
 		for(offensive.Server.Hybernate.POJO.Player player: game.getPlayers()) {
@@ -861,5 +874,35 @@ public class HandlerThread implements Runnable {
 		}
 
 		game.setBoard((Board)session.get(Board.class, 0));
+	}
+	
+	private void addReinforcements(CurrentGame game, Session session) {
+		
+		// Check continent bonus.
+		offensive.Server.Hybernate.POJO.Player[] playersByContinents = new offensive.Server.Hybernate.POJO.Player[Continents.values().length];
+		int[] belongsToOnePlayer = new int[Continents.values().length];
+		
+		for(Territory territory :game.getTerritories()) {
+			if(belongsToOnePlayer[territory.getField().getContinent().getId()] != 2) {
+				if(belongsToOnePlayer[territory.getField().getContinent().getId()] == 0) {
+					belongsToOnePlayer[territory.getField().getContinent().getId()] = 1;
+					playersByContinents[territory.getField().getContinent().getId()] = territory.getPlayer();
+				} else if (belongsToOnePlayer[territory.getField().getContinent().getId()] == 1) {
+					if (playersByContinents[territory.getField().getContinent().getId()].getId() == territory.getPlayer().getId()) {
+						belongsToOnePlayer[territory.getField().getContinent().getId()] = 2;
+					}
+				}
+			}
+		}
+		
+		for(int belongsToOnePlayerVal :belongsToOnePlayer) {
+			if(belongsToOnePlayerVal == 1) {
+				playersByContinents[belongsToOnePlayerVal].setNumberOfReinforcements(((Continent)session.get(Continent.class, belongsToOnePlayerVal)).getBonus());
+			}
+		}
+		
+		for(offensive.Server.Hybernate.POJO.Player player :game.getPlayers()) {
+			player.increaseReinforcements(Math.max(player.getTerritories().size(), 3));
+		}
 	}
 }

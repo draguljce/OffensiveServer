@@ -70,7 +70,7 @@ INSERT INTO CardTypes VALUES (0, 'Soldier', 1), (1, 'Horse', 1), (2, 'Artilery',
 --	| PK 	ID				|
 --	| 		Name			|
 --	#####################################################
-INSERT INTO CommandTypes VALUES (0, 'Attack', 1);
+INSERT INTO CommandTypes VALUES (0, 'Attack', 1), (1, 'Move', 1);
 
 --	#####################################################
 --	-------------------------
@@ -83,26 +83,35 @@ INSERT INTO AllianceTypes (Name, Version) VALUES ('Allied', 1), ('At war', 1), (
 
 --	#####################################################
 --	---------------------
+--	|		Continents	|
+--	---------------------
+--	| PK	ID			|
+--	|		Name		|
+--	#####################################################
+INSERT INTO Continents VALUES (1, 'North America', 5), (2, 'South America', 2), (3, 'Europe', 5), (4, 'Africa', 3), (5, 'Asia', 7), (6, 'Austalia', 2);
+
+--	#####################################################
+--	---------------------
 --	|		Fields		|
 --	---------------------
 --	| PK	ID			|
 --	|		Name		|
 --	#####################################################
 INSERT INTO Fields VALUES 
-(1, 'ALASKA', 1),(2, 'ALBERTA', 1), (3, 'CENTRAL_AMERICA', 1),
-(4, 'EASTERN_US', 1), (5, 'GREENLAND', 1), (6, 'NORTHWEST_TERRITORY', 1),
-(7, 'ONTARIO', 1), (8, 'QUEBEC', 1), (9, 'WESTERN_US', 1),
-(10, 'ARGENTINA', 1), (11, 'BRAZIL', 1), (12, 'PERU', 1),
-(13, 'VENEZUELA', 1), (14, 'GREAT_BRITAIN', 1), (15, 'ICELAND', 1),
-(16, 'NORTHERN_EUROPE', 1), (17, 'SCANDINAVIA', 1), (18, 'SOUTHERN_EUROPE', 1),
-(19, 'UKRAINE', 1), (20, 'WESTERN_EUROPE', 1), (21, 'CONGO', 1),
-(22, 'EAST_AFRICA', 1), (23, 'EGYPT', 1), (24, 'MADAGASCAR', 1),
-(25, 'NORTH_AFRICA', 1), (26, 'SOUTH_AFRICA', 1), (27, 'AFGHANISTAN', 1),
-(28, 'CHINA', 1), (29, 'INDIA', 1), (30, 'IRKUTSK', 1),
-(31, 'JAPAN', 1), (32, 'KAMCHATKA', 1), (33, 'MIDDLE_EAST', 1),
-(34, 'MONGOLIA', 1), (35, 'SIAM', 1), (36, 'SIBERIA', 1),
-(37, 'URAL', 1), (38, 'YAKUTSK', 1), (39, 'EASTERN_AUSTRALIA', 1),
-(40, 'INDONESIA', 1), (41, 'NEW_GUINEA', 1), (42, 'WESTERN_AUSTRALIA', 1);
+(1, 'ALASKA', 1, 1),(2, 'ALBERTA', 1, 1), (3, 'CENTRAL_AMERICA', 1, 1),
+(4, 'EASTERN_US', 1, 1), (5, 'GREENLAND', 1, 1), (6, 'NORTHWEST_TERRITORY', 1, 1),
+(7, 'ONTARIO', 1, 1), (8, 'QUEBEC', 1, 1), (9, 'WESTERN_US', 1, 1),
+(10, 'ARGENTINA', 2, 1), (11, 'BRAZIL', 2, 1), (12, 'PERU', 2, 1),
+(13, 'VENEZUELA', 2, 1), (14, 'GREAT_BRITAIN', 3, 1), (15, 'ICELAND', 3, 1),
+(16, 'NORTHERN_EUROPE', 3, 1), (17, 'SCANDINAVIA', 3, 1), (18, 'SOUTHERN_EUROPE', 3, 1),
+(19, 'UKRAINE', 3, 1), (20, 'WESTERN_EUROPE', 3, 1), (21, 'CONGO', 4, 1),
+(22, 'EAST_AFRICA', 4, 1), (23, 'EGYPT', 4, 1), (24, 'MADAGASCAR', 4, 1),
+(25, 'NORTH_AFRICA', 4, 1), (26, 'SOUTH_AFRICA', 4, 1), (27, 'AFGHANISTAN', 5, 1),
+(28, 'CHINA', 5, 1), (29, 'INDIA', 5, 1), (30, 'IRKUTSK', 5, 1),
+(31, 'JAPAN', 5, 1), (32, 'KAMCHATKA', 5, 1), (33, 'MIDDLE_EAST', 5, 1),
+(34, 'MONGOLIA', 5, 1), (35, 'SIAM', 5, 1), (36, 'SIBERIA', 5, 1),
+(37, 'URAL', 5, 1), (38, 'YAKUTSK', 5, 1), (39, 'EASTERN_AUSTRALIA', 6, 1),
+(40, 'INDONESIA', 6, 1), (41, 'NEW_GUINEA', 6, 1), (42, 'WESTERN_AUSTRALIA', 6, 1);
 
 --	#####################################################
 --	---------------------

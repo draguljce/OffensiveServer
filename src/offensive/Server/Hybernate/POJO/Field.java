@@ -3,7 +3,8 @@ package offensive.Server.Hybernate.POJO;
 public class Field {
 	private int id;
 	private String name;
-	
+	private Continent continent;
+
 	private long version;
 	
 	public Field() {}
@@ -31,4 +32,13 @@ public class Field {
 	public void setVersion(long version) {
 		this.version = version;
 	};
+	
+	public Continent getContinent() {
+		return continent;
+	}
+
+	public void setContinent(Continent continent) {
+		this.continent = continent;
+	}
+
 }

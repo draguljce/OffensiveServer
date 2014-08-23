@@ -2,11 +2,10 @@
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd"> 
 
 <hibernate-mapping> 
-	<class name="offensive.Server.Hybernate.POJO.Field" table="Fields">  
+	<class name="offensive.Server.Hybernate.POJO.Continent" table="Continents">  
 		<id name="id" type="int" column="id"/>
 		
-		<version name="version" type="long"/>
-		<property name="name" column="Name" type="string"/>
-		<many-to-one name="continent" column="Continent" class="offensive.Server.Hybernate.POJO.Continent"/>
+		<property name="name" column="name" type="string"/>
+		<property name="bonus" column="bonus" type="int"/>  
 	</class> 
 </hibernate-mapping>
