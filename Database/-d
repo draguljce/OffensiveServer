@@ -149,7 +149,7 @@ ALTER TABLE
 
  setval 
 --------
-      2
+      3
 (1 row)
 
  setval 
@@ -169,7 +169,7 @@ ALTER TABLE
 
  setval 
 --------
-      1
+      3
 (1 row)
 
  setval 
@@ -184,12 +184,12 @@ ALTER TABLE
 
  setval 
 --------
-      2
+      9
 (1 row)
 
  setval 
 --------
-     42
+    126
 (1 row)
 
  setval 

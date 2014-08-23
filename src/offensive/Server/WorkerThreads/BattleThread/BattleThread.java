@@ -31,6 +31,7 @@ import communication.protos.CommunicationProtos.BorderClashes;
 import communication.protos.CommunicationProtos.MultipleAttacks;
 import communication.protos.CommunicationProtos.PlayerRolledDice;
 import communication.protos.CommunicationProtos.RollDiceClicked;
+import communication.protos.CommunicationProtos.RollDiceClickedResponse;
 import communication.protos.CommunicationProtos.SingleAttacks;
 import communication.protos.CommunicationProtos.SpoilsOfWar;
 import communication.protos.DataProtos;
@@ -304,8 +305,14 @@ public class BattleThread implements Runnable {
 						RollDiceClicked rollDiceClicked = (RollDiceClicked)message.data;
 
 						if(rollDiceClicked.getGameId() == this.game.getId()) {
-							if (armiesThatNeedToRoll.removeIf(army -> army.player.getUser().getId() == message.sender.user.getId())) {
+							if (armiesThatNeedToRoll.removeIf(army -> 	army.player.getUser().getId() == message.sender.user.getId() &&
+																		army.sourceTerritory.getField().getId() == rollDiceClicked.getTerritoryId())) {
 								
+								RollDiceClickedResponse.Builder rollDiceClickedResponseBuilder = RollDiceClickedResponse.newBuilder();
+
+								SendableMessage rolleDiceClickedResponseMessage = new SendableMessage(new ProtobuffMessage(HandlerId.RollDiceClicked, message.ticketId, rollDiceClickedResponseBuilder.build()), message.sender);
+								rolleDiceClickedResponseMessage.send();
+
 								Server.getServer().logger.info("Broadcasting rolle dice message");
 								this.sendRollDiceMessage(rollDiceClicked.getTerritoryId(), message.sender);
 								
