@@ -43,5 +43,5 @@ public class Constants {
 	
 	public static final String SocketTimeoutDefaultVal = "1000";
 	
-	public static final int UserWaitTime = 8000;	// in milliseconds
+	public static final int UserWaitTime = 10000;	// in milliseconds
 }

@@ -262,11 +262,17 @@ public class BattleThread implements Runnable {
 		SendableMessage advanceToNextBattleMessage = new SendableMessage(new ProtobuffMessage(HandlerId.AdvanceToNextBattle, 0, advanceToNextBattleBuilder.build()), this.onlinePlayers);
 		advanceToNextBattleMessage.send();
 		
+		this.sleep(1000);
+		
 		while(battleContainer.oneSide.size() != 0 && battleContainer.otherSide.size() != 0) {
 			this.allUsersRoll(battleContainer);
 			
 			battleContainer.nextRound();
+			
+			this.sleep(2000);
 		}
+		
+		this.sleep(1000);
 	}
 	
 	private void allUsersRoll(BattleContainer commandContainer) throws FatalErrorException {
