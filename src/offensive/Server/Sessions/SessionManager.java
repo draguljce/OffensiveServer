@@ -138,7 +138,7 @@ public class SessionManager implements Runnable{
 						
 						Server.getServer().logger.info("Waiting for battle threads to finish...");
 						this.battleExecutorService.shutdown();
-						this.battleExecutorService.awaitTermination(Long.MAX_VALUE, TimeUnit.NANOSECONDS);
+						// this.battleExecutorService.awaitTermination(Long.MAX_VALUE, TimeUnit.NANOSECONDS);
 					} catch (InterruptedException e) {
 						Server.getServer().logger.error(e.getMessage(), e);
 					}

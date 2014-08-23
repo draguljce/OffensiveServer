@@ -269,17 +269,11 @@ public class BattleThread implements Runnable {
 	}
 	
 	private void allUsersRoll(BattleContainer commandContainer) throws FatalErrorException {
-		HashSet<Army> armiesThatNeedToRoll = new HashSet<>();
+		ArrayList<Army> armiesThatNeedToRoll = new ArrayList<>();
 		HashSet<Army> offlineArmiesThatNeedToRoll = new HashSet<>();
 		
 		this.populateOnlineAndOfflineUsers(armiesThatNeedToRoll, offlineArmiesThatNeedToRoll, commandContainer);
 		
-		this.sleep(2000);
-		
-		for(Army army :offlineArmiesThatNeedToRoll) {
-			this.sendRollDiceMessage(army.sourceTerritory.getField().getId(), null);
-		}
-
 		
 		long startTime = System.currentTimeMillis();
 		long endTime = startTime + Constants.UserWaitTime;
@@ -297,14 +291,26 @@ public class BattleThread implements Runnable {
 					break;
 				}
 				
+				if(System.currentTimeMillis() - startTime > 2000) {
+					for(Army army :offlineArmiesThatNeedToRoll) {
+						this.sendRollDiceMessage(army.sourceTerritory.getField().getId(), null);
+					}
+				}
+				
 				for(ProtobuffMessage message: this.messages) {
+					Server.getServer().logger.info("Battle thread received new message.");
+					
 					if(RollDiceClicked.class.equals(message.data.getClass())) {
 						RollDiceClicked rollDiceClicked = (RollDiceClicked)message.data;
-						
-						if(rollDiceClicked.getGameId() == this.game.getId() && armiesThatNeedToRoll.contains(message.sender.user)) {
-							this.sendRollDiceMessage(rollDiceClicked.getTerritoryId(), message.sender);
-							
-							armiesThatNeedToRoll.remove(message.sender.user);
+
+						if(rollDiceClicked.getGameId() == this.game.getId()) {
+							if (armiesThatNeedToRoll.removeIf(army -> army.player.getUser().getId() == message.sender.user.getId())) {
+								
+								Server.getServer().logger.info("Broadcasting rolle dice message");
+								this.sendRollDiceMessage(rollDiceClicked.getTerritoryId(), message.sender);
+								
+								armiesThatNeedToRoll.remove(message.sender.user);
+							}
 						}
 					}
 				}

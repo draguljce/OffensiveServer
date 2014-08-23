@@ -149,7 +149,7 @@ ALTER TABLE
 
  setval 
 --------
-      1
+      2
 (1 row)
 
  setval 
