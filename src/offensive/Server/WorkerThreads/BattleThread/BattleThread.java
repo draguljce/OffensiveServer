@@ -281,10 +281,9 @@ public class BattleThread implements Runnable {
 		
 		this.populateOnlineAndOfflineUsers(armiesThatNeedToRoll, offlineArmiesThatNeedToRoll, commandContainer);
 		
-		
 		long startTime = System.currentTimeMillis();
 		long endTime = startTime + Constants.UserWaitTime;
-		long waitTime = endTime - System.currentTimeMillis();
+		long waitTime = 2000;
 		
 		synchronized (this.messages) {
 			while (armiesThatNeedToRoll.size() != 0 && waitTime > 0) {
