@@ -59,4 +59,29 @@ public class Army {
 	private int getNumberOfDices() {
 		return Math.min(3, this.troopNumber);
 	}
+	
+	@Override
+	public int hashCode() {
+		return (this.sourceTerritory.getField().getId() << 16) ^ this.destinationTerritory.getField().getId();
+	}
+	
+	@Override
+	public boolean equals(Object other) {
+		if(this == other) {
+			return true;
+		}
+		
+		if(this.getClass() != other.getClass()) {
+			return false;
+		}
+		
+		Army otherArmy = (Army)other;
+		
+		if(this.sourceTerritory.getField().getId() == otherArmy.sourceTerritory.getField().getId() && this.destinationTerritory.getField().getId() == otherArmy.destinationTerritory.getField().getId()) {
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
 }

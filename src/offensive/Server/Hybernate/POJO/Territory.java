@@ -14,6 +14,8 @@ public class Territory {
 	
 	private long version;
 	
+	private Army myArmy;
+	
 	public Territory() {};
 	
 	public Territory(CurrentGame game, Field field, Player player) {
@@ -80,7 +82,12 @@ public class Territory {
 	}
 	
 	public Army getArmy() {	
-		return new Army(this.troopsOnIt, this.player, this);
+		if(this.myArmy == null) {
+			this.myArmy = new Army(this.troopsOnIt, this.player, this);
+			this.troopsOnIt = 0;
+		}
+		
+		return this.myArmy;
 	}
 
 	public void submitTroops() {

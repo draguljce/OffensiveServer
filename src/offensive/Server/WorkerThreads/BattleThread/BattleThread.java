@@ -64,7 +64,7 @@ public class BattleThread implements Runnable {
 			this.game = (CurrentGame) session.get(CurrentGame.class, this.gameId);
 			
 			Set<Command> allCommands = this.game.getCommands();
-			Collection<Army> armies = new LinkedList<Army>();
+			HashSet<Army> armies = new HashSet<Army>();
 			
 			CommunicationProtos.AllCommands.Builder allCommandsBuilder = CommunicationProtos.AllCommands.newBuilder();
 			
@@ -107,10 +107,15 @@ public class BattleThread implements Runnable {
 			for(Army army: armies) {
 				Territory armyDestination = army.destinationTerritory;
 				
-				armyDestination.setPlayer(army.player);
-				armyDestination.setTroopsOnIt((short)army.troopNumber);
+				if(armyDestination.getPlayer().getId() == army.player.getId()) {
+					armyDestination.increaseNumberOfTroops((short)army.troopNumber);
+				}
+				else {
+					armyDestination.setPlayer(army.player);
+					armyDestination.setTroopsOnIt((short)army.troopNumber);
+				}
 			}
-			
+
 			this.advanceToNextPhase(this.game, session).send();
 			tran.commit();
 		} catch(Exception e) {
@@ -163,8 +168,11 @@ public class BattleThread implements Runnable {
 			
 			battleContainer.armies.addAll(multipleAttack);
 			battleContainer.oneSide.addAll(multipleAttack);
-			battleContainer.armies.add(multipleAttack.element().destinationTerritory.getArmy());
-			battleContainer.otherSide.add(multipleAttack.element().destinationTerritory.getArmy());
+			
+			Army defendingArmy = multipleAttack.element().destinationTerritory.getArmy();
+			battleContainer.armies.add(defendingArmy);
+			battleContainer.otherSide.add(defendingArmy);
+			armies.add(defendingArmy);
 			
 			multipleAttacks.add(battleContainer);
 		}
@@ -177,10 +185,12 @@ public class BattleThread implements Runnable {
 		HashMap<Territory, Army> destinationTerritories = new HashMap<>();
 		
 		for(Army army: armies) {
-			if(destinationTerritories.containsKey((army.destinationTerritory))) {
-				destinationTerritories.remove(army.destinationTerritory);
-			} else {
-				destinationTerritories.put(army.destinationTerritory, army);
+			if((army.destinationTerritory.getField().getId() != army.sourceTerritory.getField().getId()) && army.destinationTerritory.getTroopsOnIt() > 0) {
+				if(destinationTerritories.containsKey((army.destinationTerritory))) {
+					destinationTerritories.remove(army.destinationTerritory);
+				} else {
+					destinationTerritories.put(army.destinationTerritory, army);
+				}
 			}
 		}
 		
@@ -189,8 +199,11 @@ public class BattleThread implements Runnable {
 			
 			battleContainer.armies.add(army);
 			battleContainer.oneSide.add(army);
-			battleContainer.armies.add(army.destinationTerritory.getArmy());
-			battleContainer.otherSide.add(army.destinationTerritory.getArmy());
+			
+			Army defendingArmy = army.destinationTerritory.getArmy();
+			battleContainer.armies.add(defendingArmy);
+			battleContainer.otherSide.add(defendingArmy);
+			armies.add(defendingArmy);
 			
 			singleAttacks.add(battleContainer);
 		}
@@ -204,9 +217,20 @@ public class BattleThread implements Runnable {
 		for(LinkedList<Army> multipleAttack: this.armiesWithSameDestination(armies)) {
 			BattleContainer battleContainer = new BattleContainer();
 			
-			battleContainer.armies.addAll(multipleAttack);
+			int armyPlayer = multipleAttack.get(0).player.getId();
+			boolean samePlayerArmies = true;
 			
-			spoilsOfWar.add(battleContainer);
+			for (Army army :multipleAttack) {
+				if(army.player.getId() != armyPlayer) {
+					samePlayerArmies = false;
+					break;
+				}
+			}
+			
+			if(!samePlayerArmies) {
+				battleContainer.armies.addAll(multipleAttack);
+				spoilsOfWar.add(battleContainer);
+			}
 		}
 		
 		return spoilsOfWar;
