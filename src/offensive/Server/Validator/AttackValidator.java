@@ -20,10 +20,12 @@ public class AttackValidator extends ValidatorBase{
 		
 		if(query.list().size() == 0) {
 			Server.getServer().logger.info(String.format("Territories %s and %s are not connected", game.getTerritory(command.getSourceTerritory()).getField().getName(), game.getTerritory(command.getDestinationTerritory()).getField().getName()));
+			session.close();
 			throw new InvalidStateException("Territories are not connected!");
 		}
 		
 		if(game.getTerritory(command.getSourceTerritory()).getTroopsOnIt() <= command.getNumberOfUnits()) {
+			session.close();
 			throw new InvalidStateException("User does not have enough troops!!!");
 		}
 		

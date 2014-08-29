@@ -830,12 +830,11 @@ public class HandlerThread implements Runnable {
 		Phase nextPhase = (Phase)session.get(Phase.class, game.getPhase().nextPhaseId());
 		game.setPhase(nextPhase);
 		
-		if(nextPhase.getId() == 0) {
+		if(nextPhase.getId() == Phases.Reinforcements.ordinal()) {
 			game.nextRound();
 		} else if(nextPhase.getId() == Phases.Attack.ordinal()) {
 			for(offensive.Server.Hybernate.POJO.Territory territory :game.getTerritories()) {
 				territory.submitTroops();
-				advancePhaseNotificationBuilder.addTerritories(territory.toProtoTerritory(this.session.user));
 			}
 		} else if (nextPhase.getId() == Phases.Move.ordinal()) {
 			// Execute commands.
@@ -846,6 +845,10 @@ public class HandlerThread implements Runnable {
 			
 			// Calculate reinforcements.
 			this.addReinforcements(game, session);
+		}
+		
+		for(offensive.Server.Hybernate.POJO.Territory territory :game.getTerritories()) {
+			advancePhaseNotificationBuilder.addTerritories(territory.toProtoTerritory(this.session.user));
 		}
 		
 		for(offensive.Server.Hybernate.POJO.Player player: game.getPlayers()) {
