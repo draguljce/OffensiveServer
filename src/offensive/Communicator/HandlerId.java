@@ -29,7 +29,8 @@ public enum HandlerId {
 	SingleAttacks,					//	22
 	SpoilsOfWar,					//	23
 	CardAwardedNotification,		//	24
-	PlayerCardCountNotification;	//	25
+	PlayerCardCountNotification,	//	25
+	ReinforcementsNotification;		//	26
 	
 	private static Map<Integer, HandlerId> intToHandlerMap;
 	

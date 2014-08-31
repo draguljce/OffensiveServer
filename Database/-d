@@ -186,32 +186,32 @@ ALTER TABLE
 
  setval 
 --------
-      1
-(1 row)
-
- setval 
---------
-      1
-(1 row)
-
- setval 
---------
-     42
-(1 row)
-
- setval 
---------
-      1
-(1 row)
-
- setval 
---------
       2
 (1 row)
 
  setval 
 --------
-     42
+      1
+(1 row)
+
+ setval 
+--------
+     84
+(1 row)
+
+ setval 
+--------
+      1
+(1 row)
+
+ setval 
+--------
+      4
+(1 row)
+
+ setval 
+--------
+     84
 (1 row)
 
  setval 

@@ -65,6 +65,7 @@ import communication.protos.CommunicationProtos.JoinGameResponse;
 import communication.protos.CommunicationProtos.MoveUnitsRequest;
 import communication.protos.CommunicationProtos.MoveUnitsResponse;
 import communication.protos.CommunicationProtos.PlayerCardCountNotification;
+import communication.protos.CommunicationProtos.ReinforcementsNotification;
 import communication.protos.CommunicationProtos.TradeCardsRequest;
 import communication.protos.CommunicationProtos.TradeCardsResponse;
 import communication.protos.DataProtos.Alliance;
@@ -547,7 +548,7 @@ public class HandlerThread implements Runnable {
 			CurrentGame game = (CurrentGame)session.get(CurrentGame.class, request.getGameId());
 			response.add(new SendableMessage(new ProtobuffMessage(responseBuilder.build()), this.session));
 			if(this.shouldAdvanceToNextPhase(game)) {
-				response.add(this.advanceToNextPhase(game, session));
+				response.addAll(this.advanceToNextPhase(game, session));
 			}
 			
 			nextPhase = game.getPhase().getId();
@@ -843,7 +844,10 @@ public class HandlerThread implements Runnable {
 		return shouldAdvanceToNextPhase;
 	}
 	
-	private SendableMessage advanceToNextPhase(CurrentGame game, Session session) {
+	private Collection<SendableMessage> advanceToNextPhase(CurrentGame game, Session session) {
+		Collection<SendableMessage> response = new ArrayList<SendableMessage>();
+		Collection<SendableMessage> reinforcementsInfo = null;
+		
 		AdvancePhaseNotification.Builder advancePhaseNotificationBuilder = AdvancePhaseNotification.newBuilder();
 		
 		advancePhaseNotificationBuilder.setGameId(game.getId());
@@ -857,9 +861,9 @@ public class HandlerThread implements Runnable {
 				command.getSource().decreaseNumberOfTroops((short)command.getTroopNumber());
 				command.getDestination().increaseNumberOfTroops((short)command.getTroopNumber());
 			}
-			
+
 			// Calculate reinforcements.
-			this.addReinforcements(game, session);
+			reinforcementsInfo = this.addReinforcements(game, session);
 			
 			game.nextRound();
 		} else if(nextPhase.getId() == Phases.Attack.ordinal()) {
@@ -878,7 +882,13 @@ public class HandlerThread implements Runnable {
 		
 		session.update(game);
 		
-		return new SendableMessage(new ProtobuffMessage(HandlerId.AdvancePhaseNotification, 0, advancePhaseNotificationBuilder.build()), GameManager.onlyInstance.getSessionsForGame(game.getId()));
+		response.add(new SendableMessage(new ProtobuffMessage(HandlerId.AdvancePhaseNotification, 0, advancePhaseNotificationBuilder.build()), GameManager.onlyInstance.getSessionsForGame(game.getId())));
+		
+		if(reinforcementsInfo != null) {
+			response.addAll(reinforcementsInfo);
+		}
+		
+		return response;
 	}
 	
 	private void divideTerritories(CurrentGame game, Session session) {
@@ -900,7 +910,8 @@ public class HandlerThread implements Runnable {
 		game.setBoard((Board)session.get(Board.class, 0));
 	}
 	
-	private void addReinforcements(CurrentGame game, Session session) {
+	private Collection<SendableMessage> addReinforcements(CurrentGame game, Session session) {
+		Collection<SendableMessage> reinforcementsInfo = new ArrayList<SendableMessage>();
 		
 		// Check continent bonus.
 		offensive.Server.Hybernate.POJO.Player[] playersByContinents = new offensive.Server.Hybernate.POJO.Player[Continents.values().length];
@@ -927,6 +938,14 @@ public class HandlerThread implements Runnable {
 		
 		for(offensive.Server.Hybernate.POJO.Player player :game.getPlayers()) {
 			player.increaseReinforcements(Math.max(player.getTerritories().size() / 3, 2));
+			
+			ReinforcementsNotification.Builder reinforcementsNotificationBuilder = ReinforcementsNotification.newBuilder();
+			reinforcementsNotificationBuilder.setGameId(game.getId());
+			reinforcementsNotificationBuilder.setNumberOfReinforcements(player.getNumberOfReinforcements());
+			
+			reinforcementsInfo.add(new SendableMessage(new ProtobuffMessage(HandlerId.ReinforcementsNotification, 0, reinforcementsNotificationBuilder.build()), GameManager.onlyInstance.getSessionForPlayer(player)));
 		}
+		
+		return reinforcementsInfo;
 	}
 }

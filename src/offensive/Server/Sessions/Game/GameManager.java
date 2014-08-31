@@ -7,6 +7,7 @@ import java.util.List;
 
 import offensive.Server.Exceptions.InvalidStateException;
 import offensive.Server.Hybernate.POJO.CurrentGame;
+import offensive.Server.Hybernate.POJO.Player;
 import offensive.Server.Sessions.Session;
 
 public class GameManager {
@@ -58,6 +59,16 @@ public class GameManager {
 		}
 		
 		return response;
+	}
+	
+	public Session getSessionForPlayer(Player player) {
+		for(Session session :this.getSessionsForGame(player.getGame().getId())) {
+			if(session.user.getId() == player.getUser().getId()) {
+				return session;
+			}
+		}
+		
+		return null;
 	}
 	
 	public CurrentGame getCurrentGame(long gameId) throws InvalidStateException {
