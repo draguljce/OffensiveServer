@@ -1,25 +1,30 @@
 package offensive.Server.Hybernate.POJO;
 
+import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
 
+import offensive.Server.Server;
 import offensive.Server.Validator.CommandValidator;
 
 public class CurrentGame {
-	private long id;
-	private String gameName;
-	private short numberOfJoinedPlayers;
-	private short numberOfPlayers;
-	private Objective objective;
-	private Phase phase;
-	private Board board;
-	private short currentRound;
-	private boolean isOpen;
-	private Set<Player> players;
-	private Set<Territory> territories;
-	private Set<Alliance> alliances;
-	private Set<Command> commands;
-	private Set<Invite> invites;
+	private long 			id;
+	
+	private String 			gameName;
+	private short 			numberOfJoinedPlayers;
+	private short 			numberOfPlayers;
+	private Objective 		objective;
+	private Phase 			phase;
+	private Board 			board;
+	private short 			currentRound;
+	private boolean 		isOpen;
+	private short			cardCounter;
+	private Set<Player> 	players;
+	private Set<Territory>	territories;
+	private Set<Alliance>	alliances;
+	private Set<Command>	commands;
+	private Set<Invite>		invites;
+	private Set<GameCard>	cards;
 	
 	private long version;
 	
@@ -29,7 +34,7 @@ public class CurrentGame {
 		this.validator = new CommandValidator(this);
 	};
 	
-	public CurrentGame(String name, int numberOfPlayers, Objective objective, boolean isOpen) {
+	public CurrentGame(String name, int numberOfPlayers, Objective objective, boolean isOpen, Collection<Card> allCards) {
 		this.gameName = name;
 		this.numberOfPlayers = (short)numberOfPlayers;
 		this.objective = objective;
@@ -38,6 +43,11 @@ public class CurrentGame {
 		this.phase = new Phase(0);
 		this.validator = new CommandValidator(this);
 		this.numberOfJoinedPlayers = 1;
+		
+		this.cards = new HashSet<GameCard>();
+		for(Card card :allCards) {
+			this.cards.add(new GameCard(this, card));
+		}
 	};
 	
 	public long getId() {
@@ -138,15 +148,26 @@ public class CurrentGame {
 	}
 	
 	public Set<Command> getCommands() {
-		return this.commands != null? this.commands : new HashSet<Command>();
+		Set<Command> commands = this.commands != null? new HashSet<Command>(this.commands) : new HashSet<Command>();
+		commands.removeIf(command -> command.getRound() != this.currentRound);
+		
+		return commands;
 	}
 	
 	public Set<Command> getMoveCommands() {
 		Set<Command> moveCommands = this.commands != null? new HashSet<Command>(this.commands) : new HashSet<Command>();
 		
-		moveCommands.removeIf(command -> command.getType().getId() != 1);
+		moveCommands.removeIf(command -> command.getType().getId() != 1 || command.getRound() != this.currentRound);
 		
 		return moveCommands;
+	}
+	
+	public Collection<Command> getPendingCommands() {
+		if(this.phase.getId() == Phases.Move.ordinal()) {
+			return this.getMoveCommands();
+		} else {
+			return this.getCommands();
+		}
 	}
 
 	public void setCommands(Set<Command> commands) {
@@ -219,11 +240,45 @@ public class CurrentGame {
 	
 	public Player getPlayer(User user) {
 		for(Player player :this.players) {
-			if(player.getUser().getId() == user.getId()) {
+			if(player.getUser() != null && player.getUser().getId() == user.getId()) {
 				return player;
 			}
 		}
 		
 		return null;
+	}
+	
+	public Set<GameCard> getCards() {
+		return this.cards;
+	}
+
+	public void setCards(Set<GameCard> cards) {
+		this.cards = cards;
+	}
+	
+	public Collection<GameCard> getAvaiableCards() {
+		Set<GameCard> allCards = new HashSet<GameCard>(this.cards);
+		allCards.removeIf(card -> card.getMyRound() != this.cardCounter);
+		
+		if(allCards.size() == 0) {
+			this.cardCounter++;
+		}
+		
+		allCards = new HashSet<GameCard>(this.cards);
+		allCards.removeIf(card -> card.getMyRound() != this.cardCounter);
+		
+		return allCards;
+	}
+	
+	public short getCardCounter() {
+		return this.cardCounter;
+	}
+
+	public void setCardCounter(short cardCounter) {
+		this.cardCounter = cardCounter;
+	}
+	
+	public GameCard getRandomGameCard() {
+		return Server.getServer().rand.chooseRandomElement(this.getAvaiableCards());
 	}
 }

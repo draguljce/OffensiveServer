@@ -23,6 +23,7 @@ import offensive.Server.Hybernate.POJO.Continent;
 import offensive.Server.Hybernate.POJO.Continents;
 import offensive.Server.Hybernate.POJO.CurrentGame;
 import offensive.Server.Hybernate.POJO.FacebookUser;
+import offensive.Server.Hybernate.POJO.GameCard;
 import offensive.Server.Hybernate.POJO.Invite;
 import offensive.Server.Hybernate.POJO.Objective;
 import offensive.Server.Hybernate.POJO.Phase;
@@ -63,6 +64,7 @@ import communication.protos.CommunicationProtos.JoinGameRequest;
 import communication.protos.CommunicationProtos.JoinGameResponse;
 import communication.protos.CommunicationProtos.MoveUnitsRequest;
 import communication.protos.CommunicationProtos.MoveUnitsResponse;
+import communication.protos.CommunicationProtos.PlayerCardCountNotification;
 import communication.protos.CommunicationProtos.TradeCardsRequest;
 import communication.protos.CommunicationProtos.TradeCardsResponse;
 import communication.protos.DataProtos.Alliance;
@@ -233,12 +235,15 @@ public class HandlerThread implements Runnable {
 		response.add(new SendableMessage(new ProtobuffMessage(filterFriendsResponseBuilder.build()), this.session));
 	}
 	
+	@SuppressWarnings("unchecked")
 	private void proccessCreateGameRequest(CreateGameRequest request, Session session, List<SendableMessage> response) throws UserNotFoundException {
 		CreateGameResponse.Builder createGameResponseBuilder = CreateGameResponse.newBuilder();
 		
-		offensive.Server.Hybernate.POJO.CurrentGame newGame = new CurrentGame(request.getGameName(), request.getNumberOfPlayers(), new Objective(request.getObjectiveCode()), request.getUserIdsCount() == 0);
+		// Create game cards
+		List<Card> allCards = (List<Card>) HibernateUtil.executeHql("FROM Card", session);
+		
+		offensive.Server.Hybernate.POJO.CurrentGame newGame = new CurrentGame(request.getGameName(), request.getNumberOfPlayers(), new Objective(request.getObjectiveCode()), request.getUserIdsCount() == 0, allCards);
 
-		@SuppressWarnings("unchecked")
 		List<Color> allColors = (List<Color>)HibernateUtil.executeHql("FROM Color", session);
 		
 		Collection<Color> chosenColors = Server.getServer().rand.chooseRandomSubset(allColors, request.getNumberOfPlayers());
@@ -264,7 +269,6 @@ public class HandlerThread implements Runnable {
 			}
 			
 			this.divideTerritories(newGame, session);
-			
 			
 			session.save(newGame);
 			
@@ -385,39 +389,49 @@ public class HandlerThread implements Runnable {
 		
 		short numberOfReinforcements = this.tradeCards(request.getCardId1(), request.getCardId2(), request.getCardId3());
 		 
-		Transaction tran = session.beginTransaction();
+		Transaction tran = null;
 		
 		try {
+			tran = session.beginTransaction();
+			
 			@SuppressWarnings("unchecked")
 			List<offensive.Server.Hybernate.POJO.Player> players = (List<offensive.Server.Hybernate.POJO.Player>)HibernateUtil.executeHql(String.format("FROM Player player WHERE player.id = %s AND player.game.id = %s", this.session.user.getId(), request.getGameId()), session);
 			
 			offensive.Server.Hybernate.POJO.Player player = players.get(0);
-			player.setNumberOfReinforcements(player.getNumberOfReinforcements() + numberOfReinforcements);
+			player.increaseReinforcements(numberOfReinforcements);
 			
 			List<Integer> cardsToRemove = new LinkedList<Integer>();
-			cardsToRemove.add(request.getCardId1());
-			cardsToRemove.add(request.getCardId2());
-			cardsToRemove.add(request.getCardId3());
+			cardsToRemove.add(request.getCardId1().getTerritoryId());
+			cardsToRemove.add(request.getCardId2().getTerritoryId());
+			cardsToRemove.add(request.getCardId3().getTerritoryId());
 			
-			for(Card card: player.getCards()) {
-				if(cardsToRemove.remove(new Integer(card.getType().getId()))) {
+			for(GameCard card: player.getCards()) {
+				if(cardsToRemove.remove(new Integer(card.getCard().getField().getId()))) {
 					session.delete(card);
 				}
-				
+
 				if(cardsToRemove.size() == 0) {
 					break;
 				}
 			}
 			
+			PlayerCardCountNotification.Builder playerCardCountNotificationBuilder = PlayerCardCountNotification.newBuilder();
+			
+			playerCardCountNotificationBuilder.setCardCount(player.getCards().size());
+			playerCardCountNotificationBuilder.setPlayerId(player.getId());
+			playerCardCountNotificationBuilder.setGameId(request.getGameId());
+			
+			SendableMessage sendableMessage = new SendableMessage(new ProtobuffMessage(HandlerId.PlayerCardCountNotification, 0, playerCardCountNotificationBuilder.build()), GameManager.onlyInstance.getSessionsForGame(request.getGameId()));
+			sendableMessage.send();
+			
 			session.update(player);
 
 			responseBuilder.setNumberOfReinforcements(numberOfReinforcements);
+			tran.commit();
 		} catch (Exception e) {
 			Server.getServer().logger.error(e.getMessage(), e);
 			tran.rollback();
 			return;
-		} finally {
-			tran.commit();
 		}
 		
 		response.add(new SendableMessage(new ProtobuffMessage(responseBuilder.build()), this.session));
@@ -502,7 +516,10 @@ public class HandlerThread implements Runnable {
 			command.setDestination(destinationTerritory);
 			command.setTroopNumber(request.getNumberOfUnits());
 			
+			game.getCommands().add(command);
+			
 			session.save(command);
+			session.flush();
 			
 			tran.commit();
 		} catch (Exception e) {
@@ -535,7 +552,7 @@ public class HandlerThread implements Runnable {
 			
 			nextPhase = game.getPhase().getId();
 			
-			if(nextPhase == 2) {
+			if(nextPhase == Phases.Battle.ordinal()) {
 				for(offensive.Server.Hybernate.POJO.Command command :game.getCommands()) {
 					command.getSource().decreaseNumberOfTroops((short) command.getTroopNumber());
 				}
@@ -699,11 +716,11 @@ public class HandlerThread implements Runnable {
 			playerBuilder.setUser(this.getUser(player.getUser().getId(), session));
 		}
 		
-		for(Card card: player.getCards()){
-			playerBuilder.addCards(card.getId());
-		}
+		playerBuilder.setCardCount(player.getCards().size());
 		
 		playerBuilder.setNumberOfReinforcments(player.getNumberOfReinforcements());
+		
+		playerBuilder.setIsPlayedMove(player.getIsPlayedMove());
 		
 		return playerBuilder.build();
 	}
@@ -775,22 +792,26 @@ public class HandlerThread implements Runnable {
 			gameContextBuilder.addAlliances(this.getAllianceFromPOJO(alliance));
 		}
 		
-		for(offensive.Server.Hybernate.POJO.Command command: game.getCommands()) {
+		for(offensive.Server.Hybernate.POJO.Command command: game.getPendingCommands()) {
 			if(command.getPlayer().getUser().equals(this.session.user)) {
 				gameContextBuilder.addPendingComands(this.getCommandFromPOJO(command));
 			}
 		}
 		
+		for(offensive.Server.Hybernate.POJO.GameCard card: game.getPlayer(this.session.user).getCards()) {
+			gameContextBuilder.addMyCards(card.getCard().toProtoCard());
+		}
+		
 		return gameContextBuilder.build();
 	}
 	
-	private short tradeCards(int card1, int card2, int card3) {
-		if(card1 != card2 && card1 != card3 && card2 != card3) {
+	private short tradeCards(communication.protos.DataProtos.Card card, communication.protos.DataProtos.Card card2, communication.protos.DataProtos.Card card3) {
+		if(card.getType() != card2.getType() && card.getType() != card3.getType() && card2.getType() != card3.getType()) {
 			return 10;
 		}
 		
-		if(card1 == card2 && card2 == card3) {
-			switch (card1) {
+		if(card.getType() == card2.getType() && card2.getType() == card3.getType()) {
+			switch (card.getType()) {
 			case 0:
 				return 4;
 			
@@ -831,12 +852,6 @@ public class HandlerThread implements Runnable {
 		game.setPhase(nextPhase);
 		
 		if(nextPhase.getId() == Phases.Reinforcements.ordinal()) {
-			game.nextRound();
-		} else if(nextPhase.getId() == Phases.Attack.ordinal()) {
-			for(offensive.Server.Hybernate.POJO.Territory territory :game.getTerritories()) {
-				territory.submitTroops();
-			}
-		} else if (nextPhase.getId() == Phases.Move.ordinal()) {
 			// Execute commands.
 			for(offensive.Server.Hybernate.POJO.Command command :game.getMoveCommands()) {
 				command.getSource().decreaseNumberOfTroops((short)command.getTroopNumber());
@@ -845,6 +860,12 @@ public class HandlerThread implements Runnable {
 			
 			// Calculate reinforcements.
 			this.addReinforcements(game, session);
+			
+			game.nextRound();
+		} else if(nextPhase.getId() == Phases.Attack.ordinal()) {
+			for(offensive.Server.Hybernate.POJO.Territory territory :game.getTerritories()) {
+				territory.submitTroops();
+			}
 		}
 		
 		for(offensive.Server.Hybernate.POJO.Territory territory :game.getTerritories()) {
@@ -886,26 +907,26 @@ public class HandlerThread implements Runnable {
 		int[] belongsToOnePlayer = new int[Continents.values().length];
 		
 		for(Territory territory :game.getTerritories()) {
-			if(belongsToOnePlayer[territory.getField().getContinent().getId()] != 2) {
-				if(belongsToOnePlayer[territory.getField().getContinent().getId()] == 0) {
-					belongsToOnePlayer[territory.getField().getContinent().getId()] = 1;
-					playersByContinents[territory.getField().getContinent().getId()] = territory.getPlayer();
-				} else if (belongsToOnePlayer[territory.getField().getContinent().getId()] == 1) {
-					if (playersByContinents[territory.getField().getContinent().getId()].getId() == territory.getPlayer().getId()) {
-						belongsToOnePlayer[territory.getField().getContinent().getId()] = 2;
+			if(belongsToOnePlayer[territory.getField().getContinent().getId() - 1] != 2) {
+				if(belongsToOnePlayer[territory.getField().getContinent().getId() - 1] == 0) {
+					belongsToOnePlayer[territory.getField().getContinent().getId() - 1] = 1;
+					playersByContinents[territory.getField().getContinent().getId() - 1] = territory.getPlayer();
+				} else if (belongsToOnePlayer[territory.getField().getContinent().getId() -1] == 1) {
+					if (playersByContinents[territory.getField().getContinent().getId() -1].getId() != territory.getPlayer().getId()) {
+						belongsToOnePlayer[territory.getField().getContinent().getId() -1] = 2;
 					}
 				}
 			}
 		}
 		
-		for(int belongsToOnePlayerVal :belongsToOnePlayer) {
-			if(belongsToOnePlayerVal == 1) {
-				playersByContinents[belongsToOnePlayerVal].setNumberOfReinforcements(((Continent)session.get(Continent.class, belongsToOnePlayerVal)).getBonus());
+		for(int i = 0; i < belongsToOnePlayer.length; i++) {
+			if(belongsToOnePlayer[i] == 1) {
+				playersByContinents[i].setNumberOfReinforcements(((Continent)session.get(Continent.class, i + 1)).getBonus());
 			}
 		}
 		
 		for(offensive.Server.Hybernate.POJO.Player player :game.getPlayers()) {
-			player.increaseReinforcements(Math.max(player.getTerritories().size(), 3));
+			player.increaseReinforcements(Math.max(player.getTerritories().size() / 3, 2));
 		}
 	}
 }

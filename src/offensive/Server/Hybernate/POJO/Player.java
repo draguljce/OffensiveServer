@@ -11,7 +11,7 @@ public class Player {
 	private Color color;
 	private boolean isPlayedMove;
 	private int numberOfReinforcements;
-	private List<Card> cards;
+	private List<GameCard> cards;
 	private Set<Territory> territories;
 	
 	private long version;
@@ -70,15 +70,15 @@ public class Player {
 		this.numberOfReinforcements = numberOfReinforcements;
 	}
 
-	public List<Card> getCards() {
+	public List<GameCard> getCards() {
 		if(this.cards == null) {
-			this.cards = new LinkedList<Card>();
+			this.cards = new LinkedList<GameCard>();
 		}
 		
 		return cards;
 	}
 
-	public void setCards(List<Card> cards) {
+	public void setCards(List<GameCard> cards) {
 		this.cards = cards;
 	}
 	

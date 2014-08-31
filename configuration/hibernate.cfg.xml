@@ -44,5 +44,6 @@
 		<mapping resource="CommandType.hbm.xml"/>
 		<mapping resource="Connection.hbm.xml"/>
 		<mapping resource="Continent.hbm.xml"/>
+		<mapping resource="GameCard.hbm.xml"/>
 	</session-factory> 
 </hibernate-configuration>

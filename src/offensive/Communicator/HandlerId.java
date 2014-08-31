@@ -4,30 +4,32 @@ import java.util.HashMap;
 import java.util.Map;
 
 public enum HandlerId {
-	RegisterRequest,			//	0
-	NoFacebookLoginRequest,		//	1
-	FacebookLoginRequest, 		//	2
-	GetUserDataRequest,			//	3
-	FilterFriendsRequest,		//	4
-	CreateGameRequest,			//	5
-	GetOpenGamesRequest,		//	6
-	JoinGameRequest,			//	7
-	InvokeAllianceRequest,		//	8
-	TradeCardsRequest,			//	9
-	AddUnitRequest,				//	10
-	MoveUnitsRequest,			//	11
-	AttackRequest,				//	12
-	CommandsSubmittedRequest,	//	13
-	AllCommands,				//	14
-	BorderClashes,				//	15
-	AdvanceToNextBattle,		//	16
-	RollDiceClicked,			//	17
-	PlayerRolledDice,			//	18
-	JoinGameNotification,		//	19
-	AdvancePhaseNotification,	//	20
-	MultipleAttacks,			//	21
-	SingleAttacks,				//	22
-	SpoilsOfWar;				//	23
+	RegisterRequest,				//	0
+	NoFacebookLoginRequest,			//	1
+	FacebookLoginRequest, 			//	2
+	GetUserDataRequest,				//	3
+	FilterFriendsRequest,			//	4
+	CreateGameRequest,				//	5
+	GetOpenGamesRequest,			//	6
+	JoinGameRequest,				//	7
+	InvokeAllianceRequest,			//	8
+	TradeCardsRequest,				//	9
+	AddUnitRequest,					//	10
+	MoveUnitsRequest,				//	11
+	AttackRequest,					//	12
+	CommandsSubmittedRequest,		//	13
+	AllCommands,					//	14
+	BorderClashes,					//	15
+	AdvanceToNextBattle,			//	16
+	RollDiceClicked,				//	17
+	PlayerRolledDice,				//	18
+	JoinGameNotification,			//	19
+	AdvancePhaseNotification,		//	20
+	MultipleAttacks,				//	21
+	SingleAttacks,					//	22
+	SpoilsOfWar,					//	23
+	CardAwardedNotification,		//	24
+	PlayerCardCountNotification;	//	25
 	
 	private static Map<Integer, HandlerId> intToHandlerMap;
 	

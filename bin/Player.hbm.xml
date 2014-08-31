@@ -8,9 +8,10 @@
 		</id>
 		
 		<version name="version" type="long"/>
+		
 		<bag name="cards" cascade="all"> 
 			<key column="player"/> 
-			<one-to-many class="offensive.Server.Hybernate.POJO.Card"/> 
+			<one-to-many class="offensive.Server.Hybernate.POJO.GameCard"/> 
 		</bag>
 		
 		<set name="territories" cascade="all"> 

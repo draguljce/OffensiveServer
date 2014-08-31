@@ -5,7 +5,6 @@
 	<class name="offensive.Server.Hybernate.POJO.CardType" table="CardTypes">  
 		<id name="id" type="int" column="id"/>
 		
-		<version name="version" type="long"/>
 		<property name="type" column="Type" type="string"/>  
 	</class> 
 </hibernate-mapping>

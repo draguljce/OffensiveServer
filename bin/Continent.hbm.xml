@@ -6,6 +6,6 @@
 		<id name="id" type="int" column="id"/>
 		
 		<property name="name" column="name" type="string"/>
-		<property name="bonus" column="bonus" type="int"/>  
+		<property name="bonus" column="bonus" type="short"/>  
 	</class> 
 </hibernate-mapping>

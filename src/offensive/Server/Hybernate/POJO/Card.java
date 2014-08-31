@@ -1,11 +1,11 @@
 package offensive.Server.Hybernate.POJO;
 
+import communication.protos.DataProtos;
+
 public class Card {
 	private int id;
 	private CardType type;
-	private int player;
-	
-	private long version;
+	private Field field;
 	
 	public Card() {}
 
@@ -25,13 +25,22 @@ public class Card {
 		this.type = type;
 	}
 
-	public int getPlayer() {
-		return player;
+	public Field getField() {
+		return this.field;
 	}
 
-	public void setPlayer(int player) {
-		this.player = player;
+	public void setField(Field field) {
+		this.field = field;
 	};
+	
+	public DataProtos.Card toProtoCard() {
+		DataProtos.Card.Builder cardBuilder = DataProtos.Card.newBuilder();
+		
+		cardBuilder.setTerritoryId(this.field.getId());
+		cardBuilder.setType(this.type.getId());
+		
+		return cardBuilder.build();
+	}
 	
 	@Override
 	public boolean equals(Object other) {
@@ -50,13 +59,5 @@ public class Card {
 		} else {
 			return false;
 		}
-	}
-
-	public long getVersion() {
-		return version;
-	}
-
-	public void setVersion(long version) {
-		this.version = version;
 	}
 }

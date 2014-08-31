@@ -15,7 +15,9 @@ import offensive.Server.Server;
 import offensive.Server.Exceptions.FatalErrorException;
 import offensive.Server.Hybernate.POJO.Command;
 import offensive.Server.Hybernate.POJO.CurrentGame;
+import offensive.Server.Hybernate.POJO.GameCard;
 import offensive.Server.Hybernate.POJO.Phase;
+import offensive.Server.Hybernate.POJO.Player;
 import offensive.Server.Hybernate.POJO.Territory;
 import offensive.Server.Sessions.Session;
 import offensive.Server.Sessions.Game.GameManager;
@@ -28,7 +30,9 @@ import communication.protos.CommunicationProtos;
 import communication.protos.CommunicationProtos.AdvancePhaseNotification;
 import communication.protos.CommunicationProtos.AdvanceToNextBattle;
 import communication.protos.CommunicationProtos.BorderClashes;
+import communication.protos.CommunicationProtos.CardAwardedNotification;
 import communication.protos.CommunicationProtos.MultipleAttacks;
+import communication.protos.CommunicationProtos.PlayerCardCountNotification;
 import communication.protos.CommunicationProtos.PlayerRolledDice;
 import communication.protos.CommunicationProtos.RollDiceClicked;
 import communication.protos.CommunicationProtos.RollDiceClickedResponse;
@@ -45,6 +49,8 @@ public class BattleThread implements Runnable {
 	private ZeroParamsCallback signalFinishCallback;
 	
 	private Collection<ProtobuffMessage> messages = new LinkedList<>();
+	
+	private ArrayList<Player> playersThatEarnedCard = new ArrayList<Player>();
 	
 	public BattleThread(long gameId, ZeroParamsCallback callback) {
 		this.gameId = gameId;
@@ -112,7 +118,47 @@ public class BattleThread implements Runnable {
 				}
 				else {
 					armyDestination.setPlayer(army.player);
+					
+					if(!this.playersThatEarnedCard.contains(army.player)) {
+						this.playersThatEarnedCard.add(army.player);
+					}
+
 					armyDestination.setTroopsOnIt((short)army.troopNumber);
+				}
+			}
+			
+			for(Player player :this.playersThatEarnedCard) {
+				GameCard gameCard = this.game.getRandomGameCard();
+				gameCard.nextRound();
+				
+				session.update(gameCard);
+				player.getCards().add(gameCard);
+				
+				PlayerCardCountNotification.Builder playerCardCountNotificationBuilder = PlayerCardCountNotification.newBuilder();
+				
+				playerCardCountNotificationBuilder.setCardCount(player.getCards().size());
+				playerCardCountNotificationBuilder.setPlayerId(player.getId());
+				playerCardCountNotificationBuilder.setGameId(this.gameId);
+				
+				SendableMessage sendableMessage = new SendableMessage(new ProtobuffMessage(HandlerId.PlayerCardCountNotification, 0, playerCardCountNotificationBuilder.build()), this.onlinePlayers);
+				sendableMessage.send();
+				
+				CardAwardedNotification.Builder cardAwardedNotificationBuilder = CardAwardedNotification.newBuilder();
+				
+				cardAwardedNotificationBuilder.setCard(gameCard.toProtoCard());
+				cardAwardedNotificationBuilder.setGameId(this.gameId);
+				
+				Session awardedPlayerSession = null;
+				for(Session userSession :this.onlinePlayers) {
+					if(userSession.user.getId() == player.getUser().getId()) {
+						awardedPlayerSession = userSession;
+						break;
+					}
+				}
+				
+				if(awardedPlayerSession != null) {
+					sendableMessage = new SendableMessage(new ProtobuffMessage(HandlerId.CardAwardedNotification, 0, cardAwardedNotificationBuilder.build()), awardedPlayerSession);
+					sendableMessage.send();
 				}
 			}
 

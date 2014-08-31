@@ -143,6 +143,7 @@ CREATE TABLE Objectives
 --	| FK	Board					|
 --	| 		CurrentRound			|
 --	| 		IsOpen					|
+--	| 		CardCounter				|
 --	#####################################################
 CREATE TABLE CurrentGames
 (
@@ -155,7 +156,8 @@ CREATE TABLE CurrentGames
 	Board					integer		REFERENCES Boards(ID) 		ON UPDATE CASCADE,
 	CurrentRound			smallint,
 	IsOpen					boolean,
-	Version		bigint,
+	CardCounter				smallint,
+	Version					bigint,
 	
 	PRIMARY KEY (ID)
 );
@@ -197,24 +199,6 @@ CREATE TABLE CardTypes
 (
 	ID		SERIAL,
 	Type	varchar(32),
-	Version		bigint,
-	
-	PRIMARY KEY (ID)
-);
-
---	#####################################################
---	---------------------
---	|		Cards		|
---	---------------------
---	| PK	ID			|
---	|   	Type		|
---	#####################################################
-CREATE TABLE Cards
-(
-	ID		SERIAL,
-	type	integer	REFERENCES CardTypes(ID)	ON UPDATE CASCADE,
-	player	integer	REFERENCES Players(ID)		ON UPDATE CASCADE,
-	Version		bigint,
 	
 	PRIMARY KEY (ID)
 );
@@ -243,7 +227,7 @@ CREATE TABLE Continents
 --	---------------------
 --	| PK	ID			|
 --	|		Name		|
---	| FK	Continent	|
+--	|    FK	Continent	|
 --	|		Version		|
 --	#####################################################
 CREATE TABLE Fields
@@ -253,6 +237,46 @@ CREATE TABLE Fields
 	Continent	integer			REFERENCES Continents(ID),
 	Version		bigint,
 	
+	PRIMARY KEY (ID)
+);
+
+--	#####################################################
+--	---------------------
+--	|		Cards		|
+--	---------------------
+--	| PK	ID			|
+--	|    FK	Type		|
+--	|    FK	field		|
+--	#####################################################
+CREATE TABLE Cards
+(
+	ID		SERIAL,
+	field	integer	REFERENCES Fields(ID)		ON UPDATE CASCADE,
+	type	integer	REFERENCES CardTypes(ID)	ON UPDATE CASCADE,
+	
+	PRIMARY KEY (ID)
+);
+
+--	#####################################################
+--	-------------------------
+--	|		GameCards		|
+--	-------------------------
+--	| PK	ID				|
+--	|    FK	game			|
+--	|    FK	Player			|
+--	|    FK	Card			|
+--	|    	myRound			|
+--	|    	version			|
+--	#####################################################
+CREATE TABLE GameCards
+(
+	ID		SERIAL,
+	game	bigint		REFERENCES CurrentGames(ID)	ON UPDATE CASCADE,
+	player	integer		REFERENCES Players(ID)		ON UPDATE CASCADE,
+	card	integer		REFERENCES Cards(ID)		ON UPDATE CASCADE,
+	myRound	smallint,
+	Version	bigint,
+
 	PRIMARY KEY (ID)
 );
 

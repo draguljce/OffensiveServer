@@ -5,8 +5,7 @@
 	<class name="offensive.Server.Hybernate.POJO.Card" table="Cards">  
 		<id name="id" type="int" column="id"/>
 		
-		<version name="version" type="long"/>
+		<many-to-one name="field" column="Field" class="offensive.Server.Hybernate.POJO.Field"/>
 		<many-to-one name="type" column="Type" class="offensive.Server.Hybernate.POJO.CardType"/>
-		<many-to-one name="player" column="Player" class="offensive.Server.Hybernate.POJO.Player"/>
 	</class> 
 </hibernate-mapping>

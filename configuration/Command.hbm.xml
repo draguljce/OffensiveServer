@@ -8,7 +8,7 @@
 		</id>
 		
 		<version name="version" type="long"/>
-		<many-to-one name="game" column="Game" class="offensive.Server.Hybernate.POJO.CurrentGame"/>
+		<many-to-one name="game" column="Game" class="offensive.Server.Hybernate.POJO.CurrentGame" not-null="true"/>
 		<many-to-one name="phase" column="Phase" class="offensive.Server.Hybernate.POJO.Phase"/>
 		<property name="round" column="Round" type="short"/>
 		<many-to-one name="player" column="Player" class="offensive.Server.Hybernate.POJO.Player"/>
