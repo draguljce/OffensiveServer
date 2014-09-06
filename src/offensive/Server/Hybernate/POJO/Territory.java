@@ -121,4 +121,14 @@ public class Territory {
 		
 		return territoryBuilder.build();
 	}
+	
+	public DataProtos.Territory toProtoTerritory() {
+		DataProtos.Territory.Builder territoryBuilder = DataProtos.Territory.newBuilder();
+		
+		territoryBuilder.setId(this.getField().getId());
+		territoryBuilder.setTroopsOnIt(this.troopsOnIt);
+		territoryBuilder.setPlayerId(this.getPlayer().getId());
+		
+		return territoryBuilder.build();
+	}
 }

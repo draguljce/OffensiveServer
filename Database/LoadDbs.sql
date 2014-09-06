@@ -17,16 +17,32 @@ INSERT INTO UserTypes VALUES ('OffensiveUser', 1), ('FacebookUser', 1);
 --	#####################################################
 INSERT INTO Users VALUES (default, 'FacebookUser', 1);
 INSERT INTO Users VALUES (default, 'FacebookUser', 1);
+INSERT INTO Users VALUES (default, 'FacebookUser', 1);
+INSERT INTO Users VALUES (default, 'OffensiveUser', 1);
+INSERT INTO Users VALUES (default, 'OffensiveUser', 1);
 
 --	#####################################################
 --	---------------------
---	|	FacebookUser	|
+--	|	FacebookUsers	|
 --	---------------------
 --	| PK	FacebookID	|
 --	| 		userID		|
 --	#####################################################
 INSERT INTO FacebookUsers VALUES (1282639449, 1, 1);
 INSERT INTO FacebookUsers VALUES (100000564933202, 2, 1);
+INSERT INTO FacebookUsers VALUES (100005974699416, 3, 1);
+
+--	#####################################################
+--	---------------------
+--	|	OffensiveUsers	|
+--	---------------------
+--	| PK	ID			|
+--	| 		UserName	|
+--	|		PassHash	|
+--	|		Version		|
+--	#####################################################
+INSERT INTO OffensiveUsers VALUES (4, 'ognjen', '18aa53c0ac2859deaca6674ee136809c', 1);
+INSERT INTO OffensiveUsers VALUES (5, 'milica', '18aa53c0ac2859deaca6674ee136809c', 1);
 
 --	#####################################################
 --	---------------------

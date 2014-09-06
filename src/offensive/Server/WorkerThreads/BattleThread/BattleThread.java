@@ -334,10 +334,13 @@ public class BattleThread implements Runnable {
 		
 		this.sleep(1000);
 		
-		while(battleContainer.oneSide.size() != 0 && battleContainer.otherSide.size() != 0) {
+		while(	(battleContainer.oneSide.size() != 0 && battleContainer.otherSide.size() != 0) || 
+				(!allArmiesBelongToOnePlayer(battleContainer) && battleContainer.oneSide.size() == 0 && battleContainer.otherSide.size() == 0)) {
 			this.allUsersRoll(battleContainer);
 			
 			battleContainer.nextRound();
+			
+			battleContainer.armies.removeIf(army -> army.troopNumber == 0);
 			
 			this.sleep(2000);
 		}
@@ -348,6 +351,7 @@ public class BattleThread implements Runnable {
 	private void allUsersRoll(BattleContainer commandContainer) throws FatalErrorException {
 		ArrayList<Army> armiesThatNeedToRoll = new ArrayList<>();
 		HashSet<Army> offlineArmiesThatNeedToRoll = new HashSet<>();
+		boolean offlineArmiesRolled = false;
 		
 		this.populateOnlineAndOfflineUsers(armiesThatNeedToRoll, offlineArmiesThatNeedToRoll, commandContainer);
 		
@@ -361,16 +365,22 @@ public class BattleThread implements Runnable {
 					while(this.messages.size() == 0 && waitTime > 0) {
 						this.messages.wait(waitTime);
 						waitTime = endTime - System.currentTimeMillis();
+						
+						if(!offlineArmiesRolled) {
+							break;
+						}
 					}
 				} catch (InterruptedException e) {
 					Server.getServer().logger.error(e.getMessage(), e);
 					break;
 				}
 				
-				if(System.currentTimeMillis() - startTime > 2000) {
+				if(!offlineArmiesRolled) {
 					for(Army army :offlineArmiesThatNeedToRoll) {
 						this.sendRollDiceMessage(army.sourceTerritory.getField().getId(), null);
 					}
+					
+					offlineArmiesRolled = true;
 				}
 				
 				for(ProtobuffMessage message: this.messages) {
@@ -410,22 +420,7 @@ public class BattleThread implements Runnable {
 	}
 	
 	public void populateOnlineAndOfflineUsers(Collection<Army> onlinePlayers, Collection<Army> offlinePlayer, BattleContainer commandContainer) {
-		for(Army army: commandContainer.oneSide) {
-			boolean isOnline = false;
-			for(Session session: this.onlinePlayers) {
-				if(session.user.getId() == army.player.getUser().getId()) {
-					onlinePlayers.add(army);
-					isOnline = true;
-					break;
-				}
-			}
-			
-			if(!isOnline) {
-				offlinePlayer.add(army);
-			}
-		}
-		
-		for(Army army: commandContainer.otherSide) {
+		for(Army army: commandContainer.armies) {
 			boolean isOnline = false;
 			for(Session session: this.onlinePlayers) {
 				if(session.user.getId() == army.player.getUser().getId()) {
@@ -507,6 +502,25 @@ public class BattleThread implements Runnable {
 		}
 	}
 	
+	private boolean allArmiesBelongToOnePlayer(BattleContainer battleContainer) {
+		Player player = null;
+		
+		if(battleContainer.armies.size() > 1) {
+			for(Army army :battleContainer.armies) {
+				if(player == null) {
+					player = army.player;
+				} 
+				else {
+					if(player.getId() != army.player.getId()) {
+						return false;
+					}
+				}
+			}
+		}
+		
+		return true;
+	}
+	
 	private SendableMessage advanceToNextPhase(CurrentGame game, org.hibernate.Session session) {
 		AdvancePhaseNotification.Builder advancePhaseNotificationBuilder = AdvancePhaseNotification.newBuilder();
 		
@@ -517,6 +531,10 @@ public class BattleThread implements Runnable {
 		
 		for(offensive.Server.Hybernate.POJO.Player player: game.getPlayers()) {
 			player.setIsPlayedMove(false);
+		}
+		
+		for(offensive.Server.Hybernate.POJO.Territory territory :game.getTerritories()) {
+			advancePhaseNotificationBuilder.addTerritories(territory.toProtoTerritory());
 		}
 
 		session.update(game);

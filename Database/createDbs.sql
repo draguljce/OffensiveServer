@@ -36,7 +36,7 @@ CREATE TABLE Users
 
 --	#####################################################
 --	---------------------
---	|	FacebookUser	|
+--	|	FacebookUsers	|
 --	---------------------
 --	| PK	FacebookID	|
 --	| 		userID		|
@@ -54,10 +54,12 @@ CREATE UNIQUE INDEX facebookUsersIndex ON FacebookUsers (UserID);
 
 --	#####################################################
 --	---------------------
---	|	OffensiveUser	|
+--	|	OffensiveUsers	|
 --	---------------------
 --	| PK	ID			|
---	|		FacebookID	|
+--	| 		UserName	|
+--	|		PassHash	|
+--	|		Version		|
 --	#####################################################
 CREATE TABLE OffensiveUsers
 (

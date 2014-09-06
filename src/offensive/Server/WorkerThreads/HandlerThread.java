@@ -396,26 +396,29 @@ public class HandlerThread implements Runnable {
 			tran = session.beginTransaction();
 			
 			@SuppressWarnings("unchecked")
-			List<offensive.Server.Hybernate.POJO.Player> players = (List<offensive.Server.Hybernate.POJO.Player>)HibernateUtil.executeHql(String.format("FROM Player player WHERE player.id = %s AND player.game.id = %s", this.session.user.getId(), request.getGameId()), session);
+			List<offensive.Server.Hybernate.POJO.Player> players = (List<offensive.Server.Hybernate.POJO.Player>)HibernateUtil.executeHql(String.format("FROM Player player WHERE player.user.id = %s", this.session.user.getId()), session);
 			
 			offensive.Server.Hybernate.POJO.Player player = players.get(0);
 			player.increaseReinforcements(numberOfReinforcements);
 			
-			List<Integer> cardsToRemove = new LinkedList<Integer>();
-			cardsToRemove.add(request.getCardId1().getTerritoryId());
-			cardsToRemove.add(request.getCardId2().getTerritoryId());
-			cardsToRemove.add(request.getCardId3().getTerritoryId());
-			
-			for(GameCard card: player.getCards()) {
-				if(cardsToRemove.remove(new Integer(card.getCard().getField().getId()))) {
-					session.delete(card);
+			Collection<GameCard> cardsToRemove = new ArrayList<GameCard>(3);
+			if(numberOfReinforcements != 0) {
+				for(GameCard gameCard :player.getCards()) {
+					if(	gameCard.getCard().getField().getId() == request.getCardId1().getTerritoryId() ||
+						gameCard.getCard().getField().getId() == request.getCardId2().getTerritoryId() ||
+						gameCard.getCard().getField().getId() == request.getCardId3().getTerritoryId()) {
+						
+						if(gameCard.getGame().getTerritory(gameCard.getCard().getField().getId()).getPlayer().getUser() != null && gameCard.getGame().getTerritory(gameCard.getCard().getField().getId()).getPlayer().getUser().getId() == this.session.user.getId()) {
+							gameCard.getGame().getTerritory(gameCard.getCard().getField().getId()).increaseNumberOfTroops((short)2);
+						}
+						cardsToRemove.add(gameCard);
+					}
 				}
-
-				if(cardsToRemove.size() == 0) {
-					break;
-				}
+				
+				cardsToRemove.forEach(card -> player.getCards().remove(card));
 			}
 			
+						
 			PlayerCardCountNotification.Builder playerCardCountNotificationBuilder = PlayerCardCountNotification.newBuilder();
 			
 			playerCardCountNotificationBuilder.setCardCount(player.getCards().size());

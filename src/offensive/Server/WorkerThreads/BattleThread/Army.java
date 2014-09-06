@@ -18,7 +18,7 @@ public class Army {
 	
 	boolean isDefending;
 	
-	CommonRandom rand = new CommonRandom(Server.getServer().rand.nextInt());
+	CommonRandom rand = new CommonRandom(Server.getServer().rand.nextInt() ^ Server.getServer().rand.nextInt());
 	
 	Dices dices = new Dices(this.rand);
 	

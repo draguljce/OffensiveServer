@@ -186,7 +186,7 @@ ALTER TABLE
 
  setval 
 --------
-      2
+      1
 (1 row)
 
  setval 
@@ -196,7 +196,7 @@ ALTER TABLE
 
  setval 
 --------
-     84
+     42
 (1 row)
 
  setval 
@@ -206,17 +206,17 @@ ALTER TABLE
 
  setval 
 --------
-      4
+      3
 (1 row)
 
  setval 
 --------
-     84
+     42
 (1 row)
 
  setval 
 --------
-      2
+      5
 (1 row)
 
 ALTER TABLE

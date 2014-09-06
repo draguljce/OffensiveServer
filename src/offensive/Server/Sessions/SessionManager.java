@@ -214,12 +214,12 @@ public class SessionManager implements Runnable{
 	}
 
 	public void removeKey(SelectionKey key) {
-		Session session = (Session)key.attachment();
-		GameManager.onlyInstance.removeGames(session);
-		
 		try {
-			Server.getServer().logger.info("Removing key for user: " + session.user.getId());
 			key.channel().close();
+			
+			Session session = (Session)key.attachment();
+			Server.getServer().logger.info("Removed key for user: " + session.user.getId());
+			GameManager.onlyInstance.removeGames(session);
 		} catch (IOException e) {
 			Server.getServer().logger.error(e.getMessage(), e);
 		}
